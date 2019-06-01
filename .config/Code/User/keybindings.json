@@ -1,12 +1,9 @@
 // Place your key bindings in this file to overwrite the defaults
 [
+    // unmap default bindings
     {
         "key": "ctrl+tab",
         "command": "-workbench.action.openNextRecentlyUsedEditorInGroup"
-    },
-    {
-        "key": "alt+right",
-        "command": "workbench.action.nextEditor"
     },
     {
         "key": "ctrl+pagedown",
@@ -17,13 +14,18 @@
         "command": "-workbench.action.openPreviousRecentlyUsedEditorInGroup"
     },
     {
-        "key": "alt+left",
-        "command": "workbench.action.previousEditor"
-    },
-    {
         "key": "ctrl+pageup",
         "command": "-workbench.action.previousEditor"
     },
+    {
+        "key": "ctrl+k ctrl+left",
+        "command": "-workbench.action.focusLeftGroup"
+    },
+    {
+        "key": "ctrl+k ctrl+right",
+        "command": "-workbench.action.focusRightGroup"
+    },
+    // cycle recent editors
     {
         "key": "ctrl+tab",
         "command": "workbench.action.openNextRecentlyUsedEditor"
@@ -32,21 +34,133 @@
         "key": "ctrl+shift+tab",
         "command": "workbench.action.openPreviousRecentlyUsedEditor"
     },
+    // navigate between tabs with the arrow keys
+    {
+        "key": "alt+left",
+        "command": "workbench.action.previousEditor"
+    },
+    {
+        "key": "alt+right",
+        "command": "workbench.action.nextEditor"
+    },
+    // navigate between tabs with , and .
+    {
+        "key": "alt+,",
+        "command": "workbench.action.previousEditor"
+    },
+    {
+        "key": "alt+.",
+        "command": "workbench.action.nextEditor"
+    },
+    // focus editors with vim style keybindings
     {
         "key": "alt+h",
         "command": "workbench.action.focusLeftGroup"
-    },
-    {
-        "key": "ctrl+k ctrl+left",
-        "command": "-workbench.action.focusLeftGroup"
     },
     {
         "key": "alt+l",
         "command": "workbench.action.focusRightGroup"
     },
     {
-        "key": "ctrl+k ctrl+right",
-        "command": "-workbench.action.focusRightGroup"
-    }
-
+        "key": "alt+j",
+        "command": "workbench.action.focusBelowGroup"
+    },
+    {
+        "key": "alt+k",
+        "command": "workbench.action.focusAboveGroup"
+    },
+    // emacs style bindings
+    {
+        "key": "alt+b",
+        "command": "cursorWordLeft"
+    },
+    {
+        "key": "alt+f",
+        "command": "cursorWordRight"
+    },
+    {
+        "key": "alt+x",
+        "command": "workbench.action.showCommands",
+    },
+    {
+        "key": "ctrl+x b",
+        "command": "workbench.action.quickOpen"
+    },
+    {
+        "key": "ctrl+x ctrl+c",
+        "command": "workbench.actionCloseWindow"
+    },
+    {
+        "key": "ctrl+x ctrl+f",
+        "command": "extension.advancedNewFile"
+    },
+    {
+        "key": "ctrl+x k",
+        "command": "workbench.action.closeActiveEditor"
+    },
+    // my idiosyncratic alt bindings
+    {
+        "key": "alt+w",
+        "command": "workbench.action.files.save"
+    },
+    {
+        "key": "alt+q",
+        "command": "workbench.action.closeActiveEditor"
+    },
+    {
+        "key": "alt+u",
+        "command": "workbench.action.reopenClosedEditor"
+    },
+    {
+        "key": "alt+m",
+        "command": "workbench.action.editor.changeLanguageMode"
+    },
+    {
+        "key": "alt+K",
+        "command": "workbench.action.openGlobalKeybindings"
+    },
+    {
+        "key": "alt+k",
+        "command": "workbench.action.openGlobalKeybindingsFile"
+    },
+    {
+        "key": "alt+p",
+        "command": "workbench.action.showCommands"
+    },
+    {
+        "key": "alt+o",
+        "command": "workbench.action.quickOpen"
+    },
+    {
+        "key": "alt+h",
+        "command": "workbench.action.previousEditor"
+    },
+    {
+        "key": "alt+l",
+        "command": "workbench.action.nextEditor"
+    },
+    {
+        "key": "alt+w",
+        "command": "workbench.action.files.save"
+    },
+    {
+        "key": "alt+q",
+        "command": "workbench.action.closeActiveEditor"
+    },
+    {
+        "key": "alt+f",
+        "command": "actions.find"
+    },
+    {
+        "key": "alt+r",
+        "command": "editor.action.startFindReplaceAction"
+    },
+    {
+        "key": "alt+e",
+        "command": "workbench.view.explorer"
+    },
+    {
+        "key": "alt+E",
+        "command": "workbench.files.action.showActiveFileInExplorer"
+    },
 ]

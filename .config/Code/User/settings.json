@@ -1,32 +1,63 @@
 {
-    "telemetry.enableTelemetry": false,
+    /// VS Code Settings ///
     "editor.rulers": [80],
     "editor.fontSize": 12,
     "editor.fontFamily": "'DejaVu Sans Mono Book', 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
-    "terminal.integrated.fontFamily": "'DejaVu Sans Mono', 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
     "editor.renderWhitespace": "boundary",
     "editor.accessibilitySupport": "off",
+    "editor.detectIndentation": false,
+    "editor.wordWrap": "on",
+
+    "explorer.autoReveal": false,
+
+    "files.associations": {
+        "ansible": "ini"
+    },
+    "files.exclude": {
+        "**/.DS_Store": true,
+        "**/.git": true,
+        "**/.hg": true,
+        "**/.svn": true,
+        "**/.terraform": true,
+        "**/*.tfstate": true,
+        "**/*.tfstate*": true,
+        "**/*~": true,
+        "**/CVS": true,
+        "**/terraform.d": true,
+        "**/terraform.tfstate.d": true
+    },
+    "files.trimTrailingWhitespace": true,
+
+    "search.useIgnoreFiles": false,
+    "search.exclude": {
+        "**/venv": true
+    },
+
+    "telemetry.enableTelemetry": false,
+
+    "terminal.integrated.fontFamily": "'DejaVu Sans Mono', 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
+    "terminal.integrated.macOptionIsMeta": true,
+    "terminal.integrated.rendererType": "dom",
+
+    "window.enableMenuBarMnemonics": false,
+    "window.openFilesInNewWindow": "default",
+    "window.title": "${dirty}${activeEditorShort}${separator}${rootName}",
+    "window.titleBarStyle": "custom",
+    "window.zoomLevel": 0,
+
     "workbench.editor.openPositioning": "last",
     "workbench.editor.tabCloseButton": "off",
     "workbench.enableExperiments": false,
     "workbench.startupEditor": "none",
-    "window.openFilesInNewWindow": "default",
-    "window.title": "${dirty}${activeEditorShort}${separator}${rootName}",
-    "window.titleBarStyle": "custom",
+    "workbench.tree.indent": 16,
 
     "zenMode.fullScreen": false,
     "zenMode.hideActivityBar": false,
     "zenMode.hideStatusBar": false,
     "zenMode.hideTabs": false,
 
-    "search.useIgnoreFiles": false,
-    "terminal.integrated.rendererType": "dom",
-    "window.zoomLevel": 0,
-    "window.enableMenuBarMnemonics": false,
-
-    "editor.disableTranslate3d": true,
-
-    // Vim plugin settings
+    /// Plugin Settings ///
+    // vscodevim
     // workaround required for setxkbmap to remap capslock to esc on Ubuntu
     "keyboard.dispatch": "keyCode",
     "vim.incsearch": true,
@@ -44,6 +75,7 @@
         {"before": ["J"], "after": ["<C-d>"]},
         {"before": ["K"], "after": ["<C-u>"]},
         {"before": ["<C-w>"], "commands": ["workbench.action.closeActiveEditor"]},
+        {"before": ["<leader>", "u"], "commands": ["workbench.action.reopenClosedEditor"]},
         {"before": ["<leader>", "m"], "commands": ["workbench.action.editor.changeLanguageMode"]},
         {"before": ["<leader>", ","], "commands": ["workbench.action.openSettingsJson"]},
         {"before": ["<leader>", "K"], "commands": ["workbench.action.openGlobalKeybindings"]},
@@ -57,22 +89,43 @@
         {"before": ["<leader>", "q"], "commands": ["workbench.action.closeActiveEditor"]},
         {"before": ["<leader>", "f"], "commands": ["actions.find"]},
         {"before": ["<leader>", "r"], "commands": ["editor.action.startFindReplaceAction"]},
+        {"before": ["<leader>", "e"], "commands": ["workbench.view.explorer"]},
+        {"before": ["<leader>", "E"], "commands": ["workbench.files.action.showActiveFileInExplorer"]},
     ],
 
-    // Language Specific Settings
-    "[javascript]": {
+    // azure functions
+    "azureFunctions.enablePowerShell": true,
+
+    /// Language Specific Settings ///
+    "[ansible]": {
         "editor.tabSize": 2
+    },
+    "[go]": {
+        "go.autocompleteUnimportedPackages": true
     },
     "[html]": {
         "editor.tabSize": 2
     },
-    "[ansible]": {
+    "[javascript]": {
+        "editor.tabSize": 2
+    },
+    "[json]": {
         "editor.tabSize": 2
     },
     "[markdown]": {
-        "editor.tabSize": 2
+        "editor.tabSize": 2,
+        "files.trimTrailingWhitespace": false,
+        "editor.rulers": []
     },
     "[shellscript]": {
+        "editor.tabSize": 2
+    },
+    "[terraform]": {
+        "editor.insertSpaces": true,
+        "editor.tabSize": 2,
+        "editor.autoIndent": true
+    },
+    "[yaml]": {
         "editor.tabSize": 2
     },
 }
