@@ -1,6 +1,6 @@
-[user]
-  email = pushittoprod@gmail.com
-  name = pushittoprod
+[include]
+  # user info and anything local to this host goes here
+  path = .gitconfig_local
 [alias]
   co = checkout
   conflicts = diff --name-only --diff-filter=U
