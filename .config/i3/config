@@ -263,3 +263,5 @@ bindsym $mod+n exec i3-input -F 'move container to workspace "%s"' -P 'Move to w
 
 # Broken - move container to workspace and go to it
 #bindsym $mod+n exec i3-input -F 'move container to workspace "%s", workspace "%s"' -P 'Move to workspace: '
+
+exec_always ~/.config/i3/scripts/gnome-keyring.sh
