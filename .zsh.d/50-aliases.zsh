@@ -47,3 +47,6 @@ alias gdiff='git diff --no-index --color-words'
 randpass() {
   openssl rand -base64 "${1:-32}" | tr -d '\n'
 }
+
+alias e='emacs'
+alias enw='emacs -nw'
