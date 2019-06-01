@@ -1,0 +1,10 @@
+venv/
+.env/
+*.pyc
+__pycache__
+*~
+.#*
+#*
+*#
+.idea/
+TODO

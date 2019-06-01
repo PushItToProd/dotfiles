@@ -2,6 +2,9 @@
 
 !.gitignore
 
+!.gitconfig
+!.gitignore_global
+
 !.config/
 .config/*
 !.config/i3
