@@ -57,7 +57,7 @@ bindsym $mod+Down focus down
 bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
-# move focused window
+# move focused window within workspace
 mode "move" {
     # alternatively, you can use the cursor keys:
     bindsym $left move left
@@ -78,14 +78,15 @@ mode "move" {
 }
 bindsym $mod+m mode "move"
 
-bindsym $ctrl+$super+$alt+$left move left
-bindsym $ctrl+$super+$alt+$down move down
-bindsym $ctrl+$super+$alt+$up move up
-bindsym $ctrl+$super+$alt+$right move right
-bindsym $ctrl+$super+$alt+Left move left
-bindsym $ctrl+$super+$alt+Down move down
-bindsym $ctrl+$super+$alt+Up move up
-bindsym $ctrl+$super+$alt+Right move right
+# quicker shortcuts to move without going into a mode
+bindsym $mod+$alt+$left move left
+bindsym $mod+$alt+$down move down
+bindsym $mod+$alt+$up move up
+bindsym $mod+$alt+$right move right
+bindsym $mod+$alt+Left move left
+bindsym $mod+$alt+Down move down
+bindsym $mod+$alt+Up move up
+bindsym $mod+$alt+Right move right
 
 # split in horizontal orientation
 bindsym $mod+Shift+v split h
@@ -158,6 +159,12 @@ bindsym $mod+Shift+7 move container to workspace number 7; workspace number 7
 bindsym $mod+Shift+8 move container to workspace number 8; workspace number 8
 bindsym $mod+Shift+9 move container to workspace number 9; workspace number 9
 bindsym $mod+Shift+0 move container to workspace number 10; workspace number 10
+
+# move container to next/previous workspace
+bindsym $mod+$ctrl+Shift+$left move container to workspace prev; workspace prev
+bindsym $mod+$ctrl+Shift+$right move container to workspace next; workspace next
+bindsym $mod+$ctrl+Shift+Left move container to workspace prev; workspace prev
+bindsym $mod+$ctrl+Shift+Right move container to workspace next; workspace next
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -265,3 +272,10 @@ bindsym $mod+n exec i3-input -F 'move container to workspace "%s"' -P 'Move to w
 #bindsym $mod+n exec i3-input -F 'move container to workspace "%s", workspace "%s"' -P 'Move to workspace: '
 
 exec_always ~/.config/i3/scripts/gnome-keyring.sh
+
+# My attempt at binding keys with i3. Unfortunately, this causes alt+,
+# and alt+. to be trapped by i3 for every other application.
+#bindsym --release $alt+comma [class="chromium-browser"] \
+#        exec --no-startup-id xdotool key --clearmodifiers ctrl+shift+Tab
+#bindsym --release $alt+period [class="chromium-browser"] \
+#        exec --no-startup-id xdotool key --clearmodifiers ctrl+Tab
