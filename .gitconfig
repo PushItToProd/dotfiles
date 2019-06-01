@@ -1,27 +1,12 @@
 [include]
   # user info and anything local to this host goes here
   path = .gitconfig_local
-[alias]
-  co = checkout
-  conflicts = diff --name-only --diff-filter=U
-  # s = status -bs -uno
-  s = status -b -u
-  st = status -b -uno
-  stu = status -b -u
-  a = add
-  ap = add -p
-  c = commit --verbose
-  ca = commit -a --verbose
-  amend = commit --amend --verbose
-  d = diff --color-words
-  ds = diff --staged --color-words
-  df = diff --name-only
-  aliases = "!git config -l | grep alias | cut -c 7-"
+[include]
+  path = .gitaliases
 [color]
   ui = true
 [push]
   default = simple
-
 [core]
   editor = vim
   excludesfile = ~/.gitignore_global

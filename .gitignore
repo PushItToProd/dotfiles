@@ -2,6 +2,7 @@
 
 !.gitignore
 
+!.gitaliases
 !.gitconfig
 !.gitignore_global
 
