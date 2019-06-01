@@ -88,17 +88,15 @@ bindsym $mod+$alt+Down move down
 bindsym $mod+$alt+Up move up
 bindsym $mod+$alt+Right move right
 
-# split in horizontal orientation
-bindsym $mod+Shift+v split h
-
-# split in vertical orientation
-bindsym $mod+v split v
+# split in horizontal/vertical orientation
+bindsym $mod+Shift+v split horizontal
+bindsym $mod+v split vertical
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
 
 # change container layout
-bindsym $mod+Tab layout toggle tabbed split
+bindsym $mod+Tab layout toggle tabbed splitv splith
 
 # toggle tiling / floating
 bindsym $mod+Shift+f floating toggle
