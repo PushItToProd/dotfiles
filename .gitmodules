@@ -1,0 +1,12 @@
+[submodule ".emacs.d/bats-mode"]
+	path = .emacs.d/bats-mode
+	url = https://github.com/dougm/bats-mode.git
+[submodule ".zsh/lib/zsh-history-substring-search"]
+	path = .zsh/lib/zsh-history-substring-search
+	url = https://github.com/zsh-users/zsh-history-substring-search
+[submodule ".zsh/lib/zsh-syntax-highlighting"]
+	path = .zsh/lib/zsh-syntax-highlighting
+	url = https://github.com/zsh-users/zsh-syntax-highlighting.git
+[submodule ".emacs.d/rust-mode"]
+	path = .emacs.d/rust-mode
+	url = https://github.com/rust-lang/rust-mode.git
