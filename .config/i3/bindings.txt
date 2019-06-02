@@ -1,0 +1,118 @@
+### Super only
+bindsym $mod+0 workspace number 10
+bindsym $mod+1 workspace number 1
+bindsym $mod+2 workspace number 2
+bindsym $mod+3 workspace number 3
+bindsym $mod+4 workspace number 4
+bindsym $mod+5 workspace number 5
+bindsym $mod+6 workspace number 6
+bindsym $mod+7 workspace number 7
+bindsym $mod+8 workspace number 8
+bindsym $mod+9 workspace number 9
+bindsym $mod+a focus parent
+bindsym $mod+d exec dmenu_run
+bindsym $mod+f fullscreen toggle
+bindsym $mod+g exec i3-input -F 'workspace "%s"' -P 'Go to workspace: '
+bindsym $mod+m mode "move"
+bindsym $mod+n exec i3-input -F 'move container to workspace "%s"' -P 'Move to workspace:'
+bindsym $mod+r mode "resize"
+bindsym $mod+s focus child
+bindsym $mod+v split vertical
+
+## Super + direction keys
+bindsym $mod+$down focus down
+bindsym $mod+Down focus down
+bindsym $mod+$left focus left
+bindsym $mod+Left focus left
+bindsym $mod+$right focus right
+bindsym $mod+Right focus right
+bindsym $mod+$up focus up
+bindsym $mod+Up focus up
+
+bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+space exec --no-startup-id i3-dmenu-desktop
+bindsym $mod+Tab layout toggle tabbed splitv splith
+
+bindsym $mod+$alt+$down move down
+bindsym $mod+$alt+Down move down
+bindsym $mod+$alt+$left move left
+bindsym $mod+$alt+Left move left
+bindsym $mod+$alt+$right move right
+bindsym $mod+$alt+Right move right
+bindsym $mod+$alt+$up move up
+bindsym $mod+$alt+Up move up
+
+bindsym $mod+$ctrl+Shift+$left move container to workspace prev; workspace prev
+bindsym $mod+$ctrl+Shift+Left move container to workspace prev; workspace prev
+bindsym $mod+$ctrl+Shift+$right move container to workspace next; workspace next
+bindsym $mod+$ctrl+Shift+Right move container to workspace next; workspace next
+
+bindsym $mod+Shift+0 move container to workspace number 10; workspace number 10
+bindsym $mod+Shift+1 move container to workspace number 1; workspace number 1
+bindsym $mod+Shift+2 move container to workspace number 2; workspace number 2
+bindsym $mod+Shift+3 move container to workspace number 3; workspace number 3
+bindsym $mod+Shift+4 move container to workspace number 4; workspace number 4
+bindsym $mod+Shift+5 move container to workspace number 5; workspace number 5
+bindsym $mod+Shift+6 move container to workspace number 6; workspace number 6
+bindsym $mod+Shift+7 move container to workspace number 7; workspace number 7
+bindsym $mod+Shift+8 move container to workspace number 8; workspace number 8
+bindsym $mod+Shift+9 move container to workspace number 9; workspace number 9
+bindsym $mod+Shift+c reload
+bindsym $mod+Shift+e mode "$mode_system"
+bindsym $mod+Shift+f floating toggle
+bindsym $mod+Shift+g exec i3-input -F 'rename workspace to "%s"' -P 'New name: '
+bindsym $mod+Shift+q kill
+bindsym $mod+Shift+r restart
+bindsym $mod+Shift+v split horizontal
+
+bindsym $mod+Shift+$left workspace prev
+bindsym $mod+Shift+Left workspace prev
+bindsym $mod+Shift+$right workspace next
+bindsym $mod+Shift+Right workspace next
+
+bindsym Control+Print exec gnome-screenshot -i
+bindsym Print exec gnome-screenshot -a
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPause exec playerctl pause-pause
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioPrev exec playerctl previous
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
+
+### Move Mode
+    bindsym $left move left
+    bindsym $down move down
+    bindsym $up move up
+    bindsym $right move right
+    bindsym Left move left
+    bindsym Down move down
+    bindsym Up move up
+    bindsym Right move right
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+    bindsym $mod+m mode "default"
+    bindsym m mode "default"
+
+### Resize mode
+    bindsym $left resize shrink width 10 px or 10 ppt
+    bindsym $down resize grow height 10 px or 10 ppt
+    bindsym $up resize shrink height 10 px or 10 ppt
+    bindsym $right resize grow width 10 px or 10 ppt
+    bindsym Left resize shrink width 10 px or 10 ppt
+    bindsym Down resize grow height 10 px or 10 ppt
+    bindsym Up resize shrink height 10 px or 10 ppt
+    bindsym Right resize grow width 10 px or 10 ppt
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+    bindsym $mod+r mode "default"
+
+### System mode
+    bindsym l exec --no-startup-id gnome-screensaver-command -l, mode "default"
+    bindsym s exec --no-startup-id systemctl suspend, mode "default"
+    bindsym e exec --no-startup-id i3-msg exit, mode "default"
+    bindsym h exec --no-startup-id systemctl hibernate, mode "default"
+    bindsym r exec --no-startup-id systemctl reboot, mode "default"
+    bindsym Shift+s exec --no-startup-id systemctl shutdown, mode "default"
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
