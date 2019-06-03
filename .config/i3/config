@@ -18,6 +18,18 @@ set $right l
 set $up k
 set $down j
 
+# numpad keycodes - Mod2 required here per https://github.com/i3/i3/issues/2558
+set $kp_0 Mod2+KP_0
+set $kp_1 Mod2+KP_1
+set $kp_2 Mod2+KP_2
+set $kp_3 Mod2+KP_3
+set $kp_4 Mod2+KP_4
+set $kp_5 Mod2+KP_5
+set $kp_6 Mod2+KP_6
+set $kp_7 Mod2+KP_7
+set $kp_8 Mod2+KP_8
+set $kp_9 Mod2+KP_9
+
 # modes
 set $mode_system (l)ock, (e)xit, (s)uspend, (h)ibernate, (r)eboot, (Shift+s)hutdown
 
@@ -99,6 +111,16 @@ bindsym $mod+7 workspace number 7
 bindsym $mod+8 workspace number 8
 bindsym $mod+9 workspace number 9
 bindsym $mod+0 workspace number 10
+bindsym $mod+$kp_1 workspace number 1
+bindsym $mod+$kp_2 workspace number 2
+bindsym $mod+$kp_3 workspace number 3
+bindsym $mod+$kp_4 workspace number 4
+bindsym $mod+$kp_5 workspace number 5
+bindsym $mod+$kp_6 workspace number 6
+bindsym $mod+$kp_7 workspace number 7
+bindsym $mod+$kp_8 workspace number 8
+bindsym $mod+$kp_9 workspace number 9
+bindsym $mod+$kp_0 workspace number 10
 
 ## Mod+letter ##
 
@@ -176,6 +198,17 @@ bindsym $mod+$ctrl+7 move container to workspace number 7; workspace number 7
 bindsym $mod+$ctrl+8 move container to workspace number 8; workspace number 8
 bindsym $mod+$ctrl+9 move container to workspace number 9; workspace number 9
 bindsym $mod+$ctrl+0 move container to workspace number 10; workspace number 10
+
+bindsym $mod+$ctrl+$kp_1 move container to workspace number 1; workspace number 1
+bindsym $mod+$ctrl+$kp_2 move container to workspace number 2; workspace number 2
+bindsym $mod+$ctrl+$kp_3 move container to workspace number 3; workspace number 3
+bindsym $mod+$ctrl+$kp_4 move container to workspace number 4; workspace number 4
+bindsym $mod+$ctrl+$kp_5 move container to workspace number 5; workspace number 5
+bindsym $mod+$ctrl+$kp_6 move container to workspace number 6; workspace number 6
+bindsym $mod+$ctrl+$kp_7 move container to workspace number 7; workspace number 7
+bindsym $mod+$ctrl+$kp_8 move container to workspace number 8; workspace number 8
+bindsym $mod+$ctrl+$kp_9 move container to workspace number 9; workspace number 9
+bindsym $mod+$ctrl+$kp_0 move container to workspace number 10; workspace number 10
 
 # move container to next/previous workspace
 bindsym $mod+$ctrl+$left move container to workspace prev; workspace prev
