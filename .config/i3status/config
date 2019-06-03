@@ -1,0 +1,46 @@
+# i3status configuration file.
+# see "man i3status" for documentation.
+
+# It is important that this file is edited as UTF-8.
+# The following line should contain a sharp s:
+# ß
+# If the above line is not correctly displayed, fix your editor first!
+
+general {
+    colors = true
+    interval = 5
+}
+
+order += "disk /"
+order += "battery all"
+order += "load"
+order += "cpu_temperature 0"
+order += "tztime local"
+
+disk "/" {
+    format = "Disk: %percentage_used"
+    low_threshold = 10
+}
+
+battery all {
+    format = "Battery: %status %percentage %remaining"
+    format_down = "No battery"
+    status_chr = "⚡ CHR"
+    status_bat = "🔋 BAT"
+    status_unk = "? UNK"
+    status_full = "☻ FULL"
+    low_threshold = 15
+}
+
+load {
+    format = "Load: %1min"
+}
+
+cpu_temperature 0 {
+    format = "Temp: %degrees C"
+    path = "/sys/devices/platform/coretemp.0/hwmon/hwmon2/temp1_input"
+}
+
+tztime local {
+    format = "%Y-%m-%d %H:%M:%S"
+}
