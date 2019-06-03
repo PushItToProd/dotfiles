@@ -76,6 +76,10 @@ exec --no-startup-id fcitx -d
 exec --no-startup-id synology-cloud-station-backup
 exec --no-startup-id synology-drive
 
+# Window assignments
+for_window [title="Tabs Outliner"] move to scratchpad, resize set 600 1200, scratchpad show
+for_window [class="keepassxc"] move to scratchpad, resize set 800 600, scratchpad show
+
 
                       ##### Basic Bindings #####
 
@@ -134,6 +138,10 @@ bindsym $mod+r mode "resize"
 bindsym $mod+s focus child
 bindsym $mod+v split vertical
 
+## Mod+symbol ##
+
+bindsym $mod+grave scratchpad show
+
 ## Mod+special ##
 
 bindsym $mod+$left focus left
@@ -169,6 +177,10 @@ bindsym $mod+Shift+Left workspace prev
 bindsym $mod+Shift+Right workspace next
 
 bindsym $mod+Shift+Print exec --no-startup-id gnome-screenshot -i
+
+bindsym $mod+Shift+asciitilde move scratchpad
+bindsym $mod+Shift+1 [title="Tabs Outliner"] scratchpad show
+bindsym $mod+Shift+2 [class="keepassxc"] scratchpad show
 
                        ### Mod+Alt Commands ###
 
