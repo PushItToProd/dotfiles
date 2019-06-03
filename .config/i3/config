@@ -60,6 +60,10 @@ exec_always --no-startup-id gnome-settings-daemon
 # Japanese support
 exec --no-startup-id fcitx -d
 
+# Synology
+exec --no-startup-id synology-cloud-station-backup
+exec --no-startup-id synology-drive
+
 
                       ##### Basic Bindings #####
 
@@ -67,6 +71,8 @@ exec --no-startup-id fcitx -d
 floating_modifier $mod
 
                          ### Nonstandard ###
+
+bindsym Print exec --no-startup-id gnome-screenshot
 
 # Volume control TODO: these don't work
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5%
@@ -140,7 +146,7 @@ bindsym $mod+Shift+$right workspace next
 bindsym $mod+Shift+Left workspace prev
 bindsym $mod+Shift+Right workspace next
 
-bindsym $mod+Shift+Print exec gnome-screenshot -i
+bindsym $mod+Shift+Print exec --no-startup-id gnome-screenshot -i
 
                        ### Mod+Alt Commands ###
 
