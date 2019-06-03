@@ -104,6 +104,7 @@
 (setq ledger-mode-should-check-version nil
       ledger-report-links-in-register nil
       ledger-bindary-path "hledger")
+(add-to-list 'auto-mode-alist '("\\.journal\\'" . ledger-mode))
 (add-hook 'python-mode-hook
           #'(lambda () (setq electric-indent-mode nil)))
 
