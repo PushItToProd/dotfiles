@@ -82,7 +82,8 @@ exec --no-startup-id synology-drive
 # Window assignments
 for_window [title="Tabs Outliner"] move to scratchpad, resize set 600 1200, scratchpad show
 for_window [class="keepassxc"] move to scratchpad, resize set 800 600, scratchpad show
-
+for_window [class="Pavucontrol"] move to scratchpad, resize set 800 600, scratchpad show
+for_window [class="Blueman-manager"] move to scratchpad, resize set 800 600, scratchpad show
 
                       ##### Basic Bindings #####
 
@@ -184,6 +185,8 @@ bindsym $mod+Shift+Print exec --no-startup-id gnome-screenshot -i
 bindsym $mod+Shift+asciitilde move scratchpad
 bindsym $mod+Shift+1 [title="Tabs Outliner"] scratchpad show
 bindsym $mod+Shift+2 [class="keepassxc"] scratchpad show
+bindsym $mod+Shift+3 [class="Pavucontrol"] scratchpad show
+bindsym $mod+Shift+4 [class="Blueman-manager"] scratchpad show
 
                        ### Mod+Alt Commands ###
 
