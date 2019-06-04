@@ -33,6 +33,9 @@ set $kp_9 Mod2+KP_9
 # modes
 set $mode_system (l)ock, (e)xit, (s)uspend, (h)ibernate, (r)eboot, (Shift+s)hutdown
 
+set $resize_amount 20 px or 10 ppt
+set $big_resize_amount 100 px or 20 ppt
+
 
                         ##### i3 Config #####
 
@@ -251,22 +254,25 @@ mode "move" {
     bindsym m mode "default"
 }
 
-# resize window (you can also use the mouse for that)
 mode "resize" {
-    # These bindings trigger as soon as you enter the resize mode
+    bindsym $left resize shrink width $resize_amount
+    bindsym $down resize grow height $resize_amount
+    bindsym $up resize shrink height $resize_amount
+    bindsym $right resize grow width $resize_amount
+    bindsym Left resize shrink width $resize_amount
+    bindsym Down resize grow height $resize_amount
+    bindsym Up resize shrink height $resize_amount
+    bindsym Right resize grow width $resize_amount
 
-    bindsym $left resize shrink width 10 px or 10 ppt
-    bindsym $down resize grow height 10 px or 10 ppt
-    bindsym $up resize shrink height 10 px or 10 ppt
-    bindsym $right resize grow width 10 px or 10 ppt
+    bindsym $shift+$left resize shrink width $big_resize_amount
+    bindsym $shift+$down resize grow height $big_resize_amount
+    bindsym $shift+$up resize shrink height $big_resize_amount
+    bindsym $shift+$right resize grow width $big_resize_amount
+    bindsym $shift+Left resize shrink width $big_resize_amount
+    bindsym $shift+Down resize grow height $big_resize_amount
+    bindsym $shift+Up resize shrink height $big_resize_amount
+    bindsym $shift+Right resize grow width $big_resize_amount
 
-    # same bindings, but for the arrow keys
-    bindsym Left resize shrink width 10 px or 10 ppt
-    bindsym Down resize grow height 10 px or 10 ppt
-    bindsym Up resize shrink height 10 px or 10 ppt
-    bindsym Right resize grow width 10 px or 10 ppt
-
-    # back to normal: Enter or Escape or $mod+r
     bindsym Return mode "default"
     bindsym Escape mode "default"
     bindsym $mod+r mode "default"
