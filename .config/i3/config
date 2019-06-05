@@ -84,6 +84,7 @@ for_window [title="Tabs Outliner"] move to scratchpad, resize set 600 1200, scra
 for_window [class="keepassxc"] move to scratchpad, resize set 800 600, scratchpad show
 for_window [class="Pavucontrol"] move to scratchpad, resize set 800 600, scratchpad show
 for_window [class="Blueman-manager"] move to scratchpad, resize set 800 600, scratchpad show
+for_window [title="Authy"] floating enable
 
                       ##### Basic Bindings #####
 
