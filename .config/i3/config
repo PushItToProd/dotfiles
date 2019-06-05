@@ -110,26 +110,11 @@ bindsym XF86AudioPrev exec playerctl previous
 
 ## Mod+number ##
 
-bindsym $mod+1 workspace number 1
-bindsym $mod+2 workspace number 2
-bindsym $mod+3 workspace number 3
-bindsym $mod+4 workspace number 4
-bindsym $mod+5 workspace number 5
-bindsym $mod+6 workspace number 6
-bindsym $mod+7 workspace number 7
-bindsym $mod+8 workspace number 8
-bindsym $mod+9 workspace number 9
-bindsym $mod+0 workspace number 10
-bindsym $mod+$kp_1 workspace number 1
-bindsym $mod+$kp_2 workspace number 2
-bindsym $mod+$kp_3 workspace number 3
-bindsym $mod+$kp_4 workspace number 4
-bindsym $mod+$kp_5 workspace number 5
-bindsym $mod+$kp_6 workspace number 6
-bindsym $mod+$kp_7 workspace number 7
-bindsym $mod+$kp_8 workspace number 8
-bindsym $mod+$kp_9 workspace number 9
-bindsym $mod+$kp_0 workspace number 10
+bindsym $mod+asciitilde move scratchpad
+bindsym $mod+1 [title="Tabs Outliner"] scratchpad show
+bindsym $mod+2 [class="keepassxc"] scratchpad show
+bindsym $mod+3 [class="Pavucontrol"] scratchpad show
+bindsym $mod+4 [class="Blueman-manager"] scratchpad show
 
 ## Mod+letter ##
 
@@ -168,6 +153,27 @@ bindsym $mod+F11 fullscreen toggle
 
 # Navigation and i3 control.
 
+bindsym $mod+Shift+1 workspace number 1
+bindsym $mod+Shift+2 workspace number 2
+bindsym $mod+Shift+3 workspace number 3
+bindsym $mod+Shift+4 workspace number 4
+bindsym $mod+Shift+5 workspace number 5
+bindsym $mod+Shift+6 workspace number 6
+bindsym $mod+Shift+7 workspace number 7
+bindsym $mod+Shift+8 workspace number 8
+bindsym $mod+Shift+9 workspace number 9
+bindsym $mod+Shift+0 workspace number 10
+bindsym $mod+Shift+$kp_1 workspace number 1
+bindsym $mod+Shift+$kp_2 workspace number 2
+bindsym $mod+Shift+$kp_3 workspace number 3
+bindsym $mod+Shift+$kp_4 workspace number 4
+bindsym $mod+Shift+$kp_5 workspace number 5
+bindsym $mod+Shift+$kp_6 workspace number 6
+bindsym $mod+Shift+$kp_7 workspace number 7
+bindsym $mod+Shift+$kp_8 workspace number 8
+bindsym $mod+Shift+$kp_9 workspace number 9
+bindsym $mod+Shift+$kp_0 workspace number 10
+
 bindsym $mod+Shift+c reload
 bindsym $mod+Shift+e mode "$mode_system"
 bindsym $mod+Shift+f floating toggle
@@ -182,12 +188,6 @@ bindsym $mod+Shift+Left workspace prev
 bindsym $mod+Shift+Right workspace next
 
 bindsym $mod+Shift+Print exec --no-startup-id gnome-screenshot -i
-
-bindsym $mod+Shift+asciitilde move scratchpad
-bindsym $mod+Shift+1 [title="Tabs Outliner"] scratchpad show
-bindsym $mod+Shift+2 [class="keepassxc"] scratchpad show
-bindsym $mod+Shift+3 [class="Pavucontrol"] scratchpad show
-bindsym $mod+Shift+4 [class="Blueman-manager"] scratchpad show
 
                        ### Mod+Alt Commands ###
 
