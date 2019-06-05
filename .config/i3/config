@@ -163,16 +163,16 @@ bindsym $mod+Shift+7 workspace number 7
 bindsym $mod+Shift+8 workspace number 8
 bindsym $mod+Shift+9 workspace number 9
 bindsym $mod+Shift+0 workspace number 10
-bindsym $mod+Shift+$kp_1 workspace number 1
-bindsym $mod+Shift+$kp_2 workspace number 2
-bindsym $mod+Shift+$kp_3 workspace number 3
-bindsym $mod+Shift+$kp_4 workspace number 4
-bindsym $mod+Shift+$kp_5 workspace number 5
-bindsym $mod+Shift+$kp_6 workspace number 6
-bindsym $mod+Shift+$kp_7 workspace number 7
-bindsym $mod+Shift+$kp_8 workspace number 8
-bindsym $mod+Shift+$kp_9 workspace number 9
-bindsym $mod+Shift+$kp_0 workspace number 10
+bindsym $mod+$kp_1 workspace number 1
+bindsym $mod+$kp_2 workspace number 2
+bindsym $mod+$kp_3 workspace number 3
+bindsym $mod+$kp_4 workspace number 4
+bindsym $mod+$kp_5 workspace number 5
+bindsym $mod+$kp_6 workspace number 6
+bindsym $mod+$kp_7 workspace number 7
+bindsym $mod+$kp_8 workspace number 8
+bindsym $mod+$kp_9 workspace number 9
+bindsym $mod+$kp_0 workspace number 10
 
 bindsym $mod+Shift+c reload
 bindsym $mod+Shift+e mode "$mode_system"
