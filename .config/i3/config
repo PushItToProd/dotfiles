@@ -55,6 +55,11 @@ focus_follows_mouse no
 
 
                        ##### Startup Stuff ####
+
+# workspaces
+workspace 0 output eDP-1
+workspace 1 output DP-2
+
 # network manager taskbar applet
 exec_always --no-startup-id nm-applet
 
@@ -76,15 +81,23 @@ exec_always --no-startup-id gnome-settings-daemon
 exec --no-startup-id fcitx -d
 
 # Synology
-exec --no-startup-id synology-cloud-station-backup
 exec --no-startup-id synology-drive
 
+# Scratchpad
+exec --no-startup-id keepassxc
+exec --no-startup-id pavucontrol
+exec --no-startup-id blueman-manager
+exec --no-startup-id gnome-calculator
+
 # Window assignments
-for_window [title="Tabs Outliner"] move to scratchpad, resize set 600 1200, scratchpad show
-for_window [class="keepassxc"] move to scratchpad, resize set 800 600, scratchpad show
-for_window [class="Pavucontrol"] move to scratchpad, resize set 800 600, scratchpad show
-for_window [class="Blueman-manager"] move to scratchpad, resize set 800 600, scratchpad show
+for_window [title="Tabs Outliner"] move to scratchpad, resize set 600 1200
+for_window [class="keepassxc"] move to scratchpad, resize set 800 600
+for_window [class="Pavucontrol"] move to scratchpad, resize set 800 600
+for_window [class="Blueman-manager"] move to scratchpad, resize set 800 600
+for_window [title="Calculator"] move to scratchpad, resize set 400 300
+
 for_window [title="Authy"] floating enable
+for_window [title="Pomodoro Timer"] floating enable
 
                       ##### Basic Bindings #####
 
@@ -101,20 +114,35 @@ bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5%
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle
 
 # Media keys
-bindsym XF86AudioPlay exec playerctl play-pause
-bindsym XF86AudioPause exec playerctl pause-pause
-bindsym XF86AudioNext exec playerctl next
-bindsym XF86AudioPrev exec playerctl previous
+bindsym XF86AudioPlay exec playerctl play-pause -p spotify
+bindsym XF86AudioPause exec playerctl pause-pause -p spotify
+bindsym XF86AudioNext exec playerctl next -p spotify
+bindsym XF86AudioPrev exec playerctl previous -p spotify
 
                          ### Mod Commands ###
 
 ## Mod+number ##
 
-bindsym $mod+asciitilde move scratchpad
-bindsym $mod+1 [title="Tabs Outliner"] scratchpad show
-bindsym $mod+2 [class="keepassxc"] scratchpad show
-bindsym $mod+3 [class="Pavucontrol"] scratchpad show
-bindsym $mod+4 [class="Blueman-manager"] scratchpad show
+bindsym $mod1 workspace number 1
+bindsym $mod2 workspace number 2
+bindsym $mod3 workspace number 3
+bindsym $mod4 workspace number 4
+bindsym $mod5 workspace number 5
+bindsym $mod6 workspace number 6
+bindsym $mod7 workspace number 7
+bindsym $mod8 workspace number 8
+bindsym $mod9 workspace number 9
+bindsym $mod0 workspace number 10
+bindsym $mod+$kp_1 workspace number 1
+bindsym $mod+$kp_2 workspace number 2
+bindsym $mod+$kp_3 workspace number 3
+bindsym $mod+$kp_4 workspace number 4
+bindsym $mod+$kp_5 workspace number 5
+bindsym $mod+$kp_6 workspace number 6
+bindsym $mod+$kp_7 workspace number 7
+bindsym $mod+$kp_8 workspace number 8
+bindsym $mod+$kp_9 workspace number 9
+bindsym $mod+$kp_0 workspace number 10
 
 ## Mod+letter ##
 
@@ -153,26 +181,12 @@ bindsym $mod+F11 fullscreen toggle
 
 # Navigation and i3 control.
 
-bindsym $mod+Shift+1 workspace number 1
-bindsym $mod+Shift+2 workspace number 2
-bindsym $mod+Shift+3 workspace number 3
-bindsym $mod+Shift+4 workspace number 4
-bindsym $mod+Shift+5 workspace number 5
-bindsym $mod+Shift+6 workspace number 6
-bindsym $mod+Shift+7 workspace number 7
-bindsym $mod+Shift+8 workspace number 8
-bindsym $mod+Shift+9 workspace number 9
-bindsym $mod+Shift+0 workspace number 10
-bindsym $mod+$kp_1 workspace number 1
-bindsym $mod+$kp_2 workspace number 2
-bindsym $mod+$kp_3 workspace number 3
-bindsym $mod+$kp_4 workspace number 4
-bindsym $mod+$kp_5 workspace number 5
-bindsym $mod+$kp_6 workspace number 6
-bindsym $mod+$kp_7 workspace number 7
-bindsym $mod+$kp_8 workspace number 8
-bindsym $mod+$kp_9 workspace number 9
-bindsym $mod+$kp_0 workspace number 10
+bindsym $mod+Shift+asciitilde move scratchpad
+bindsym $mod+Shift+1 [title="Tabs Outliner"] scratchpad show
+bindsym $mod+Shift+2 [class="keepassxc"] scratchpad show
+bindsym $mod+Shift+3 [class="Pavucontrol"] scratchpad show
+bindsym $mod+Shift+4 [class="Blueman-manager"] scratchpad show
+bindsym $mod+Shift+5 [title="Calculator"] scratchpad show
 
 bindsym $mod+Shift+c reload
 bindsym $mod+Shift+e mode "$mode_system"
