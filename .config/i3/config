@@ -71,7 +71,8 @@ exec_always --no-startup-id numlockx on
 exec_always --no-startup-id setxkbmap -layout us -option caps:escape
 
 # use GNOME keyring for caching SSH keys, passwords, etc.
-exec_always ~/.config/i3/scripts/gnome-keyring.sh
+exec_always --no-startup-id ~/.config/i3/scripts/gnome-keyring.sh
+exec_always --no-startup-id ~/.xprofile
 
 # can't remember why this is here but I don't want to deal with what
 # happens if I take it out
