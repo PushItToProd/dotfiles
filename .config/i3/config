@@ -95,7 +95,7 @@ for_window [title="Tabs Outliner"] move to scratchpad, resize set 600 1200
 for_window [class="keepassxc"] move to scratchpad, resize set 800 600
 for_window [class="Pavucontrol"] move to scratchpad, resize set 800 600
 for_window [class="Blueman-manager"] move to scratchpad, resize set 800 600
-for_window [title="Calculator"] move to scratchpad, resize set 400 300
+for_window [class="gnome-calculator"] move to scratchpad, resize set 400 300
 
 for_window [title="Authy"] floating enable
 for_window [title="Pomodoro Timer"] floating enable
