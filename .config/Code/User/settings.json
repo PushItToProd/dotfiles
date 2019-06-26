@@ -8,7 +8,13 @@
     "editor.detectIndentation": false,
     "editor.wordWrap": "on",
 
+    "emmet.triggerExpansionOnTab": true,
+    "emmet.includeLanguages": {
+        "xml": "xml"
+    },
+
     "explorer.autoReveal": false,
+    "explorer.confirmDelete": false,
 
     "files.associations": {
         "ansible": "ini"
@@ -24,7 +30,10 @@
         "**/*~": true,
         "**/CVS": true,
         "**/terraform.d": true,
-        "**/terraform.tfstate.d": true
+        "**/terraform.tfstate.d": true,
+        "**/__pycache__": true,
+        "venv": true,
+        "**/*.egg-info": true,
     },
     "files.trimTrailingWhitespace": true,
 
@@ -115,7 +124,6 @@
     "[markdown]": {
         "editor.tabSize": 2,
         "files.trimTrailingWhitespace": false,
-        "editor.rulers": []
     },
     "[shellscript]": {
         "editor.tabSize": 2
