@@ -250,6 +250,13 @@ bindsym $mod+$ctrl+$right move container to workspace next; workspace next
 bindsym $mod+$ctrl+Left move container to workspace prev; workspace prev
 bindsym $mod+$ctrl+Right move container to workspace next; workspace next
 
+                    ### Mod+Ctrl+Alt Commands ###
+
+bindsym $mod+$ctrl+$alt+$left move workspace to output left
+bindsym $mod+$ctrl+$alt+$right move workspace to output right
+bindsym $mod+$ctrl+$alt+Left move workspace to output left
+bindsym $mod+$ctrl+$alt+Right move workspace to output right
+
 
                           ##### Modes #####
 
