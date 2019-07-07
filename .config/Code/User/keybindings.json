@@ -46,11 +46,11 @@
     // navigate between tabs with , and .
     {
         "key": "alt+,",
-        "command": "workbench.action.previousEditor"
+        "command": "workbench.action.previousEditorInGroup"
     },
     {
         "key": "alt+.",
-        "command": "workbench.action.nextEditor"
+        "command": "workbench.action.nextEditorInGroup"
     },
     // focus editors with vim style keybindings
     {
@@ -101,7 +101,7 @@
     // my idiosyncratic alt bindings
     {
         "key": "alt+w",
-        "command": "workbench.action.files.save"
+        "command": "workbench.action.closeActiveEditor"
     },
     {
         "key": "alt+q",
@@ -138,5 +138,17 @@
     {
         "key": "alt+E",
         "command": "workbench.files.action.showActiveFileInExplorer"
+    },
+    {
+        "key": "ctrl+shift+t",
+        "command": "-workbench.action.reopenClosedEditor"
+    },
+    {
+        "key": "ctrl+shift+t",
+        "command": "workbench.action.terminal.toggleTerminal"
+    },
+    {
+        "key": "ctrl+`",
+        "command": "-workbench.action.terminal.toggleTerminal"
     },
 ]
