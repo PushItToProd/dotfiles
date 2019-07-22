@@ -144,8 +144,18 @@
         "command": "-workbench.action.reopenClosedEditor"
     },
     {
-        "key": "ctrl+shift+t",
+        "key": "alt+shift+t",
         "command": "workbench.action.terminal.toggleTerminal"
+    },
+    {
+        "key": "alt+t",
+        "command": "workbench.action.terminal.focus",
+        "when": "!terminalFocus"
+    },
+    {
+        "key": "alt+t",
+        "command": "workbench.action.focusActiveEditorGroup",
+        "when": "terminalFocus"
     },
     {
         "key": "ctrl+`",
