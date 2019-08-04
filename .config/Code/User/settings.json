@@ -18,7 +18,8 @@
     "explorer.confirmDelete": false,
 
     "files.associations": {
-        "ansible": "ini"
+        "ansible": "ini",
+        "inventory": "ini"
     },
     "files.exclude": {
         "**/.DS_Store": true,
