@@ -11,9 +11,11 @@ alias pbcopy='xclip -sel clip'
 alias pbpaste='xclip -sel clip -o'
 alias open='xdg-open'
 
-alias l='ls -Ap'
-alias l1='ls -Ap1'
-alias ll='ls -lAp'
+alias l='ls -F'
+alias ll='ls -lh'
+alias la='ls -lah'
+alias lt='ls --human-readable --size --sort=size --classify --format=single-column'
+alias lastmodified='ls -tl'
 
 alias grep='grep -I --exclude-dir=.git'
 alias fgrep='fgrep -I --exclude-dir=.git'
@@ -25,7 +27,9 @@ if [ -x /usr/bin/dircolors ]; then
     #alias dir='dir --color=auto'
     #alias vdir='vdir --color=auto'
 
-    alias grep='grep --color=auto -I --exclude-dir=.git'
-    alias fgrep='fgrep --color=auto -I --exclude-dir=.git'
-    alias egrep='egrep --color=auto -I --exclude-dir=.git'
+    __grep_defaults='--color=auto -I --exclude-dir=.git --exclude-dir=venv'
+
+    alias grep="grep $__grep_defaults"
+    alias fgrep="fgrep $__grep_defaults"
+    alias egrep="egrep $__grep_defaults"
 fi
