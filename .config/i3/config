@@ -33,8 +33,8 @@ set $kp_9 Mod2+KP_9
 # modes
 set $mode_system (l)ock, (e)xit, (s)uspend, (h)ibernate, (r)eboot, (Shift+s)hutdown
 
-set $resize_amount 20 px or 10 ppt
-set $big_resize_amount 100 px or 20 ppt
+set $resize_amount 20 px or 5 ppt
+set $big_resize_amount 100 px or 10 ppt
 
 
                         ##### i3 Config #####
