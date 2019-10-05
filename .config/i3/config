@@ -11,6 +11,25 @@ set $super Mod4
 set $alt Mod1
 set $mod Mod4
 
+# modkey aliases for navigation
+# Mod4 focus
+# Ctrl navigate (workspaces)
+# Shift navgiate at the level of workspaces/outputs
+# Alt reposition
+
+# focus = change window/container focus within workspace
+set $focus Mod4
+# focus+movespace = focus output
+set $focusoutput Mod4+Shift
+# focus+move = reposition window/container in workspace
+set $move Mod4+Mod1
+# focus+navigate = go to workspace
+set $goto Mod4+Control
+# focus+navigate+movewin = move window to workspace
+set $moveto Mod4+Control+Mod1
+# focus+navigate+movespace = move workspace (to output)
+set $movespace Mod4+Control+Shift
+
 # vim hjkl direction bindings, because switching between vim-style and
 # i3-style is very confusing
 set $left h
@@ -179,6 +198,7 @@ bindsym $mod+Tab layout toggle tabbed splitv splith
 bindsym $mod+F11 fullscreen toggle
 
                       ### Mod+Shift Commands ###
+                  ### (reposition in workspace) ###
 
 # Navigation and i3 control.
 
@@ -197,65 +217,95 @@ bindsym $mod+Shift+q kill
 bindsym $mod+Shift+r restart
 bindsym $mod+Shift+s exec --no-startup-id gnome-screenshot -a
 
-bindsym $mod+Shift+$left workspace prev
-bindsym $mod+Shift+$right workspace next
-bindsym $mod+Shift+Left workspace prev
-bindsym $mod+Shift+Right workspace next
+bindsym $focusoutput+Left focus output left
+bindsym $focusoutput+Right focus output right
+bindsym $focusoutput+$left focus output left
+bindsym $focusoutput+$right focus output right
 
 bindsym $mod+Shift+Print exec --no-startup-id gnome-screenshot -i
 
                        ### Mod+Alt Commands ###
-
 # Reposition within the current workspace.
 
-bindsym $mod+$alt+$left move left
-bindsym $mod+$alt+$down move down
-bindsym $mod+$alt+$up move up
-bindsym $mod+$alt+$right move right
-bindsym $mod+$alt+Left move left
-bindsym $mod+$alt+Down move down
-bindsym $mod+$alt+Up move up
-bindsym $mod+$alt+Right move right
+bindsym $move+$left move left
+bindsym $move+$down move down
+bindsym $move+$up move up
+bindsym $move+$right move right
+bindsym $move+Left move left
+bindsym $move+Down move down
+bindsym $move+Up move up
+bindsym $move+Right move right
 
                       ### Mod+Ctrl Commands ###
 
-# Move containers between workspaces.
+# Navigate between workspaces.
 
-# move container and jump with it - TODO: switch these to $mod+$ctrl instead
-bindsym $mod+$ctrl+1 move container to workspace number 1; workspace number 1
-bindsym $mod+$ctrl+2 move container to workspace number 2; workspace number 2
-bindsym $mod+$ctrl+3 move container to workspace number 3; workspace number 3
-bindsym $mod+$ctrl+4 move container to workspace number 4; workspace number 4
-bindsym $mod+$ctrl+5 move container to workspace number 5; workspace number 5
-bindsym $mod+$ctrl+6 move container to workspace number 6; workspace number 6
-bindsym $mod+$ctrl+7 move container to workspace number 7; workspace number 7
-bindsym $mod+$ctrl+8 move container to workspace number 8; workspace number 8
-bindsym $mod+$ctrl+9 move container to workspace number 9; workspace number 9
-bindsym $mod+$ctrl+0 move container to workspace number 10; workspace number 10
+bindsym $goto+1 workspace number 1
+bindsym $goto+2 workspace number 2
+bindsym $goto+3 workspace number 3
+bindsym $goto+4 workspace number 4
+bindsym $goto+5 workspace number 5
+bindsym $goto+6 workspace number 6
+bindsym $goto+7 workspace number 7
+bindsym $goto+8 workspace number 8
+bindsym $goto+9 workspace number 9
+bindsym $goto+0 workspace number 10
 
-bindsym $mod+$ctrl+$kp_1 move container to workspace number 1; workspace number 1
-bindsym $mod+$ctrl+$kp_2 move container to workspace number 2; workspace number 2
-bindsym $mod+$ctrl+$kp_3 move container to workspace number 3; workspace number 3
-bindsym $mod+$ctrl+$kp_4 move container to workspace number 4; workspace number 4
-bindsym $mod+$ctrl+$kp_5 move container to workspace number 5; workspace number 5
-bindsym $mod+$ctrl+$kp_6 move container to workspace number 6; workspace number 6
-bindsym $mod+$ctrl+$kp_7 move container to workspace number 7; workspace number 7
-bindsym $mod+$ctrl+$kp_8 move container to workspace number 8; workspace number 8
-bindsym $mod+$ctrl+$kp_9 move container to workspace number 9; workspace number 9
-bindsym $mod+$ctrl+$kp_0 move container to workspace number 10; workspace number 10
+bindsym $goto+$kp_1 workspace number 1
+bindsym $goto+$kp_2 workspace number 2
+bindsym $goto+$kp_3 workspace number 3
+bindsym $goto+$kp_4 workspace number 4
+bindsym $goto+$kp_5 workspace number 5
+bindsym $goto+$kp_6 workspace number 6
+bindsym $goto+$kp_7 workspace number 7
+bindsym $goto+$kp_8 workspace number 8
+bindsym $goto+$kp_9 workspace number 9
+bindsym $goto+$kp_0 workspace number 10
+
+bindsym $goto+$left  workspace prev
+bindsym $goto+$right workspace next
+bindsym $goto+Left   workspace prev
+bindsym $goto+Right  workspace next
+
+
+                   ### Mod+Ctrl+Shift Commands ###
+                  ### (move window to workspace) ###
+
+bindsym $moveto+1 move container to workspace number 1; workspace number 1
+bindsym $moveto+2 move container to workspace number 2; workspace number 2
+bindsym $moveto+3 move container to workspace number 3; workspace number 3
+bindsym $moveto+4 move container to workspace number 4; workspace number 4
+bindsym $moveto+5 move container to workspace number 5; workspace number 5
+bindsym $moveto+6 move container to workspace number 6; workspace number 6
+bindsym $moveto+7 move container to workspace number 7; workspace number 7
+bindsym $moveto+8 move container to workspace number 8; workspace number 8
+bindsym $moveto+9 move container to workspace number 9; workspace number 9
+bindsym $moveto+0 move container to workspace number 10; workspace number 10
+
+bindsym $moveto+$kp_1 move container to workspace number 1; workspace number 1
+bindsym $moveto+$kp_2 move container to workspace number 2; workspace number 2
+bindsym $moveto+$kp_3 move container to workspace number 3; workspace number 3
+bindsym $moveto+$kp_4 move container to workspace number 4; workspace number 4
+bindsym $moveto+$kp_5 move container to workspace number 5; workspace number 5
+bindsym $moveto+$kp_6 move container to workspace number 6; workspace number 6
+bindsym $moveto+$kp_7 move container to workspace number 7; workspace number 7
+bindsym $moveto+$kp_8 move container to workspace number 8; workspace number 8
+bindsym $moveto+$kp_9 move container to workspace number 9; workspace number 9
+bindsym $moveto+$kp_0 move container to workspace number 10; workspace number 10
 
 # move container to next/previous workspace
-bindsym $mod+$ctrl+$left move container to workspace prev; workspace prev
-bindsym $mod+$ctrl+$right move container to workspace next; workspace next
-bindsym $mod+$ctrl+Left move container to workspace prev; workspace prev
-bindsym $mod+$ctrl+Right move container to workspace next; workspace next
+bindsym $moveto+$left move container to workspace prev; workspace prev
+bindsym $moveto+$right move container to workspace next; workspace next
+bindsym $moveto+Left move container to workspace prev; workspace prev
+bindsym $moveto+Right move container to workspace next; workspace next
 
-                    ### Mod+Ctrl+Alt Commands ###
+                 ### Mod+Ctrl+Shift+Alt Commands ###
+                 ###  (move workspace to output) ###
 
-bindsym $mod+$ctrl+$alt+$left move workspace to output left
-bindsym $mod+$ctrl+$alt+$right move workspace to output right
-bindsym $mod+$ctrl+$alt+Left move workspace to output left
-bindsym $mod+$ctrl+$alt+Right move workspace to output right
+bindsym $movespace+$left move workspace to output left
+bindsym $movespace+$right move workspace to output right
+bindsym $movespace+Left move workspace to output left
+bindsym $movespace+Right move workspace to output right
 
 
                           ##### Modes #####
