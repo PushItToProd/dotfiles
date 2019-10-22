@@ -12,6 +12,7 @@ general {
 }
 
 order += "disk /"
+order += "memory"
 order += "battery all"
 order += "load"
 order += "cpu_temperature 0"
@@ -43,4 +44,8 @@ cpu_temperature 0 {
 
 tztime local {
     format = "%Y-%m-%d %H:%M:%S"
+}
+
+memory {
+       format = "Mem: %percentage_used"
 }
