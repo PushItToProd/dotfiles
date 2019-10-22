@@ -87,7 +87,7 @@ exec_always --no-startup-id blueman-applet
 
 # keyboard stuff
 exec_always --no-startup-id numlockx on
-exec_always --no-startup-id setxkbmap -layout us -option caps:escape
+exec_always --no-startup-id setxkbmap -layout us -option caps:escape -option compose:menu
 
 # use GNOME keyring for caching SSH keys, passwords, etc.
 exec_always --no-startup-id ~/.config/i3/scripts/gnome-keyring.sh
