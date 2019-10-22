@@ -108,7 +108,7 @@
 (add-hook 'python-mode-hook
           #'(lambda () (setq electric-indent-mode nil)))
 
-(add-hook 'before-save-hook 'delete-trailing-whitespace)
+;(add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 (setq css-indent-offset 2)
 (custom-set-variables
