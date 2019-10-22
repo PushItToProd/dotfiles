@@ -139,4 +139,5 @@
         "editor.tabSize": 2
     },
     "shellcheck.disableVersionCheck": true,
+    "explorer.confirmDragAndDrop": false,
 }
