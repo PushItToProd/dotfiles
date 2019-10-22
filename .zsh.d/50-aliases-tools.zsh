@@ -2,8 +2,6 @@
 alias venv='source venv/bin/activate'
 
 alias k='kubectl'
-alias h='hledger'
-alias hl='hledger'
 
 # From .bashrc
 # Add an "alert" alias for long running commands.  Use like so:
