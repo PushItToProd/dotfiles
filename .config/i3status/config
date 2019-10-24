@@ -47,7 +47,8 @@ tztime local {
 }
 
 memory {
-       format = "Mem: %free free, %available avail, %used used / %total total (%percentage_used)"
+       #format = "Mem: %free free, %available avail, %used used / %total total (%percentage_used)"
+       format = "Mem: %used/%total (%percentage_used)"
        threshold_degraded = 15%
        threshold_critical = 5%
 }
