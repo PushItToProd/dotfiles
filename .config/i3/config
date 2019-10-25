@@ -267,6 +267,8 @@ bindsym $goto+$right workspace next
 bindsym $goto+Left   workspace prev
 bindsym $goto+Right  workspace next
 
+bindsym $goto+g exec i3-input -F 'workspace "%s"' -P 'Go to workspace: '
+
 
                    ### Mod+Ctrl+Shift Commands ###
                   ### (move window to workspace) ###
@@ -298,6 +300,8 @@ bindsym $moveto+$left move container to workspace prev; workspace prev
 bindsym $moveto+$right move container to workspace next; workspace next
 bindsym $moveto+Left move container to workspace prev; workspace prev
 bindsym $moveto+Right move container to workspace next; workspace next
+
+bindsym $moveto+g exec i3-input -F 'move container to workspace "%s"' -P 'Move to workspace: '
 
                  ### Mod+Ctrl+Shift+Alt Commands ###
                  ###  (move workspace to output) ###
