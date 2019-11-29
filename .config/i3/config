@@ -175,6 +175,7 @@ bindsym $mod+n exec i3-input -F 'move container to workspace "%s"' -P 'Move to w
 bindsym $mod+r mode "resize"
 bindsym $mod+s focus child
 bindsym $mod+v split vertical
+bindsym $mod+w exec firefox
 
 ## Mod+symbol ##
 
