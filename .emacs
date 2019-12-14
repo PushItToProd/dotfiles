@@ -29,9 +29,10 @@
 
 (global-linum-mode t)
 (global-hl-line-mode +1)
-(if (display-graphic-p)
-    (load-theme 'dracula t)
-  (set-face-background hl-line-face "darkblue"))
+;(if (display-graphic-p)
+;    (load-theme 'dracula t)
+;  (set-face-background hl-line-face "darkblue"))
+(load-theme 'spacemacs-dark t)
 (setq inhibit-splash-screen t)
 (setq inhibit-startup-screen t)
 
@@ -118,11 +119,11 @@
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
    (quote
-    ("f8cf128fa0ef7e61b5546d12bb8ea1584c80ac313db38867b6e774d1d38c73db" default)))
+    ("a2cde79e4cc8dc9a03e7d9a42fabf8928720d420034b66aecc5b665bbf05d4e9" "bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" "cdb4ffdecc682978da78700a461cdc77456c3a6df1c1803ae2dd55c59fa703e3" "f8cf128fa0ef7e61b5546d12bb8ea1584c80ac313db38867b6e774d1d38c73db" default)))
  '(org-export-backends (quote (ascii html icalendar latex md)))
  '(package-selected-packages
    (quote
-    (rust-mode terraform-mode go-mode ansible markdown-mode ledger-mode tide evil)))
+    (monokai-theme spacemacs-theme zenburn-theme rust-mode terraform-mode go-mode ansible markdown-mode ledger-mode tide evil)))
  '(scroll-conservatively 10000))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
