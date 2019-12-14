@@ -371,7 +371,7 @@ mode "$mode_system" {
     bindsym Escape mode "default"
 }
 
-set $mode_launch (w)eb browser, (t)ext editor, (s)potify, (m)onitor, (a)nki, (e)macs
+set $mode_launch (w)eb browser, (t)ext editor, (s)potify, (m)onitor, (a)nki, (e)macs, (f)iles
 mode "$mode_launch" {
      bindsym w exec firefox, mode "default"
      bindsym t exec gnome-text-editor, mode "default"
@@ -379,6 +379,7 @@ mode "$mode_launch" {
      bindsym m exec gnome-system-monitor, mode "default"
      bindsym a exec anki, mode "default"
      bindsym e exec emacs, mode "default"
+     bindsym f exec nautilus, mode "default"
 
      bindsym Return mode "default"
      bindsym Escape mode "default"
