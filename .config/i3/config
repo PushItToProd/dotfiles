@@ -49,9 +49,6 @@ set $kp_7 Mod2+KP_7
 set $kp_8 Mod2+KP_8
 set $kp_9 Mod2+KP_9
 
-# modes
-set $mode_system (l)ock, (e)xit, (s)uspend, (h)ibernate, (r)eboot, (Shift+s)hutdown
-
 set $resize_amount 20 px or 5 ppt
 set $big_resize_amount 100 px or 10 ppt
 
@@ -176,6 +173,7 @@ bindsym $mod+r mode "resize"
 bindsym $mod+s focus child
 bindsym $mod+v split vertical
 bindsym $mod+w exec firefox
+bindsym $mod+slash mode "$mode_launch"
 
 ## Mod+symbol ##
 
@@ -359,6 +357,7 @@ mode "resize" {
     bindsym $mod+r mode "default"
 }
 
+set $mode_system (l)ock, (e)xit, (s)uspend, (h)ibernate, (r)eboot, (Shift+s)hutdown
 mode "$mode_system" {
     bindsym l exec --no-startup-id gnome-screensaver-command -l, mode "default"
     bindsym s exec --no-startup-id systemctl suspend, mode "default"
@@ -370,4 +369,18 @@ mode "$mode_system" {
     # exit system mode: "Enter" or "Escape"
     bindsym Return mode "default"
     bindsym Escape mode "default"
+}
+
+set $mode_launch (w)eb browser, (t)ext editor, (s)potify, (m)onitor, (a)nki, (e)macs
+mode "$mode_launch" {
+     bindsym w exec firefox, mode "default"
+     bindsym t exec gnome-text-editor, mode "default"
+     bindsym s exec spotify, mode "default"
+     bindsym m exec gnome-system-monitor, mode "default"
+     bindsym a exec anki, mode "default"
+     bindsym e exec emacs, mode "default"
+
+     bindsym Return mode "default"
+     bindsym Escape mode "default"
+     bindsym $mod+slash mode "default"
 }
