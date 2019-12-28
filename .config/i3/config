@@ -214,14 +214,12 @@ bindsym $mod+Shift+f floating toggle
 bindsym $mod+Shift+g exec i3-input -F 'rename workspace to "%s"' -P 'New name: '
 bindsym $mod+Shift+q kill
 bindsym $mod+Shift+r restart
-bindsym $mod+Shift+s exec --no-startup-id gnome-screenshot -a
+bindsym $mod+Shift+s exec --no-startup-id gnome-screenshot -i
 
 bindsym $focusoutput+Left focus output left
 bindsym $focusoutput+Right focus output right
 bindsym $focusoutput+$left focus output left
 bindsym $focusoutput+$right focus output right
-
-bindsym $mod+Shift+Print exec --no-startup-id gnome-screenshot -i
 
                        ### Mod+Alt Commands ###
 # Reposition within the current workspace.
