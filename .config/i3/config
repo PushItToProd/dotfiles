@@ -369,9 +369,8 @@ mode "$mode_system" {
     bindsym Escape mode "default"
 }
 
-set $mode_launch (w)eb browser, (t)ext editor, (s)potify, (m)onitor, (a)nki, (e)macs, (f)iles, (d)iscord
+set $mode_launch (t)ext editor, (s)potify, (m)onitor, (a)nki, (e)macs, (f)iles, (d)iscord, (c)haracters, (p)rint screen | (w)eb mode, (j)p mode
 mode "$mode_launch" {
-     bindsym w exec firefox, mode "default"
      bindsym t exec gnome-text-editor, mode "default"
      bindsym s exec spotify, mode "default"
      bindsym m exec gnome-system-monitor, mode "default"
@@ -379,8 +378,40 @@ mode "$mode_launch" {
      bindsym e exec emacs, mode "default"
      bindsym f exec nautilus, mode "default"
      bindsym d exec discord, mode "default"
+     bindsym c exec gnome-characters, mode "default"
+     bindsym p exec gnome-screenshot -i, mode "default"
+
+     bindsym w mode "$mode_launch_web"
+     bindsym j mode "$mode_launch_jp"
 
      bindsym Return mode "default"
      bindsym Escape mode "default"
      bindsym $mod+slash mode "default"
+}
+
+set $mode_launch_jp (a)nki, (b)unpro, (t)ext editor
+mode "$mode_launch_jp" {
+     bindsym a exec anki, mode "default"
+     bindsym b exec firefox --new-window bunpro.jp, mode "default"
+     bindsym t exec gnome-text-editor, mode "default"
+
+     bindsym j mode "$mode_launch"
+     bindsym $mod+slash mode "$mode_launch"
+
+     bindsym Return mode "default"
+     bindsym Escape mode "default"
+}
+
+set $mode_launch_web (n)otion, (t)odoist, (l)ast.fm, (r)eddit.com
+mode "$mode_launch_web" {
+     bindsym n exec firefox notion.so, mode "default"
+     bindsym t exec firefox todoist.com, mode "default"
+     bindsym l exec firefox last.fm, mode "default"
+     bindsym r exec firefox reddit.com, mode "default"
+
+     bindsym w mode "$mode_launch"
+     bindsym $mod+slash mode "$mode_launch"
+
+     bindsym Return mode "default"
+     bindsym Escape mode "default"
 }
