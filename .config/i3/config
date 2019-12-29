@@ -165,6 +165,7 @@ bindsym $mod+$kp_0 workspace number 10
 
 bindsym $mod+a focus parent
 bindsym $mod+d exec dmenu_run
+bindsym $mod+e mode "$mode_launch"
 bindsym $mod+f focus mode_toggle
 bindsym $mod+g exec i3-input -F 'workspace "%s"' -P 'Go to workspace: '
 bindsym $mod+m mode "move"
@@ -172,7 +173,7 @@ bindsym $mod+n exec i3-input -F 'move container to workspace "%s"' -P 'Move to w
 bindsym $mod+r mode "resize"
 bindsym $mod+s focus child
 bindsym $mod+v split vertical
-bindsym $mod+w exec firefox
+bindsym $mod+w mode "$mode_launch_web"
 bindsym $mod+slash mode "$mode_launch"
 
 ## Mod+symbol ##
@@ -392,7 +393,7 @@ mode "$mode_launch" {
 set $mode_launch_jp (a)nki, (b)unpro, (t)ext editor
 mode "$mode_launch_jp" {
      bindsym a exec anki, mode "default"
-     bindsym b exec firefox --new-window bunpro.jp, mode "default"
+     bindsym b exec i3-firefox bunpro.jp, mode "default"
      bindsym t exec gnome-text-editor, mode "default"
 
      bindsym j mode "$mode_launch"
@@ -402,15 +403,15 @@ mode "$mode_launch_jp" {
      bindsym Escape mode "default"
 }
 
-set $mode_launch_web (n)otion, (t)odoist, (l)ast.fm, (r)eddit.com
+set $mode_launch_web new (w)indow | (n)otion, (t)odoist, (l)ast.fm, (r)eddit.com (b)unpro.jp
 mode "$mode_launch_web" {
-     bindsym n exec firefox notion.so, mode "default"
-     bindsym t exec firefox todoist.com, mode "default"
-     bindsym l exec firefox last.fm, mode "default"
-     bindsym r exec firefox reddit.com, mode "default"
+     bindsym w exec firefox --new-window, mode "default"
 
-     bindsym w mode "$mode_launch"
-     bindsym $mod+slash mode "$mode_launch"
+     bindsym n exec i3-firefox notion.so, mode "default"
+     bindsym t exec i3-firefox todoist.com, mode "default"
+     bindsym l exec i3-firefox last.fm, mode "default"
+     bindsym r exec i3-firefox reddit.com, mode "default"
+     bindsym b exec i3-firefox bunpro.jp, mode "default"
 
      bindsym Return mode "default"
      bindsym Escape mode "default"
