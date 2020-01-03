@@ -108,7 +108,9 @@ exec --no-startup-id gnome-calculator
 
 # Window assignments
 for_window [title="Tabs Outliner"] move to scratchpad, resize set 600 1200
-for_window [class="keepassxc"] move to scratchpad, resize set 800 600
+# Adding title="KeePassXC" here prevents this from matching KeePass's
+# dialog windows, which gets confusing.
+for_window [class="keepassxc" title="KeePassXC"] move to scratchpad, resize set 800 600
 for_window [class="Pavucontrol"] move to scratchpad, resize set 800 600
 for_window [class="Blueman-manager"] move to scratchpad, resize set 800 600
 for_window [class="gnome-calculator"] move to scratchpad, resize set 400 300
