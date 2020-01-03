@@ -29,3 +29,5 @@
   lg = !"git lg1"
   adog = log --all --decorate --oneline --graph
   bv = branch -v
+
+  remotes = remote -v
