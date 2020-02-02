@@ -16,6 +16,10 @@ alias hgc='hledger-git c'
 alias hgca='hledger-git ca'
 alias hgd='hledger-git d'
 alias hgds='hledger-git ds'
+alias hgp='hledger-git push'
+
+alias hl='hledger-launch'
+alias hle='hledger-launch emacs'
 
 alias ht='hledger-true'
 
