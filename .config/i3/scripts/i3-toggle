@@ -1,0 +1,77 @@
+#!/usr/bin/env bash
+# Given a set of i3 workspace numbers, toggle between them.
+set -o errexit
+set -o nounset
+set -o pipefail
+
+readonly SCRIPTNAME="$0"
+: "${DEBUG:=}"
+
+debug() {
+  if (( "$DEBUG" )); then
+    echo "DEBUG:" "$@" >&2
+  fi
+}
+
+get_workspace_num() {
+  i3-msg -t get_workspaces | jq -r '.[] | select(.focused).num'
+}
+
+assert_num() {
+  if ! [[ "$1" =~ ^[0-9]+$ ]]; then
+    echo "ERROR: '$1' is not a number. we can only jump to workspace numbers" >&2
+    exit 1
+  fi
+}
+
+jump_to() {
+  assert_num "$1"
+
+  i3-msg -t command "workspace number $1"
+}
+
+main() {
+  # TODO: make sure all targets are actually numbers
+  if [[ "$#" == "0" ]]; then
+    # no targets given
+    echo "usage: $SCRIPTNAME [workspace nums...]" >&2
+    exit 1
+  fi
+
+  for arg in "$@"; do
+    assert_num "$arg"
+  done
+
+  # we default to the first argument if no argument or the last
+  # argument is matched
+  default="$1"
+
+  # get our current workspace
+  current_ws="$(get_workspace_num)"
+  debug "current workspace: $current_ws. default target: $default"
+
+  # pop workspaces until we can't anymore
+  while (( "$#" )); do
+    # check if we matched the workspace
+    debug "checking argument $1"
+    if [[ "$1" == "$current_ws" ]]; then
+      debug "matched! $1 is the current workspace"
+      # shift returns 1 if it can't pop anything, but that means we're
+      # on the last workspace and we want to jump to the default anyway
+      shift || true
+      break
+    fi
+    shift
+  done
+
+  # if there's still an argument left, use that as the target.
+  # otherwise, jump to the default target
+  target="${1:-$default}"
+
+  debug "going to target $target"
+  jump_to "$target"
+}
+
+if [[ "${BASH_SOURCE[0]}" == "$0" ]]; then
+  main "$@"
+fi

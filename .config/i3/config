@@ -142,27 +142,17 @@ bindsym XF86AudioPrev exec --no-startup-id playerctl previous -p spotify
 
 ## Mod+number ##
 
-bindsym $mod1 workspace number 1
-bindsym $mod2 workspace number 2
-bindsym $mod3 workspace number 3
-bindsym $mod4 workspace number 4
-bindsym $mod5 workspace number 5
-bindsym $mod6 workspace number 6
-bindsym $mod7 workspace number 7
-bindsym $mod8 workspace number 8
-bindsym $mod9 workspace number 9
-bindsym $mod0 workspace number 10
-bindsym $mod+minus workspace number 11
-bindsym $mod+equal workspace number 12
-bindsym $mod+F1 workspace number 13
-bindsym $mod+F2 workspace number 14
-bindsym $mod+F3 workspace number 15
-bindsym $mod+F4 workspace number 16
-bindsym $mod+F5 workspace number 17
-bindsym $mod+F6 workspace number 18
-bindsym $mod+F7 workspace number 19
-bindsym $mod+F8 workspace number 20
-# leave mod+F9-12 for special features
+#bindsym $mod1 workspace number 1
+bindsym $mod1 exec ~/.config/i3/scripts/i3-toggle 1 11
+bindsym $mod2 exec ~/.config/i3/scripts/i3-toggle 2 12
+bindsym $mod3 exec ~/.config/i3/scripts/i3-toggle 3 13
+bindsym $mod4 exec ~/.config/i3/scripts/i3-toggle 4 14
+bindsym $mod5 exec ~/.config/i3/scripts/i3-toggle 5 15
+bindsym $mod6 exec ~/.config/i3/scripts/i3-toggle 6 16
+bindsym $mod7 exec ~/.config/i3/scripts/i3-toggle 7 17
+bindsym $mod8 exec ~/.config/i3/scripts/i3-toggle 8 18
+bindsym $mod9 exec ~/.config/i3/scripts/i3-toggle 9 19
+bindsym $mod0 exec ~/.config/i3/scripts/i3-toggle 10 20
 
 
 bindsym $mod+$kp_1 workspace number 1
