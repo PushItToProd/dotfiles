@@ -417,7 +417,7 @@ mode "$mode_launch_jp" {
      bindsym Escape mode "default"
 }
 
-set $mode_launch_web new (w)indow | (n)otion, (t)odoist, (l)ast.fm, (r)eddit.com (b)unpro.jp
+set $mode_launch_web new (w)indow | (n)otion, (t)odoist, (l)ast.fm, (r)eddit.com (b)unpro.jp (d)s note
 mode "$mode_launch_web" {
      bindsym w exec firefox --new-window, mode "default"
 
@@ -426,6 +426,7 @@ mode "$mode_launch_web" {
      bindsym l exec i3-firefox last.fm, mode "default"
      bindsym r exec i3-firefox reddit.com, mode "default"
      bindsym b exec i3-firefox bunpro.jp, mode "default"
+     bindsym d exec i3-firefox notes.zane.cloud, mode "default"
 
      bindsym Return mode "default"
      bindsym Escape mode "default"
