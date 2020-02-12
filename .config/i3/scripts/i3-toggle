@@ -1,77 +1,117 @@
-#!/usr/bin/env bash
-# Given a set of i3 workspace numbers, toggle between them.
-set -o errexit
-set -o nounset
-set -o pipefail
+#!/usr/bin/env python3
+"""
+Toggle among a set of given workspaces.
+"""
+import argparse
+import logging
+import os
 
-readonly SCRIPTNAME="$0"
-: "${DEBUG:=}"
+import i3ipc
 
-debug() {
-  if (( "$DEBUG" )); then
-    echo "DEBUG:" "$@" >&2
-  fi
-}
 
-get_workspace_num() {
-  i3-msg -t get_workspaces | jq -r '.[] | select(.focused).num'
-}
+logger = logging.getLogger(__name__)
+logging.basicConfig(
+    format='[%(levelname)s] %(funcName)s - %(message)s',
+    level=getattr(logging, os.environ.get('I3_SCRIPT_LOG_LEVEL', 'INFO')),
+)
 
-assert_num() {
-  if ! [[ "$1" =~ ^[0-9]+$ ]]; then
-    echo "ERROR: '$1' is not a number. we can only jump to workspace numbers" >&2
-    exit 1
-  fi
-}
 
-jump_to() {
-  assert_num "$1"
+parser = argparse.ArgumentParser()
+parser.add_argument(
+    '-m', '--move', action='store_true',
+    help='Move the focused container to the given workspace.',
+)
+parser.add_argument(
+    'workspaces', type=int, nargs='+', help='Workspace numbers to toggle.'
+)
 
-  i3-msg -t command "workspace number $1"
-}
 
-main() {
-  # TODO: make sure all targets are actually numbers
-  if [[ "$#" == "0" ]]; then
-    # no targets given
-    echo "usage: $SCRIPTNAME [workspace nums...]" >&2
-    exit 1
-  fi
+def go_to(i3: i3ipc.Connection, workspace: int):
+    """Go to the given workspace number."""
+    i3.command(f"workspace number {workspace}")
 
-  for arg in "$@"; do
-    assert_num "$arg"
-  done
 
-  # we default to the first argument if no argument or the last
-  # argument is matched
-  default="$1"
+def move_to(i3: i3ipc.Connection, workspace: int):
+    """Move the focused container to the given workspace."""
+    i3.command(f"move container to workspace number {workspace}")
 
-  # get our current workspace
-  current_ws="$(get_workspace_num)"
-  debug "current workspace: $current_ws. default target: $default"
 
-  # pop workspaces until we can't anymore
-  while (( "$#" )); do
-    # check if we matched the workspace
-    debug "checking argument $1"
-    if [[ "$1" == "$current_ws" ]]; then
-      debug "matched! $1 is the current workspace"
-      # shift returns 1 if it can't pop anything, but that means we're
-      # on the last workspace and we want to jump to the default anyway
-      shift || true
-      break
-    fi
-    shift
-  done
+def get_target_workspace(current_workspace, workspaces):
+    """
+    Get the first entry in workspaces after the given current_workspace or
+    otherwise the first entry.
 
-  # if there's still an argument left, use that as the target.
-  # otherwise, jump to the default target
-  target="${1:-$default}"
+    >>> get_target_workspace(1, [])
+    1
+    >>> get_target_workspace(-1, [1])
+    1
+    >>> get_target_workspace(1, [1])
+    1
+    >>> get_target_workspace(1, [1, 2])
+    2
+    >>> get_target_workspace(2, [1, 2])
+    1
+    >>> get_target_workspace(1, [2, 1])
+    2
+    >>> get_target_workspace(2, [2, 1])
+    1
+    >>> get_target_workspace(-1, [1, 2, 3])
+    1
+    >>> get_target_workspace(1, [1, 2, 3])
+    2
+    >>> get_target_workspace(2, [1, 2, 3])
+    3
+    >>> get_target_workspace(3, [1, 2, 3])
+    1
+    """
+    if len(workspaces) <= 0:
+        logger.debug('No workspaces given - defaulting to current workspace %s',
+                     current_workspace)
+        return current_workspace
 
-  debug "going to target $target"
-  jump_to "$target"
-}
+    logger.debug('Searching for %s among %s', current_workspace, workspaces)
 
-if [[ "${BASH_SOURCE[0]}" == "$0" ]]; then
-  main "$@"
-fi
+    target_index = 0
+    for i, n in enumerate(workspaces):
+        if n == current_workspace:
+            logger.debug('Found match for %s at index %s', current_workspace, i)
+            target_index = i + 1
+            break
+
+    # prevent out of range index
+    if target_index >= len(workspaces):
+        target_index = 0
+    target = workspaces[target_index]
+    logger.debug('Returning workspace for index %s = %s', target_index, target)
+    return target
+
+
+def get_current_workspace_num(i3: i3ipc.Connection):
+    """Get the number of the current workspace."""
+    return i3.get_tree().find_focused().workspace().num
+
+
+def main():
+    """Main script entrypoint."""
+    args = parser.parse_args()
+    assert len(args.workspaces) > 0, "expected at least one target workspace"
+
+    workspaces = args.workspaces
+    i3 = i3ipc.Connection()
+
+    # get current workspace - TODO: support workspace names too
+    current_workspace_num = get_current_workspace_num(i3)
+    logging.debug('Current workspace number: %s', current_workspace_num)
+
+    target = get_target_workspace(current_workspace_num, workspaces)
+    logging.info('Going to workspace %s', target)
+
+    if args.move:
+        logging.info('Moving container to target workspace first')
+        move_to(i3, target)
+    go_to(i3, target)
+
+
+if __name__ == '__main__':
+    main()
+
