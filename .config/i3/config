@@ -152,7 +152,7 @@ bindsym $mod6 exec ~/.config/i3/scripts/i3-toggle 6 16
 bindsym $mod7 exec ~/.config/i3/scripts/i3-toggle 7 17
 bindsym $mod8 exec ~/.config/i3/scripts/i3-toggle 8 18
 bindsym $mod9 exec ~/.config/i3/scripts/i3-toggle 9 19
-bindsym $mod0 exec ~/.config/i3/scripts/i3-toggle 10 20
+bindsym $mod0 exec ~/.config/i3/scripts/i3-toggle 10 0
 
 
 bindsym $mod+$kp_1 workspace number 1
