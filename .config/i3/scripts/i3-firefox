@@ -12,6 +12,7 @@ a new window if it is not.
 EOF
 }
 
+# check if firefox is open in the current workspace
 firefox_is_open() {
   i3-save-tree | grep Firefox >/dev/null 2>/dev/null
 }
@@ -24,22 +25,38 @@ firefox_is_focused() {
   [[ "$(get_focused_window_class)" == "Firefox" ]]
 }
 
+# focus firefox in the current workspace (otherwise firefox -new-tab
+# will open a new tab in the last focused window, potentially in
+# a different workspace)
 focus_firefox() {
   i3-msg '[class="Firefox" workspace="__focused__"] focus'
+}
+
+i3_open_in_firefox() {
+  if ! firefox_is_open; then
+    echo "Firefox isn't open in this workspace - opening a new window" >&2
+    firefox -new-window "$@"
+    return
+  fi
+
+  # only focus firefox if it isn't already. if we call focus without
+  # checking and more than one window is open, then the new tab will
+  # be opened in a window other than the currently focused, which is
+  # annoying and unintuitive
+  if ! firefox_is_focused; then
+    echo "Firefox isn't focused - focusing it in this workspace" >&2
+    focus_firefox
+  fi
+
+  echo "Opening a new tab in firefox" >&2
+  firefox -new-tab "$@"
 }
 
 if [[ "${BASH_SOURCE[0]}" == "$0" ]]; then
   if (( "$#" == 0 )); then
     print_usage
-    exit 0
+    exit 1
   fi
 
-  if firefox_is_open; then
-    if ! firefox_is_focused; then
-      focus_firefox
-    fi
-    firefox -new-tab "$@"
-  else
-    firefox -new-window "$@"
-  fi
+  i3_open_in_firefox "$@"
 fi
