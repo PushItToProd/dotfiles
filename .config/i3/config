@@ -286,16 +286,16 @@ bindsym $moveto+8 exec ~/.config/i3/scripts/i3-toggle --move 8 18
 bindsym $moveto+9 exec ~/.config/i3/scripts/i3-toggle --move 9 19
 bindsym $moveto+0 exec ~/.config/i3/scripts/i3-toggle --move 10 0
 
-bindsym $moveto+$kp_1 move container to workspace number 1; workspace number 1
-bindsym $moveto+$kp_2 move container to workspace number 2; workspace number 2
-bindsym $moveto+$kp_3 move container to workspace number 3; workspace number 3
-bindsym $moveto+$kp_4 move container to workspace number 4; workspace number 4
-bindsym $moveto+$kp_5 move container to workspace number 5; workspace number 5
-bindsym $moveto+$kp_6 move container to workspace number 6; workspace number 6
-bindsym $moveto+$kp_7 move container to workspace number 7; workspace number 7
-bindsym $moveto+$kp_8 move container to workspace number 8; workspace number 8
-bindsym $moveto+$kp_9 move container to workspace number 9; workspace number 9
-bindsym $moveto+$kp_0 move container to workspace number 10; workspace number 10
+bindsym $moveto+$kp_1 exec ~/.config/i3/scripts/i3-toggle --move 1 11
+bindsym $moveto+$kp_2 exec ~/.config/i3/scripts/i3-toggle --move 2 12
+bindsym $moveto+$kp_3 exec ~/.config/i3/scripts/i3-toggle --move 3 13
+bindsym $moveto+$kp_4 exec ~/.config/i3/scripts/i3-toggle --move 4 14
+bindsym $moveto+$kp_5 exec ~/.config/i3/scripts/i3-toggle --move 5 15
+bindsym $moveto+$kp_6 exec ~/.config/i3/scripts/i3-toggle --move 6 16
+bindsym $moveto+$kp_7 exec ~/.config/i3/scripts/i3-toggle --move 7 17
+bindsym $moveto+$kp_8 exec ~/.config/i3/scripts/i3-toggle --move 8 18
+bindsym $moveto+$kp_9 exec ~/.config/i3/scripts/i3-toggle --move 9 19
+bindsym $moveto+$kp_0 exec ~/.config/i3/scripts/i3-toggle --move 10 0
 
 # move container to next/previous workspace
 bindsym $moveto+$left move container to workspace prev; workspace prev
