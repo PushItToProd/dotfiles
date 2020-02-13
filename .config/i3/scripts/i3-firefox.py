@@ -6,7 +6,7 @@ a new window if it is not.
 import argparse
 import logging
 import os
-import webbrowser
+import subprocess
 
 import i3ipc
 
@@ -19,7 +19,6 @@ logging.basicConfig(
 
 # control objects
 i3 = i3ipc.Connection()
-browser = webbrowser.get('firefox')
 
 # global state information
 focused = i3.get_tree().find_focused()
@@ -30,11 +29,17 @@ parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument('url', help='The URL to open.')
 
 
+# FIXME: currently this always opens code in (I think) the oldest
+# window in the workspace. I've tried using Python's webbrowser module
+# and now am using the subprocess module, but both have the same
+# issue, which is bizarre since the bash implementation of this
+# doesn't have this problem. I almost wonder if i3ipc is somehow
+# modifying the tree state or something?
 def i3_open_in_browser(url, i3=i3):
     if not browser_windows:
         logging.debug("browser isn't open in this workspace - "
                       "opening a new window")
-        browser.open_new(url)
+        subprocess.run(["firefox", "-new-window", url])
         return
 
     if not browser_is_focused:
@@ -45,7 +50,7 @@ def i3_open_in_browser(url, i3=i3):
         browser_windows[0].command('focus')
 
     logging.debug("browser is open and focused - opening a new tab")
-    browser.open_new_tab(url)
+    subprocess.run(["firefox", "-new-tab", url])
 
 
 if __name__ == '__main__':
