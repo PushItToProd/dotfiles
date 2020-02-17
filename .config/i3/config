@@ -117,6 +117,7 @@ for_window [class="gnome-calculator"] move to scratchpad, resize set 400 300
 
 for_window [title="Authy"] floating enable
 for_window [title="Pomodoro Timer"] floating enable
+for_window [title="Terminator Preferences"] floating enable
 
                       ##### Basic Bindings #####
 
