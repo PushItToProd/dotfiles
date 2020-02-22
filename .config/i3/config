@@ -154,18 +154,6 @@ bindsym $mod8 exec ~/.config/i3/scripts/i3-toggle 8 18
 bindsym $mod9 exec ~/.config/i3/scripts/i3-toggle 9 19
 bindsym $mod0 exec ~/.config/i3/scripts/i3-toggle 10 0
 
-
-bindsym $mod+$kp_1 workspace number 1
-bindsym $mod+$kp_2 workspace number 2
-bindsym $mod+$kp_3 workspace number 3
-bindsym $mod+$kp_4 workspace number 4
-bindsym $mod+$kp_5 workspace number 5
-bindsym $mod+$kp_6 workspace number 6
-bindsym $mod+$kp_7 workspace number 7
-bindsym $mod+$kp_8 workspace number 8
-bindsym $mod+$kp_9 workspace number 9
-bindsym $mod+$kp_0 workspace number 10
-
 ## Mod+letter ##
 
 bindsym $mod+a focus parent
