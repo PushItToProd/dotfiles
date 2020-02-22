@@ -1,5 +1,4 @@
 [[ "$DEBUG" == "1" ]] && echo Configuring aliases
-alias venv='source venv/bin/activate'
 
 alias k='kubectl'
 
