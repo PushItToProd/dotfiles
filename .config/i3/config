@@ -349,13 +349,12 @@ mode "resize" {
     bindsym $mod+r mode "default"
 }
 
-set $mode_system (l)ock, (e)xit, (s)uspend, (h)ibernate, (r)eboot, (Shift+s)hutdown
+set $mode_system (l)ock, (s)uspend, (h)ibernate, (Shift+r)eboot, (Shift+s)hutdown
 mode "$mode_system" {
     bindsym l exec --no-startup-id gnome-screensaver-command -l, mode "default"
     bindsym s exec --no-startup-id systemctl suspend, mode "default"
-    bindsym e exec --no-startup-id i3-msg exit, mode "default"
     bindsym h exec --no-startup-id systemctl hibernate, mode "default"
-    bindsym r exec --no-startup-id systemctl reboot, mode "default"
+    bindsym Shift+r exec --no-startup-id systemctl reboot, mode "default"
     bindsym Shift+s exec --no-startup-id systemctl shutdown, mode "default"
 
     # exit system mode: "Enter" or "Escape"
