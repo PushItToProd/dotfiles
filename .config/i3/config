@@ -381,11 +381,12 @@ mode "$mode_launch" {
      bindsym $mod+slash mode "default"
 }
 
-set $mode_launch_jp (a)nki, (b)unpro, (t)ext editor
+set $mode_launch_jp (a)nki, (b)unpro, (t)ext editor, (f)iles
 mode "$mode_launch_jp" {
      bindsym a exec anki, mode "default"
      bindsym b exec ~/.config/i3/scripts/i3-firefox bunpro.jp, mode "default"
      bindsym t exec gnome-text-editor, mode "default"
+     bindsym f exec nautilus --new-window ~/Documents/japanese, mode "default"
 
      bindsym j mode "$mode_launch"
      bindsym $mod+slash mode "$mode_launch"
