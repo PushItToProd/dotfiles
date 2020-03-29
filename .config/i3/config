@@ -166,6 +166,7 @@ bindsym $mod+n exec i3-input -F 'move container to workspace "%s"' -P 'Move to w
 bindsym $mod+r mode "resize"
 bindsym $mod+s focus child
 bindsym $mod+v split vertical
+bindsym $mod+z exec --no-startup-id rofimoji
 bindsym $mod+w mode "$mode_launch_web"
 bindsym $mod+slash mode "$mode_launch"
 
@@ -384,11 +385,11 @@ mode "$mode_launch" {
      bindsym $mod+slash mode "default"
 }
 
-set $mode_launch_jp (a)nki, (b)unpro, (t)ext editor, (f)iles
+set $mode_launch_jp (a)nki, (b)unpro, (t)odoist, (f)iles
 mode "$mode_launch_jp" {
      bindsym a exec anki, mode "default"
      bindsym b exec ~/.config/i3/scripts/i3-firefox bunpro.jp, mode "default"
-     bindsym t exec gnome-text-editor, mode "default"
+     bindsym t exec ~/.config/i3/scripts/i3-firefox "https://todoist.com/app#project%2F2228604695", mode "default"
      bindsym f exec nautilus --new-window ~/Documents/japanese, mode "default"
 
      bindsym j mode "$mode_launch"
