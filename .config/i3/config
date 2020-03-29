@@ -388,8 +388,8 @@ mode "$mode_launch" {
 set $mode_launch_jp (a)nki, (b)unpro, (t)odoist, (f)iles
 mode "$mode_launch_jp" {
      bindsym a exec anki, mode "default"
-     bindsym b exec ~/.config/i3/scripts/i3-firefox bunpro.jp, mode "default"
-     bindsym t exec ~/.config/i3/scripts/i3-firefox "https://todoist.com/app#project%2F2228604695", mode "default"
+     bindsym b exec i3-firefox bunpro.jp, mode "default"
+     bindsym t exec i3-firefox "https://todoist.com/app#project%2F2228604695", mode "default"
      bindsym f exec nautilus --new-window ~/Documents/japanese, mode "default"
 
      bindsym j mode "$mode_launch"
@@ -403,12 +403,12 @@ set $mode_launch_web new (w)indow | (n)otion, (t)odoist, (l)ast.fm, (r)eddit.com
 mode "$mode_launch_web" {
      bindsym w exec firefox --new-window, mode "default"
 
-     bindsym n exec ~/.config/i3/scripts/i3-firefox notion.so, mode "default"
-     bindsym t exec ~/.config/i3/scripts/i3-firefox todoist.com, mode "default"
-     bindsym l exec ~/.config/i3/scripts/i3-firefox last.fm, mode "default"
-     bindsym r exec ~/.config/i3/scripts/i3-firefox reddit.com, mode "default"
-     bindsym b exec ~/.config/i3/scripts/i3-firefox bunpro.jp, mode "default"
-     bindsym d exec ~/.config/i3/scripts/i3-firefox notes.zane.cloud, mode "default"
+     bindsym n exec i3-firefox notion.so, mode "default"
+     bindsym t exec i3-firefox todoist.com, mode "default"
+     bindsym l exec i3-firefox last.fm, mode "default"
+     bindsym r exec i3-firefox reddit.com, mode "default"
+     bindsym b exec i3-firefox bunpro.jp, mode "default"
+     bindsym d exec i3-firefox notes.zane.cloud, mode "default"
 
      bindsym Return mode "default"
      bindsym Escape mode "default"
