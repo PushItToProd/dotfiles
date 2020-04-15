@@ -4,12 +4,12 @@
 find_venv() {
   # on principle, I refuse to support virtualenvs in /
   if [[ "$(pwd)" == / ]]; then
-    return
+    return 1
   fi
 
   if [[ -d venv ]]; then
     pwd
-    return
+    return 0
   fi
 
   pushd .. >/dev/null
@@ -17,12 +17,21 @@ find_venv() {
   popd >/dev/null
 }
 
-venv() {
+activate_venv_if_exists() {
   local -r venv_location="$(find_venv)"
 
   if [[ "$venv_location" ]]; then
     echo "Activating virtualenv in ${venv_location}"
     source "${venv_location}/venv/bin/activate"
+    return 0
+  fi
+
+  return 1
+}
+
+# activate a venv if one is found, otherwise offer to create one
+venv() {
+  if activate_venv_if_exists; then
     return
   fi
 
@@ -35,3 +44,10 @@ venv() {
   fi
 }
 
+alias de=deactivate
+
+# TODO: implement automated venv activation on cd
+#cd_venv_handler() {
+#
+#}
+#chpwd_functions=(${chpwd_functions[@]} "cd_venv_handler")
