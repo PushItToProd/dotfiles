@@ -152,7 +152,7 @@ bindsym $mod6 exec ~/.config/i3/scripts/i3-toggle 6 16
 bindsym $mod7 exec ~/.config/i3/scripts/i3-toggle 7 17
 bindsym $mod8 exec ~/.config/i3/scripts/i3-toggle 8 18
 bindsym $mod9 exec ~/.config/i3/scripts/i3-toggle 9 19
-bindsym $mod0 exec ~/.config/i3/scripts/i3-toggle 10 0
+bindsym $mod0 exec ~/.config/i3/scripts/i3-toggle 0 10 20
 
 ## Mod+letter ##
 
@@ -163,6 +163,7 @@ bindsym $mod+f focus mode_toggle
 bindsym $mod+g exec i3-input -F 'workspace "%s"' -P 'Go to workspace: '
 bindsym $mod+m mode "move"
 bindsym $mod+n exec i3-input -F 'move container to workspace "%s"' -P 'Move to workspace: '
+bindsym $mod+p scratchpad show
 bindsym $mod+r mode "resize"
 bindsym $mod+s focus child
 bindsym $mod+v split vertical
