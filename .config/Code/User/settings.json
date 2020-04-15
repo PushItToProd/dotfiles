@@ -35,7 +35,6 @@
         "**/terraform.d": true,
         "**/terraform.tfstate.d": true,
         "**/__pycache__": true,
-        "venv": true,
         "**/*.egg-info": true,
     },
     "files.trimTrailingWhitespace": true,
@@ -82,10 +81,17 @@
         {"before": ["capslock"], "after": ["<Esc>"]}
     ],
     "vim.normalModeKeyBindings": [
+        // file navigation
         {"before": ["H"], "after": ["^"]},
         {"before": ["L"], "after": ["$"]},
         {"before": ["J"], "after": ["<C-d>"]},
         {"before": ["K"], "after": ["<C-u>"]},
+
+        // setext-style headers for markdown and plain text
+        {"before": ["<leader>", "1"], "after": ["y", "y", "p", "V", "r", "="]},
+        {"before": ["<leader>", "2"], "after": ["y", "y", "p", "V", "r", "-"]},
+
+        // various actions
         {"before": ["<C-w>"], "commands": ["workbench.action.closeActiveEditor"]},
         {"before": ["<leader>", "u"], "commands": ["workbench.action.reopenClosedEditor"]},
         {"before": ["<leader>", "m"], "commands": ["workbench.action.editor.changeLanguageMode"]},
@@ -141,4 +147,10 @@
     },
     "shellcheck.disableVersionCheck": true,
     "explorer.confirmDragAndDrop": false,
+
+    "newFile.relativeTo": "file",
+    "newFile.showPathRelativeTo": "project",
+    "[plaintext]": {
+        "editor.tabSize": 2
+    }
 }

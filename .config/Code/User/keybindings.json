@@ -88,11 +88,15 @@
     },
     {
         "key": "ctrl+x ctrl+c",
-        "command": "workbench.actionCloseWindow"
+        "command": "workbench.action.CloseWindow"
     },
     {
         "key": "ctrl+x ctrl+f",
         "command": "extension.advancedNewFile"
+    },
+    {
+        "key": "ctrl+x ctrl+s",
+        "command": "workbench.action.files.save"
     },
     {
         "key": "ctrl+x k",
@@ -104,8 +108,8 @@
         "command": "workbench.action.closeActiveEditor"
     },
     {
-        "key": "alt+q",
-        "command": "workbench.action.closeActiveEditor"
+        "key": "alt+e",
+        "command": "workbench.action.files.save"
     },
     {
         "key": "alt+u",
@@ -160,5 +164,20 @@
     {
         "key": "ctrl+`",
         "command": "-workbench.action.terminal.toggleTerminal"
+    },
+    {
+        "key": "alt+n",
+        //"command": "workbench.action.files.newUntitledFile"
+        "command": "newFile.createNewFile"
+    },
+    {
+        "key": "alt+i",
+        "command": "editor.action.triggerParameterHints",
+        "when": "editorHasSignatureHelpProvider && editorTextFocus"
+    },
+    {
+        "key": "alt+d",
+        "command": "editor.action.addSelectionToNextFindMatch",
+        "when": "editorFocus"
     },
 ]
