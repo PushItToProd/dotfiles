@@ -8,6 +8,9 @@ alias k='kubectl'
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
 alias gdiff='git diff --no-index --color-words'
+alias g=git
+
+alias l=less
 
 alias e='emacs'
 alias enw='emacs -nw'
