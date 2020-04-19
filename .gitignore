@@ -27,6 +27,7 @@
 !.emacs.d
 .emacs.d/session.*
 .emacs.d/elpa/*
+.emacs.d/kkcrc
 
 !.vimrc
 !.vimconfig
