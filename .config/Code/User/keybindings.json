@@ -104,8 +104,12 @@
     },
     // my idiosyncratic alt bindings
     {
-        "key": "alt+w",
+        "key": "alt+q",
         "command": "workbench.action.closeActiveEditor"
+    },
+    {
+        "key": "alt+w",
+        "command": "workbench.action.files.save"
     },
     {
         "key": "alt+e",
