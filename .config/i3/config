@@ -73,7 +73,7 @@ focus_follows_mouse no
                        ##### Startup Stuff ####
 
 # workspaces
-workspace 0 output eDP-1
+workspace 90 output eDP-1
 workspace 1 output DP-2
 
 # network manager taskbar applet
@@ -152,7 +152,7 @@ bindsym $mod6 exec ~/.config/i3/scripts/i3-toggle 6 16
 bindsym $mod7 exec ~/.config/i3/scripts/i3-toggle 7 17
 bindsym $mod8 exec ~/.config/i3/scripts/i3-toggle 8 18
 bindsym $mod9 exec ~/.config/i3/scripts/i3-toggle 9 19
-bindsym $mod0 exec ~/.config/i3/scripts/i3-toggle 0 10 20
+bindsym $mod0 exec ~/.config/i3/scripts/i3-toggle 90 91 92
 
 ## Mod+letter ##
 
