@@ -20,7 +20,8 @@
 
     "files.associations": {
         "ansible": "ini",
-        "inventory": "ini"
+        "inventory": "ini",
+        "*.service": "ini"
     },
     "files.exclude": {
         "**/.DS_Store": true,
