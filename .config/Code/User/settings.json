@@ -42,7 +42,8 @@
 
     "search.useIgnoreFiles": false,
     "search.exclude": {
-        "**/venv": true
+        "**/venv": true,
+        "**/*.log": true
     },
 
     "telemetry.enableTelemetry": false,
