@@ -148,6 +148,7 @@
         "editor.tabSize": 2
     },
     "shellcheck.disableVersionCheck": true,
+    "shellcheck.customArgs": ["-x"],
     "explorer.confirmDragAndDrop": false,
 
     "newFile.relativeTo": "file",
