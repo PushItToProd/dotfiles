@@ -84,8 +84,8 @@
     ],
     "vim.normalModeKeyBindings": [
         // file navigation
-        {"before": ["H"], "after": ["^"]},
-        {"before": ["L"], "after": ["$"]},
+        {"before": ["H"], "commands": ["cursorHome"]},
+        {"before": ["L"], "commands": ["cursorEnd"]},
         {"before": ["J"], "after": ["<C-d>"]},
         {"before": ["K"], "after": ["<C-u>"]},
 
