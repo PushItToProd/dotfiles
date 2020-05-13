@@ -11,7 +11,8 @@ alias pbcopy='xclip -sel clip'
 alias pbpaste='xclip -sel clip -o'
 alias open='xdg-open'
 
-alias l='ls -F'
+alias l=less
+#alias l='ls -F'
 alias ll='ls -lh'
 alias la='ls -lah'
 alias lt='ls --human-readable --size --sort=size --classify --format=single-column'

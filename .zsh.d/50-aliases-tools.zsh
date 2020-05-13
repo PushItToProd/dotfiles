@@ -15,8 +15,6 @@ alias gds='git ds'
 alias gc='git c'
 alias gca='git ca'
 
-alias l=less
-
 alias e='emacs'
 alias enw='emacs -nw'
 
