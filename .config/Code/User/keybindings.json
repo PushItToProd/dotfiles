@@ -55,11 +55,23 @@
     // focus editors with vim style keybindings
     {
         "key": "alt+h",
-        "command": "workbench.action.focusLeftGroup"
+        "command": "workbench.action.focusLeftGroup",
+        "when": "multipleEditorGroups || activeEditorGroupIndex == 1"
+    },
+    {
+        "key": "alt+h",
+        "command": "workbench.action.previousEditor",
+        "when": "!(multipleEditorGroups || activeEditorGroupIndex == 1)"
     },
     {
         "key": "alt+l",
-        "command": "workbench.action.focusRightGroup"
+        "command": "workbench.action.focusRightGroup",
+        "when": "multipleEditorGroups || activeEditorGroupLast"
+    },
+    {
+        "key": "alt+l",
+        "command": "workbench.action.nextEditor",
+        "when": "!(multipleEditorGroups || activeEditorGroupLast)"
     },
     {
         "key": "alt+j",
