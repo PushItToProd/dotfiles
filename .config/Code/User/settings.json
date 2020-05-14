@@ -93,22 +93,29 @@
         {"before": ["<leader>", "1"], "after": ["y", "y", "p", "V", "r", "="]},
         {"before": ["<leader>", "2"], "after": ["y", "y", "p", "V", "r", "-"]},
 
-        // various actions
-        {"before": ["<C-w>"], "commands": ["workbench.action.closeActiveEditor"]},
-        {"before": ["<leader>", "u"], "commands": ["workbench.action.reopenClosedEditor"]},
-        {"before": ["<leader>", "m"], "commands": ["workbench.action.editor.changeLanguageMode"]},
-        {"before": ["<leader>", ","], "commands": ["workbench.action.openSettingsJson"]},
-        {"before": ["<leader>", "K"], "commands": ["workbench.action.openGlobalKeybindings"]},
-        {"before": ["<leader>", "k"], "commands": ["workbench.action.openGlobalKeybindingsFile"]},
-        {"before": ["<leader>", "/"], "commands": [":nohl"]},
-        {"before": ["<leader>", "p"], "commands": ["workbench.action.showCommands"]},
-        {"before": ["<leader>", "o"], "commands": ["workbench.action.quickOpen"]},
+        // navigating between editors/tabs
         {"before": ["<leader>", "h"], "commands": ["workbench.action.previousEditor"]},
+        {"before": ["<leader>", ","], "commands": ["workbench.action.previousEditor"]},
         {"before": ["<leader>", "l"], "commands": ["workbench.action.nextEditor"]},
+        {"before": ["<leader>", "."], "commands": ["workbench.action.nextEditor"]},
+
+        // saving and closing
+        {"before": ["<C-w>"], "commands": ["workbench.action.closeActiveEditor"]},
         {"before": ["<leader>", "w"], "commands": ["workbench.action.files.save"]},
         {"before": ["<leader>", "q"], "commands": ["workbench.action.closeActiveEditor"]},
+
+        // vscode-native searching
         {"before": ["<leader>", "f"], "commands": ["actions.find"]},
         {"before": ["<leader>", "r"], "commands": ["editor.action.startFindReplaceAction"]},
+
+        // reset vim search highlight
+        {"before": ["<leader>", "/"], "commands": [":nohl"]},
+
+        // quick commands
+        {"before": ["<leader>", "p"], "commands": ["workbench.action.showCommands"]},
+        {"before": ["<leader>", "o"], "commands": ["workbench.action.quickOpen"]},
+
+        // navigation
         {"before": ["<leader>", "e"], "commands": ["workbench.view.explorer"]},
         {"before": ["<leader>", "E"], "commands": ["workbench.files.action.showActiveFileInExplorer"]},
     ],
