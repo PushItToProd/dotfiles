@@ -108,10 +108,6 @@
         "command": "workbench.action.files.save"
     },
     {
-        "key": "alt+e",
-        "command": "workbench.action.files.save"
-    },
-    {
         "key": "alt+u",
         "command": "workbench.action.reopenClosedEditor"
     },
@@ -137,10 +133,16 @@
     },
     {
         "key": "alt+e",
-        "command": "workbench.view.explorer"
+        "command": "workbench.action.focusSideBar",
+        "when": "inputFocus"
     },
     {
-        "key": "alt+E",
+        "key": "alt+e",
+        "command": "workbench.action.focusActiveEditorGroup",
+        "when": "!inputFocus"
+    },
+    {
+        "key": "alt+shift+e",
         "command": "workbench.files.action.showActiveFileInExplorer"
     },
     {
