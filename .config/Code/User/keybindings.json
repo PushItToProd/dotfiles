@@ -52,7 +52,12 @@
         "key": "alt+.",
         "command": "workbench.action.nextEditorInGroup"
     },
+
+
     // focus editors with vim style keybindings
+
+    // alt+h and alt+l allow moving between tabs or, when the first or last
+    // editor in a group is selected, they jump to the next group
     {
         "key": "alt+h",
         "command": "workbench.action.focusLeftGroup",
@@ -63,6 +68,7 @@
         "command": "workbench.action.previousEditor",
         "when": "!(multipleEditorGroups || activeEditorGroupIndex == 1)"
     },
+
     {
         "key": "alt+l",
         "command": "workbench.action.focusRightGroup",
@@ -73,6 +79,17 @@
         "command": "workbench.action.nextEditor",
         "when": "!(multipleEditorGroups || activeEditorGroupLast)"
     },
+
+    // jump directly between left and right groups with alt+shift
+    {
+        "key": "alt+shift+h",
+        "command": "workbench.action.focusLeftGroup"
+    },
+    {
+        "key": "alt+shift+l",
+        "command": "workbench.action.focusRightGroup"
+    },
+
     {
         "key": "alt+j",
         "command": "workbench.action.focusBelowGroup"
