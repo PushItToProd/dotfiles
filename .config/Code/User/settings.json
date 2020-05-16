@@ -21,7 +21,8 @@
     "files.associations": {
         "ansible": "ini",
         "inventory": "ini",
-        "*.service": "ini"
+        "*.service": "ini",
+        ".pylintrc": "ini"
     },
     "files.exclude": {
         "**/.DS_Store": true,
