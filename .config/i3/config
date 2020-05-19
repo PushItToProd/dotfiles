@@ -167,13 +167,15 @@ bindsym $mod+p scratchpad show
 bindsym $mod+r mode "resize"
 bindsym $mod+s focus child
 bindsym $mod+v split vertical
-bindsym $mod+z exec --no-startup-id rofimoji
 bindsym $mod+w mode "$mode_launch_web"
-bindsym $mod+slash mode "$mode_launch"
+bindsym $mod+z exec --no-startup-id rofimoji
 
 ## Mod+symbol ##
 
+bindsym $mod+slash mode "$mode_launch"
 bindsym $mod+grave exec --no-startup-id rofi -show window
+bindsym $mod+apostrophe exec i3-input -F '[con_mark="%s"] focus' -l 1 -P 'Goto: '
+bindsym $mod+semicolon exec i3-input -F 'mark %s' -l 1 -P 'Mark: '
 
 ## Mod+special ##
 
