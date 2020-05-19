@@ -265,7 +265,7 @@ bindsym $goto+Right  workspace next
 bindsym $goto+g exec i3-input -F 'workspace "%s"' -P 'Go to workspace: '
 
 
-                   ### Mod+Ctrl+Shift Commands ###
+                     ### Mod+Ctrl+Alt Commands ###
                   ### (move window to workspace) ###
 
 bindsym $moveto+1 exec ~/.config/i3/scripts/i3-toggle --move 1 11
