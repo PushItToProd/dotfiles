@@ -166,7 +166,8 @@ bindsym $mod+n exec i3-input -F 'move container to workspace number "%s"' -P 'Mo
 bindsym $mod+p scratchpad show
 bindsym $mod+r mode "resize"
 bindsym $mod+s focus child
-bindsym $mod+u exec i3-input -F 'unmark %s' -l 1 -P 'Unmark: '
+#bindsym $mod+u exec i3-input -F 'unmark %s' -l 1 -P 'Unmark: '
+bindsym $mod+u exec ~/.config/i3/scripts/select_a_mark.sh 'unmark %s' 'Unmark'
 bindsym $mod+v split vertical
 bindsym $mod+w mode "$mode_launch_web"
 bindsym $mod+z exec --no-startup-id rofimoji
