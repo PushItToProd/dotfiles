@@ -1,0 +1,62 @@
+#!/usr/bin/env bash
+# Renumber a workspace without renaming or rename without renumbering.
+set -euo pipefail
+
+usage() {
+  cat <<EOF
+usage: $0 [--name NAME | --number NUMBER]
+EOF
+} >&2
+
+get_current_workspace() {
+  i3-msg -t get_workspaces | jq -r '.. | select(.focused?==true)'
+}
+
+# get workspace number
+number() {
+  echo "$1" | jq -r '.num'
+}
+
+# get workspace name
+name() {
+  echo "$1" | jq -r '.name'
+}
+
+rename() {
+  i3-msg "$(printf 'rename workspace to "%s"' "$1")"
+}
+
+main() {
+  workspace="$(get_current_workspace)"
+  workspace_name="$(name "$workspace")"
+  workspace_number="$(number "$workspace")"
+
+
+  if (( "$#" < 2 )); then
+    usage
+    exit 1
+  fi
+
+  case "$1" in
+    --name)
+      # just stick the new name after the current number
+      new_name="${workspace_number}:$2"
+      ;;
+    --number)
+      # get the name without the numeric prefix
+      bare_name="${workspace_name##$workspace_number}"
+      # strip a leading colon if present
+      bare_name="${bare_name##:}"
+      new_name="$2:${bare_name}"
+      ;;
+    *)
+      echo "unrecognized command: $1" >&2
+      usage
+      exit 1
+      ;;
+  esac
+
+  echo "renaming to $new_name"
+  rename "$new_name"
+}
+main "$@"

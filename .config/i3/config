@@ -212,7 +212,8 @@ bindsym $mod+Shift+c reload
 bindsym $mod+Shift+d exec dmenu_run
 bindsym $mod+Shift+e mode "$mode_system"
 bindsym $mod+Shift+f floating toggle
-bindsym $mod+Shift+g exec i3-input -F 'rename workspace to "%s"' -P 'New name: '
+bindsym $mod+Shift+g exec i3-input -F 'exec ~/.config/i3/scripts/i3-rename --name "%s"' -P 'New name: '
+bindsym $mod+Shift+n exec i3-input -F 'exec ~/.config/i3/scripts/i3-rename --number "%s"' -P 'New number: '
 bindsym $mod+Shift+q kill
 bindsym $mod+Shift+r restart
 bindsym $mod+Shift+s exec --no-startup-id gnome-screenshot -i
