@@ -161,12 +161,12 @@ bindsym $mod+d exec --no-startup-id rofi -show run
 bindsym $mod+e mode "$mode_launch"
 bindsym $mod+f focus mode_toggle
 bindsym $mod+g exec i3-input -F 'workspace number "%s"' -P 'Go to workspace: '
-#bindsym $mod+m mode "move"
 bindsym $mod+m exec i3-input -F 'mark %s' -l 1 -P 'Mark: '
 bindsym $mod+n exec i3-input -F 'move container to workspace number "%s"' -P 'Move to workspace: '
 bindsym $mod+p scratchpad show
 bindsym $mod+r mode "resize"
 bindsym $mod+s focus child
+bindsym $mod+u exec i3-input -F 'unmark %s' -l 1 -P 'Unmark: '
 bindsym $mod+v split vertical
 bindsym $mod+w mode "$mode_launch_web"
 bindsym $mod+z exec --no-startup-id rofimoji
