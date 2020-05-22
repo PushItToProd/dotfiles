@@ -176,7 +176,7 @@ bindsym $mod+z exec --no-startup-id rofimoji
 bindsym $mod+slash mode "$mode_launch"
 bindsym $mod+grave exec --no-startup-id rofi -show window
 bindsym $mod+apostrophe exec i3-input -F '[con_mark="%s"] focus' -l 1 -P 'Goto: '
-bindsym $mod+semicolon exec i3-input -F 'mark %s' -l 1 -P 'Mark: '
+bindsym $mod+semicolon exec ~/.config/i3/scripts/select_a_mark.sh
 
 ## Mod+special ##
 
