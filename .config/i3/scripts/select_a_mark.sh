@@ -5,7 +5,7 @@ get_marked() {
 }
 
 display_menu() {
-  i3-msg -t get_marks | jq -r '.[]' | while read -r mark; do
+  i3-msg -t get_marks | jq -r '.[]' | sort | while read -r mark; do
     echo "$mark --- $(get_marked "$mark")"
   done | rofi -dmenu -i -p "Select a mark"
 }
