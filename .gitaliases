@@ -4,7 +4,6 @@
 
   co = checkout
   conflicts = diff --name-only --diff-filter=U
-  #s = status -bs -uno
   s = status -bu
   st = status -b -uno
   stu = status -bu
@@ -16,11 +15,12 @@
   amend = commit --amend --verbose
 
   d = diff --color-words -b
-  #ds = diff --staged --color-words -b
   ds = !"git d --staged"
   dlast = !"git d HEAD~1 HEAD"
   dl = !"git dlast"
   dm = !"git d master"
+  dnames = diff --name-only
+  dn = !"git dnames"
 
   ch = cherry -v master
 
