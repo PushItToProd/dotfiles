@@ -163,5 +163,6 @@
     "newFile.showPathRelativeTo": "project",
     "[plaintext]": {
         "editor.tabSize": 2
-    }
+    },
+    "workbench.colorTheme": "Default High Contrast"
 }
