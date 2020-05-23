@@ -236,6 +236,8 @@ bindsym $move+Down move down
 bindsym $move+Up move up
 bindsym $move+Right move right
 
+bindsym $move+n exec i3-input -F 'rename workspace to "%s"' -P 'Rename workspace: '
+
                       ### Mod+Ctrl Commands ###
 
 # Navigate between workspaces.
