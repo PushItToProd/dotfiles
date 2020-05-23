@@ -73,8 +73,8 @@ focus_follows_mouse no
                        ##### Startup Stuff ####
 
 # workspaces
-workspace 90 output eDP-1
-workspace 100 output DP-2
+workspace 0 output eDP-1
+workspace 10 output DP-2
 
 # network manager taskbar applet
 exec_always --no-startup-id nm-applet
@@ -143,16 +143,16 @@ bindsym XF86AudioPrev exec --no-startup-id playerctl previous -p spotify
 
 ## Mod+number ##
 
-bindsym $mod1 exec ~/.config/i3/scripts/i3-toggle 100 110
-bindsym $mod2 exec ~/.config/i3/scripts/i3-toggle 200 210
-bindsym $mod3 exec ~/.config/i3/scripts/i3-toggle 300 310
-bindsym $mod4 exec ~/.config/i3/scripts/i3-toggle 400 410
-bindsym $mod5 exec ~/.config/i3/scripts/i3-toggle 500 510
-bindsym $mod6 exec ~/.config/i3/scripts/i3-toggle 600 610
-bindsym $mod7 exec ~/.config/i3/scripts/i3-toggle 700 710
-bindsym $mod8 exec ~/.config/i3/scripts/i3-toggle 800 810
-bindsym $mod9 exec ~/.config/i3/scripts/i3-toggle 900 910
-bindsym $mod0 exec ~/.config/i3/scripts/i3-toggle 90 91 92
+bindsym $mod1 exec ~/.config/i3/scripts/i3-toggle 10 15
+bindsym $mod2 exec ~/.config/i3/scripts/i3-toggle 20 25
+bindsym $mod3 exec ~/.config/i3/scripts/i3-toggle 30 35
+bindsym $mod4 exec ~/.config/i3/scripts/i3-toggle 40 45
+bindsym $mod5 exec ~/.config/i3/scripts/i3-toggle 50 55
+bindsym $mod6 exec ~/.config/i3/scripts/i3-toggle 60 65
+bindsym $mod7 exec ~/.config/i3/scripts/i3-toggle 70 75
+bindsym $mod8 exec ~/.config/i3/scripts/i3-toggle 80 85
+bindsym $mod9 exec ~/.config/i3/scripts/i3-toggle 90 95
+bindsym $mod0 exec ~/.config/i3/scripts/i3-toggle 0 1 2
 
 ## Mod+letter ##
 
@@ -253,16 +253,16 @@ bindsym $goto+g exec i3-input -F 'workspace "%s"' -P 'Go to workspace: '
                      ### Mod+Ctrl+Alt Commands ###
                   ### (move window to workspace) ###
 
-bindsym $moveto+1 exec ~/.config/i3/scripts/i3-toggle --move 100 110
-bindsym $moveto+2 exec ~/.config/i3/scripts/i3-toggle --move 200 210
-bindsym $moveto+3 exec ~/.config/i3/scripts/i3-toggle --move 300 310
-bindsym $moveto+4 exec ~/.config/i3/scripts/i3-toggle --move 400 410
-bindsym $moveto+5 exec ~/.config/i3/scripts/i3-toggle --move 500 510
-bindsym $moveto+6 exec ~/.config/i3/scripts/i3-toggle --move 600 610
-bindsym $moveto+7 exec ~/.config/i3/scripts/i3-toggle --move 700 710
-bindsym $moveto+8 exec ~/.config/i3/scripts/i3-toggle --move 800 810
-bindsym $moveto+9 exec ~/.config/i3/scripts/i3-toggle --move 900 910
-bindsym $moveto+0 exec ~/.config/i3/scripts/i3-toggle --move 90 91 92
+bindsym $moveto+1 exec ~/.config/i3/scripts/i3-toggle --move 10 15
+bindsym $moveto+2 exec ~/.config/i3/scripts/i3-toggle --move 20 25
+bindsym $moveto+3 exec ~/.config/i3/scripts/i3-toggle --move 30 35
+bindsym $moveto+4 exec ~/.config/i3/scripts/i3-toggle --move 40 45
+bindsym $moveto+5 exec ~/.config/i3/scripts/i3-toggle --move 50 55
+bindsym $moveto+6 exec ~/.config/i3/scripts/i3-toggle --move 60 65
+bindsym $moveto+7 exec ~/.config/i3/scripts/i3-toggle --move 70 75
+bindsym $moveto+8 exec ~/.config/i3/scripts/i3-toggle --move 80 85
+bindsym $moveto+9 exec ~/.config/i3/scripts/i3-toggle --move 90 95
+bindsym $moveto+0 exec ~/.config/i3/scripts/i3-toggle --move 0 1 2
 
 # move container to next/previous workspace
 bindsym $moveto+$left move container to workspace prev; workspace prev
