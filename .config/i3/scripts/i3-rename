@@ -40,14 +40,17 @@ main() {
   case "$1" in
     --name)
       # just stick the new name after the current number
-      new_name="${workspace_number}:$2"
+      if [[ "$2" ]]; then
+        name=":$2"
+      else
+        name=""
+      fi
+      new_name="${workspace_number}${name}"
       ;;
     --number)
       # get the name without the numeric prefix
       bare_name="${workspace_name##$workspace_number}"
-      # strip a leading colon if present
-      bare_name="${bare_name##:}"
-      new_name="$2:${bare_name}"
+      new_name="$2${bare_name}"
       ;;
     *)
       echo "unrecognized command: $1" >&2
