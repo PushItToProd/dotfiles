@@ -272,7 +272,7 @@ bindsym $moveto+Right move container to workspace next; workspace next
 
 bindsym $moveto+g exec i3-input -F 'move container to workspace "%s"' -P 'Move to workspace: '
 
-                 ### Mod+Ctrl+Shift+Alt Commands ###
+                 ### Mod+Ctrl+Shift Commands ###
                  ###  (move workspace to output) ###
 
 bindsym $movespace+$left move workspace to output left
