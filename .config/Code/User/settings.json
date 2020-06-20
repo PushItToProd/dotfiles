@@ -22,7 +22,8 @@
         "ansible": "ini",
         "inventory": "ini",
         "*.service": "ini",
-        ".pylintrc": "ini"
+        ".pylintrc": "ini",
+        "todo": "markdown"
     },
     "files.exclude": {
         "**/.DS_Store": true,
