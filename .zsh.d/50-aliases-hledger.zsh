@@ -1,6 +1,6 @@
 alias h='hledger'
 
-alias hb='hledger-mybalances'
+alias hb='hledger-totals'
 
 alias hbi='hledger-bills'
 alias hbill='hledger-bills'
@@ -20,6 +20,8 @@ alias hgp='hledger-git push'
 
 alias hl='hledger-launch'
 alias hle='hledger-launch emacs'
+
+alias hsh='hledger-shell'
 
 alias ht='hledger-true'
 
