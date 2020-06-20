@@ -169,5 +169,10 @@
     "[plaintext]": {
         "editor.tabSize": 2
     },
-    "workbench.colorTheme": "Default High Contrast"
+    "[jinja-md]": {
+        "editor.tabSize": 2
+    },
+    "workbench.colorTheme": "Default High Contrast",
+    "editor.fontSize": 16,
+    "python.pythonPath": "/usr/bin/python3.8"
 }
