@@ -129,6 +129,9 @@
     "[ansible]": {
         "editor.tabSize": 2
     },
+    "[bats]": {
+        "editor.tabSize": 2
+    },
     "[go]": {
         "go.autocompleteUnimportedPackages": true
     },
