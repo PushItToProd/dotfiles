@@ -362,11 +362,11 @@ mode "$mode_launch" {
 
 set $mode_launch_jp (a)nki, (b)unpro, (d)uolingo, (f)iles, (t)odoist
 mode "$mode_launch_jp" {
-     bindsym a exec anki, mode "default"
-     bindsym b exec i3-firefox bunpro.jp, mode "default"
-     bindsym d exec i3-firefox duolingo.com, mode "default"
-     bindsym f exec nautilus --new-window ~/Documents/japanese, mode "default"
-     bindsym t exec i3-firefox "https://todoist.com/app#project%2F2228604695", mode "default"
+     bindsym a exec anki, exec ~/.config/i3/scripts/i3-rename --nameif "jp", mode "default"
+     bindsym b exec i3-firefox bunpro.jp, exec ~/.config/i3/scripts/i3-rename --nameif "jp", mode "default"
+     bindsym d exec i3-firefox duolingo.com, exec ~/.config/i3/scripts/i3-rename --nameif "jp", mode "default"
+     bindsym f exec nautilus --new-window ~/Documents/japanese, exec ~/.config/i3/scripts/i3-rename --nameif "jp", mode "default"
+     bindsym t exec i3-firefox "https://todoist.com/app#project%2F2228604695", exec ~/.config/i3/scripts/i3-rename --nameif "jp", mode "default"
 
      bindsym j mode "$mode_launch"
      bindsym $mod+slash mode "$mode_launch"
