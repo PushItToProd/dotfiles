@@ -26,30 +26,54 @@ rename() {
   i3-msg "$(printf 'rename workspace to "%s"' "$1")"
 }
 
+cmd_nameif() {
+  # only rename if there isn't a name set
+  if [[ "$bare_name" ]]; then
+    echo "the name '$bare_name' is already set - not renaming"
+    return
+  fi
+
+  new_name="${workspace_number}:$1"
+}
+
+cmd_name() {
+  # just stick the new name after the current number
+  if [[ "$1" ]]; then
+    name=":$1"
+  else
+    name=""
+  fi
+  new_name="${workspace_number}${name}"
+}
+
+cmd_number() {
+  new_name="$1${bare_name}"
+}
+
 main() {
   workspace="$(get_current_workspace)"
   workspace_name="$(name "$workspace")"
   workspace_number="$(number "$workspace")"
+
+  # get the workspace name without the numeric prefix
+  bare_name="${workspace_name##$workspace_number}"
 
   if (( "$#" < 2 )); then
     usage
     exit 1
   fi
 
+  new_name=
+
   case "$1" in
+    --nameif)
+      cmd_nameif "$2"
+      ;;
     --name)
-      # just stick the new name after the current number
-      if [[ "$2" ]]; then
-        name=":$2"
-      else
-        name=""
-      fi
-      new_name="${workspace_number}${name}"
+      cmd_name "$2"
       ;;
     --number)
-      # get the name without the numeric prefix
-      bare_name="${workspace_name##$workspace_number}"
-      new_name="$2${bare_name}"
+      cmd_number "$2"
       ;;
     *)
       echo "unrecognized command: $1" >&2
@@ -58,7 +82,14 @@ main() {
       ;;
   esac
 
+  if [[ ! "$new_name" ]]; then
+    echo "no new name set - not renaming"
+    exit 0
+  fi
+
   echo "renaming to $new_name"
   rename "$new_name"
 }
-main "$@"
+if [[ "${BASH_SOURCE[0]}" == "$0" ]]; then
+  main "$@"
+fi
