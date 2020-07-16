@@ -56,7 +56,7 @@
     "terminal.integrated.rendererType": "dom",
 
     "window.enableMenuBarMnemonics": false,
-    "window.openFilesInNewWindow": "default",
+    "window.openFoldersInNewWindow": "on",
     "window.title": "${dirty}${activeEditorShort}${separator}${rootName}",
     "window.titleBarStyle": "custom",
     "window.zoomLevel": 0,
