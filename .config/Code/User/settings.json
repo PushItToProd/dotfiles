@@ -50,7 +50,8 @@
 
     "telemetry.enableTelemetry": false,
 
-    "terminal.integrated.fontFamily": "'DejaVu Sans Mono', 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
+    "terminal.integrated.fontSize": 24,
+    "terminal.integrated.fontFamily": "'DejaVu Sans Mono for Powerline', 'DejaVu Sans Mono', 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
     "terminal.integrated.macOptionIsMeta": true,
     "terminal.integrated.rendererType": "dom",
 
