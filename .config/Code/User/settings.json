@@ -173,7 +173,13 @@
     "[jinja-md]": {
         "editor.tabSize": 2
     },
-    "workbench.colorTheme": "Default High Contrast",
+    "workbench.colorTheme": "Slack Theme Dark Mode",
     "editor.fontSize": 16,
-    "python.pythonPath": "/usr/bin/python3.8"
+    "python.pythonPath": "/usr/bin/python3.8",
+    "[verilog]": {
+        "editor.tabSize": 2
+    },
+    "[systemverilog]": {
+        "editor.tabSize": 2
+    },
 }
