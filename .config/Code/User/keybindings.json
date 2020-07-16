@@ -100,6 +100,10 @@
     },
     // my idiosyncratic alt bindings
     {
+        "key": "alt+`",
+        "command": "workbench.action.closeActiveEditor"
+    },
+    {
         "key": "alt+w",
         "command": "workbench.action.files.save"
     },
@@ -177,5 +181,31 @@
         "key": "alt+d",
         "command": "editor.action.addSelectionToNextFindMatch",
         "when": "editorFocus"
+    },
+
+    { "key": "ctrl+numpad_add",       "command": "editor.action.fontZoomIn" },
+    { "key": "ctrl+shift+=",          "command": "editor.action.fontZoomIn" },
+    { "key": "ctrl+=",                "command": "editor.action.fontZoomIn" },
+    { "key": "ctrl+numpad_subtract",  "command": "editor.action.fontZoomOut" },
+    { "key": "ctrl+-",                "command": "editor.action.fontZoomOut" },
+
+    {
+        "key": "ctrl+numpad0",
+        "command": "editor.action.fontZoomReset"
+    },
+    {
+        "key": "alt+.",
+        "command": "workbench.action.terminal.focusNext",
+        "when": "terminalFocus"
+    },
+    {
+        "key": "alt+,",
+        "command": "workbench.action.terminal.focusPrevious",
+        "when": "terminalFocus"
+    },
+    {
+        "key": "alt+r",
+        "command": "workbench.action.terminal.rename",
+        "when": "terminalFocus"
     },
 ]
