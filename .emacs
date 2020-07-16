@@ -35,6 +35,7 @@
 (load-theme 'spacemacs-dark t)
 (setq inhibit-splash-screen t)
 (setq inhibit-startup-screen t)
+(setq inhibit-startup-buffer-menu t)
 
 ; highlight whitespace and long lines
 ; based on https://gist.github.com/RayRacine/3794795
