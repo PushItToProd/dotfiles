@@ -23,7 +23,8 @@
         "inventory": "ini",
         "*.service": "ini",
         ".pylintrc": "ini",
-        "todo": "markdown"
+        "todo": "markdown",
+        "*.html": "jinja-html"
     },
     "files.exclude": {
         "**/.DS_Store": true,
