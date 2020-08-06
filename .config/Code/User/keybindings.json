@@ -231,4 +231,8 @@
         "command": "workbench.action.terminal.rename",
         "when": "terminalFocus"
     },
+    {
+        "key": "ctrl+e",
+        "command": "-workbench.action.quickOpen"
+    },
 ]
