@@ -186,4 +186,5 @@
     "[systemverilog]": {
         "editor.tabSize": 2
     },
+    "explorer.openEditors.visible": 0,
 }
