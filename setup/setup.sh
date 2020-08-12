@@ -16,12 +16,29 @@ apt_packages=(
   spotify-client
   code
   steam
-  i3
   libtinfo-dev  # hledger
   libgmp-dev    # hledger
   pavucontrol
   gdebi-core    # discord
   wget
+  python3-pip
+
+  # i3 + related functionality
+  i3
+  blueman       # provides blueman-applet for bluetooth control from taskbar
+  gnome-settings-daemon
+  numlockx
+  fcitx-bin     # japanese support
+  playerctl     # media keys
+  rofi
+  # rofimoji dependencies
+  fonts-emojione
+  python3
+  xdotool
+  xsel
+
+  # TODO: trilium
+  # TODO: my pomodoro timer
 )
 
 vscode_extensions=(
@@ -91,4 +108,24 @@ fi
 
 notice "Installing Discord"
 wget -O "$TMP/discord.deb" "https://discordapp.com/api/download?platform=linux&format=deb"
-gdebi "$TMP/discord.deb"
+dpkg -i "$TMP/discord.deb"
+
+### Install Rofimoji ###
+
+notice "Installing Rofimoji for i3"
+
+# Package URL, filename, and download location
+rofimoji_url='https://github.com/fdw/rofimoji/releases/download/4.2.0/rofimoji-4.2.0-py3-none-any.whl'
+rofimoji_package="$(basename "$rofimoji_url")"
+rofimoji="$TMP/$rofimoji_package"
+
+# Download the package
+wget -O "$rofimoji" https://github.com/fdw/rofimoji/releases/download/4.2.0/rofimoji-4.2.0-py3-none-any.whl
+
+# Install rofimoji. --no-warn-script-location is here because ~/.local/bin isn't
+# on the path for the root user.
+sudo -u "$USER" pip3 install --user --no-warn-script-location "$rofimoji"
+
+### Install Virtualenv ###
+notice "Installing Virtualenv"
+sudo -u "$USER" pip3 install virtualenv
