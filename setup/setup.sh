@@ -52,15 +52,15 @@ notice "Installing VS Code Repo"
 curl https://packages.microsoft.com/keys/microsoft.asc \
   | gpg --dearmor \
   > "$TMP/packages.microsoft.gpg"
-sudo install -o root -g root -m 644 "$TMP/packages.microsoft.gpg" /etc/apt/trusted.gpg.d/
+install -o root -g root -m 644 "$TMP/packages.microsoft.gpg" /etc/apt/trusted.gpg.d/
 echo "deb [arch=amd64 signed-by=/etc/apt/trusted.gpg.d/packages.microsoft.gpg] https://packages.microsoft.com/repos/vscode stable main" > /etc/apt/sources.list.d/vscode.list
 
 
 ### Spotify Repo ###
 
 notice "Installing Spotify repo"
-curl -sS https://download.spotify.com/debian/pubkey.gpg | sudo apt-key add -
-echo "deb http://repository.spotify.com stable non-free" | sudo tee /etc/apt/sources.list.d/spotify.list
+curl -sS https://download.spotify.com/debian/pubkey.gpg | apt-key add -
+echo "deb http://repository.spotify.com stable non-free" | tee /etc/apt/sources.list.d/spotify.list
 
 
 ### Install ###
@@ -68,7 +68,7 @@ echo "deb http://repository.spotify.com stable non-free" | sudo tee /etc/apt/sou
 notice "Installing packages"
 add-apt-repository multiverse
 apt-get update
-sudo apt install "${apt_packages[@]}"
+apt install "${apt_packages[@]}"
 
 
 ### VS Code Extensions ###
