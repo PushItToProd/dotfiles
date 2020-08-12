@@ -19,7 +19,19 @@ info() {
   echo "$(tput bold)$(tput setaf 14)** $*$(tput sgr0)" >&2
 }
 
-fatal() {
+error() {
   echo "$(tput bold)$(tput setaf 1)ERROR: $*$(tput sgr0)" >&2
+}
+
+fatal() {
+  error "$@"
   exit 1
 }
+
+if [[ "$BASH_SOURCE" == "$0" ]]; then
+  notice "This is a notice!"
+  echo
+  info "This is some info!"
+  echo
+  error "This is an error!"
+fi
