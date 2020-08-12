@@ -1,6 +1,11 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+readonly PROGNAME="$(basename "$0")"
+readonly DIR="$(dirname "$(readlink -f "$0")")"
+
+source "$DIR/messages.sh"
+
 apt_packages=(
   vim
   keepassxc
@@ -26,32 +31,11 @@ vscode_extensions=(
   mads-hartmann.bash-ide-vscode
   mark-hansen.hledger-vscode
   mshr-h.veriloghdl
-  patbenatar.advanced-new-file
+  dkundel.vscode-new-file
   samuelcolvin.jinjahtml
   stkb.rewrap
   timonwong.shellcheck
 )
-
-notice() {
-  local message="= $1 ="
-  local messagelen="${#message}"
-  echo ""
-  printf '=%.0s' $(seq 1 "$messagelen")
-  echo ""
-  echo "$message"
-  printf '=%.0s' $(seq 1 "$messagelen")
-  echo ""
-  echo ""
-}
-
-info() {
-  echo "$(tput setaf 2)** $*$(tput sgr0)" >&2
-}
-
-fatal() {
-  echo "$(tput setaf 1)ERROR: $*$(tput sgr0)" >&2
-  exit 1
-}
 
 [[ "$EUID" -eq 0 ]] || fatal "You must run this script as root."
 

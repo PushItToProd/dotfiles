@@ -31,8 +31,7 @@
 !.vimrc
 !.vimconfig
 
-!setup.sh
-!scripts/
+!setup/
 !bin/
 
 scratch/
