@@ -39,6 +39,7 @@ apt_packages=(
   spotify-client
   code
   steam
+  i3
 )
 
 vscode_extensions=(
@@ -76,3 +77,5 @@ notice "Installing VS Code Extensions"
 for ext in "${vscode_extensions[@]}"; do
   sudo -u "$USER" code --install-extension "$ext"
 done
+
+notice "Installing hledger"
