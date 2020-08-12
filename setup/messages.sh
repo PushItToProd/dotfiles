@@ -3,6 +3,8 @@
 notice() {
   local message="= $1 ="
   local messagelen="${#message}"
+  tput bold
+  tput setaf 14
   echo ""
   printf '=%.0s' $(seq 1 "$messagelen")
   echo ""
@@ -10,6 +12,7 @@ notice() {
   printf '=%.0s' $(seq 1 "$messagelen")
   echo ""
   echo ""
+  tput sgr0
 }
 
 info() {
