@@ -44,6 +44,9 @@ TMP=/tmp/machine_setup
 mkdir -p "$TMP"
 cd "$TMP"
 
+
+### VS Code Repo ###
+
 notice "Installing VS Code Repo"
 # https://code.visualstudio.com/docs/setup/linux#_debian-and-ubuntu-based-distributions
 curl https://packages.microsoft.com/keys/microsoft.asc \
@@ -52,25 +55,39 @@ curl https://packages.microsoft.com/keys/microsoft.asc \
 sudo install -o root -g root -m 644 "$TMP/packages.microsoft.gpg" /etc/apt/trusted.gpg.d/
 echo "deb [arch=amd64 signed-by=/etc/apt/trusted.gpg.d/packages.microsoft.gpg] https://packages.microsoft.com/repos/vscode stable main" > /etc/apt/sources.list.d/vscode.list
 
+
+### Spotify Repo ###
+
 notice "Installing Spotify repo"
 curl -sS https://download.spotify.com/debian/pubkey.gpg | sudo apt-key add -
 echo "deb http://repository.spotify.com stable non-free" | sudo tee /etc/apt/sources.list.d/spotify.list
 
+
+### Install ###
 
 notice "Installing packages"
 add-apt-repository multiverse
 apt-get update
 sudo apt install "${apt_packages[@]}"
 
+
+### VS Code Extensions ###
+
 notice "Installing VS Code Extensions"
 for ext in "${vscode_extensions[@]}"; do
   sudo -u "$USER" code --install-extension "$ext"
 done
 
+
+### Install Hledger ###
+
 if ! which hledger &>/dev/null; then
   notice "Installing hledger"
   sudo -u "$USER" bash /home/$USER/bin/hledger-install.sh
 fi
+
+
+### Install Discord ###
 
 notice "Installing Discord"
 wget -O "$TMP/discord.deb" "https://discordapp.com/api/download?platform=linux&format=deb"
