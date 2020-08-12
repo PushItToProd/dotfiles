@@ -4,7 +4,7 @@ notice() {
   local message="= $1 ="
   local messagelen="${#message}"
   tput bold
-  tput setaf 14
+  tput setaf 6
   echo ""
   printf '=%.0s' $(seq 1 "$messagelen")
   echo ""
