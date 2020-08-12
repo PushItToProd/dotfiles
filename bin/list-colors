@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+print_color() {
+  echo "$(tput setaf $1)color $1$(tput sgr0)"
+}
+
+if [[ "${1:0:1}" == - ]]; then
+  print_color "${1:1}"
+  exit
+fi
+
+for i in $(seq 1 ${1:-16}); do
+  print_color "$i"
+done

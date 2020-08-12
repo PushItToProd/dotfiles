@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+# This is configured under core.editor in .gitconfig. If running under
+# VS Code, then Code is launched as the editor, but otherwise we use
+# vim. This is preferable to hard-coding one or the other, since I
+# do want to use vim if I'm using the terminal outside Code.
+
+if [[ "$TERM_PROGRAM" == "vscode" ]]; then
+  code --wait "$@"
+else
+  vim "$@"
+fi

@@ -1,0 +1,45 @@
+#!/usr/bin/env bash
+# TODO: genericize to any application
+set -e
+set -o pipefail
+
+print_usage() {
+  cat <<EOF
+$0 URL
+
+Open URL in a new tab if Firefox is open in the current workspace or
+a new window if it is not.
+EOF
+}
+
+firefox_is_open() {
+  i3-save-tree | grep Firefox >/dev/null 2>/dev/null
+}
+
+get_focused_window_class() {
+  i3-msg -t get_tree | jq -r '.. | select(.focused?==true).window_properties.class'
+}
+
+firefox_is_focused() {
+  [[ "$(get_focused_window_class)" == "Firefox" ]]
+}
+
+focus_firefox() {
+  i3-msg '[class="Firefox" workspace="__focused__"] focus'
+}
+
+if [[ "${BASH_SOURCE[0]}" == "$0" ]]; then
+  if (( "$#" == 0 )); then
+    print_usage
+    exit 0
+  fi
+
+  if firefox_is_open; then
+    if ! firefox_is_focused; then
+      focus_firefox
+    fi
+    firefox -new-tab "$@"
+  else
+    firefox -new-window "$@"
+  fi
+fi

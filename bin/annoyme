@@ -1,0 +1,116 @@
+#!/usr/bin/env bash
+# A utility for annoying yourself. Displays a fixed message on a recurring
+# interval to keep you from forgetting.
+readonly BASENAME="$(basename "$0")"
+
+readonly MSG_HYDRATE="Hydrate, fool!"
+readonly RED="$(tput setaf 1)"
+readonly BOLD="$(tput bold)"
+readonly END="$(tput sgr0)"
+
+export opt_interval=15
+export opt_message
+
+is_integer() {
+    [[ "$1" =~ ^[[:digit:]]+$ ]]
+}
+
+err() {
+    echo "$RED$BOLD$*$END" >&2
+}
+
+fail() {
+    err "$*"
+    exit 1
+}
+
+alert() {
+    zenity --info --title="$BASENAME" --text="$*" 2>/dev/null
+}
+
+print_usage() {
+    cat <<EOF
+usage: $0 [-every MINUTES] ([-msg MESSAGE] | -hydrate)
+
+A utility for annoying yourself. Displays a message every MINUTES
+minutes (default $interval) with the message of your choice.
+
+Flags:
+    -every MINUTES: Set interval. Default is $interval.
+    -msg MESSAGE:   Set message.
+    -hydrate:       In lieu of -msg, this will provide a default
+                    message about staying hydrated.
+EOF
+}
+
+parse_args() {
+    while (( "$#" )); do
+        case "$1" in
+            -h|-help|--help)
+                print_usage
+                exit
+                ;;
+            -every)
+                shift
+                opt_interval="$1"
+                ;;
+            -msg)
+                shift
+                opt_message="$1"
+                ;;
+            -hydrate)
+                opt_message="$MSG_HYDRATE"
+                ;;
+            -debug)
+                echo "opt_interval: $opt_interval"
+                echo "opt_message: $opt_message"
+                exit 0
+                ;;
+            *)
+                fail "Unrecognized option: $1"
+                ;;
+        esac
+        shift
+    done
+
+    check_args
+}
+
+check_args() {
+    if [[ "$opt_message" == "" ]]; then
+        err "Error: No message to annoy you with."
+        print_usage
+        exit 1
+    fi
+    if ! is_integer "$opt_interval"; then
+        fail "Error: Interval '$opt_interval' is not an integer."
+    fi
+    if [[ ! "$opt_interval" -gt 0 ]]; then
+        fail "Error: Interval must be greater than 0."
+    fi
+}
+
+do_annoy() {
+    local -r interval="$1"
+    local -r message="$2"
+    while true; do
+        for ((i="$interval"; i > 0; i--)); do
+            echo "$i minutes left"
+            sleep 60
+        done
+        alert "$message"
+    done
+}
+
+main() {
+    parse_args "$@"
+
+    if [[ "$opt_interval" -gt 1 ]]; then
+        echo "Annoying you every $opt_interval minutes with message: $opt_message"
+    else
+        echo "Annoying you every minute with message: $opt_message"
+    fi
+
+    do_annoy "$opt_interval" "$opt_message"
+}
+main "$@"

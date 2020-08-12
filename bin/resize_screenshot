@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+F="$1"
+EXT="${F##*.}"
+
+convert "$F" -crop 3840x2160+0+0 -resize 1920x1080 "$F.resized.$EXT"

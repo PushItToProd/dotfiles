@@ -1,0 +1,86 @@
+#!/usr/bin/env bash
+
+OPEN_FILES=false
+
+file_is_empty() {
+  # -s tests if the file is not zero size, so this means the file *is* zero
+  # size
+  [[ ! -s "$1" ]]
+}
+
+running_in_goland() {
+  [[ "$SNAP_NAME" == "goland" ]]
+}
+
+running_in_pycharm() {
+  [[ "$SNAP_NAME" == "pycharm-professional" ]]
+}
+
+running_in_vscode() {
+  [[ "$TERM_PROGRAM" == "vscode" ]]
+}
+
+post_run() {
+  local -r path="$1"
+  if $OPEN_FILES; then
+    if running_in_pycharm; then
+      pycharm-professional "$path" >/dev/null 2>&1
+    elif running_in_goland; then
+      goland "$path" >/dev/null 2>&1
+    elif running_in_vscode; then
+      code "$path"
+    fi
+  fi
+}
+
+post_create() {
+  local -r path="$1"
+  case "$(basename "$path")" in
+    main.go)
+      echo "package main" >> "$path"
+      ;;
+    *.sh)
+      echo "#!/usr/bin/env bash" >"$path"
+      ;;
+    *.bats)
+      echo "#!/usr/bin/env bats" >"$path"
+      ;;
+  esac
+}
+
+makefile() {
+  local -r path="$1"
+
+  FILE_EXISTED=0
+  if [[ -e "$path" ]]; then
+    FILE_EXISTED=1
+  fi
+
+
+  if [[ "$path" == */ ]]; then
+    mkdir -p "$path"
+  else
+    mkdir -p "$(dirname "$path")"
+    touch "$path"
+  fi
+
+  post_run "$path"
+
+  if [[ FILE_EXISTED == "1" ]]; then
+    return 0
+  fi
+
+  post_create "$path"
+}
+
+main() {
+  for f in "$@"; do
+    if [[ "$f" == "-o" ]]; then
+      OPEN_FILES=true
+      continue
+    fi
+
+    makefile "$f"
+  done
+}
+main "$@"
