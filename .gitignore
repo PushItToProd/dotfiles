@@ -33,5 +33,6 @@
 
 !setup.sh
 !scripts/
+!bin/
 
 scratch/

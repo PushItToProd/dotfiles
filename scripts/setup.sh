@@ -1,6 +1,37 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+apt_packages=(
+  vim
+  keepassxc
+  gnome-tweaks
+  emacs
+  apt-transport-https
+  shellcheck
+  spotify-client
+  code
+  steam
+  i3
+  libtinfo-dev  # hledger
+  libgmp-dev    # hledger
+  pavucontrol
+  gdebi-core    # discord
+  wget
+)
+
+vscode_extensions=(
+  dcasella.i3
+  felipe-mendes.slack-theme
+  jetmartin.bats
+  mads-hartmann.bash-ide-vscode
+  mark-hansen.hledger-vscode
+  mshr-h.veriloghdl
+  patbenatar.advanced-new-file
+  samuelcolvin.jinjahtml
+  stkb.rewrap
+  timonwong.shellcheck
+)
+
 notice() {
   local message="= $1 ="
   local messagelen="${#message}"
@@ -29,32 +60,6 @@ TMP=/tmp/machine_setup
 mkdir -p "$TMP"
 cd "$TMP"
 
-apt_packages=(
-  vim
-  keepassxc
-  gnome-tweaks
-  emacs
-  apt-transport-https
-  shellcheck
-  spotify-client
-  code
-  steam
-  i3
-)
-
-vscode_extensions=(
-  dcasella.i3
-  felipe-mendes.slack-theme
-  jetmartin.bats
-  mads-hartmann.bash-ide-vscode
-  mark-hansen.hledger-vscode
-  mshr-h.veriloghdl
-  patbenatar.advanced-new-file
-  samuelcolvin.jinjahtml
-  stkb.rewrap
-  timonwong.shellcheck
-)
-
 notice "Installing VS Code Repo"
 # https://code.visualstudio.com/docs/setup/linux#_debian-and-ubuntu-based-distributions
 curl https://packages.microsoft.com/keys/microsoft.asc \
@@ -78,4 +83,11 @@ for ext in "${vscode_extensions[@]}"; do
   sudo -u "$USER" code --install-extension "$ext"
 done
 
-notice "Installing hledger"
+if ! which hledger &>/dev/null; then
+  notice "Installing hledger"
+  sudo -u "$USER" bash /home/$USER/bin/hledger-install.sh
+fi
+
+notice "Installing Discord"
+wget -O "$TMP/discord.deb" "https://discordapp.com/api/download?platform=linux&format=deb"
+gdebi "$TMP/discord.deb"
