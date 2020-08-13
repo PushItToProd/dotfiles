@@ -82,7 +82,7 @@ cd "$TMP"
 notice "Applying basic settings"
 
 info "Mapping capslock to escape"
-dconf write /org/gnome/desktop/input-sources/xkb-options ['caps:escape']
+dconf write /org/gnome/desktop/input-sources/xkb-options "['caps:escape']"
 
 
 ### VS Code Repo ###
