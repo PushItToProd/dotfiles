@@ -100,11 +100,20 @@ echo "deb http://repository.spotify.com stable non-free" | tee /etc/apt/sources.
 
 ### Install ###
 
-notice "Installing packages"
+notice "Setting up repos"
 for repo in "${apt_repos[@]}"; do
-  add-apt-repository "$repo"
+  add-apt-repository -y "$repo"
 done
+
+notice "Installing packages"
+
+info "apt-get update"
 apt-get update
+
+info "fixing broken installs"
+apt --fix-broken install
+
+info "installing packages"
 apt install "${apt_packages[@]}"
 
 
@@ -128,7 +137,11 @@ fi
 
 notice "Installing Discord"
 wget -O "$TMP/discord.deb" "https://discordapp.com/api/download?platform=linux&format=deb"
-dpkg -i "$TMP/discord.deb"
+dpkg -i "$TMP/discord.deb" || {
+  info "Initial Discord install failed. Trying to grab dependencies"
+  apt-get -f --force-yes --yes install
+  dpkg -i "$TMP/discord.deb"
+}
 
 ### Install Rofimoji ###
 
