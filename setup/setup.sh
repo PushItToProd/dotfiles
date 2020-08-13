@@ -62,6 +62,7 @@ vscode_extensions=(
   samuelcolvin.jinjahtml
   stkb.rewrap
   timonwong.shellcheck
+  vscodevim.vim
 )
 
 [[ "$EUID" -eq 0 ]] || fatal "You must run this script as root."
