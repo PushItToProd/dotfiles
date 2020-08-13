@@ -2,20 +2,20 @@
 # i3-gaps config file for the Regolith Desktop Environment
 #
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
-# 
+#
 ###############################################################################
 #
-# In this config file, may values are taken from Xresources with the directive 
+# In this config file, may values are taken from Xresources with the directive
 # set_from_resource:
 #
 # set_from_resource <i3 variable name> <Xresources key> <default value>
-# 
+#
 # This configuration file utilizes Xresource variables to enable users to
 # change the configuration without having to make a copy of this config file.
 # The benefit to not copying this file is easier upgrading in the future.
-# To update a value in this config without making a copy, update the Xresource 
+# To update a value in this config without making a copy, update the Xresource
 # value in the file ~/.config/regolith/Xresources.
-# 
+#
 # For example, to change the bar position to the top of the screen this is the
 # i3 config entry:
 # set_from_resource $i3-wm.bar.position i3-wm.bar.position bottom
@@ -23,7 +23,7 @@
 # So add this line to ~/.config/regolith/Xresources to change it's value:
 # i3-wm.bar.position: top
 #
-# Reload i3 after making Xresource changes.  Learn more at 
+# Reload i3 after making Xresource changes.  Learn more at
 # https://regolith-linux.org/docs/howto/override-xres/
 #
 ###############################################################################
@@ -74,8 +74,22 @@ set_from_resource $ws19 i3-wm.workspace.19.name "19"
 ## Launch // Terminal // <> Enter ##
 bindsym $mod+Return exec /usr/bin/x-terminal-emulator
 
-## Launch // Browser // <><Shift> Enter ##
-bindsym $mod+Shift+Return exec gtk-launch $(xdg-settings get default-web-browser)
+## Launch // Web Mode // <> W ##
+bindsym $mod+w mode "$mode_launch_web"
+set $mode_launch_web new (w)indow | (n)otion, (t)odoist, (l)ast.fm, (r)eddit.com, (d)s note, (a)sahi
+mode "$mode_launch_web" {
+     bindsym w exec firefox --new-window, mode "default"
+
+     bindsym n exec i3-firefox notion.so, mode "default"
+     bindsym t exec i3-firefox todoist.com, mode "default"
+     bindsym l exec i3-firefox last.fm, mode "default"
+     bindsym r exec i3-firefox reddit.com, mode "default"
+     bindsym d exec i3-firefox notes.zane.cloud, mode "default"
+     bindsym a exec i3-firefox asahi.zane.cloud, mode "default"
+
+     bindsym Return mode "default"
+     bindsym Escape mode "default"
+}
 
 set_from_resource $rofiTheme rofi.theme /etc/regolith/styles/lascaille/rofi.rasi
 
@@ -216,7 +230,7 @@ bindsym $mod+Shift+Ctrl+9 move container to workspace number $ws19
 
 # move focused container to workspace, move to workspace
 ## Modify // Carry Window to Workspace 1 - 10// <><Alt> 0..9 ##
-bindsym $mod+$alt+1 move container to workspace number $ws1; workspace number $ws1  
+bindsym $mod+$alt+1 move container to workspace number $ws1; workspace number $ws1
 bindsym $mod+$alt+2 move container to workspace number $ws2; workspace number $ws2
 bindsym $mod+$alt+3 move container to workspace number $ws3; workspace number $ws3
 bindsym $mod+$alt+4 move container to workspace number $ws4; workspace number $ws4
@@ -248,6 +262,7 @@ hide_edge_borders smart
 
 ## Session // Exit App // <><Shift> q ##
 bindsym $mod+Shift+q [con_id="__focused__"] kill
+bindsym $mod+q [con_id="__focused__"] kill
 
 ## Session // Terminate App // <><Alt> q ##
 bindsym $mod+$alt+q [con_id="__focused__"] exec --no-startup-id kill -9 $(xdotool getwindowfocus getwindowpid)
@@ -294,10 +309,6 @@ bindsym $mod+c exec $i3-wm.program.settings
 set_from_resource $i3-wm.program.display i3-wm.program.display gnome-control-center display
 bindsym $mod+d exec $i3-wm.program.display
 
-## Modify // Wifi Settings // <> w ##
-set_from_resource $i3-wm.program.wifi i3-wm.program.wifi gnome-control-center wifi
-bindsym $mod+w exec $i3-wm.program.wifi
-
 ## Modify // Bluetooth Settings // <> b ##
 set_from_resource $i3-wm.program.bluetooth i3-wm.program.bluetooth gnome-control-center bluetooth
 bindsym $mod+b exec $i3-wm.program.bluetooth
@@ -316,7 +327,7 @@ bindsym $mod+n exec $i3-wm.program.notification_ui
 
 # i3-snapshot for load/save current layout
 ## Modify // Save Window Layout // <> , ##
-bindsym $mod+comma  exec /usr/bin/i3-snapshot -o > /tmp/i3-snapshot 
+bindsym $mod+comma  exec /usr/bin/i3-snapshot -o > /tmp/i3-snapshot
 ## Modify // Load Window Layout // <> . ##
 bindsym $mod+period exec /usr/bin/i3-snapshot -c < /tmp/i3-snapshot
 
@@ -364,7 +375,7 @@ mode "Resize Mode" {
         bindsym Shift+minus gaps inner current minus 12
         bindsym Shift+plus gaps inner current plus 12
 
-        ## Resize // Exit Resize Mode // Escape or Enter ## 
+        ## Resize // Exit Resize Mode // Escape or Enter ##
         bindsym Return mode "default"
         bindsym Escape mode "default"
         bindsym $mod+r mode "default"
