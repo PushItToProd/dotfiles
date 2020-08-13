@@ -73,6 +73,13 @@ mkdir -p "$TMP"
 cd "$TMP"
 
 
+### Basic OS Config ###
+notice "Applying basic settings"
+
+info "Mapping capslock to escape"
+dconf write /org/gnome/desktop/input-sources/xkb-options ['caps:escape']
+
+
 ### VS Code Repo ###
 
 notice "Installing VS Code Repo"
