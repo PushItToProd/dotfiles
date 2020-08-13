@@ -6,6 +6,11 @@ readonly DIR="$(dirname "$(readlink -f "$0")")"
 
 source "$DIR/messages.sh"
 
+apt_repos=(
+  multiverse
+  ppa:regolith-linux/release
+)
+
 apt_packages=(
   vim
   keepassxc
@@ -23,22 +28,27 @@ apt_packages=(
   wget
   python3-pip
 
-  # i3 + related functionality
-  i3
+  # i3 support functionality
   blueman       # provides blueman-applet for bluetooth control from taskbar
   gnome-settings-daemon
   numlockx
   fcitx-bin     # japanese support
-  playerctl     # media keys
   rofi
+
   # rofimoji dependencies
   fonts-emojione
   python3
   xdotool
   xsel
 
-  # TODO: trilium
-  # TODO: my pomodoro timer
+  # regolith
+  regolith-desktop
+  i3xrocks-net-traffic
+  i3xrocks-cpu-usage
+  i3xrocks-time
+  i3-gaps-wm
+  regolith-gnome-flashback
+  regolith-i3-gaps-config
 )
 
 vscode_extensions=(
@@ -83,7 +93,9 @@ echo "deb http://repository.spotify.com stable non-free" | tee /etc/apt/sources.
 ### Install ###
 
 notice "Installing packages"
-add-apt-repository multiverse
+for repo in "${apt_repos[@]}"; do
+  add-apt-repository "$repo"
+done
 apt-get update
 apt install "${apt_packages[@]}"
 
@@ -129,3 +141,6 @@ sudo -u "$USER" pip3 install --user --no-warn-script-location "$rofimoji"
 ### Install Virtualenv ###
 notice "Installing Virtualenv"
 sudo -u "$USER" pip3 install virtualenv
+
+# TODO: trilium
+# TODO: my pomodoro timer
