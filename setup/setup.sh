@@ -74,6 +74,12 @@ vscode_extensions=(
 [[ "$EUID" -eq 0 ]] || fatal "You must run this script as root."
 
 USER=joe
+
+### Make sure git submodule dependencies are provided in homedir ###
+cd ~
+notice "Updating Git submodules in homedir"
+sudo -u "$USER" bash -c 'cd ~; git submodule init; git submodule update'
+
 TMP=/tmp/machine_setup
 mkdir -p "$TMP"
 cd "$TMP"
@@ -84,7 +90,6 @@ notice "Applying basic settings"
 
 info "Mapping capslock to escape"
 dconf write /org/gnome/desktop/input-sources/xkb-options "['caps:escape']"
-
 
 ### VS Code Repo ###
 
