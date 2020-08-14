@@ -27,6 +27,7 @@ apt_packages=(
   gdebi-core    # discord
   wget
   python3-pip
+  vlc
 
   # i3 support functionality
   blueman       # provides blueman-applet for bluetooth control from taskbar
