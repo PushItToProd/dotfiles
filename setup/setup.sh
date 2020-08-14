@@ -76,11 +76,18 @@ vscode_extensions=(
   vscodevim.vim
 )
 
+appdir_name="Applications"
+homedir_dirs=(
+  bin
+  "$appdir_name"
+  Code/projects
+)
+
 [[ "$EUID" -eq 0 ]] || fatal "You must run this script as root."
 
 USER=joe
 USER_HOME=/home/$USER
-APPDIR="$USER_HOME/Applications"
+APPDIR="$USER_HOME/$appdir_name"
 
 notice "Setting up homedir"
 
@@ -93,8 +100,8 @@ fi
 info "Updating Git submodules in homedir"
 sudo -u "$USER" bash -c 'cd ~; git submodule init; git submodule update'
 
-info "Creating ~/Applications"
-sudo -u "$USER" mkdir -p "$APPDIR"
+info "Creating home directories: ${homedir_dirs[*]}"
+sudo -u "$USER" mkdir -p "${homedir_dirs[@]}"
 
 TMP=/tmp/machine_setup
 mkdir -p "$TMP"
