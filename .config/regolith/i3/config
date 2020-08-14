@@ -326,10 +326,10 @@ set_from_resource $i3-wm.program.shutdown i3-wm.program.shutdown /usr/bin/gnome-
 set_from_resource $i3-wm.program.lock i3-wm.program.lock dbus-send --type=method_call --dest=org.gnome.ScreenSaver /org/gnome/ScreenSaver org.gnome.ScreenSaver.Lock
 set_from_resource $i3-wm.program.sleep i3-wm.program.sleep systemctl suspend
 
-## Session // Shutdown options // <><Shift> e, x ##
+## Session // Shutdown options // <><Shift> e, e ##
 bindsym $mod+Shift+e mode "$mode_system"
 
-set $mode_system (l)ock, (s)uspend, (h)ibernate, (Shift+r)eboot, (Shift+s)hutdown
+set $mode_system (x)logout, (l)ock, (s)uspend, (h)ibernate, (Shift+r)eboot, (Shift+s)hutdown
 mode "$mode_system" {
 ## Session // Logout // <><Shift> e, x ##
     bindsym x exec $i3-wm.program.logout, mode "default"
