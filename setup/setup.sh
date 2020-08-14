@@ -85,7 +85,11 @@ APPDIR="$USER_HOME/Applications"
 notice "Setting up homedir"
 
 ### Make sure git submodule dependencies are provided in homedir ###
-cd ~
+cd "$USER_HOME"
+if [[ ! -d .ssh ]]; then
+  fatal "ssh keys need to be set up first"
+fi
+
 info "Updating Git submodules in homedir"
 sudo -u "$USER" bash -c 'cd ~; git submodule init; git submodule update'
 
