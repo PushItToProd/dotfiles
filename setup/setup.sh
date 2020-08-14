@@ -221,7 +221,6 @@ sudo -u "$USER" pip3 install --user --no-warn-script-location "$rofimoji"
 notice "Installing Virtualenv"
 sudo -u "$USER" pip3 install virtualenv
 
-
 ### Install Syncplay ###
 notice "Installing Syncplay"
 syncplay_url='https://github.com/Syncplay/syncplay/releases/download/v1.6.5/Syncplay-1.6.5-x86_64.AppImage'
@@ -288,6 +287,10 @@ bitwig_package="$(basename "$bitwig_url")"
 bitwig="$TMP/$bitwig_package"
 wget -O "$bitwig" "$bitwig_url"
 dpkg -i "$bitwig"
+
+### Install Powerline Shell ###
+notice "Install Powerline Shell"
+sudo -u "$USER" pip3 install powerline-shell
 
 # TODO: trilium
 # TODO: my pomodoro timer
