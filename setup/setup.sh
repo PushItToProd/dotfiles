@@ -262,5 +262,14 @@ fi
 popd
 
 
+### Install Synology Drive ###
+
+notice "Installing Synology Drive"
+synology_drive_url='https://global.download.synology.com/download/Tools/SynologyDriveClient/2.0.2-11078/Ubuntu/Installer/x86_64/synology-drive-client-11078.x86_64.deb'
+synology_drive_package="$(basename "$synology_drive_url")"
+synology_drive="$TMP/$synology_drive_package"
+wget -O "$synology_drive" "$synology_drive_url"
+dpkg -i "$synology_drive"
+
 # TODO: trilium
 # TODO: my pomodoro timer
