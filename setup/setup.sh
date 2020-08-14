@@ -103,10 +103,11 @@ sudo -u "$USER" bash -c 'cd ~; git submodule init; git submodule update'
 info "Creating home directories: ${homedir_dirs[*]}"
 sudo -u "$USER" mkdir -p "${homedir_dirs[@]}"
 
+
+# Create temp directory for setup files
 TMP=/tmp/machine_setup
 mkdir -p "$TMP"
 cd "$TMP"
-
 
 ### Basic OS Config ###
 notice "Applying basic settings"
