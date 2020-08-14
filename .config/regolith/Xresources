@@ -17,3 +17,5 @@ i3-wm.workspace.16.name:        16
 i3-wm.workspace.17.name:        17
 i3-wm.workspace.18.name:        18
 i3-wm.workspace.19.name:        19
+i3-wm.bar.position:             top
+i3xrocks.date.format2: + %F %R
