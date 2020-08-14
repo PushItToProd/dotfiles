@@ -199,20 +199,17 @@ bindsym $mod+Ctrl+Shift+Right move workspace to output right
 ## Modify // Next Window Orientation // <> Backspace ##
 bindsym $mod+BackSpace split toggle
 
-## Modify // Window Fullscreen Toggle // <> f ##
-bindsym $mod+f fullscreen toggle
+## Modify // Window Fullscreen Toggle // <> F11 ##
+bindsym $mod+F11 fullscreen toggle
 
 ## Modify // Window Floating Toggle // <><Shift> f ##
 bindsym $mod+Shift+f floating toggle
 
-## Modify // Move to Scratchpad // <><Ctrl> m ##
-bindsym $mod+Ctrl+m move to scratchpad
+## Modify // Tile/Float Focus Toggle // <> f ##
+bindsym $mod+f focus mode_toggle
 
-## Modify // Tile/Float Focus Toggle // <><Shift> t ##
-bindsym $mod+Shift+t focus mode_toggle
-
-## Modify // Window Layout Mode // <> t ##
-bindsym $mod+t layout toggle tabbed splith splitv
+## Modify // Window Layout Mode // <> Tab ##
+bindsym $mod+Tab layout toggle tabbed splitv splith
 
 ## Modify // Move Window to Workspace 1 - 10 // <><Shift> 0..9 ##
 bindsym $mod+Shift+1 move container to workspace number $ws1
