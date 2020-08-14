@@ -151,24 +151,32 @@ bindsym $mod+Ctrl+7 workspace number $ws17
 bindsym $mod+Ctrl+8 workspace number $ws18
 bindsym $mod+Ctrl+9 workspace number $ws19
 
-## Navigate // Next Workspace // <> Tab ##
-bindsym $mod+Tab workspace next
 
-## Navigate // Next Workspace // <><Alt> → ##
-bindsym $mod+$alt+Right workspace next
+## Navigate // Next Workspace // <><Ctrl> L ##
+bindsym $mod+Control+l workspace next
 
-## Navigate // Previous Workspace // <><Shift> Tab ##
-bindsym $mod+Shift+Tab workspace prev
+## Navigate // Next Workspace // <><Ctrl> → ##
+bindsym $mod+Control+right workspace next
 
-## Navigate // Previous Workspace // <><Alt> ← ##
-bindsym $mod+$alt+Left workspace prev
 
-## Navigate // Scratchpad // <><Ctrl> a ##
-bindsym $mod+Ctrl+a scratchpad show
+## Navigate // Previous Workspace // <><Ctrl> H ##
+bindsym $mod+Control+h workspace prev
+
+## Navigate // Previous Workspace // <><Ctrl> ← ##
+bindsym $mod+Control+left workspace prev
+
+## Navigate // Scratchpad // <>p ##
+bindsym $mod+p scratchpad show
 
 ###############################################################################
 # Window and Workspace Configuration
 ###############################################################################
+
+## Modify // Rename workspace // <mod><Shift> g ##
+bindsym $mod+Shift+g exec i3-input -F 'exec ~/.config/i3/scripts/i3-rename --name "%s"' -P 'New name: '
+
+## Modify // Renumber workspace // <mod><Shift> n ##
+bindsym $mod+Shift+n exec i3-input -F 'exec ~/.config/i3/scripts/i3-rename --number "%s"' -P 'New number: '
 
 ## Modify // Window Position // <><Shift> ↑ ↓ ← → ##
 bindsym $mod+Shift+Left move left
