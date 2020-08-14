@@ -268,6 +268,9 @@ hide_edge_borders smart
 # Scratchpad Management
 ###############################################################################
 
+## Scratchpad // Show // <> p ##
+bindsym $mod+p scratchpad show
+
 ## Scratchpad // Move to Scratchpad // <><Shift> ~ ##
 bindsym $mod+Shift+asciitilde move to scratchpad
 
