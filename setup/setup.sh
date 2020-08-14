@@ -289,8 +289,12 @@ wget -O "$bitwig" "$bitwig_url"
 dpkg -i "$bitwig"
 
 ### Install Powerline Shell ###
-notice "Install Powerline Shell"
+notice "Installing Powerline Shell"
 sudo -u "$USER" pip3 install powerline-shell
+
+### Use Zsh ###
+notice "Switching to zsh"
+chsh -s /usr/bin/zsh
 
 # TODO: trilium
 # TODO: my pomodoro timer
