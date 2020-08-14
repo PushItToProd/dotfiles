@@ -55,6 +55,9 @@ apt_packages=(
   i3-gaps-wm
   regolith-gnome-flashback
   regolith-i3-gaps-config
+
+  # zsh
+  zsh
 )
 
 vscode_extensions=(
