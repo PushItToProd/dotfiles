@@ -182,7 +182,6 @@ bindsym $mod+Control+l workspace next
 ## Navigate // Next Workspace // <><Ctrl> → ##
 bindsym $mod+Control+right workspace next
 
-
 ## Navigate // Previous Workspace // <><Ctrl> H ##
 bindsym $mod+Control+h workspace prev
 
@@ -194,6 +193,19 @@ bindsym $mod+a focus parent
 
 ## Navigate // Focus Child // <> s ##
 bindsym $mod+s focus child
+
+## Navigate // Mark // <> m ##
+bindsym $mod+m exec i3-input -F 'mark %s' -l 1 -P 'Mark: '
+
+## Navigate // Go to Mark // <> ' ##
+bindsym $mod+apostrophe exec i3-input -F '[con_mark="%s"] focus' -l 1 -P 'Goto: '
+
+## Navigate // List Marks // <> ; ##
+bindsym $mod+semicolon exec ~/.config/i3/scripts/select_a_mark.sh
+
+## Navigate // Go to workspace number // <> g ##
+bindsym $mod+g exec i3-input -F 'workspace number "%s"' -P 'Go to workspace: '
+
 
 ###############################################################################
 # Window and Workspace Configuration
