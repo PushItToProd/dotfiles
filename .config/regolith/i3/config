@@ -101,9 +101,9 @@ bindsym $mod+space exec $i3-wm.program.launcher.app
 set_from_resource $i3-wm.program.launcher.cmd i3-wm.program.launcher.cmd rofi -show run -theme $rofiTheme
 bindsym $mod+Shift+space exec $i3-wm.program.launcher.cmd
 
-## Navigate // Window by Name // <><Ctrl> Space ##
+## Navigate // Window by Name // <> ` ##
 set_from_resource $i3-wm.program.launcher.window i3-wm.program.launcher.window rofi -show window -theme $rofiTheme
-bindsym $mod+Ctrl+space exec $i3-wm.program.launcher.window
+bindsym $mod+grave exec $i3-wm.program.launcher.window
 
 ## Launch // This Dialog // <><Shift> ? ##
 set_from_resource $i3-wm.program.help i3-wm.program.help /usr/bin/remontoire-toggle
