@@ -165,8 +165,11 @@ bindsym $mod+Control+h workspace prev
 ## Navigate // Previous Workspace // <><Ctrl> ← ##
 bindsym $mod+Control+left workspace prev
 
-## Navigate // Scratchpad // <>p ##
-bindsym $mod+p scratchpad show
+## Navigate // Focus Parent // <> a ##
+bindsym $mod+a focus parent
+
+## Navigate // Focus Child // <> s ##
+bindsym $mod+s focus child
 
 ###############################################################################
 # Window and Workspace Configuration
