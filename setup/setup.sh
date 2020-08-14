@@ -78,11 +78,18 @@ vscode_extensions=(
 [[ "$EUID" -eq 0 ]] || fatal "You must run this script as root."
 
 USER=joe
+USER_HOME=/home/$USER
+APPDIR="$USER_HOME/Applications"
+
+notice "Setting up homedir"
 
 ### Make sure git submodule dependencies are provided in homedir ###
 cd ~
-notice "Updating Git submodules in homedir"
+info "Updating Git submodules in homedir"
 sudo -u "$USER" bash -c 'cd ~; git submodule init; git submodule update'
+
+info "Creating ~/Applications"
+sudo -u "$USER" mkdir -p "$APPDIR"
 
 TMP=/tmp/machine_setup
 mkdir -p "$TMP"
@@ -177,6 +184,56 @@ sudo -u "$USER" pip3 install --user --no-warn-script-location "$rofimoji"
 ### Install Virtualenv ###
 notice "Installing Virtualenv"
 sudo -u "$USER" pip3 install virtualenv
+
+
+### Install Syncplay ###
+notice "Installing Syncplay"
+syncplay_url='https://github.com/Syncplay/syncplay/releases/download/v1.6.5/Syncplay-1.6.5-x86_64.AppImage'
+syncplay="$APPDIR/Syncplay"
+wget -O "$syncplay" "$syncplay_url"
+chmod +x "$syncplay"
+
+### Install TeamSpeak ###
+notice "Installing Teamspeak"
+teamspeak_url='https://files.teamspeak-services.com/releases/client/3.5.3/TeamSpeak3-Client-linux_amd64-3.5.3.run'
+teamspeak_installer="$APPDIR/$(basename "$teamspeak_url")"
+teamspeak="$APPDIR/teamspeak"
+teamspeak_dir=
+if [ ! -f "$teamspeak_installer" ]; then
+  info "Downloading teamspeak"
+  wget -O "$teamspeak_installer" "$teamspeak_url"
+fi
+chmod +x "$teamspeak_installer"
+
+find_teamspeak_dir() {
+  for d in "$APPDIR/TeamSpeak3-Client"*; do
+    if [[ -d "$d" ]]; then
+      teamspeak_dir="$d"
+      info "Teamspeak directory: $teamspeak_dir"
+    fi
+  done
+}
+
+find_teamspeak_dir
+
+pushd "$APPDIR"
+if [[ ! "$teamspeak_dir" ]]; then
+  info "Running teamspeak installer"
+  "$teamspeak_installer"
+  find_teamspeak_dir
+fi
+
+teamspeak_runscript="$teamspeak_dir/ts3client_runscript.sh"
+if [[ ! -f "$teamspeak_runscript" ]]; then
+  fatal "didn't find ts3client_runscript.sh under $APPDIR as expected"
+fi
+
+if [[ ! -e "$teamspeak" ]]; then
+  info "Creating teamspeak symlink"
+  ln -s "$teamspeak_runscript" "$teamspeak"
+fi
+popd
+
 
 # TODO: trilium
 # TODO: my pomodoro timer
