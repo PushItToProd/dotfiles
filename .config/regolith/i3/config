@@ -231,7 +231,7 @@ bindsym $mod+Shift+j move down
 bindsym $mod+Shift+k move up
 bindsym $mod+Shift+l move right
 
-## Modify // Containing Workspace // <><Ctrl><Shift> ↑ ↓ ← → ##
+## Modify // Move Workspace to Display // <><Ctrl><Shift> ↑ ↓ ← → ##
 bindsym $mod+Ctrl+Shift+Left move workspace to output left
 bindsym $mod+Ctrl+Shift+Down move workspace to output down
 bindsym $mod+Ctrl+Shift+Up move workspace to output up
@@ -274,6 +274,9 @@ bindsym $mod+$alt+Ctrl+6 move container to workspace number $ws16; workspace num
 bindsym $mod+$alt+Ctrl+7 move container to workspace number $ws17; workspace number $ws17
 bindsym $mod+$alt+Ctrl+8 move container to workspace number $ws18; workspace number $ws18
 bindsym $mod+$alt+Ctrl+9 move container to workspace number $ws19; workspace number $ws19
+
+## Modify // Split Container // <> v ##
+bindsym $mod+v split vertical
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
