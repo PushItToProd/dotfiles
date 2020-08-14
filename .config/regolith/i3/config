@@ -182,13 +182,13 @@ bindsym $mod+Ctrl+9 workspace number $ws19
 bindsym $mod+Control+l workspace next
 
 ## Navigate // Next Workspace // <><Ctrl> → ##
-bindsym $mod+Control+right workspace next
+bindsym $mod+Control+Right workspace next
 
 ## Navigate // Previous Workspace // <><Ctrl> H ##
 bindsym $mod+Control+h workspace prev
 
 ## Navigate // Previous Workspace // <><Ctrl> ← ##
-bindsym $mod+Control+left workspace prev
+bindsym $mod+Control+Left workspace prev
 
 ## Navigate // Focus Parent // <> a ##
 bindsym $mod+a focus parent
