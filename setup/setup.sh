@@ -83,6 +83,11 @@ homedir_dirs=(
   Code/projects
 )
 
+declare -A homedir_repos=(
+  ["Code/projects/hledger-shell"]="ssh://git@gitlab.zane.cloud:30001/joe/hledger-shell.git"
+  ["Code/projects/my-hledger"]="git@github.com-pushittoprod:PushItToProd/my-hledger.git"
+)
+
 [[ "$EUID" -eq 0 ]] || fatal "You must run this script as root."
 
 USER=joe
@@ -102,6 +107,15 @@ sudo -u "$USER" bash -c 'cd ~; git submodule init; git submodule update'
 
 info "Creating home directories: ${homedir_dirs[*]}"
 sudo -u "$USER" mkdir -p "${homedir_dirs[@]}"
+
+info "Cloning repos"
+for path in "${!homedir_repos[@]}"; do
+  repo="${homedir_repos["$path"]}"
+  info "Cloning $repo to $path"
+  if [[ ! -d "$path" ]]; then
+    sudo -u "$USER" git clone "$repo" "$path"
+  fi
+done
 
 
 # Create temp directory for setup files
