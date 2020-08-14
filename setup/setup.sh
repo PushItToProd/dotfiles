@@ -34,6 +34,7 @@ apt_packages=(
   numlockx
   fcitx-bin     # japanese support
   rofi
+  jq
 
   # rofimoji dependencies
   fonts-emojione
