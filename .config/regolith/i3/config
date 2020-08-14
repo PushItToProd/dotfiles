@@ -295,25 +295,37 @@ bindsym $mod+Shift+r exec --no-startup-id $i3-wm.program.refresh_ui
 ## Session // Restart i3 // <><Ctrl> r ##
 bindsym $mod+Ctrl+r restart
 
-## Session // Logout // <><Shift> e ##
 set_from_resource $i3-wm.program.logout i3-wm.program.logout /usr/bin/gnome-session-quit --logout
-bindsym $mod+Shift+e exec $i3-wm.program.logout
 
-## Session // Reboot // <><Shift> b ##
 set_from_resource $i3-wm.program.reboot i3-wm.program.reboot /usr/bin/gnome-session-quit --reboot
-bindsym $mod+Shift+b exec $i3-wm.program.reboot
 
-## Session // Power Down // <><Shift> p ##
 set_from_resource $i3-wm.program.shutdown i3-wm.program.shutdown /usr/bin/gnome-session-quit --power-off
-bindsym $mod+Shift+p exec $i3-wm.program.shutdown
 
-## Session // Lock Screen // <> Escape ##
 set_from_resource $i3-wm.program.lock i3-wm.program.lock dbus-send --type=method_call --dest=org.gnome.ScreenSaver /org/gnome/ScreenSaver org.gnome.ScreenSaver.Lock
-bindsym $mod+Escape exec $i3-wm.program.lock
 
-## Session // Sleep // <><Shift> s ##
 set_from_resource $i3-wm.program.sleep i3-wm.program.sleep systemctl suspend
-bindsym $mod+Shift+s exec $i3-wm.program.sleep
+
+set $mode_system (l)ock, (s)uspend, (h)ibernate, (Shift+r)eboot, (Shift+s)hutdown
+mode "$mode_system" {
+## Session // Logout // <><Shift> e, x ##
+    bindsym x exec $i3-wm.program.logout
+
+## Session // Lock Screen // <><Shift> e, l ##
+    bindsym l exec $i3-wm.program.lock
+
+## Session // Sleep // <><Shift> e, s ##
+    bindsym s exec $i3-wm.program.sleep
+
+## Session // Reboot // <><Shift> e, <Shift> r ##
+    bindsym Shift+r exec $i3-wm.program.reboot
+
+## Session // Power Down // <><Shift> e, <Shift> s ##
+    bindsym Shift+s exec $i3-wm.program.shutdown
+
+    # exit system mode: "Enter" or "Escape"
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
 
 ###############################################################################
 # System Management
