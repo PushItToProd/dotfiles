@@ -28,6 +28,7 @@ apt_packages=(
   wget
   python3-pip
   vlc
+  ffmpeg        # bitwig
 
   # i3 support functionality
   blueman       # provides blueman-applet for bluetooth control from taskbar
@@ -270,6 +271,15 @@ synology_drive_package="$(basename "$synology_drive_url")"
 synology_drive="$TMP/$synology_drive_package"
 wget -O "$synology_drive" "$synology_drive_url"
 dpkg -i "$synology_drive"
+
+### Install Bitwig ###
+
+notice "Installing Bitwig"
+bitwig_url='https://downloads.bitwig.com/stable/3.2.7/bitwig-studio-3.2.7.deb'
+bitwig_package="$(basename "$bitwig_url")"
+bitwig="$TMP/$bitwig_package"
+wget -O "$bitwig" "$bitwig_url"
+dpkg -i "$bitwig"
 
 # TODO: trilium
 # TODO: my pomodoro timer
