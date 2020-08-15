@@ -234,7 +234,9 @@ sudo -u "$USER" pip3 install virtualenv
 notice "Installing Syncplay"
 syncplay_url='https://github.com/Syncplay/syncplay/releases/download/v1.6.5/Syncplay-1.6.5-x86_64.AppImage'
 syncplay="$APPDIR/Syncplay"
-wget -O "$syncplay" "$syncplay_url"
+if [[ ! -f "$syncplay" ]]; then
+  wget -O "$syncplay" "$syncplay_url"
+fi
 chmod +x "$syncplay"
 
 ### Install TeamSpeak ###
