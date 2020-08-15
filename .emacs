@@ -4,8 +4,14 @@
 (add-to-list 'package-archives
              '("melpa" . "http://melpa.org/packages/") t)
 (package-initialize)
+(package-refresh-contents)
 
-(add-to-list 'load-path "~/.emacs.d/evil")
+(unless (package-installed-p 'evil)
+  (package-install 'evil))
+(unless (package-installed-p 'spacemacs-theme)
+  (package-install 'spacemacs-theme))
+(unless (package-installed-p 'ledger-mode)
+  (package-install 'ledger-mode))
 (add-to-list 'load-path "~/.emacs.d/lib")
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
 
