@@ -86,6 +86,7 @@ homedir_dirs=(
 
 declare -A homedir_repos=(
   ["Code/projects/hledger-shell"]="ssh://git@gitlab.zane.cloud:30001/joe/hledger-shell.git"
+  ["Documents/ledger"]="ssh://git@gitlab.zane.cloud:30001/joe/ledger.git"
   ["Code/projects/my-hledger"]="git@github.com-pushittoprod:PushItToProd/my-hledger.git"
 )
 
