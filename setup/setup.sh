@@ -4,6 +4,7 @@ set -euo pipefail
 readonly PROGNAME="$(basename "$0")"
 readonly DIR="$(dirname "$(readlink -f "$0")")"
 
+# shellcheck source=messages.sh
 source "$DIR/messages.sh"
 
 apt_repos=(
@@ -29,6 +30,7 @@ apt_packages=(
   python3-pip
   vlc
   ffmpeg        # bitwig
+  xclip
 
   # i3 support functionality
   blueman       # provides blueman-applet for bluetooth control from taskbar
