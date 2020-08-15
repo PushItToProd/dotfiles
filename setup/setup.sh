@@ -282,11 +282,16 @@ dpkg -i "$synology_drive"
 ### Install Bitwig ###
 
 notice "Installing Bitwig"
-bitwig_url='https://downloads.bitwig.com/stable/3.2.7/bitwig-studio-3.2.7.deb'
-bitwig_package="$(basename "$bitwig_url")"
-bitwig="$TMP/$bitwig_package"
-wget -O "$bitwig" "$bitwig_url"
-dpkg -i "$bitwig"
+if ! dpkg-query -l bitwig-studio; then
+  info "Installing bitwig"
+  bitwig_url='https://downloads.bitwig.com/stable/3.2.7/bitwig-studio-3.2.7.deb'
+  bitwig_package="$(basename "$bitwig_url")"
+  bitwig="$TMP/$bitwig_package"
+  wget -O "$bitwig" "$bitwig_url"
+  dpkg -i "$bitwig"
+else
+  info "bitwig-studio is already installed"
+fi
 
 ### Install Powerline Shell ###
 notice "Installing Powerline Shell"
