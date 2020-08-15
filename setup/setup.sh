@@ -89,10 +89,14 @@ homedir_dirs=(
   Code/projects
 )
 
+hledger_shell_path="Code/projects/hledger-shell"
+pomodoro_path="Code/projects/pomodoro"
+
 declare -A homedir_repos=(
-  ["Code/projects/hledger-shell"]="ssh://git@gitlab.zane.cloud:30001/joe/hledger-shell.git"
+  ["$hledger_shell_path"]="ssh://git@gitlab.zane.cloud:30001/joe/hledger-shell.git"
   ["Documents/ledger"]="ssh://git@gitlab.zane.cloud:30001/joe/ledger.git"
   ["Code/projects/my-hledger"]="git@github.com-pushittoprod:PushItToProd/my-hledger.git"
+  ["$pomodoro_path"]="https://github.com/PushItToProd/super-simple-pomodoro.git"
 )
 
 [[ "$EUID" -eq 0 ]] || fatal "You must run this script as root."
@@ -193,11 +197,20 @@ done
 
 ### Install Hledger ###
 
-if ! which hledger &>/dev/null; then
-  notice "Installing hledger"
+notice "Installing hledger"
+if [[ -f "$USER_HOME/.local/bin/hledger" ]]; then
+  info "hledger is already installed"
+else
+  # hledger-install.sh is included in the repo for ease of distribution
   sudo -u "$USER" bash /home/$USER/bin/hledger-install.sh
 fi
 
+info "Installing hledger-shell"
+if [[ -f "$USER_HOME/.local/bin/hledger-shell" ]]; then
+  info "hledger-shell is already installed"
+else
+  sudo -u "$USER" pip3 install "$USER_HOME/$hledger_shell_path"
+fi
 
 ### Install Discord ###
 
