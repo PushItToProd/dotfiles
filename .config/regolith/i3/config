@@ -204,28 +204,17 @@ bindsym $mod+j focus down
 bindsym $mod+k focus up
 bindsym $mod+l focus right
 
-## Navigate // Workspaces 1-10 // <> 0..9 ##
-bindsym $mod+1 workspace number $ws1
-bindsym $mod+2 workspace number $ws2
-bindsym $mod+3 workspace number $ws3
-bindsym $mod+4 workspace number $ws4
-bindsym $mod+5 workspace number $ws5
-bindsym $mod+6 workspace number $ws6
-bindsym $mod+7 workspace number $ws7
-bindsym $mod+8 workspace number $ws8
-bindsym $mod+9 workspace number $ws9
-bindsym $mod+0 workspace number $ws10
-## Navigate // Workspace 11 - 19 // <><Ctrl> 0..9 ##
-bindsym $mod+Ctrl+1 workspace number $ws11
-bindsym $mod+Ctrl+2 workspace number $ws12
-bindsym $mod+Ctrl+3 workspace number $ws13
-bindsym $mod+Ctrl+4 workspace number $ws14
-bindsym $mod+Ctrl+5 workspace number $ws15
-bindsym $mod+Ctrl+6 workspace number $ws16
-bindsym $mod+Ctrl+7 workspace number $ws17
-bindsym $mod+Ctrl+8 workspace number $ws18
-bindsym $mod+Ctrl+9 workspace number $ws19
-
+## Navigate // Toggle Workspaces 0-95 // <> 0..9 ##
+bindsym $mod+1 exec i3-toggle 10 15
+bindsym $mod+2 exec i3-toggle 20 25
+bindsym $mod+3 exec i3-toggle 30 35
+bindsym $mod+4 exec i3-toggle 40 45
+bindsym $mod+5 exec i3-toggle 50 55
+bindsym $mod+6 exec i3-toggle 60 65
+bindsym $mod+7 exec i3-toggle 70 75
+bindsym $mod+8 exec i3-toggle 80 85
+bindsym $mod+9 exec i3-toggle 90 95
+bindsym $mod+0 exec i3-toggle 0 1 2
 
 ## Navigate // Next Workspace // <><Ctrl> L ##
 bindsym $mod+Control+l workspace next
@@ -302,27 +291,17 @@ bindsym $mod+f focus mode_toggle
 bindsym $mod+Tab layout toggle tabbed splitv splith
 
 # move focused container to workspace, move to workspace
-## Modify // Carry Window to Workspace 1 - 10// <><Alt> 0..9 ##
-bindsym $mod+$alt+1 move container to workspace number $ws1; workspace number $ws1
-bindsym $mod+$alt+2 move container to workspace number $ws2; workspace number $ws2
-bindsym $mod+$alt+3 move container to workspace number $ws3; workspace number $ws3
-bindsym $mod+$alt+4 move container to workspace number $ws4; workspace number $ws4
-bindsym $mod+$alt+5 move container to workspace number $ws5; workspace number $ws5
-bindsym $mod+$alt+6 move container to workspace number $ws6; workspace number $ws6
-bindsym $mod+$alt+7 move container to workspace number $ws7; workspace number $ws7
-bindsym $mod+$alt+8 move container to workspace number $ws8; workspace number $ws8
-bindsym $mod+$alt+9 move container to workspace number $ws9; workspace number $ws9
-bindsym $mod+$alt+0 move container to workspace number $ws10; workspace number $ws10
-## Modify // Carry Window to Workspace 11 - 19 // <><Alt><Ctrl> 0..9 ##
-bindsym $mod+$alt+Ctrl+1 move container to workspace number $ws11; workspace number $ws11
-bindsym $mod+$alt+Ctrl+2 move container to workspace number $ws12; workspace number $ws12
-bindsym $mod+$alt+Ctrl+3 move container to workspace number $ws13; workspace number $ws13
-bindsym $mod+$alt+Ctrl+4 move container to workspace number $ws14; workspace number $ws14
-bindsym $mod+$alt+Ctrl+5 move container to workspace number $ws15; workspace number $ws15
-bindsym $mod+$alt+Ctrl+6 move container to workspace number $ws16; workspace number $ws16
-bindsym $mod+$alt+Ctrl+7 move container to workspace number $ws17; workspace number $ws17
-bindsym $mod+$alt+Ctrl+8 move container to workspace number $ws18; workspace number $ws18
-bindsym $mod+$alt+Ctrl+9 move container to workspace number $ws19; workspace number $ws19
+## Modify // Move Window to Workspace // <><Ctrl><Alt> 0..9 ##
+bindsym $moveto+1 exec ~/.config/i3/scripts/i3-toggle --move 10 15
+bindsym $moveto+2 exec ~/.config/i3/scripts/i3-toggle --move 20 25
+bindsym $moveto+3 exec ~/.config/i3/scripts/i3-toggle --move 30 35
+bindsym $moveto+4 exec ~/.config/i3/scripts/i3-toggle --move 40 45
+bindsym $moveto+5 exec ~/.config/i3/scripts/i3-toggle --move 50 55
+bindsym $moveto+6 exec ~/.config/i3/scripts/i3-toggle --move 60 65
+bindsym $moveto+7 exec ~/.config/i3/scripts/i3-toggle --move 70 75
+bindsym $moveto+8 exec ~/.config/i3/scripts/i3-toggle --move 80 85
+bindsym $moveto+9 exec ~/.config/i3/scripts/i3-toggle --move 90 95
+bindsym $moveto+0 exec ~/.config/i3/scripts/i3-toggle --move 0 1 2
 
 ## Modify // Split Container // <> v ##
 bindsym $mod+v split vertical

@@ -278,5 +278,9 @@ as_me pip3 install powerline-shell
 notice "Switching to zsh"
 chsh -s /usr/bin/zsh
 
+### Install i3ipc ###
+notice "Installing i3ipc for i3 Python scripts"
+as_me pip3 install i3ipc
+
 # TODO: trilium
 # TODO: my pomodoro timer
