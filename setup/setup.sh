@@ -10,6 +10,10 @@ source "$PROGDIR/messages.sh"
 # shellcheck source=install-deb.sh
 source "$PROGDIR/install-deb.sh"
 
+as_me() {
+  sudo -u "$USER" "$@"
+}
+
 apt_repos=(
   multiverse
   ppa:regolith-linux/release
@@ -114,17 +118,17 @@ if [[ ! -d .ssh ]]; then
 fi
 
 info "Updating Git submodules in homedir"
-sudo -u "$USER" bash -c 'cd ~; git submodule init; git submodule update'
+as_me bash -c 'cd ~; git submodule init; git submodule update'
 
 info "Creating home directories: ${homedir_dirs[*]}"
-sudo -u "$USER" mkdir -p "${homedir_dirs[@]}"
+as_me mkdir -p "${homedir_dirs[@]}"
 
 info "Cloning repos"
 for path in "${!homedir_repos[@]}"; do
   repo="${homedir_repos["$path"]}"
   info "Cloning $repo to $path"
   if [[ ! -d "$path" ]]; then
-    sudo -u "$USER" git clone "$repo" "$path"
+    as_me git clone "$repo" "$path"
   fi
 done
 
@@ -191,7 +195,7 @@ apt install "${apt_packages[@]}"
 
 notice "Installing VS Code Extensions"
 for ext in "${vscode_extensions[@]}"; do
-  sudo -u "$USER" code --install-extension "$ext"
+  as_me code --install-extension "$ext"
 done
 
 
@@ -202,14 +206,14 @@ if [[ -f "$USER_HOME/.local/bin/hledger" ]]; then
   info "hledger is already installed"
 else
   # hledger-install.sh is included in the repo for ease of distribution
-  sudo -u "$USER" bash /home/$USER/bin/hledger-install.sh
+  as_me bash /home/$USER/bin/hledger-install.sh
 fi
 
 info "Installing hledger-shell"
 if [[ -f "$USER_HOME/.local/bin/hledger-shell" ]]; then
   info "hledger-shell is already installed"
 else
-  sudo -u "$USER" pip3 install "$USER_HOME/$hledger_shell_path"
+  as_me pip3 install "$USER_HOME/$hledger_shell_path"
 fi
 
 ### Install Discord ###
@@ -224,7 +228,7 @@ install_deb --url "$discord_url" --file "$discord_filename" --name discord
 
 notice "Installing Rofimoji for i3"
 
-if sudo -u "$USER" pip3 show rofimoji >/dev/null; then
+if as_me pip3 show rofimoji >/dev/null; then
   info "rofimoji is already installed"
 else
   # Package URL, filename, and download location
@@ -237,7 +241,7 @@ else
 
   # Install rofimoji. --no-warn-script-location is here because ~/.local/bin isn't
   # on the path for the root user.
-  sudo -u "$USER" pip3 install --user --no-warn-script-location "$rofimoji"
+  as_me pip3 install --user --no-warn-script-location "$rofimoji"
 fi
 
 ### Install Syncplay ###
@@ -268,7 +272,7 @@ install_deb --url "$bitwig_url" --name bitwig-studio
 
 ### Install Powerline Shell ###
 notice "Installing Powerline Shell"
-sudo -u "$USER" pip3 install powerline-shell
+as_me pip3 install powerline-shell
 
 ### Use Zsh ###
 notice "Switching to zsh"
