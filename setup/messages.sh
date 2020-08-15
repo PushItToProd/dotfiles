@@ -1,5 +1,14 @@
 #!/usr/bin/env bash
 
+: "${SETUP_DEBUG:=}"
+
+debug() {
+  if [[ ! "$SETUP_DEBUG" ]]; then
+    return
+  fi
+  echo "debug: $*" >&2
+}
+
 notice() {
   local message="= $1 ="
   local messagelen="${#message}"
@@ -17,6 +26,10 @@ notice() {
 
 info() {
   echo "$(tput bold)$(tput setaf 14)** $*$(tput sgr0)" >&2
+}
+
+warning() {
+  echo "$(tput bold)$(tput setaf 11)WARNING: $*$(tput sgr0)" >&2
 }
 
 error() {
