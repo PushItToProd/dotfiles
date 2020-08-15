@@ -39,8 +39,42 @@
 # Alt key is Mod1, and Windows key is Mod4
 ###############################################################################
 
+# assign modkeys to variables just for simplicity
+set $ctrl Control
+set $shift Shift
+set $super Mod4
 set_from_resource $mod  i3-wm.mod Mod4
 set_from_resource $alt  i3-wm.alt Mod1
+
+###############################################################################
+# Variables for key names
+###############################################################################
+
+# modkey aliases for navigation
+# Mod4 focus
+# Ctrl navigate (workspaces)
+# Shift navgiate at the level of workspaces/outputs
+# Alt reposition
+
+# focus = change window/container focus within workspace
+set $focus Mod4
+# focus+movespace = focus output
+set $focusoutput Mod4+Shift
+# focus+move = reposition window/container in workspace
+set $move Mod4+Mod1
+# focus+navigate = go to workspace
+set $goto Mod4+Control
+# focus+navigate+movewin = move window to workspace
+set $moveto Mod4+Control+Mod1
+# focus+navigate+movespace = move workspace (to output)
+set $movespace Mod4+Control+Shift
+
+# vim hjkl direction bindings, because switching between vim-style and
+# i3-style is very confusing
+set $left h
+set $right l
+set $up k
+set $down j
 
 ###############################################################################
 # Workspace Names
