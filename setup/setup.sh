@@ -2,10 +2,13 @@
 set -euo pipefail
 
 readonly PROGNAME="$(basename "$0")"
-readonly DIR="$(dirname "$(readlink -f "$0")")"
+readonly PROGDIR="$(dirname "$(readlink -f "$0")")"
 
 # shellcheck source=messages.sh
-source "$DIR/messages.sh"
+source "$PROGDIR/messages.sh"
+
+# shellcheck source=install-deb.sh
+source "$PROGDIR/install-deb.sh"
 
 apt_repos=(
   multiverse
@@ -158,14 +161,16 @@ curl -sS https://download.spotify.com/debian/pubkey.gpg | apt-key add -
 echo "deb http://repository.spotify.com stable non-free" | tee /etc/apt/sources.list.d/spotify.list
 
 
-### Install ###
+################################
+##### Install Apt Packages #####
+################################
 
-notice "Setting up repos"
+notice "Setting up apt repos"
 for repo in "${apt_repos[@]}"; do
   add-apt-repository -y "$repo"
 done
 
-notice "Installing packages"
+notice "Installing apt packages"
 
 info "apt-get update"
 apt-get update
@@ -196,12 +201,10 @@ fi
 ### Install Discord ###
 
 notice "Installing Discord"
-wget -O "$TMP/discord.deb" "https://discordapp.com/api/download?platform=linux&format=deb"
-dpkg -i "$TMP/discord.deb" || {
-  info "Initial Discord install failed. Trying to grab dependencies"
-  apt-get -f --force-yes --yes install
-  dpkg -i "$TMP/discord.deb"
-}
+
+discord_url="https://discordapp.com/api/download?platform=linux&format=deb"
+discord_filename=discord.deb
+install_deb --url "$discord_url" --file "$discord_filename" --name discord
 
 ### Install Rofimoji ###
 
@@ -276,24 +279,13 @@ popd
 
 notice "Installing Synology Drive"
 synology_drive_url='https://global.download.synology.com/download/Tools/SynologyDriveClient/2.0.2-11078/Ubuntu/Installer/x86_64/synology-drive-client-11078.x86_64.deb'
-synology_drive_package="$(basename "$synology_drive_url")"
-synology_drive="$TMP/$synology_drive_package"
-wget -O "$synology_drive" "$synology_drive_url"
-dpkg -i "$synology_drive"
+install_deb --url "$synology_drive_url" --name synology-drive
 
 ### Install Bitwig ###
 
 notice "Installing Bitwig"
-if ! dpkg-query -l bitwig-studio; then
-  info "Installing bitwig"
-  bitwig_url='https://downloads.bitwig.com/stable/3.2.7/bitwig-studio-3.2.7.deb'
-  bitwig_package="$(basename "$bitwig_url")"
-  bitwig="$TMP/$bitwig_package"
-  wget -O "$bitwig" "$bitwig_url"
-  dpkg -i "$bitwig"
-else
-  info "bitwig-studio is already installed"
-fi
+bitwig_url='https://downloads.bitwig.com/stable/3.2.7/bitwig-studio-3.2.7.deb'
+install_deb --url "$bitwig_url" --name bitwig-studio
 
 ### Install Powerline Shell ###
 notice "Installing Powerline Shell"
