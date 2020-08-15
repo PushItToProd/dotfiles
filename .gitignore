@@ -12,6 +12,7 @@
 !.config/i3status
 !.config/Code
 !.config/regolith
+!.config/powerline-shell
 .config/regolith/flags/ui-fingerprint
 
 .config/Code/*

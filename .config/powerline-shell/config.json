@@ -1,0 +1,11 @@
+{
+  "segments": [
+    "virtual_env",
+    "ssh",
+    "cwd",
+    "git",
+    "jobs",
+    "root",
+    "exit_code"
+  ]
+}
