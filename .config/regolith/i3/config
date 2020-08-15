@@ -257,23 +257,27 @@ bindsym $mod+Shift+g exec i3-input -F 'exec ~/.config/i3/scripts/i3-rename --nam
 ## Modify // Renumber workspace // <mod><Shift> n ##
 bindsym $mod+Shift+n exec i3-input -F 'exec ~/.config/i3/scripts/i3-rename --number "%s"' -P 'New number: '
 
-## Modify // Window Position // <><Shift> ↑ ↓ ← → ##
-bindsym $mod+Shift+Left move left
-bindsym $mod+Shift+Down move down
-bindsym $mod+Shift+Up move up
-bindsym $mod+Shift+Right move right
+## Modify // Window Position // <><Alt> ↑ ↓ ← → ##
+bindsym $move+Left move left
+bindsym $move+Down move down
+bindsym $move+Up move up
+bindsym $move+Right move right
 
-## Modify // Window Position // <><Shift> k j h l ##
-bindsym $mod+Shift+h move left
-bindsym $mod+Shift+j move down
-bindsym $mod+Shift+k move up
-bindsym $mod+Shift+l move right
+## Modify // Window Position // <><Alt> k j h l ##
+bindsym $move+h move left
+bindsym $move+j move down
+bindsym $move+k move up
+bindsym $move+l move right
 
 ## Modify // Move Workspace to Display // <><Ctrl><Shift> ↑ ↓ ← → ##
-bindsym $mod+Ctrl+Shift+Left move workspace to output left
-bindsym $mod+Ctrl+Shift+Down move workspace to output down
-bindsym $mod+Ctrl+Shift+Up move workspace to output up
-bindsym $mod+Ctrl+Shift+Right move workspace to output right
+bindsym $movespace+Left move workspace to output left
+bindsym $movespace+Down move workspace to output down
+bindsym $movespace+Up move workspace to output up
+bindsym $movespace+Right move workspace to output right
+bindsym $movespace+h move workspace to output left
+bindsym $movespace+j move workspace to output down
+bindsym $movespace+k move workspace to output up
+bindsym $movespace+l move workspace to output right
 
 ## Modify // Next Window Orientation // <> Backspace ##
 bindsym $mod+BackSpace split toggle
