@@ -60,7 +60,6 @@ apt_packages=(
 
   # zsh
   zsh
-  # TODO: install powerline shell
 )
 
 vscode_extensions=(
