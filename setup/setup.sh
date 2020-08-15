@@ -34,6 +34,7 @@ apt_packages=(
   vlc
   ffmpeg        # bitwig
   xclip
+  python3-venv
 
   # i3 support functionality
   blueman       # provides blueman-applet for bluetooth control from taskbar
@@ -225,10 +226,6 @@ else
   # on the path for the root user.
   sudo -u "$USER" pip3 install --user --no-warn-script-location "$rofimoji"
 fi
-
-### Install Virtualenv ###
-notice "Installing Virtualenv"
-sudo -u "$USER" pip3 install virtualenv
 
 ### Install Syncplay ###
 notice "Installing Syncplay"
