@@ -1,0 +1,52 @@
+{
+	"folders": [
+		{
+			"path": ".."
+		}
+    ],
+    "settings": {
+        "files.associations": {
+            ".config/i3/config": "i3",
+            "**/i3/config": "i3"
+        },
+        "files.exclude": {
+            ".bash_history": true,
+            ".bash_logout": true,
+            ".cloud-ipc-socket": true,
+            ".dbus": true,
+            ".fonts": true,
+            ".git": true,
+            ".gnupg": true,
+            ".icons": true,
+            ".lesshst": true,
+            ".mozilla": true,
+            ".nv": true,
+            ".pam_environment": true,
+            ".pki": true,
+            ".pulse-cookie": true,
+            ".regolith-gnome-backup-r1-4": true,
+            ".stack": true,
+            ".steam": true,
+            ".steampath": true,
+            ".steampid": true,
+            ".sudo_as_admin_successful": true,
+            ".SynologyDrive": true,
+            ".ts3client": true,
+            ".viminfo": true,
+            ".wget-hsts": true,
+            ".zcompdump": true,
+            ".zsh_history": true,
+            "Applications": true,
+            "Desktop": true,
+            "Documents": true,
+            "Downloads": true,
+            "Music": true,
+            "Pictures": true,
+            "Public": true,
+            "Steam": true,
+            "SynologyDrive": true,
+            "Templates": true,
+            "Videos": true,
+        }
+    }
+}
