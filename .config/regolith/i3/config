@@ -327,9 +327,13 @@ bindsym $mod+Shift+asciitilde move to scratchpad
 
 ## Scratchpad // KeePass // <><Shift> 2 ##
 bindsym $mod+Shift+2 [class="keepassxc"] scratchpad show
+bindsym $mod+Shift+3 [class="Pavucontrol"] scratchpad show
+bindsym $mod+Shift+5 [title="Calculator"] scratchpad show
 
-# Always open keepass in scratchpad.
+# Assign quick apps to scratchpad.
 for_window [class="keepassxc" title="KeePassXC"] move to scratchpad, resize set 800 600
+for_window [class="gnome-calculator"] move to scratchpad, resize set 400 300
+for_window [class="Pavucontrol"] move to scratchpad, resize set 800 600
 
 ###############################################################################
 # Session Management
@@ -624,4 +628,6 @@ exec --no-startup-id $i3-wm.program.3
 
 # Launch my apps
 exec --no-startup-id keepassxc
+exec --no-startup-id pavucontrol
+exec --no-startup-id gnome-calculator
 exec --no-startup-id synology-drive
