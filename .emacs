@@ -12,6 +12,8 @@
   (package-install 'spacemacs-theme))
 (unless (package-installed-p 'ledger-mode)
   (package-install 'ledger-mode))
+(unless (package-installed-p 'markdown-mode)
+  (package-install 'markdown-mode))
 (add-to-list 'load-path "~/.emacs.d/lib")
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
 
