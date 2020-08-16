@@ -39,6 +39,7 @@ apt_packages=(
   ffmpeg        # bitwig
   xclip
   python3-venv
+  tree
 
   # i3 support functionality
   blueman       # provides blueman-applet for bluetooth control from taskbar
