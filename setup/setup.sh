@@ -40,6 +40,7 @@ apt_packages=(
   xclip
   python3-venv
   tree
+  ubuntu-touch-sounds  # needed for super-simple-pomodoro
 
   # i3 support functionality
   blueman       # provides blueman-applet for bluetooth control from taskbar
