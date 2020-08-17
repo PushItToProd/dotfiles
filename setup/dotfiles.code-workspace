@@ -19,6 +19,7 @@
             ".gnupg": true,
             ".icons": true,
             ".lesshst": true,
+            ".local": true,
             ".mozilla": true,
             ".nv": true,
             ".pam_environment": true,
