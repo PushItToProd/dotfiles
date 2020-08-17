@@ -22,3 +22,5 @@ i3-wm.bar.trayoutput:           primary
 i3xrocks.date.format2: + %F %R
 i3-wm.gaps.focus_follows_mouse: no
 gnome.wallpaper:                /usr/share/backgrounds/pop/nasa-53884.jpg
+i3-wm.bar.workspace.active.background.color: #bda28a
+i3-wm.bar.workspace.active.border.color: #bda28a
