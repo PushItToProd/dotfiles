@@ -424,12 +424,11 @@ bindsym $mod+period exec /usr/bin/i3-snapshot -c < /tmp/i3-snapshot
 ## Modify // Toggle Bar // <> i ##
 bindsym $mod+i bar mode toggle
 
-# Cause Settings app to float above tiled windows
+# Apps that should float
 floating_maximum_size -1 x -1
 for_window [class="Gnome-control-center"] floating enable
-
-# Cause file manager to float
 for_window [class="Org.gnome.Nautilus"] floating enable
+for_window [class="Blueman-manager"] floating enable
 
 ###############################################################################
 # Window Resize and Gaps
