@@ -26,7 +26,6 @@ apt_packages=(
   emacs
   apt-transport-https
   shellcheck
-  spotify-client
   code
   steam
   libtinfo-dev  # hledger
@@ -167,9 +166,8 @@ echo "deb [arch=amd64 signed-by=/etc/apt/trusted.gpg.d/packages.microsoft.gpg] h
 
 ### Spotify Repo ###
 
-notice "Installing Spotify repo"
-curl -sS https://download.spotify.com/debian/pubkey.gpg | apt-key add -
-echo "deb http://repository.spotify.com stable non-free" | tee /etc/apt/sources.list.d/spotify.list
+notice "Installing Spotify"
+as_me flatpak install flathub com.spotify.Client
 
 
 ################################
