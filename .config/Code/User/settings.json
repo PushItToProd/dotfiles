@@ -180,7 +180,6 @@
     },
     "workbench.colorTheme": "Slack Theme Dark Mode",
     "editor.fontSize": 16,
-    "python.pythonPath": "/usr/bin/python3.8",
     "[verilog]": {
         "editor.tabSize": 2
     },
@@ -188,4 +187,5 @@
         "editor.tabSize": 2
     },
     "explorer.openEditors.visible": 0,
+    "python.defaultInterpreterPath": "/usr/bin/python3.8",
 }
