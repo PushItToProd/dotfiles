@@ -282,9 +282,6 @@ chsh -s /usr/bin/zsh
 notice "Installing i3ipc for i3 Python scripts"
 as_me pip3 install i3ipc
 
-# TODO: trilium
-# TODO: my pomodoro timer
-
 ### Install Geckodriver for Selenium ###
 notice "Installing geckodriver"
 geckodriver_url='https://github.com/mozilla/geckodriver/releases/download/v0.27.0/geckodriver-v0.27.0-linux64.tar.gz'
@@ -295,3 +292,6 @@ if [[ ! -f "$geckodriver_path" ]]; then
   tar -xvf "$geckodriver_tar"
   mv -f geckodriver "$USER_HOME/Applications/"
 fi
+
+# TODO: trilium
+# TODO: anki
