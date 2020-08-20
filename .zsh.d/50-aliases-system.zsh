@@ -34,3 +34,11 @@ if [ -x /usr/bin/dircolors ]; then
     alias fgrep="fgrep $__grep_defaults"
     alias egrep="egrep $__grep_defaults"
 fi
+
+function llss {
+  if [[ -d "$1" ]]; then
+    ls -l "$1"
+  else
+    less "$1"
+  fi
+}
