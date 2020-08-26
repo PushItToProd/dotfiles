@@ -335,7 +335,7 @@ bindsym $mod+Shift+5 [title="Calculator"] scratchpad show
 
 # Assign quick apps to scratchpad.
 for_window [class="keepassxc" title="KeePassXC"] move to scratchpad, resize set 800 600
-for_window [class="gnome-calculator"] move to scratchpad, resize set 400 300
+for_window [window_role="gnome-calculator"] move to scratchpad, resize set 400 300
 for_window [class="Pavucontrol"] move to scratchpad, resize set 800 600
 
 ###############################################################################
