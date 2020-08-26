@@ -77,10 +77,14 @@ set $up k
 set $down j
 
 ###############################################################################
-# Workspace Names
-# These are the labels which define each i3 workspace.
+# Workspace Names and Associations
 ###############################################################################
 
+# Map default workspaces to outputs.
+workspace 0 output eDP-1-1
+workspace 10 output DP-1-1
+
+# These are the labels which define each i3 workspace.
 set_from_resource $ws1  i3-wm.workspace.01.name "1"
 set_from_resource $ws2  i3-wm.workspace.02.name "2"
 set_from_resource $ws3  i3-wm.workspace.03.name "3"
