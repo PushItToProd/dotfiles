@@ -75,6 +75,11 @@ apt_packages=(
 
   # zsh
   zsh
+
+  # docker
+  docker-ce
+  docker-ce-cli
+  containerd.io
 )
 
 vscode_extensions=(
@@ -172,6 +177,15 @@ echo "deb [arch=amd64 signed-by=/etc/apt/trusted.gpg.d/packages.microsoft.gpg] h
 
 notice "Installing Spotify"
 as_me flatpak install flathub com.spotify.Client
+
+### Docker Repo ###
+
+notice "Installing Docker Repo"
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
+add-apt-repository \
+   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+   $(lsb_release -cs) \
+   stable"
 
 
 ################################
@@ -311,6 +325,16 @@ else
   pushd "$anki_dir" >/dev/null
   sudo make install
   popd >/dev/null
+fi
+
+### Docker Compose ###
+notice "Installing docker-compose"
+if [[ ! -f /usr/local/bin/docker-compose ]]; then
+  curl -L "https://github.com/docker/compose/releases/download/1.26.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+fi
+
+if [[ ! -x /usr/local/bin/docker-compose ]]; then
+  chmod +x /usr/local/bin/docker-compose
 fi
 
 # TODO: trilium
