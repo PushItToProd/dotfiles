@@ -117,7 +117,7 @@ bindsym $mod+slash mode "$mode_launch"
 set $mode_launch (t)ext editor, (s)potify, (m)onitor, (e)macs, (f)iles, (d)iscord, (c)ode, (p)omodoro, t(r)ilium | (w)eb mode, (j)p mode
 mode "$mode_launch" {
     bindsym t exec gnome-text-editor, mode "default"
-    bindsym s exec spotify, mode "default"
+    bindsym s exec flatpak run com.spotify.Client, mode "default"
     bindsym m exec gnome-system-monitor, mode "default"
     bindsym e exec emacs, mode "default"
     bindsym f exec $i3-wm.program.files, mode "default"
