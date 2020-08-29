@@ -40,6 +40,10 @@ apt_packages=(
   python3-venv
   tree
   ubuntu-touch-sounds  # needed for super-simple-pomodoro
+  okular
+  calibre
+  certbot
+  python3-certbot-dns-digitalocean
 
   # i3 support functionality
   blueman       # provides blueman-applet for bluetooth control from taskbar
