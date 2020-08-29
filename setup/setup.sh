@@ -173,7 +173,7 @@ install -o root -g root -m 644 "$TMP/packages.microsoft.gpg" /etc/apt/trusted.gp
 echo "deb [arch=amd64 signed-by=/etc/apt/trusted.gpg.d/packages.microsoft.gpg] https://packages.microsoft.com/repos/vscode stable main" > /etc/apt/sources.list.d/vscode.list
 
 
-### Spotify Repo ###
+### Spotify ###
 
 notice "Installing Spotify"
 as_me flatpak install flathub com.spotify.Client
