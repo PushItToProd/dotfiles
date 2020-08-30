@@ -121,6 +121,8 @@ APPDIR="$USER_HOME/$appdir_name"
 
 notice "Setting up homedir"
 
+mkdir -p "$APPDIR"
+
 ### Make sure git submodule dependencies are provided in homedir ###
 cd "$USER_HOME"
 if [[ ! -d .ssh ]]; then
