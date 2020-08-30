@@ -1,0 +1,1 @@
+export PATH="$HOME/Applications/trilium-linux-x64:$PATH"
