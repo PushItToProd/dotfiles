@@ -42,3 +42,5 @@ function llss {
     less "$1"
   fi
 }
+
+alias untar='tar --extract --verbose --file'
