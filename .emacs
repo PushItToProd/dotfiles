@@ -1,19 +1,30 @@
+; Package installation
 (require 'package)
 (add-to-list 'package-archives
              '("melpa-stable" . "http://stable.melpa.org/packages/"))
 (add-to-list 'package-archives
              '("melpa" . "http://melpa.org/packages/") t)
 (package-initialize)
-(package-refresh-contents)
 
-(unless (package-installed-p 'evil)
-  (package-install 'evil))
-(unless (package-installed-p 'spacemacs-theme)
-  (package-install 'spacemacs-theme))
-(unless (package-installed-p 'ledger-mode)
-  (package-install 'ledger-mode))
-(unless (package-installed-p 'markdown-mode)
-  (package-install 'markdown-mode))
+; Ensure we only package-refresh-contents once
+(setq packages-refreshed-during-startup nil)
+(defun package-refresh-once ()
+  (unless packages-refreshed-during-startup
+    (package-refresh-contents)
+    (setq packages-refreshed-during-startup t)))
+
+; Install pkg if it's not present, refreshing the packages first
+; if they aren't already.
+(defun my-package-install (pkg)
+  (unless (package-installed-p pkg)
+    (package-refresh-once)
+    (package-install pkg)))
+
+(my-package-install 'evil)
+(my-package-install 'spacemacs-theme)
+(my-package-install 'ledger-mode)
+(my-package-install 'markdown-mode)
+
 (add-to-list 'load-path "~/.emacs.d/lib")
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
 
