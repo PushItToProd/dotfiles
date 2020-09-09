@@ -8,10 +8,10 @@
 [push]
   default = simple
 [core]
-	editor = git_editor
+  editor = git_editor
   excludesfile = ~/.gitignore_global
 [log]
   date = iso
 [user]
-	name = pushittoprod
-	email = pushittoprod@gmail.com
+  name = pushittoprod
+  email = pushittoprod@gmail.com
