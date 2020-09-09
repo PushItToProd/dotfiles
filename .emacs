@@ -48,9 +48,6 @@
 
 (global-linum-mode t)
 (global-hl-line-mode +1)
-;(if (display-graphic-p)
-;    (load-theme 'dracula t)
-;  (set-face-background hl-line-face "darkblue"))
 (load-theme 'spacemacs-dark t)
 (setq inhibit-splash-screen t)
 (setq inhibit-startup-screen t)
