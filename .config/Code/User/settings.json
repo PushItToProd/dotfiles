@@ -186,6 +186,10 @@
     "[systemverilog]": {
         "editor.tabSize": 2
     },
+    "[haskell]": {
+        "editor.tabSize": 2
+    },
     "explorer.openEditors.visible": 0,
     "python.defaultInterpreterPath": "/usr/bin/python3.8",
+    "python.showStartPage": false,
 }
