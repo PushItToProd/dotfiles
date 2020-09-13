@@ -21,3 +21,5 @@ alias enw='emacs -nw'
 randpass() {
   openssl rand -base64 "${1:-32}" | tr -d '\n'
 }
+
+alias ts=ts-node
