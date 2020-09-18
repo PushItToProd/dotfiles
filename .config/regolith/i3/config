@@ -334,8 +334,14 @@ bindsym $mod+Shift+asciitilde move to scratchpad
 
 ## Scratchpad // KeePass // <><Shift> 2 ##
 bindsym $mod+Shift+2 [class="keepassxc"] scratchpad show
+
+## Scratchpad // PulseAudio // <><Shift> 3 ##
 bindsym $mod+Shift+3 [class="Pavucontrol"] scratchpad show
+
+## Scratchpad // Bluetooth Manager // <><Shift> 4 ##
 bindsym $mod+Shift+4 [class="Blueman-manager"] scratchpad show
+
+## Scratchpad // Calculator // <><Shift> 5 ##
 bindsym $mod+Shift+5 [title="Calculator"] scratchpad show
 
 # Assign quick apps to scratchpad.
