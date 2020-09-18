@@ -241,6 +241,9 @@ bindsym $mod+a focus parent
 ## Navigate // Focus Child // <> s ##
 bindsym $mod+s focus child
 
+## Navigate // Go to workspace number // <> g ##
+bindsym $mod+g exec i3-input -F 'workspace number "%s"' -P 'Go to workspace: '
+
 ## Navigate // Mark // <> m ##
 bindsym $mod+m exec i3-input -F 'mark %s' -l 1 -P 'Mark: '
 
@@ -249,9 +252,6 @@ bindsym $mod+apostrophe exec i3-input -F '[con_mark="%s"] focus' -l 1 -P 'Goto: 
 
 ## Navigate // List Marks // <> ; ##
 bindsym $mod+semicolon exec ~/.config/i3/scripts/select_a_mark.sh
-
-## Navigate // Go to workspace number // <> g ##
-bindsym $mod+g exec i3-input -F 'workspace number "%s"' -P 'Go to workspace: '
 
 
 ###############################################################################
@@ -335,12 +335,14 @@ bindsym $mod+Shift+asciitilde move to scratchpad
 ## Scratchpad // KeePass // <><Shift> 2 ##
 bindsym $mod+Shift+2 [class="keepassxc"] scratchpad show
 bindsym $mod+Shift+3 [class="Pavucontrol"] scratchpad show
+bindsym $mod+Shift+4 [class="Blueman-manager"] scratchpad show
 bindsym $mod+Shift+5 [title="Calculator"] scratchpad show
 
 # Assign quick apps to scratchpad.
 for_window [class="keepassxc" title="KeePassXC"] move to scratchpad, resize set 800 600
 for_window [window_role="gnome-calculator"] move to scratchpad, resize set 400 300
 for_window [class="Pavucontrol"] move to scratchpad, resize set 800 600
+for_window [class="Blueman-manager"] move to scratchpad, resize set 800 600
 
 ###############################################################################
 # Session Management
@@ -637,3 +639,5 @@ exec --no-startup-id keepassxc
 exec --no-startup-id pavucontrol
 exec --no-startup-id gnome-calculator
 exec --no-startup-id synology-drive
+exec --no-startup-id blueman-applet
+exec --no-startup-id blueman-manager
