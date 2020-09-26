@@ -179,11 +179,6 @@
         "command": "editor.action.triggerParameterHints",
         "when": "editorHasSignatureHelpProvider && editorTextFocus"
     },
-    {
-        "key": "alt+d",
-        "command": "editor.action.addSelectionToNextFindMatch",
-        "when": "editorFocus"
-    },
 
     // font and editor zoom
     // ctrl+=/ctrl+- for font zoom
@@ -218,16 +213,6 @@
     },
 
     // terminal navigation/control
-    {
-        "key": "alt+.",
-        "command": "workbench.action.terminal.focusNext",
-        "when": "terminalFocus"
-    },
-    {
-        "key": "alt+,",
-        "command": "workbench.action.terminal.focusPrevious",
-        "when": "terminalFocus"
-    },
     {
         "key": "alt+r",
         "command": "workbench.action.terminal.rename",
@@ -304,5 +289,27 @@
         "key": "ctrl+shift+right",
         "command": "-workbench.action.terminal.resizePaneRight",
         "when": "terminalFocus"
+    },
+    {
+        "key": "alt+a",
+        "command": "workbench.action.keepEditor"
+    },
+    {
+        "key": "ctrl+k enter",
+        "command": "workbench.action.keepEditor"
+    },
+    {
+        "key": "shift+alt+d",
+        "command": "editor.action.revealDefinition",
+        "when": "editorHasDefinitionProvider && editorTextFocus && !isInEmbeddedEditor"
+    },
+    {
+        "key": "f12",
+        "command": "editor.action.revealDefinition",
+        "when": "editorHasDefinitionProvider && editorTextFocus && !isInEmbeddedEditor"
+    },
+    {
+        "key": "alt+d",
+        "command": "editor.action.revealDeclaration"
     },
 ]
