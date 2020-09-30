@@ -97,6 +97,7 @@
         // setext-style headers for markdown and plain text
         {"before": ["<leader>", "1"], "after": ["y", "y", "p", "V", "r", "="]},
         {"before": ["<leader>", "2"], "after": ["y", "y", "p", "V", "r", "-"]},
+        {"before": ["<leader>", "3"], "after": ["0", "i", "#", "#", "#", " ", "<Esc>", "$"]},
 
         // navigating between editors/tabs
         {"before": ["<leader>", "h"], "commands": ["workbench.action.previousEditor"]},
