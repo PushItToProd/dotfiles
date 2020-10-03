@@ -53,27 +53,6 @@
 (setq inhibit-startup-screen t)
 (setq inhibit-startup-buffer-menu t)
 
-; highlight whitespace and long lines
-; based on https://gist.github.com/RayRacine/3794795
-; (defun setup-whitespace ()
-;     "Handle highlighting long lines and whitespace."
-;     (require 'whitespace)
-;     (custom-set-faces
-;     '(my-carriage-return-face ((((class color)) (:background "blue"))) t)
-;     '(my-tab-face ((((class color)) (:background "green"))) t)
-;     )
-;     (add-hook 'font-lock-mode-hook
-;             (function (lambda ()
-;                         (setq font-lock-keywords
-;                                 (append font-lock-keywords
-;                                         '(("\r" (0 'my-carriage-return-face t))
-;                                         ("\t" (0 'my-tab-face t))))))))
-;     (setq whitespace-style '(face trailing tab-mark lines-tail)
-;         whitespace-line-column 80)
-;     (global-whitespace-mode +1)
-;     (setq whitespace-global-modes '(not go-mode))
-;     )
-; (add-hook 'prog-mode-hook (lambda () (setup-whitespace)))
 (require 'whitespace)
 (setq whitespace-style '(face empty trailing lines-tail)
       whitespace-line-column 80)
