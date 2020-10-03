@@ -1,0 +1,53 @@
+#!/usr/bin/env bash
+# TODO: genericize to any application
+set -e
+set -o pipefail
+
+print_usage() {
+  cat <<EOF
+$0 URL
+
+Open URL in a new tab if Vivaldi is open in the current workspace or
+a new window if it is not.
+EOF
+}
+
+BROWSER_NAME_IN_TREE=Vivaldi
+BROWSER_WINDOW_CLASS_PREFIX=Vivaldi
+
+vivaldi_is_open() {
+  i3-save-tree | grep "$BROWSER_NAME_IN_TREE" >/dev/null 2>/dev/null
+}
+
+get_focused_window_class() {
+  i3-msg -t get_tree | jq -r '.. | select(.focused?==true).window_properties.class'
+}
+
+vivaldi_is_focused() {
+  [[ "$(get_focused_window_class)" == "$BROWSER_WINDOW_CLASS_PREFIX"* ]]
+}
+
+get_focus_cmd() {
+  # Use printf to avoid nesting double quotes
+  printf '[class="^%s" workspace="__focused__"] focus' "$BROWSER_WINDOW_CLASS_PREFIX"
+}
+
+focus_vivaldi() {
+  i3-msg "$(get_focus_cmd)"
+}
+
+if [[ "${BASH_SOURCE[0]}" == "$0" ]]; then
+  if (( "$#" == 0 )); then
+    print_usage
+    exit 0
+  fi
+
+  if vivaldi_is_open; then
+    if ! vivaldi_is_focused; then
+      focus_vivaldi
+    fi
+    vivaldi -new-tab "$@"
+  else
+    vivaldi -new-window "$@"
+  fi
+fi
