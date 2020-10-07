@@ -124,7 +124,7 @@ mode "$mode_launch" {
     bindsym d exec discord, mode "default"
     bindsym h exec gnome-characters, mode "default"
     bindsym c exec code, mode "default"
-    bindsym p exec ~/bin/pomodoro, mode "default"
+    bindsym p exec pomodoro, mode "default"
     bindsym r exec trilium, mode "default"
 
     bindsym w mode "$mode_launch_web"
