@@ -151,7 +151,7 @@
 (add-hook 'markdown-mode-hook
           (lambda () (visual-line-mode)))
 
-(add-to-list 'default-frame-alist '(font . "DejaVu Sans Mono-10"))
+(add-to-list 'default-frame-alist '(font . "DejaVu Sans Mono-14"))
 
 (setq visible-bell 1)
 
