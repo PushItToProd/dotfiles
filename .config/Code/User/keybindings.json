@@ -225,12 +225,7 @@
     {
         "key": "alt+enter",
         "command": "editor.emmet.action.expandAbbreviation",
-        "when": "config.emmet.triggerExpansionOnTab && editorTextFocus && !editorReadonly && !editorTabMovesFocus"
-    },
-    {
-        "key": "tab",
-        "command": "editor.emmet.action.expandAbbreviation",
-        "when": "config.emmet.triggerExpansionOnTab && editorTextFocus && !editorReadonly && !editorTabMovesFocus"
+        "when": "editorTextFocus && !editorReadonly && !editorTabMovesFocus"
     },
     {
         "key": "alt+l",

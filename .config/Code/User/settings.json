@@ -10,10 +10,12 @@
     "editor.wordWrap": "on",
     "workbench.editor.focusRecentEditorAfterClose": false,
 
-    "emmet.triggerExpansionOnTab": true,
+    "emmet.showSuggestionsAsSnippets": true,
     "emmet.includeLanguages": {
         "xml": "xml"
     },
+
+    "editor.renameOnType": false,
 
     "explorer.autoReveal": false,
     "explorer.confirmDelete": false,
