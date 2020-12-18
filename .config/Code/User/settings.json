@@ -151,7 +151,7 @@
         "editor.tabSize": 2
     },
     "[markdown]": {
-        "editor.tabSize": 2,
+        "editor.tabSize": 4,
         "files.trimTrailingWhitespace": false,
     },
     "markdown.preview.fontSize": 18,
