@@ -323,4 +323,8 @@
         "key": "shift+alt+j",
         "command": "workbench.action.moveEditorToBelowGroup"
     },
+    {
+        "key": "alt+-",
+        "command": "workbench.action.toggleEditorWidths"
+    },
 ]
