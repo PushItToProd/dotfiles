@@ -38,3 +38,6 @@
 !bin/
 
 scratch/
+bin/goland
+bin/idea
+bin/pycharm
