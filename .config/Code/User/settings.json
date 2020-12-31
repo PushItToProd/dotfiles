@@ -87,7 +87,8 @@
     "vim.leader": "<space>",
     "vim.insertModeKeyBindings": [
         {"before": ["j", "k"], "after": ["<Esc>"]},
-        {"before": ["capslock"], "after": ["<Esc>"]}
+        {"before": ["capslock"], "after": ["<Esc>"]},
+        {"before": ["<C-v>"],  "commands": ["editor.action.clipboardPasteAction"]}
     ],
     "vim.normalModeKeyBindings": [
         // file navigation

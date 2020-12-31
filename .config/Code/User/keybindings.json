@@ -332,4 +332,21 @@
         "command": "-extension.vim_ctrl+b",
         "when": "editorTextFocus && vim.active && vim.use<C-b> && !inDebugRepl && vim.mode != 'Insert'"
     },
+    {
+        "key": "ctrl+j",
+        "command": "-extension.vim_ctrl+j",
+        "when": "editorTextFocus && vim.active && vim.use<C-j> && !inDebugRepl"
+    },
+    {
+        "key": "ctrl+alt+l",
+        "command": "workbench.action.positionPanelRight"
+    },
+    {
+        "key": "ctrl+alt+h",
+        "command": "workbench.action.positionPanelLeft"
+    },
+    {
+        "key": "ctrl+alt+j",
+        "command": "workbench.action.positionPanelBottom"
+    },
 ]
