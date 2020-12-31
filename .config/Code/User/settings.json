@@ -15,7 +15,7 @@
         "xml": "xml"
     },
 
-    "editor.renameOnType": false,
+    "editor.linkedEditing": false,
 
     "explorer.autoReveal": false,
     "explorer.confirmDelete": false,
@@ -140,8 +140,8 @@
         "editor.tabSize": 2
     },
     "[go]": {
-        "go.autocompleteUnimportedPackages": true
     },
+    "go.autocompleteUnimportedPackages": true,
     "[html]": {
         "editor.tabSize": 2
     },
