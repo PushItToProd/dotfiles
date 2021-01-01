@@ -349,4 +349,9 @@
         "key": "ctrl+alt+j",
         "command": "workbench.action.positionPanelBottom"
     },
+    {
+        "key": "ctrl+r",
+        "command": "-extension.vim_ctrl+r",
+        "when": "editorTextFocus && vim.active && vim.use<C-r> && !inDebugRepl"
+    },
 ]
