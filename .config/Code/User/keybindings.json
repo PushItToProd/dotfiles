@@ -46,11 +46,13 @@
     // navigate between tabs with , and .
     {
         "key": "alt+,",
-        "command": "workbench.action.previousEditorInGroup"
+        "command": "workbench.action.previousEditorInGroup",
+        "when": "!terminalFocus"
     },
     {
         "key": "alt+.",
-        "command": "workbench.action.nextEditorInGroup"
+        "command": "workbench.action.nextEditorInGroup",
+        "when": "!terminalFocus"
     },
     // jump between editor groups with vim style keybindings
     {
@@ -248,7 +250,7 @@
         "when": "terminalFocus"
     },
     {
-        "key": "shift+alt+t",
+        "key": "ctrl+shift+t",
         "command": "workbench.action.terminal.new"
     },
     {
@@ -353,5 +355,15 @@
         "key": "ctrl+r",
         "command": "-extension.vim_ctrl+r",
         "when": "editorTextFocus && vim.active && vim.use<C-r> && !inDebugRepl"
+    },
+    {
+        "key": "alt+,",
+        "command": "workbench.action.terminal.focusPrevious",
+        "when": "terminalFocus"
+    },
+    {
+        "key": "alt+.",
+        "command": "workbench.action.terminal.focusNext",
+        "when": "terminalFocus"
     },
 ]
