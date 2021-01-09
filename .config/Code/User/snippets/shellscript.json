@@ -30,5 +30,9 @@
       "  ${1:main} \"\\$@\"",
       "fi"
     ]
+  },
+  "#!/usr/bin/env bash": {
+    "prefix": "shebang",
+    "body": ["#!/usr/bin/env bash"]
   }
 }
