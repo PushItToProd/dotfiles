@@ -16,6 +16,10 @@ as_me() {
 
 [[ "$EUID" -eq 0 ]] || fatal "You must run this script as root."
 
+if [[ ! -d "$PROGDIR/setup.d" ]]; then
+  fatal "Can't find setup.d under program directory $PROGDIR"
+fi
+
 for mod in "$PROGDIR/setup.d/"*.sh; do
   info "Running setup step $mod"
   source "$mod"
