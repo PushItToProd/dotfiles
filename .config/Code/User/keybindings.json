@@ -366,4 +366,12 @@
         "command": "workbench.action.terminal.focusNext",
         "when": "terminalFocus"
     },
+    {
+        "key": "ctrl+shift+v",
+        "command": "editor.action.clipboardPasteAction"
+    },
+    {
+        "key": "ctrl+v",
+        "command": "-editor.action.clipboardPasteAction"
+    },
 ]
