@@ -100,7 +100,8 @@
 
 (setq ledger-mode-should-check-version nil
       ledger-report-links-in-register nil
-      ledger-bindary-path "hledger")
+      ledger-binary-path "hledger"
+      ledger-default-date-format "%Y-%m-%d")
 (add-to-list 'auto-mode-alist '("\\.journal\\'" . ledger-mode))
 (add-hook 'ledger-mode-hook
           (lambda ()
@@ -121,6 +122,7 @@
  '(custom-safe-themes
    (quote
     ("a2cde79e4cc8dc9a03e7d9a42fabf8928720d420034b66aecc5b665bbf05d4e9" "bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" "cdb4ffdecc682978da78700a461cdc77456c3a6df1c1803ae2dd55c59fa703e3" "f8cf128fa0ef7e61b5546d12bb8ea1584c80ac313db38867b6e774d1d38c73db" default)))
+ '(ledger-binary-path "hledger")
  '(org-export-backends (quote (ascii html icalendar latex md)))
  '(package-selected-packages
    (quote
