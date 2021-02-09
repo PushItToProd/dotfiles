@@ -46,6 +46,8 @@
 (define-key evil-motion-state-map "L" "$")
 (evil-mode 1)
 
+(define-key evil-insert-state-map "\C-v" 'yank)
+
 (global-linum-mode t)
 (global-hl-line-mode +1)
 (load-theme 'spacemacs-dark t)
@@ -122,11 +124,11 @@
  '(custom-safe-themes
    (quote
     ("a2cde79e4cc8dc9a03e7d9a42fabf8928720d420034b66aecc5b665bbf05d4e9" "bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" "cdb4ffdecc682978da78700a461cdc77456c3a6df1c1803ae2dd55c59fa703e3" "f8cf128fa0ef7e61b5546d12bb8ea1584c80ac313db38867b6e774d1d38c73db" default)))
- '(ledger-binary-path "hledger")
+ '(ledger-binary-path "hledger" t)
  '(org-export-backends (quote (ascii html icalendar latex md)))
  '(package-selected-packages
    (quote
-    (haskell-mode monokai-theme spacemacs-theme zenburn-theme rust-mode terraform-mode go-mode ansible markdown-mode ledger-mode tide evil)))
+    (htmlize haskell-mode monokai-theme spacemacs-theme zenburn-theme rust-mode terraform-mode go-mode ansible markdown-mode ledger-mode tide evil)))
  '(scroll-conservatively 10000)
  '(show-paren-mode t))
 (custom-set-faces
@@ -161,10 +163,12 @@
 (add-to-list 'auto-mode-alist '("\\.bats\\'" . sh-mode))
 (add-hook 'sh-mode-hook
           (lambda ()
-            (if (string-match "\\.bats$" buffer-file-name)
-                (sh-set-shell "bash")
-              (if (string-match "\\.sh$" buffer-file-name)
-                  (sh-set-shell "bash")))))
+            (when buffer-file-name
+                (if (string-match "\\.bats$" buffer-file-name)
+                    (sh-set-shell "bash")
+                    (if (string-match "\\.sh$" buffer-file-name)
+                        (sh-set-shell "bash"))))))
+
 
 (setq sh-basic-offset 2)
 
@@ -175,3 +179,19 @@
 ; This doesn't actually do anything afaict.  TODO: figure out how to
 ; make org mode open Firefox instead of Chromium.
 (setq browser-url-browser-function 'browse-url-firefox)
+
+;; Run and highlight code using babel in org-mode
+;; via http://cachestocaches.com/2018/6/org-literate-programming/
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '(
+   (python . t)
+   (shell . t)
+   (C . t)
+   ))
+;; Use python3
+(setq org-babel-python-command "python3")
+;; Syntax highlight in #+BEGIN_SRC blocks
+(setq org-src-fontify-natively t)
+;; Don't prompt before running code in org
+(setq org-confirm-babel-evaluate nil)
