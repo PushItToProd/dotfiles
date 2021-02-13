@@ -195,3 +195,8 @@
 (setq org-src-fontify-natively t)
 ;; Don't prompt before running code in org
 (setq org-confirm-babel-evaluate nil)
+
+;; (setq org-html-htmlize-output-type 'inline-css) ;; default
+(setq org-html-htmlize-output-type 'css)
+;; (setq org-html-htmlize-font-prefix "") ;; default
+(setq org-html-htmlize-font-prefix "org-")
