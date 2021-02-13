@@ -203,4 +203,5 @@
             "document"
         ]
     },
+    "python.languageServer": "Pylance",
 }
