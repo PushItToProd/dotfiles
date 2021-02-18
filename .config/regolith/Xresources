@@ -24,6 +24,7 @@ i3xrocks.action.media-player.middle: playerctl $PLAYER_ARGS previous
 i3xrocks.action.media-player.left: playerctl $PLAYER_ARGS play-pause
 i3xrocks.action.media-player.right: playerctl $PLAYER_ARGS next
 i3-wm.gaps.focus_follows_mouse: no
-gnome.wallpaper:                /usr/share/backgrounds/pop/nasa-53884.jpg
+! gnome.wallpaper:                /usr/share/backgrounds/pop/nasa-53884.jpg
+gnome.wallpaper: /home/joe/Pictures/8086-microcode.jpeg
 i3-wm.bar.workspace.active.background.color: #bda28a
 i3-wm.bar.workspace.active.border.color: #bda28a
