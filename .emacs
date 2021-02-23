@@ -128,7 +128,7 @@
  '(org-export-backends (quote (ascii html icalendar latex md)))
  '(package-selected-packages
    (quote
-    (htmlize haskell-mode monokai-theme spacemacs-theme zenburn-theme rust-mode terraform-mode go-mode ansible markdown-mode ledger-mode tide evil)))
+    (ob-go htmlize haskell-mode monokai-theme spacemacs-theme zenburn-theme rust-mode terraform-mode go-mode ansible markdown-mode ledger-mode tide evil)))
  '(scroll-conservatively 10000)
  '(show-paren-mode t))
 (custom-set-faces
@@ -188,6 +188,10 @@
    (python . t)
    (shell . t)
    (C . t)
+   (org . t)
+   (emacs-lisp . t)
+   (go . t)
+   (java . t)
    ))
 ;; Use python3
 (setq org-babel-python-command "python3")
