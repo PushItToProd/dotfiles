@@ -140,6 +140,7 @@
         "editor.tabSize": 2
     },
     "[go]": {
+        "editor.rulers": []
     },
     "go.autocompleteUnimportedPackages": true,
     "[html]": {
