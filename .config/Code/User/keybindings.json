@@ -177,7 +177,7 @@
         "command": "newFile.createNewFile"
     },
     {
-        "key": "alt+i",
+        "key": "alt+i alt+p",
         "command": "editor.action.triggerParameterHints",
         "when": "editorHasSignatureHelpProvider && editorTextFocus"
     },
@@ -373,5 +373,19 @@
     {
         "key": "ctrl+v",
         "command": "-editor.action.clipboardPasteAction"
+    },
+    {
+        "key": "alt+i alt+i",
+        "command": "editor.action.showHover",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "ctrl+k ctrl+i",
+        "command": "-editor.action.showHover",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "alt+i alt+d",
+        "command": "editor.action.showDefinitionPreviewHover"
     },
 ]
