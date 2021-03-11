@@ -215,6 +215,9 @@ bindsym $mod+$alt+space exec $i3-wm.program.file_search
 ## Launch // Emoji Picker // <> Z ##
 bindsym $mod+z exec --no-startup-id rofimoji
 
+## Launch // Unicode Picker // <> U ##
+bindsym $mod+u exec --no-startup-id rofi -show unicode -modi "unicode:~/bin/_rofi-select-unicode"
+
 ###############################################################################
 # Window and Workspace Navigation
 ###############################################################################

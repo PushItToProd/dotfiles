@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+# A rofi script for selecting characters. Needs to be invoked via a wrapper that
+# exports CHARACTER_FILE with the path of a file listing options.
+# Based on: https://git.teknik.io/matf/rofiemoji-rofiunicode.git.
+# See also: https://www.mankier.com/5/rofi-script
+
+: "${CHARACTER_FILE?:}"
+
+get_first() {
+  printf '%s' "$1"
+}
+
+# A selection has been passed.
+if [[ "$*" ]]; then
+  # Deliberately pass $@ unquoted here since rofi passes the whole string as the
+  # first argument.
+  get_first $@ | xsel -bi
+  exit 0
+fi
+
+# List all options.
+cat "$CHARACTER_FILE"

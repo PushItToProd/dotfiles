@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+SCRIPT_PATH="$(dirname "${BASH_SOURCE[0]}")"
+
+export CHARACTER_FILE="$HOME/setup/resources/emoji.txt"
+
+"$SCRIPT_PATH/_rofi-select-from-file" "$@"
