@@ -199,7 +199,12 @@
     "explorer.openEditors.visible": 0,
     "python.defaultInterpreterPath": "/usr/bin/python3.8",
     "python.showStartPage": false,
-    "workbench.editorAssociations": [],
+    "workbench.editorAssociations": [
+        {
+            "viewType": "jupyter.notebook.ipynb",
+            "filenamePattern": "*.ipynb"
+        }
+    ],
     "[vue]": {
         "editor.tabSize": 2,
         "gitlens.codeLens.scopes": [
