@@ -27,7 +27,8 @@
         ".pylintrc": "ini",
         "todo": "markdown",
         "*.html": "jinja-html",
-        "**/i3/config": "i3"
+        "**/i3/config": "i3",
+        "*.html5": "html"
     },
     "files.exclude": {
         "**/.DS_Store": true,
