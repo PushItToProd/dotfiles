@@ -183,7 +183,7 @@ mode "$mode_launch_web" {
      bindsym t exec i3-browser todoist.com, mode "default"
      bindsym l exec i3-browser last.fm, mode "default"
      bindsym r exec i3-browser reddit.com, mode "default"
-     bindsym d exec i3-browser notes.zane.cloud, mode "default"
+     bindsym d exec firefox -new-window notes.zane.cloud, mode "default"
      bindsym a exec i3-browser asahi.zane.cloud, mode "default"
 
      bindsym Return mode "default"
