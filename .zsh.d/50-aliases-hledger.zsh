@@ -1,3 +1,7 @@
+# Prefix to hledger commands to use the 2020 journal
+alias l2020="LEDGER_FILE=$HOME/Documents/ledger/2020/2020.journal"
+alias hledger2020="export LEDGER_FILE=$HOME/Documents/ledger/2020/2020.journal"
+
 alias h='hledger'
 
 alias hb='hledger-totals'
