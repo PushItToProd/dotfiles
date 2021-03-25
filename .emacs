@@ -128,7 +128,7 @@
  '(org-export-backends (quote (ascii html icalendar latex md)))
  '(package-selected-packages
    (quote
-    (json-mode ob-go htmlize haskell-mode monokai-theme spacemacs-theme zenburn-theme rust-mode terraform-mode go-mode ansible markdown-mode ledger-mode tide evil)))
+    (org-journal json-mode ob-go htmlize haskell-mode monokai-theme spacemacs-theme zenburn-theme rust-mode terraform-mode go-mode ansible markdown-mode ledger-mode tide evil)))
  '(scroll-conservatively 10000)
  '(show-paren-mode t))
 (custom-set-faces
@@ -180,6 +180,8 @@
 ; make org mode open Firefox instead of Chromium.
 (setq browser-url-browser-function 'browse-url-firefox)
 
+;;; org babel ;;;
+
 ;; Run and highlight code using babel in org-mode
 ;; via http://cachestocaches.com/2018/6/org-literate-programming/
 (org-babel-do-load-languages
@@ -204,3 +206,10 @@
 (setq org-html-htmlize-output-type 'css)
 ;; (setq org-html-htmlize-font-prefix "") ;; default
 (setq org-html-htmlize-font-prefix "org-")
+
+
+;;; org-journal ;;;
+
+(setq org-journal-dir "~/org/journal/")
+(setq org-journal-date-format "%A, %Y-%m-%d")
+(require 'org-journal)
