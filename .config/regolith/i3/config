@@ -273,18 +273,18 @@ bindsym $mod+m exec i3-input -F 'mark %s' -l 1 -P 'Mark: '
 ## Navigate // Go to Mark // <> ' ##
 bindsym $mod+apostrophe exec i3-input -F '[con_mark="%s"] focus' -l 1 -P 'Goto: '
 
-## Navigate // List Marks // <> ; ##
-bindsym $mod+semicolon exec ~/.config/i3/scripts/select_a_mark.sh
+## Navigate // List Marks // <><Shift> ' ##
+bindsym $mod+shift+apostrophe exec ~/.config/i3/scripts/select_a_mark.sh
 
 
 ###############################################################################
 # Window and Workspace Configuration
 ###############################################################################
 
-## Modify // Rename workspace // <mod><Shift> g ##
+## Modify // Rename workspace // <><Shift> g ##
 bindsym $mod+Shift+g exec i3-input -F 'exec ~/.config/i3/scripts/i3-rename --name "%s"' -P 'New name: '
 
-## Modify // Renumber workspace // <mod><Shift> n ##
+## Modify // Renumber workspace // <><Shift> n ##
 bindsym $mod+Shift+n exec i3-input -F 'exec ~/.config/i3/scripts/i3-rename --number "%s"' -P 'New number: '
 
 ## Modify // Window Position // <><Alt> ↑ ↓ ← → ##
