@@ -33,6 +33,7 @@
 (require 'key-chord)
 (key-chord-mode 1)
 (require 'key-seq)
+(require 'space-chord)
 
 (setq evil-shift-width 4)
 (setq evil-want-C-u-scroll t)
@@ -42,6 +43,7 @@
 (key-seq-define evil-normal-state-map ",o" 'find-file)
 (key-seq-define evil-normal-state-map ",a" 'previous-buffer)
 (key-seq-define evil-normal-state-map ",d" 'next-buffer)
+(space-chord-define evil-normal-state-map "w" 'save-buffer)
 (define-key evil-motion-state-map "H" "^")
 (define-key evil-motion-state-map "L" "$")
 (evil-mode 1)
