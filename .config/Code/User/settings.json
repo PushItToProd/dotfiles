@@ -212,4 +212,22 @@
         ]
     },
     "python.languageServer": "Pylance",
+    "[COBOL]": {
+        "editor.semanticHighlighting.enabled": false,
+        "files.autoGuessEncoding": false,
+        "editor.snippetSuggestions": "bottom",
+        "editor.renderIndentGuides": false,
+        "editor.autoIndent": "advanced",
+        "editor.insertSpaces": true,
+        "editor.formatOnType": true,
+        "editor.rulers": [
+            // 6,
+            // 7,
+            // 11,
+            // 72
+        ],
+        "editor.detectIndentation": false,
+        "editor.useTabStops": false,
+        "editor.wordSeparators": "`~!@$%^&*()=+[{]}\\|;:'\",.<>/?"
+    },
 }
