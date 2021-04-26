@@ -156,7 +156,7 @@
     },
     "[markdown]": {
         "editor.semanticHighlighting.enabled": true,
-        "editor.tabSize": 4,
+        "editor.tabSize": 2,
         "files.trimTrailingWhitespace": false,
     },
     "markdown.preview.fontSize": 18,
