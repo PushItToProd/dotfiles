@@ -65,7 +65,6 @@
     "window.openFoldersInNewWindow": "on",
     "window.title": "${dirty}${activeEditorShort}${separator}${rootName}",
     "window.titleBarStyle": "custom",
-    "window.zoomLevel": -1,
 
     "workbench.editor.openPositioning": "last",
     "workbench.editor.tabCloseButton": "off",
@@ -231,4 +230,6 @@
     },
     "coboleditor.tabstops": [],
     "coboleditor.enable_tabstop": false,
+    "jupyter.alwaysTrustNotebooks": true,
+    "window.zoomLevel": 1,
 }
