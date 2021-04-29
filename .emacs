@@ -183,6 +183,7 @@
 (setq browser-url-browser-function 'browse-url-firefox)
 
 ;;; org babel ;;;
+(require 'ob-js)
 
 ;; Run and highlight code using babel in org-mode
 ;; via http://cachestocaches.com/2018/6/org-literate-programming/
@@ -196,6 +197,7 @@
    (emacs-lisp . t)
    (go . t)
    (java . t)
+   (js . t)
    ))
 ;; Use python3
 (setq org-babel-python-command "python3")
