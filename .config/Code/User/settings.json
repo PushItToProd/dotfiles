@@ -27,7 +27,7 @@
         "*.service": "ini",
         ".pylintrc": "ini",
         "todo": "markdown",
-        "*.html": "jinja-html",
+        "*.html": "html",
         "**/i3/config": "i3",
         "*.html5": "html"
     },
@@ -66,7 +66,7 @@
     "window.title": "${dirty}${activeEditorShort}${separator}${rootName}",
     "window.titleBarStyle": "custom",
 
-    "workbench.editor.openPositioning": "last",
+    "workbench.editor.openPositioning": "right",
     "workbench.editor.tabCloseButton": "off",
     "workbench.enableExperiments": false,
     "workbench.startupEditor": "none",
@@ -232,5 +232,6 @@
     "coboleditor.tabstops": [],
     "coboleditor.enable_tabstop": false,
     "jupyter.alwaysTrustNotebooks": true,
-    "window.zoomLevel": 1,
+    "plantuml.exportFormat": "png",
+    "window.zoomLevel": -1,
 }
