@@ -9,3 +9,4 @@ __pycache__
 .idea/
 TODO
 *.scratch*
+node_modules/
