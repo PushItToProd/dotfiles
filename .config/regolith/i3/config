@@ -287,6 +287,9 @@ bindsym $mod+Shift+g exec i3-input -F 'exec ~/.config/i3/scripts/i3-rename --nam
 ## Modify // Renumber workspace // <><Shift> n ##
 bindsym $mod+Shift+n exec i3-input -F 'exec ~/.config/i3/scripts/i3-rename --number "%s"' -P 'New number: '
 
+## Modify // Rename window/container // <> t ##
+bindsym $mod+t exec i3-input -F 'title_format %s' -P 'Rename window/container: '
+
 ## Modify // Window Position // <><Alt> ↑ ↓ ← → ##
 bindsym $move+Left move left
 bindsym $move+Down move down
