@@ -341,9 +341,12 @@ bindsym $moveto+9 exec ~/.config/i3/scripts/i3-toggle --move 90 95
 bindsym $moveto+0 exec ~/.config/i3/scripts/i3-toggle --move 0 1 2
 
 ## Modify // Move Window to Workspace by Name // <><Ctrl><Alt> G ##
-bindsym $moveto+g exec i3-input -F 'move container to workspace "%s"' -P 'Move to workspace: '
+# exec commands must be double quoted for the semicolon argument to work
+# see https://www.reddit.com/r/i3wm/comments/cnil9s/i3input_with_multiple_commands/
+bindsym $moveto+g exec "i3-input -F 'move container to workspace \\"%s\\"; workspace \\"%s\\"' -P 'Move to workspace: '"
+
 ## Modify // Move Window to Workspace by Number // <><Ctrl><Alt> N ##
-bindsym $moveto+n exec i3-input -F 'move container to workspace number "%s"' -P 'Move to workspace number: '
+bindsym $moveto+n exec "i3-input -F 'move container to workspace number \\"%s\\"; workspace number \\"%s\\"' -P 'Move to workspace number: '"
 
 ## Modify // Split Container // <> v ##
 bindsym $mod+v split vertical
