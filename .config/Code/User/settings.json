@@ -32,19 +32,20 @@
         "*.html5": "html"
     },
     "files.exclude": {
-        "**/.DS_Store": true,
         "**/.git": true,
-        "**/.hg": true,
         "**/.svn": true,
+        "**/.hg": true,
+        "**/CVS": true,
+        "**/.DS_Store": true,
         "**/.terraform": true,
         "**/*.tfstate": true,
         "**/*.tfstate*": true,
         "**/*~": true,
-        "**/CVS": true,
         "**/terraform.d": true,
         "**/terraform.tfstate.d": true,
         "**/__pycache__": true,
         "**/*.egg-info": true,
+        "**/*.olean": true
     },
     "files.trimTrailingWhitespace": true,
 
@@ -233,5 +234,8 @@
     "coboleditor.enable_tabstop": false,
     "jupyter.alwaysTrustNotebooks": true,
     "plantuml.exportFormat": "png",
+    "lean.input.leader": "/",
+    "update.showReleaseNotes": false,
+    "update.mode": "manual",
     "window.zoomLevel": -1,
 }
