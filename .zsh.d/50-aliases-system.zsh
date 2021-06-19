@@ -44,4 +44,4 @@ function llss {
 }
 
 alias untar='tar --extract --verbose --file'
-alias python='python3'
+alias python='python3.9'
