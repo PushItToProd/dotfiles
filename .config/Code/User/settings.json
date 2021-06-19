@@ -240,6 +240,5 @@
     "lean.input.leader": "/",
     "update.showReleaseNotes": false,
     "update.mode": "manual",
-    "window.zoomLevel": -1,
     "workbench.editor.untitled.hint": "hidden",
 }
