@@ -172,6 +172,9 @@
     "[yaml]": {
         "editor.tabSize": 2
     },
+    "[dockercompose]": {
+        "editor.tabSize": 2
+    },
     "shellcheck.disableVersionCheck": true,
     "shellcheck.customArgs": ["-x"],
     "explorer.confirmDragAndDrop": false,
@@ -238,4 +241,5 @@
     "update.showReleaseNotes": false,
     "update.mode": "manual",
     "window.zoomLevel": -1,
+    "workbench.editor.untitled.hint": "hidden",
 }
