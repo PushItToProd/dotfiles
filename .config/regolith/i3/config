@@ -360,6 +360,14 @@ hide_edge_borders smart
 # Scratchpad Management
 ###############################################################################
 
+# Scratchpad startup apps
+exec --no-startup-id keepassxc
+exec --no-startup-id pavucontrol
+exec --no-startup-id gnome-calculator
+exec --no-startup-id synology-drive
+exec --no-startup-id blueman-applet
+exec --no-startup-id blueman-manager
+
 ## Scratchpad // Show // <> p ##
 bindsym $mod+p scratchpad show
 
@@ -673,11 +681,3 @@ set_from_resource $i3-wm.program.2 i3-wm.program.2 :
 exec --no-startup-id $i3-wm.program.2
 set_from_resource $i3-wm.program.3 i3-wm.program.3 :
 exec --no-startup-id $i3-wm.program.3
-
-# Launch my apps
-exec --no-startup-id keepassxc
-exec --no-startup-id pavucontrol
-exec --no-startup-id gnome-calculator
-exec --no-startup-id synology-drive
-exec --no-startup-id blueman-applet
-exec --no-startup-id blueman-manager
