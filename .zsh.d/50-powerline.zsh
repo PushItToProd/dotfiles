@@ -2,6 +2,9 @@
 [[ "$DEBUG" == "1" ]] && echo "Configuring powerline"
 
 function powerline_precmd() {
+    # Hack required for ~/bin/powerline_segments/wrap.py to properly wrap text.
+    read TERM_ROWS TERM_COLUMNS < <(stty size)
+    export TERM_ROWS TERM_COLUMNS
     PS1="$(powerline-shell --shell zsh $?)"
 }
 

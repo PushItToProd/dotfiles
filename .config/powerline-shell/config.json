@@ -3,7 +3,7 @@
     "virtual_env",
     "~/bin/powerline_segments/my_cwd.py",
     "git",
-    "newline",
+    "~/bin/powerline_segments/wrap.py",
     "root",
     "exit_code"
   ],
