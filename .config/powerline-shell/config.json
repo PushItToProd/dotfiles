@@ -1,11 +1,13 @@
 {
   "segments": [
     "virtual_env",
-    "ssh",
-    "cwd",
+    "~/bin/powerline_cwd_custom.py",
     "git",
-    "jobs",
+    "newline",
     "root",
     "exit_code"
-  ]
+  ],
+  "cwd": {
+    "max_dir_size": 15
+  }
 }
