@@ -3,7 +3,6 @@
     "editor.rulers": [
         80
     ],
-    "editor.fontFamily": "'DejaVu Sans Mono Book', 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
     "editor.renderWhitespace": "boundary",
     "editor.accessibilitySupport": "off",
     "editor.detectIndentation": false,
@@ -45,7 +44,8 @@
         "**/terraform.tfstate.d": true,
         "**/__pycache__": true,
         "**/*.egg-info": true,
-        "**/*.olean": true
+        "**/*.olean": true,
+        "**/node_modules": false
     },
     "files.trimTrailingWhitespace": true,
 
@@ -56,8 +56,6 @@
     },
 
     "telemetry.enableTelemetry": false,
-
-    "terminal.integrated.fontSize": 18,
     "terminal.integrated.fontFamily": "'DejaVu Sans Mono for Powerline', 'DejaVu Sans Mono', 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
     "terminal.integrated.macOptionIsMeta": true,
     "terminal.integrated.rendererType": "dom",
@@ -192,7 +190,6 @@
         "editor.tabSize": 2
     },
     "workbench.colorTheme": "Slack Theme Dark Mode",
-    "editor.fontSize": 16,
     "[verilog]": {
         "editor.tabSize": 2
     },
@@ -205,12 +202,9 @@
     "explorer.openEditors.visible": 0,
     "python.defaultInterpreterPath": "/usr/bin/python3.8",
     "python.showStartPage": false,
-    "workbench.editorAssociations": [
-        {
-            "viewType": "jupyter.notebook.ipynb",
-            "filenamePattern": "*.ipynb"
-        }
-    ],
+    "workbench.editorAssociations": {
+      "*.ipynb": "jupyter-notebook"
+    },
     "[vue]": {
         "editor.tabSize": 2,
         "gitlens.codeLens.scopes": [
@@ -241,4 +235,14 @@
     "update.showReleaseNotes": false,
     "update.mode": "manual",
     "workbench.editor.untitled.hint": "hidden",
+    "notebook.cellToolbarLocation": {
+        "default": "right",
+        "jupyter-notebook": "left"
+    },
+    "[typescript]": {
+        "editor.tabSize": 2
+    },
+    "editor.copyWithSyntaxHighlighting": false,
+    "editor.selectionClipboard": false,
+    "terminal.integrated.fontSize": 16,
 }
