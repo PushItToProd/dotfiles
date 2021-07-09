@@ -1,7 +1,7 @@
 {
   "segments": [
     "virtual_env",
-    "~/bin/powerline_cwd_custom.py",
+    "~/bin/powerline_segments/my_cwd.py",
     "git",
     "newline",
     "root",
