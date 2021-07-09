@@ -72,7 +72,7 @@ def truncate(s: str, max_size: int, sep='...'):
     '012...789'
     """
     if max_size < 9:
-        print(f"cwd config max_size {max_size} is too short - treating as 9")
+        warn(f"cwd config max_size {max_size} is too short - treating as 9")
         max_size = 9
 
     if len(s) <= max_size:
