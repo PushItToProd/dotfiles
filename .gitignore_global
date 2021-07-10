@@ -10,3 +10,4 @@ __pycache__
 TODO
 *.scratch*
 node_modules/
+_scratch/
