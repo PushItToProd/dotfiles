@@ -199,8 +199,10 @@
    (java . t)
    (js . t)
    ))
-;; Use python3
+;; Use python3 in babel
 (setq org-babel-python-command "python3")
+;; Use bash in babel
+(setq org-babel-shell-command "bash")
 ;; Syntax highlight in #+BEGIN_SRC blocks
 (setq org-src-fontify-natively t)
 ;; Don't prompt before running code in org
