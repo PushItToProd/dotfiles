@@ -10,10 +10,7 @@ autoload -Uz compinit
 compinit
 # End of lines added by compinstall
 # Lines configured by zsh-newuser-install
-HISTFILE=~/.zsh_history
-HISTSIZE=90000
-SAVEHIST=150000
-setopt appendhistory extendedglob
+setopt extendedglob
 unsetopt beep
 bindkey -e
 # End of lines configured by zsh-newuser-install
