@@ -393,4 +393,8 @@
         "key": "alt+i alt+d",
         "command": "editor.action.showDefinitionPreviewHover"
     },
+    {
+        "key": "shift+escape",
+        "command": "notifications.clearAll"
+    },
 ]
