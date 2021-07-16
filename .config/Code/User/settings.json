@@ -245,4 +245,5 @@
     "editor.copyWithSyntaxHighlighting": false,
     "editor.selectionClipboard": false,
     "terminal.integrated.fontSize": 16,
+    "terminal.integrated.scrollback": 10000,
 }
