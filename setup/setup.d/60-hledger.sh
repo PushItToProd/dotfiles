@@ -1,4 +1,5 @@
 ### Install Hledger ###
+# https://hledger.org/download.html
 
 notice "Installing hledger"
 if [[ -f "$USER_HOME/.local/bin/hledger" ]]; then
