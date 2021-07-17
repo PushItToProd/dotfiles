@@ -48,7 +48,6 @@ apt_packages=(
   calibre
   certbot
   python3-certbot-dns-digitalocean
-
-  # zsh
   zsh
+  openssh-server
 )
