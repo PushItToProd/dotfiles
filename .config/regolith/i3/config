@@ -483,6 +483,7 @@ floating_maximum_size -1 x -1
 for_window [class="Gnome-control-center"] floating enable
 for_window [class="Org.gnome.Nautilus"] floating enable, resize set 1600 1200
 for_window [class="Blueman-manager"] floating enable
+for_window [class="Pomodoro"] floating enable, sticky enable
 
 ###############################################################################
 # Window Resize and Gaps
