@@ -1,1 +1,1 @@
-export PAGER=less
+export PAGER='less -F'
