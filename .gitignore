@@ -27,6 +27,7 @@
 
 !.emacs
 !.emacs.d
+.emacs.d/tramp
 .emacs.d/session.*
 .emacs.d/elpa/*
 .emacs.d/kkcrc
