@@ -246,4 +246,7 @@
     "editor.selectionClipboard": false,
     "terminal.integrated.fontSize": 16,
     "terminal.integrated.scrollback": 10000,
+    "[ruby]": {
+        "editor.tabSize": 2
+    }
 }
