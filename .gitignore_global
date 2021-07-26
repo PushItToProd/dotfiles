@@ -12,3 +12,4 @@ TODO
 node_modules/
 _scratch/
 .zsh_local_history
+.bundle/
