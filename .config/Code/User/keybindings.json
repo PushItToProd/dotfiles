@@ -397,4 +397,8 @@
         "key": "shift+escape",
         "command": "notifications.clearAll"
     },
+    {
+        "key": "f5",
+        "command": "python.runtests"
+    },
 ]
