@@ -198,6 +198,7 @@
    (go . t)
    (java . t)
    (js . t)
+   (ruby . t)
    ))
 ;; Use python3 in babel
 (setq org-babel-python-command "python3")
