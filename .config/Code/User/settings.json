@@ -144,7 +144,8 @@
     },
     "go.autocompleteUnimportedPackages": true,
     "[html]": {
-        "editor.tabSize": 2
+        "editor.tabSize": 2,
+        "editor.defaultFormatter": "vscode.html-language-features"
     },
     "[javascript]": {
         "editor.tabSize": 2,
