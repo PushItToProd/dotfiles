@@ -190,7 +190,7 @@
     "[jinja-html]": {
         "editor.tabSize": 2
     },
-    "workbench.colorTheme": "Slack Theme Dark Mode",
+    "workbench.colorTheme": "Oldschool Theme (QBasic)",
     "[verilog]": {
         "editor.tabSize": 2
     },
