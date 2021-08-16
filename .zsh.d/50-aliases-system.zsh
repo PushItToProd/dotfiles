@@ -12,6 +12,8 @@ alias pbpaste='xclip -sel clip -o'
 alias open='xdg-open'
 
 #alias l=less
+alias cat='less -F'
+alias less='less -RF'
 alias l='ls -F'
 alias ll='ls -lh'
 alias la='ls -lah'
@@ -21,6 +23,10 @@ alias lastmodified='ls -tl'
 alias grep='grep -I --exclude-dir=.git'
 alias fgrep='fgrep -I --exclude-dir=.git'
 alias egrep='egrep -I --exclude-dir=.git'
+
+grepless() {
+  grep --color=always "$@" | less
+}
 
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
