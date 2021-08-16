@@ -258,5 +258,12 @@
             "path": "zsh",
             "args": ["-l"]
         }
+    },
+    "editor.semanticTokenColorCustomizations": {
+        "enabled": true
+    },
+    "[twee3-sugarcube-2]": {
+        "editor.rulers": [],
+        "editor.tabSize": 2
     }
 }
