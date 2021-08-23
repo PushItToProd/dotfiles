@@ -265,5 +265,8 @@
     "[twee3-sugarcube-2]": {
         "editor.rulers": [],
         "editor.tabSize": 2
+    },
+    "[liquid]": {
+        "editor.tabSize": 2
     }
 }
