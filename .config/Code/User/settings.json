@@ -268,5 +268,6 @@
     },
     "[liquid]": {
         "editor.tabSize": 2
-    }
+    },
+    "window.zoomLevel": -1
 }
