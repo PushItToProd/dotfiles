@@ -312,9 +312,6 @@ bindsym $movespace+j move workspace to output down
 bindsym $movespace+k move workspace to output up
 bindsym $movespace+l move workspace to output right
 
-## Modify // Next Window Orientation // <> Backspace ##
-bindsym $mod+BackSpace split toggle
-
 ## Modify // Window Fullscreen Toggle // <> F11 ##
 bindsym $mod+F11 fullscreen toggle
 
@@ -323,6 +320,9 @@ bindsym $mod+Shift+f floating toggle
 
 ## Modify // Tile/Float Focus Toggle // <> f ##
 bindsym $mod+f focus mode_toggle
+
+## Modify // Toggle Stacking/Tabbed Layout // <> Backspace ##
+bindsym $mod+BackSpace layout toggle stacking tabbed
 
 ## Modify // Window Layout Mode // <> Tab ##
 bindsym $mod+Tab layout toggle tabbed splitv splith
