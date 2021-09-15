@@ -325,7 +325,7 @@ bindsym $mod+f focus mode_toggle
 bindsym $mod+BackSpace layout toggle stacking tabbed
 
 ## Modify // Window Layout Mode // <> Tab ##
-bindsym $mod+Tab layout toggle tabbed splitv splith stacking
+bindsym $mod+Tab layout toggle tabbed stacking splitv splith
 
 # move focused container to workspace, move to workspace
 ## Modify // Move Window to Workspace // <><Ctrl><Alt> 0..9 ##
