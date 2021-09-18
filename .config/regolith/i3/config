@@ -400,6 +400,9 @@ for_window [class="Blueman-manager"] move to scratchpad, resize set 800 600
 bindsym $mod+Shift+q [con_id="__focused__"] kill
 bindsym $mod+q [con_id="__focused__"] kill
 
+## Session // Exit App // <><Shift> button2 ##
+bindsym --whole-window $mod+button2 kill
+
 ## Session // Terminate App // <><Alt> q ##
 bindsym $mod+$alt+q [con_id="__focused__"] exec --no-startup-id kill -9 $(xdotool getwindowfocus getwindowpid)
 
