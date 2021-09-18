@@ -27,3 +27,4 @@ i3-wm.gaps.focus_follows_mouse: no
 gnome.wallpaper: /home/joe/Pictures/8086-microcode.jpeg
 i3-wm.bar.workspace.active.background.color: #bda28a
 i3-wm.bar.workspace.active.border.color: #bda28a
+i3-wm.gaps.inner.size: 0
