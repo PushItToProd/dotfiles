@@ -318,6 +318,9 @@ bindsym $mod+F11 fullscreen toggle
 ## Modify // Window Floating Toggle // <><Shift> f ##
 bindsym $mod+Shift+f floating toggle
 
+## Modify // Window Floating Toggle // <><Shift> right click ##
+bindsym --whole-window $mod+Shift+button3 floating toggle
+
 ## Modify // Tile/Float Focus Toggle // <> f ##
 bindsym $mod+f focus mode_toggle
 
