@@ -495,11 +495,11 @@ for_window [class="Pomodoro"] floating enable, sticky enable
 # Window Resize and Gaps
 ###############################################################################
 
-## Resize // Enter Resize Mode // <> r ##
+## Windows // Enter Resize Mode // <> r ##
 mode "Resize Mode" {
         # These bindings trigger as soon as you enter the resize mode
 
-        ## Resize // Resize Window // ↑ ↓ ← → ##
+        ## Windows // Resize Window // ↑ ↓ ← → ##
         bindsym Left resize shrink width 6 px or 6 ppt
         bindsym Down resize grow height 6 px or 6 ppt
         bindsym Up resize shrink height 6 px or 6 ppt
@@ -510,7 +510,7 @@ mode "Resize Mode" {
         bindsym Shift+Up resize shrink height 12 px or 12 ppt
         bindsym Shift+Right resize grow width 12 px or 12 ppt
 
-        ## Resize // Resize Window // k j h l ##
+        ## Windows // Resize Window // k j h l ##
         bindsym h resize shrink width 6 px or 6 ppt
         bindsym k resize grow height 6 px or 6 ppt
         bindsym j resize shrink height 6 px or 6 ppt
@@ -521,18 +521,39 @@ mode "Resize Mode" {
         bindsym Shift+j resize shrink height 12 px or 12 ppt
         bindsym Shift+l resize grow width 12 px or 12 ppt
 
-        ## Resize // Window Gaps // + - ##
+        ## Windows // Window Gaps // + - ##
         bindsym minus gaps inner current minus 6
         bindsym plus gaps inner current plus 6
         bindsym Shift+minus gaps inner current minus 12
         bindsym Shift+plus gaps inner current plus 12
 
-        ## Resize // Exit Resize Mode // Escape or Enter ##
+        ## Windows // Exit Resize Mode // Escape or Enter ##
         bindsym Return mode "default"
         bindsym Escape mode "default"
         bindsym $mod+r mode "default"
 }
 bindsym $mod+r mode "Resize Mode"
+
+## Windows // Enter Move Mode // <> x ##
+# move focused window within workspace
+mode "move" {
+    # regular directional keys
+    bindsym $left move left
+    bindsym $down move down
+    bindsym $up move up
+    bindsym $right move right
+
+    # cursor keys
+    bindsym Left move left
+    bindsym Down move down
+    bindsym Up move up
+    bindsym Right move right
+
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+    bindsym $mod+x mode "default"
+}
+bindsym $mod+x mode "move"
 
 ###############################################################################
 # i3 Appearance and Behavior
