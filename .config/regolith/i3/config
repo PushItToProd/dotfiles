@@ -454,15 +454,15 @@ mode "$mode_system" {
 # System Management
 ###############################################################################
 
-## Modify // Settings // <> c ##
+## Launch // Settings // <> c ##
 set_from_resource $i3-wm.program.settings i3-wm.program.settings gnome-control-center
 bindsym $mod+c exec $i3-wm.program.settings
 
-## Modify // Display Settings // <> d ##
+## Launch // Display Settings // <> d ##
 set_from_resource $i3-wm.program.display i3-wm.program.display gnome-control-center display
 bindsym $mod+d exec $i3-wm.program.display
 
-## Modify // Bluetooth Settings // <> b ##
+## Launch // Bluetooth Settings // <> b ##
 set_from_resource $i3-wm.program.bluetooth i3-wm.program.bluetooth gnome-control-center bluetooth
 bindsym $mod+b exec $i3-wm.program.bluetooth
 
