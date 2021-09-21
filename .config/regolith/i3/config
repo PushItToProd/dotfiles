@@ -324,11 +324,11 @@ bindsym --whole-window $mod+Shift+button3 floating toggle
 ## Modify // Tile/Float Focus Toggle // <> f ##
 bindsym $mod+f focus mode_toggle
 
-## Modify // Toggle Stacking/Tabbed Layout // <> Backspace ##
-bindsym $mod+BackSpace layout toggle stacking tabbed
 
-## Modify // Window Layout Mode // <> Tab ##
-bindsym $mod+Tab layout toggle tabbed stacking splitv splith
+## Modify // Cycle Window Layout Mode // <> Tab ##
+bindsym $mod+Tab layout toggle splith tabbed stacking splitv
+## Modify // Cycle Window Layout Mode (prev) // <><Shift> Tab ##
+bindsym $mod+Shift+Tab layout toggle splith splitv stacking tabbed
 
 # move focused container to workspace, move to workspace
 ## Modify // Move Window to Workspace // <><Ctrl><Alt> 0..9 ##
