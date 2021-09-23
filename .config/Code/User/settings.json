@@ -28,7 +28,8 @@
         "todo": "markdown",
         "*.html": "html",
         "**/i3/config": "i3",
-        "*.html5": "html"
+        "*.html5": "html",
+        "COMMIT_EDITMSG": "git-commit"
     },
     "files.exclude": {
         "**/.git": true,
