@@ -132,19 +132,19 @@ set_from_resource $i3-wm.program.files i3-wm.program.files /usr/bin/nautilus --n
 
 ## Launch // Launch mode // <> / ##
 bindsym $mod+slash mode "$mode_launch"
-
-set $mode_launch (t)ext editor, (s)potify, (m)onitor, (e)macs, (f)iles, (d)iscord, (c)ode, (p)omodoro, t(r)ilium | (w)eb mode, (j)p mode
+set $mode_launch (c)ode, (d)iscord, (e)macs, (f)iles, c(h)aracters, (m)onitor, (n)vtop, (p)omodoro, t(r)ilium, (s)potify, (t)ext editor | (j)p mode, (w)eb mode
 mode "$mode_launch" {
-    bindsym t exec gnome-text-editor, mode "default"
-    bindsym s exec flatpak run com.spotify.Client, mode "default"
-    bindsym m exec gnome-system-monitor, mode "default"
+    bindsym c exec code, mode "default"
+    bindsym d exec discord, mode "default"
     bindsym e exec emacs, mode "default"
     bindsym f exec $i3-wm.program.files, mode "default"
-    bindsym d exec discord, mode "default"
     bindsym h exec gnome-characters, mode "default"
-    bindsym c exec code, mode "default"
+    bindsym m exec gnome-system-monitor, mode "default"
+    bindsym n exec gnome-terminal -- nvtop, mode "default"
     bindsym p exec pomodoro, mode "default"
     bindsym r exec trilium, mode "default"
+    bindsym s exec flatpak run com.spotify.Client, mode "default"
+    bindsym t exec gnome-text-editor, mode "default"
 
     bindsym w mode "$mode_launch_web"
     bindsym j mode "$mode_launch_jp"
