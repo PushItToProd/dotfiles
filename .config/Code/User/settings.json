@@ -29,7 +29,8 @@
         "*.html": "html",
         "**/i3/config": "i3",
         "*.html5": "html",
-        "COMMIT_EDITMSG": "git-commit"
+        "COMMIT_EDITMSG": "git-commit",
+        "*.h": "c"
     },
     "files.exclude": {
         "**/.git": true,
