@@ -12,8 +12,9 @@ alias pbpaste='xclip -sel clip -o'
 alias open='xdg-open'
 
 #alias l=less
-alias cat='less -F'
+# alias cat='less -RF'
 alias less='less -RF'
+alias lless='/usr/bin/less'
 alias l='ls -F'
 alias ll='ls -lh'
 alias la='ls -lah'
