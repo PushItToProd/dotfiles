@@ -15,8 +15,7 @@ set nofoldenable
 set scrolloff=5
 set number
 set background=dark
-" colorscheme darkblue
-colorscheme default
+colorscheme darkblue
 
 set colorcolumn=80
 
@@ -56,11 +55,11 @@ let g:netrw_list_hide= '.*\.swp$,.*\.pyc,.env,.git'
 "   autocmd!
 "   autocmd VimEnter * :Vexplore
 " augroup END
-" 
+"
 " augroup netrw_close
 "   autocmd!
 "   autocmd WinEnter * if winnr('$') == 1 && getbufvar(winbufnr(winnr()), "&filetype") == "netrw"|q|endif
 " augroup END
-" 
+"
 "
 autocmd FileType markdown setlocal ts=4 sts=4 sw=4 expandtab
