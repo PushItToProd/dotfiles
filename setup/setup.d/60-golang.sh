@@ -23,3 +23,6 @@ install_go() {
   tar -C /usr/local -xzf "$go_tar"
 }
 install_go
+
+# update PATH for later scripts
+export PATH="$PATH:/usr/local/go/bin"
