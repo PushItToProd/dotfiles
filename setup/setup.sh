@@ -24,3 +24,5 @@ for mod in "$PROGDIR/setup.d/"*.sh; do
   info "Running setup step $mod"
   source "$mod"
 done
+
+success "Installation finished! 🎉"

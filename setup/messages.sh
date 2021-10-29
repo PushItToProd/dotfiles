@@ -24,6 +24,10 @@ notice() {
   tput sgr0
 }
 
+success() {
+  echo "$(tput bold)$(tput setaf 10)** $*$(tput sgr0)" >&2
+}
+
 info() {
   echo "$(tput bold)$(tput setaf 14)** $*$(tput sgr0)" >&2
 }
