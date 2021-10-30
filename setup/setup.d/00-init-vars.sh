@@ -25,30 +25,31 @@ apt_repos=(
   multiverse
 )
 apt_packages=(
-  vim
-  keepassxc
-  gnome-tweaks
-  emacs
   apt-transport-https
-  shellcheck
-  code
-  steam
-  libtinfo-dev  # hledger
-  libgmp-dev    # hledger
-  pavucontrol
-  gdebi-core    # discord
-  wget
-  python3-pip
-  vlc
-  ffmpeg        # bitwig
-  xclip
-  python3-venv
-  tree
-  ubuntu-touch-sounds  # needed for super-simple-pomodoro
-  okular
   calibre
   certbot
-  python3-certbot-dns-digitalocean
-  zsh
+  code
+  emacs
+  ffmpeg        # bitwig
+  gdebi-core    # discord
+  gnome-tweaks
+  keepassxc
+  libgmp-dev    # hledger
+  libtinfo-dev  # hledger
+  okular
   openssh-server
+  pavucontrol
+  python3-certbot-dns-digitalocean
+  python3-pip
+  python3-venv
+  shellcheck
+  steam
+  tmux
+  tree
+  ubuntu-touch-sounds  # needed for super-simple-pomodoro
+  vim
+  vlc
+  wget
+  xclip
+  zsh
 )
