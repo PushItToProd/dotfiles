@@ -61,6 +61,7 @@
 (setq whitespace-style '(face empty trailing lines-tail)
       whitespace-line-column 80)
 (setq whitespace-global-modes '(not go-mode))
+
 ; whitespace styles for Go and SQL
 (add-hook 'go-mode-hook
           (lambda ()
@@ -84,7 +85,9 @@
 
 (when window-system
   (set-frame-size (selected-frame) 81 50))
+(global-auto-revert-mode t)
 
+; org config
 (require 'org)
 (setq org-default-notes-file (concat org-directory "/capture.org"))
 (define-key global-map "\C-cc" 'org-capture)
