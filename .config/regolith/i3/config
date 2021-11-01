@@ -135,7 +135,7 @@ bindsym $mod+slash mode "$mode_launch"
 set $mode_launch (c)ode, (d)iscord, (e)macs, (f)iles, (h)ledger, (m)onitor, (n)vtop, (p)omodoro, t(r)ilium, (s)potify, (t)ext editor | (j)p mode, (w)eb mode
 mode "$mode_launch" {
     bindsym c exec ~/go/bin/rofi-code, mode "default"
-    bindsym C exec code, mode "default"
+    bindsym Shift+C exec code -n, mode "default"
     bindsym d exec discord, mode "default"
     bindsym e exec emacs, mode "default"
     bindsym f exec $i3-wm.program.files, mode "default"
