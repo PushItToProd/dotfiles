@@ -8,9 +8,9 @@ go_tar="$(basename "$go_url")"
 
 install_go() {
   local installed_version=''
-  installed_version="$(</usr/local/go/VERSION)" ||
 
   if [[ -d /usr/local/go ]]; then
+    installed_version="$(</usr/local/go/VERSION)" || true
     if [[ "$installed_version" == "go${GO_VERSION}" ]]; then
       info 'Go is already installed and up to date'
       return
