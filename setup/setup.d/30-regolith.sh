@@ -1,3 +1,4 @@
+notice 'Setting up regolith'
 apt_repos+=(ppa:regolith-linux/release)
 apt_packages+=(
   # regolith
