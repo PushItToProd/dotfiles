@@ -19,6 +19,6 @@ else
   tar xjf "$anki_tar"
 
   pushd "$anki_dir" >/dev/null || fatal "Unable to switch to anki directory $anki_dir"
-  sudo make install
+  ./install.sh
   popd >/dev/null || fatal "Unable to return from anki directory"
 fi
