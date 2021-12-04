@@ -270,5 +270,8 @@
     },
     "[liquid]": {
         "editor.tabSize": 2
+    },
+    "security.workspace.trust.untrustedFiles": "open",
+    "[php]": {
     }
 }
