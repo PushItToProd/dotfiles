@@ -271,6 +271,13 @@
         "editor.tabSize": 2
     },
     "security.workspace.trust.untrustedFiles": "open",
-    "[php]": {
-    }
+    "[java]": {
+        "editor.rulers": [120]
+    },
+    "[python]": {
+    },
+    "[jsonc]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "window.zoomLevel": -1
 }
