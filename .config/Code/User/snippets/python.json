@@ -28,5 +28,17 @@
       "class ${1:TestCase}(unittest.TestCase):",
       "    ${2:pass}"
     ]
+  },
+  "main": {
+      "prefix": "main",
+      "body": [
+        "def main():",
+        "    ${0:pass}",
+        "",
+        "",
+        "if __name__ == '__main__':",
+        "    main()",
+        ""
+      ]
   }
 }
