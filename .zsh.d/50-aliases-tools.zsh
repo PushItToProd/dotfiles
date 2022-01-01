@@ -1,5 +1,5 @@
 i3-binds() {
-  grep -e '^[^#]*bind' -e '^[^#]*mode' .config/i3/config
+  grep --color=never -e '^[^#]*set' -e '^[^#]*bind' -e '^[^#]*mode' .config/regolith/i3/config
 }
 
 alias gdiff='git diff --no-index --color-words'
