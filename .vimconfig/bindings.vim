@@ -1,5 +1,5 @@
 " custom mappings
-let mapleader = ","
+let mapleader = " "
 
 " open vimrc
 nnoremap <leader>ev :tabe $MYVIMRC<cr>
