@@ -102,6 +102,8 @@ workspace 80 output DP-1-1
 workspace 85 output DP-1-1
 workspace 90 output DP-1-1
 workspace 95 output DP-1-1
+workspace 100 output DP-1-1
+workspace 105 output DP-1-1
 
 # These are the labels which define each i3 workspace.
 set_from_resource $ws1  i3-wm.workspace.01.name "1"
@@ -245,6 +247,7 @@ bindsym $mod+6 exec i3-toggle 60 65
 bindsym $mod+7 exec i3-toggle 70 75
 bindsym $mod+8 exec i3-toggle 80 85
 bindsym $mod+9 exec i3-toggle 90 95
+bindsym $mod+minus exec i3-toggle 100 105
 bindsym $mod+0 exec i3-toggle 0 1 2
 
 ## Navigate // Next Workspace // <><Ctrl> L ##
