@@ -401,4 +401,18 @@
         "key": "f5",
         "command": "python.runtests"
     },
+    {
+        "key": "ctrl+[",
+        "command": "outline.toggleVisibility"
+    },
+    {
+        "key": "ctrl+[",
+        "command": "-editor.action.outdentLines",
+        "when": "editorTextFocus && !editorReadonly"
+    },
+    {
+        "key": "ctrl+[",
+        "command": "-markdown.extension.onOutdentLines",
+        "when": "editorTextFocus && !suggestWidgetVisible && editorLangId == 'markdown'"
+    },
 ]
