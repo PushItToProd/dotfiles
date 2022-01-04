@@ -50,13 +50,23 @@ cmd_number() {
   new_name="$1${bare_name}"
 }
 
+cmd_smart() {
+  if [[ "$1" =~ ^[0-9]+$ ]]; then
+    cmd_number "$1"
+  elif [[ "$1" =~ ^[0-9]+: ]]; then
+    new_name="$1"
+  else
+    cmd_name "$1"
+  fi
+}
+
 main() {
   workspace="$(get_current_workspace)"
   workspace_name="$(name "$workspace")"
   workspace_number="$(number "$workspace")"
 
   # get the workspace name without the numeric prefix
-  bare_name="${workspace_name##$workspace_number}"
+  bare_name="${workspace_name##"$workspace_number"}"
 
   if (( "$#" < 2 )); then
     usage
@@ -74,6 +84,9 @@ main() {
       ;;
     --number)
       cmd_number "$2"
+      ;;
+    --smart)
+      cmd_smart "$2"
       ;;
     *)
       echo "unrecognized command: $1" >&2

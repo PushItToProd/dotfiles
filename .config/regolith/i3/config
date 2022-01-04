@@ -289,7 +289,7 @@ bindsym $mod+shift+apostrophe exec ~/.config/i3/scripts/select_a_mark.sh
 bindsym $mod+Shift+g exec i3-input -F 'exec ~/.config/i3/scripts/i3-rename --name "%s"' -P 'New name: '
 
 ## Modify // Renumber workspace // <><Shift> n ##
-bindsym $mod+Shift+n exec i3-input -F 'exec ~/.config/i3/scripts/i3-rename --number "%s"' -P 'New number: '
+bindsym $mod+Shift+n exec i3-input -F 'exec ~/.config/i3/scripts/i3-rename --smart "%s"' -P 'New name/number: '
 
 ## Modify // Rename window/container // <> t ##
 bindsym $mod+t exec i3-input -F 'title_format %s' -P 'Rename window/container: '
