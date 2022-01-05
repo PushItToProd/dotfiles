@@ -206,7 +206,7 @@
         "editor.tabSize": 2
     },
     "explorer.openEditors.visible": 0,
-    "python.defaultInterpreterPath": "/usr/bin/python3.8",
+    "python.defaultInterpreterPath": "/usr/bin/python3.9",
     "python.showStartPage": false,
     "workbench.editorAssociations": {
       "*.ipynb": "jupyter-notebook"
