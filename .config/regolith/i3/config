@@ -286,7 +286,7 @@ bindsym $mod+shift+apostrophe exec ~/.config/i3/scripts/select_a_mark.sh
 ###############################################################################
 
 ## Modify // Rename workspace // <><Shift> g ##
-bindsym $mod+Shift+g exec i3-input -F 'exec ~/.config/i3/scripts/i3-rename --name "%s"' -P 'New name: '
+bindsym $mod+Shift+g exec rofi -markup -e '<span foreground="red" size="large">Use mod+shift+n to rename workspaces now!</span>'
 
 ## Modify // Renumber workspace // <><Shift> n ##
 bindsym $mod+Shift+n exec i3-input -F 'exec ~/.config/i3/scripts/i3-rename --smart "%s"' -P 'New name/number: '
