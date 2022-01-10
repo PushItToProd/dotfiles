@@ -248,7 +248,7 @@ bindsym $mod+7 exec i3-toggle 70 75
 bindsym $mod+8 exec i3-toggle 80 85
 bindsym $mod+9 exec i3-toggle 90 95
 bindsym $mod+minus exec i3-toggle 100 105
-bindsym $mod+0 exec i3-toggle 0 1 2
+bindsym $mod+0 exec i3-toggle 0 1 2 3
 
 ## Navigate // Next Workspace // <><Ctrl> L ##
 bindsym $mod+Control+l workspace next
@@ -345,7 +345,7 @@ bindsym $moveto+6 exec ~/.config/i3/scripts/i3-toggle --move 60 65
 bindsym $moveto+7 exec ~/.config/i3/scripts/i3-toggle --move 70 75
 bindsym $moveto+8 exec ~/.config/i3/scripts/i3-toggle --move 80 85
 bindsym $moveto+9 exec ~/.config/i3/scripts/i3-toggle --move 90 95
-bindsym $moveto+0 exec ~/.config/i3/scripts/i3-toggle --move 0 1 2
+bindsym $moveto+0 exec ~/.config/i3/scripts/i3-toggle --move 0 1 2 3
 
 ## Modify // Move Window to Workspace by Name // <><Ctrl><Alt> G ##
 # exec commands must be double quoted for the semicolon argument to work
