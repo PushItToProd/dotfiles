@@ -217,7 +217,7 @@
             "document"
         ]
     },
-    "python.languageServer": "Jedi",
+    // "python.languageServer": "Jedi",
     "[COBOL]": {
         // "editor.semanticHighlighting.enabled": false,
         "editor.tabSize": 2,
