@@ -336,16 +336,16 @@ bindsym $mod+Shift+Tab layout toggle splith splitv stacking tabbed
 
 # move focused container to workspace, move to workspace
 ## Modify // Move Window to Workspace // <><Ctrl><Alt> 0..9 ##
-bindsym $moveto+1 exec ~/.config/i3/scripts/i3-toggle --move 10 15
-bindsym $moveto+2 exec ~/.config/i3/scripts/i3-toggle --move 20 25
-bindsym $moveto+3 exec ~/.config/i3/scripts/i3-toggle --move 30 35
-bindsym $moveto+4 exec ~/.config/i3/scripts/i3-toggle --move 40 45
-bindsym $moveto+5 exec ~/.config/i3/scripts/i3-toggle --move 50 55
-bindsym $moveto+6 exec ~/.config/i3/scripts/i3-toggle --move 60 65
-bindsym $moveto+7 exec ~/.config/i3/scripts/i3-toggle --move 70 75
-bindsym $moveto+8 exec ~/.config/i3/scripts/i3-toggle --move 80 85
-bindsym $moveto+9 exec ~/.config/i3/scripts/i3-toggle --move 90 95
-bindsym $moveto+0 exec ~/.config/i3/scripts/i3-toggle --move 0 1 2 3
+bindsym $moveto+1 exec i3-toggle --move 10 15
+bindsym $moveto+2 exec i3-toggle --move 20 25
+bindsym $moveto+3 exec i3-toggle --move 30 35
+bindsym $moveto+4 exec i3-toggle --move 40 45
+bindsym $moveto+5 exec i3-toggle --move 50 55
+bindsym $moveto+6 exec i3-toggle --move 60 65
+bindsym $moveto+7 exec i3-toggle --move 70 75
+bindsym $moveto+8 exec i3-toggle --move 80 85
+bindsym $moveto+9 exec i3-toggle --move 90 95
+bindsym $moveto+0 exec i3-toggle --move 0 1 2 3
 
 ## Modify // Move Window to Workspace by Name // <><Ctrl><Alt> G ##
 # exec commands must be double quoted for the semicolon argument to work
