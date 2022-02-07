@@ -27,15 +27,6 @@
     },
     // cycle recent editors
     {
-        "key": "ctrl+tab",
-        "command": "workbench.action.openNextRecentlyUsedEditor"
-    },
-    {
-        "key": "ctrl+shift+tab",
-        "command": "workbench.action.openPreviousRecentlyUsedEditor"
-    },
-    // navigate between tabs with the arrow keys
-    {
         "key": "alt+left",
         "command": "workbench.action.previousEditor"
     },
@@ -414,5 +405,33 @@
         "key": "ctrl+[",
         "command": "-markdown.extension.onOutdentLines",
         "when": "editorTextFocus && !suggestWidgetVisible && editorLangId == 'markdown'"
+    },
+    {
+        "key": "ctrl+tab",
+        "command": "-workbench.action.quickOpenPreviousRecentlyUsedEditorInGroup"
+    },
+    {
+        "key": "ctrl+shift+tab",
+        "command": "-workbench.action.quickOpenLeastRecentlyUsedEditorInGroup"
+    },
+    {
+        "key": "ctrl+shift+tab",
+        "command": "workbench.action.terminal.focusPrevious",
+        "when": "terminalFocus"
+    },
+    {
+        "key": "ctrl+shift+tab",
+        "command": "workbench.action.previousEditorInGroup",
+        "when": "!terminalFocus"
+    },
+    {
+        "key": "ctrl+tab",
+        "command": "workbench.action.terminal.focusNext",
+        "when": "terminalFocus"
+    },
+    {
+        "key": "ctrl+tab",
+        "command": "workbench.action.nextEditorInGroup",
+        "when": "!terminalFocus"
     },
 ]
