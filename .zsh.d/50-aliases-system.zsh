@@ -41,4 +41,3 @@ if [ -x /usr/bin/dircolors ]; then
 fi
 
 alias untar='tar --extract --verbose --file'
-alias python='python3.9'

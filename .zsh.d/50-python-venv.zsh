@@ -1,5 +1,7 @@
 [[ "$DEBUG" == "1" ]] && echo Configuring Python helpers
 
+DEFAULT_PYTHON=python3.9
+
 # recurse up the directory tree to find a virtualenv directory
 find_venv() {
   # on principle, I refuse to support virtualenvs in /
@@ -35,16 +37,36 @@ venv() {
     return
   fi
 
-  local create_venv
-  read "create_venv?venv not available. create one? (Y/n) "
-  if [[ "$create_venv" =~ ^[Yy] ]] || [[ "$create_venv" = "" ]]; then
-    echo "Creating virtualenv" >&2
-    python3.9 -m venv venv
-    source venv/bin/activate
+  local cmd="$1"
+  if [[ ! "$cmd" ]]; then
+    read "cmd?venv not available. create one? (Y/n/version) "
   fi
+
+  case $cmd in
+    [Yy]*|''|-y) cmd="$DEFAULT_PYTHON" ;;
+    ^[0-9]) cmd="python$cmd" ;;
+  esac
+
+  # if [[ "$cmd" =~ ^[Yy] ]] || [[ "$cmd" == "" ]] || [[ "$cmd" == -y ]]; then
+  #   cmd="python3.9"
+  # elif [[ "$cmd" =~ ^[0-9] ]]; then
+  #   cmd="python$cmd"
+  # fi
+  [[ -x "$cmd" ]] || command -v "$cmd" &>/dev/null || {
+    echo "Not found: $cmd"
+    return 1
+  }
+
+  echo "Creating virtualenv using $cmd" >&2
+  $cmd -m venv venv
+  source venv/bin/activate
 }
 
 alias de=deactivate
+
+python() {
+  "$(whence -p python || whence -p "$DEFAULT_PYTHON")" "$@"
+}
 
 # TODO: implement automated venv activation on cd
 #cd_venv_handler() {
