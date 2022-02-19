@@ -1,6 +1,6 @@
 [[ "$DEBUG" == "1" ]] && echo Configuring Python helpers
 
-DEFAULT_PYTHON=python3.9
+DEFAULT_PYTHON=python3.10
 
 # recurse up the directory tree to find a virtualenv directory
 find_venv() {
