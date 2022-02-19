@@ -28,11 +28,11 @@
     // cycle recent editors
     {
         "key": "alt+left",
-        "command": "workbench.action.previousEditor"
+        "command": "workbench.action.previousEditor && !terminalFocus"
     },
     {
         "key": "alt+right",
-        "command": "workbench.action.nextEditor"
+        "command": "workbench.action.nextEditor && !terminalFocus"
     },
     // navigate between tabs with , and .
     {
@@ -58,11 +58,13 @@
     },
     {
         "key": "alt+j",
-        "command": "workbench.action.focusBelowGroup"
+        "command": "workbench.action.focusBelowGroup",
+        "when": "!terminalFocus"
     },
     {
         "key": "alt+k",
-        "command": "workbench.action.focusAboveGroup"
+        "command": "workbench.action.focusAboveGroup",
+        "when": "!terminalFocus"
     },
     // emacs style bindings
     {
@@ -132,6 +134,16 @@
         "when": "inputFocus"
     },
     {
+        "key": "ctrl+shift+d",
+        "command": "bookmarks.toggle",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "alt+enter",
+        "command": "editor.emmet.action.expandAbbreviation",
+        "when": "editorTextFocus && !editorReadonly && !editorTabMovesFocus"
+    },
+    {
         "key": "alt+e",
         "command": "workbench.action.focusActiveEditorGroup",
         "when": "!inputFocus"
@@ -164,7 +176,6 @@
     },
     {
         "key": "alt+n",
-        //"command": "workbench.action.files.newUntitledFile"
         "command": "newFile.createNewFile"
     },
     {
@@ -215,31 +226,51 @@
         "key": "ctrl+e",
         "command": "-workbench.action.quickOpen"
     },
-    {
-        "key": "alt+enter",
-        "command": "editor.emmet.action.expandAbbreviation",
-        "when": "editorTextFocus && !editorReadonly && !editorTabMovesFocus"
-    },
+
+    // navigate left and right when terminal is at bottom
     {
         "key": "alt+l",
         "command": "workbench.action.terminal.focusNextPane",
-        "when": "terminalFocus"
+        "when": "terminalFocus && panelPosition == 'bottom'"
     },
     {
-        "key": "alt+down",
-        "command": "-workbench.action.terminal.focusNextPane",
-        "when": "terminalFocus"
+        "key": "alt+right",
+        "command": "workbench.action.terminal.focusNextPane",
+        "when": "terminalFocus && panelPosition == 'bottom'"
     },
     {
         "key": "alt+h",
         "command": "workbench.action.terminal.focusPreviousPane",
-        "when": "terminalFocus"
+        "when": "terminalFocus && panelPosition == 'bottom'"
+    },
+    {
+        "key": "alt+left",
+        "command": "workbench.action.terminal.focusPreviousPane",
+        "when": "terminalFocus && panelPosition == 'bottom'"
+    },
+
+    // navigate up and down when terminal is at the side
+    {
+        "key": "alt+j",
+        "command": "workbench.action.terminal.focusNextPane",
+        "when": "terminalFocus && panelPosition != 'bottom'"
+    },
+    {
+        "key": "alt+down",
+        "command": "workbench.action.terminal.focusNextPane",
+        "when": "terminalFocus && panelPosition != 'bottom'"
+    },
+    {
+        "key": "alt+k",
+        "command": "workbench.action.terminal.focusPreviousPane",
+        "when": "terminalFocus && panelPosition != 'bottom'"
     },
     {
         "key": "alt+up",
-        "command": "-workbench.action.terminal.focusPreviousPane",
-        "when": "terminalFocus"
+        "command": "workbench.action.terminal.focusPreviousPane",
+        "when": "terminalFocus && panelPosition != 'bottom'"
     },
+
     {
         "key": "ctrl+shift+t",
         "command": "workbench.action.terminal.new"

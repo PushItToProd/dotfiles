@@ -96,6 +96,9 @@
         {"before": ["<C-v>"],  "commands": ["editor.action.clipboardPasteAction"]}
     ],
     "vim.normalModeKeyBindings": [
+        {"before": ["j"], "after": ["g", "j"]},
+        {"before": ["k"], "after": ["g", "k"]},
+
         // file navigation
         {"before": ["H"], "commands": ["cursorHome"]},
         {"before": ["L"], "commands": ["cursorEnd"]},
