@@ -166,6 +166,7 @@
         "editor.semanticHighlighting.enabled": true,
         "editor.tabSize": 2,
         "files.trimTrailingWhitespace": false,
+        "editor.rulers": []
     },
     "markdown.preview.fontSize": 18,
     "[shellscript]": {
@@ -296,5 +297,5 @@
     },
     "editor.suggestSelection": "first",
     "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
-    "window.zoomLevel": -1
+    "python.experiments.enabled": false
 }
