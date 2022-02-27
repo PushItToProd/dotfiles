@@ -47,11 +47,6 @@ venv() {
     ^[0-9]) cmd="python$cmd" ;;
   esac
 
-  # if [[ "$cmd" =~ ^[Yy] ]] || [[ "$cmd" == "" ]] || [[ "$cmd" == -y ]]; then
-  #   cmd="python3.9"
-  # elif [[ "$cmd" =~ ^[0-9] ]]; then
-  #   cmd="python$cmd"
-  # fi
   [[ -x "$cmd" ]] || command -v "$cmd" &>/dev/null || {
     echo "Not found: $cmd"
     return 1
