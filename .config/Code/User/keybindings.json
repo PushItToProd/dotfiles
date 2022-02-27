@@ -465,4 +465,14 @@
         "command": "workbench.action.nextEditorInGroup",
         "when": "!terminalFocus"
     },
+    {
+        "key": "f3",
+        "command": "bookmarks.toggle",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "f3",
+        "command": "-editor.action.nextMatchFindAction",
+        "when": "editorFocus"
+    },
 ]
