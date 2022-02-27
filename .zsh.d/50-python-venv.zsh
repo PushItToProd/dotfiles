@@ -64,10 +64,6 @@ venv() {
 
 alias de=deactivate
 
-python() {
-  "$(whence -p python || whence -p "$DEFAULT_PYTHON")" "$@"
-}
-
 # TODO: implement automated venv activation on cd
 #cd_venv_handler() {
 #
