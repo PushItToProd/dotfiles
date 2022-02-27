@@ -110,12 +110,6 @@
         {"before": ["<leader>", "2"], "after": ["y", "y", "p", "V", "r", "-"]},
         {"before": ["<leader>", "3"], "after": ["0", "i", "#", "#", "#", " ", "<Esc>", "$"]},
 
-        // navigating between editors/tabs
-        {"before": ["<leader>", "h"], "commands": ["workbench.action.previousEditor"]},
-        {"before": ["<leader>", ","], "commands": ["workbench.action.previousEditor"]},
-        {"before": ["<leader>", "l"], "commands": ["workbench.action.nextEditor"]},
-        {"before": ["<leader>", "."], "commands": ["workbench.action.nextEditor"]},
-
         // saving and closing
         {"before": ["<C-w>"], "commands": ["workbench.action.closeActiveEditor"]},
         {"before": ["<leader>", "w"], "commands": ["workbench.action.files.save"]},
