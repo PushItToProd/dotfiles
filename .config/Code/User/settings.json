@@ -193,7 +193,7 @@
     "[jinja-html]": {
         "editor.tabSize": 2
     },
-    "workbench.colorTheme": "Oldschool Theme (QBasic)",
+    "workbench.colorTheme": "Tomorrow Night Blue",
     "[verilog]": {
         "editor.tabSize": 2
     },
