@@ -36,12 +36,14 @@ def move_to(i3: i3ipc.Connection, workspace: int):
     i3.command(f"move container to workspace number {workspace}")
 
 
-def get_target_workspace(focused, open_workspaces, targets):
+def get_target_workspace(focused, visible, open_workspaces, targets):
     """
     Find the workspace to switch to.
 
-    - If the current workspace is a target, go to the next target.
-    - If the current workspace isn't a target, go to the first open target.
+    - If the focused workspace is a target, go to the next target.
+    - If a visible non-focused workspace is a target, focus that workspace.
+    - Otherwise, go to the first open target.
+    - If no targets are open, go to the first target.
 
     :param focused: The number of the open workspace.
     :param open_workspaces: The numbers of open workspaces.
