@@ -40,8 +40,11 @@
 
 scratch/
 
+# Jetbrains stuff
 bin/goland
 bin/idea
 bin/pycharm
 bin/clion
 bin/rubymine
+bin/datagrip
+bin/dataspell
