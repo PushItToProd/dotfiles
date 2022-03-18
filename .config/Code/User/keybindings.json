@@ -485,4 +485,14 @@
         "command": "-markdown.extension.editing.toggleHeadingUp",
         "when": "editorTextFocus && !editorReadonly && editorLangId == 'markdown'"
     },
+    {
+        "key": "ctrl+`",
+        "command": "markdown.extension.editing.toggleCodeSpan",
+        "when": "editorTextFocus && !editorReadonly && editorLangId == 'markdown'"
+    },
+    {
+        "key": "ctrl+shift+`",
+        "command": "markdown.extension.editing.toggleCodeBlock",
+        "when": "editorTextFocus && !editorReadonly && editorLangId == 'markdown'"
+    },
 ]
