@@ -77,7 +77,7 @@
     },
     {
         "key": "alt+x",
-        "command": "workbench.action.showCommands",
+        "command": "workbench.action.showCommands"
     },
     {
         "key": "ctrl+x b",
@@ -334,7 +334,8 @@
     },
     {
         "key": "alt+d",
-        "command": "editor.action.revealDeclaration"
+        "command": "editor.action.revealDeclaration",
+        "when": "!(resourceDirname =~ /foam/"
     },
     {
         "key": "shift+alt+l",
@@ -495,4 +496,28 @@
         "command": "markdown.extension.editing.toggleCodeBlock",
         "when": "editorTextFocus && !editorReadonly && editorLangId == 'markdown'"
     },
+    {
+        "key": "alt+d",
+        "command": "foam-vscode.open-daily-note",
+        "when": "resourceDirname =~ /foam/"
+    },
+    {
+        "key": "alt+d",
+        "command": "-foam-vscode.open-daily-note"
+    },
+    {
+        "key": "shift+enter",
+        "command": "-python.execSelectionInTerminal",
+        "when": "editorTextFocus && !findInputFocussed && !jupyter.ownsSelection && !notebookEditorFocused && !replaceInputFocussed && editorLangId == 'python'"
+    },
+    {
+        "key": "shift+enter",
+        "command": "testing.runAtCursor",
+        "when": "editorTextFocus && !notebookCellListFocused"
+    },
+    {
+        "key": "ctrl+shift+enter",
+        "command": "testing.runAll",
+        "when": "!notebookCellListFocused"
+    }
 ]

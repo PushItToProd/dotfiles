@@ -40,5 +40,12 @@
         "    main()",
         ""
       ]
+  },
+  "Exception": {
+      "prefix": "/exception",
+      "body": [
+          "class ${1:MyException}(BaseException):",
+          "    pass$0"
+      ]
   }
 }
