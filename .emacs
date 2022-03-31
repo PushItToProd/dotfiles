@@ -1,9 +1,9 @@
 ; Package installation
 (require 'package)
 (add-to-list 'package-archives
-             '("melpa-stable" . "http://stable.melpa.org/packages/"))
+             '("melpa-stable" . "https://stable.melpa.org/packages/"))
 (add-to-list 'package-archives
-             '("melpa" . "http://melpa.org/packages/") t)
+             '("melpa" . "https://melpa.org/packages/") t)
 (package-initialize)
 
 ; Ensure we only package-refresh-contents once
@@ -24,6 +24,11 @@
 (my-package-install 'spacemacs-theme)
 (my-package-install 'ledger-mode)
 (my-package-install 'markdown-mode)
+(my-package-install 'ivy)
+(my-package-install 'ivy-rich)
+(my-package-install 'all-the-icons-ivy-rich)
+(my-package-install 'ivy-posframe)
+(my-package-install 'counsel)
 
 (add-to-list 'load-path "~/.emacs.d/lib")
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
@@ -133,7 +138,7 @@
  '(org-export-backends (quote (ascii html icalendar latex md)))
  '(package-selected-packages
    (quote
-    (pyvenv cobol-mode org-journal json-mode ob-go htmlize haskell-mode monokai-theme spacemacs-theme zenburn-theme rust-mode terraform-mode go-mode ansible markdown-mode ledger-mode tide evil)))
+    (counsel ivy-clojuredocs ivy-posframe ivy pyvenv cobol-mode org-journal json-mode ob-go htmlize haskell-mode monokai-theme spacemacs-theme zenburn-theme rust-mode terraform-mode go-mode ansible markdown-mode ledger-mode tide evil)))
  '(scroll-conservatively 10000)
  '(show-paren-mode t))
 (custom-set-faces
@@ -217,9 +222,63 @@
 ;; (setq org-html-htmlize-font-prefix "") ;; default
 (setq org-html-htmlize-font-prefix "org-")
 
+;; override the structure template to insert lowercase delimters
+;; https://orgmode.org/manual/Structure-Templates.html
+;; https://emacs.stackexchange.com/a/12847
+;; the '?' denotes where the cursor should be after template insertion
+(add-to-list 'org-structure-template-alist
+             '("s" "#+begin_src ?\n#+end_src"))
+(add-to-list 'org-structure-template-alist
+             '("sh" "#+begin_src sh\n?\n#+end_src" ""))
+
 
 ;;; org-journal ;;;
 
 (setq org-journal-dir "~/org/journal/")
 (setq org-journal-date-format "%A, %Y-%m-%d")
 (require 'org-journal)
+
+;; ivy and counsel
+(ivy-mode 1)
+(global-set-key (kbd "C-s") 'swiper-isearch)
+(global-set-key (kbd "M-x") 'counsel-M-x)
+(global-set-key (kbd "C-x C-f") 'counsel-find-file)
+(global-set-key (kbd "M-y") 'counsel-yank-pop)
+(global-set-key (kbd "<f1> f") 'counsel-describe-function)
+(global-set-key (kbd "<f1> v") 'counsel-describe-variable)
+(global-set-key (kbd "<f1> l") 'counsel-find-library)
+(global-set-key (kbd "<f2> i") 'counsel-info-lookup-symbol)
+(global-set-key (kbd "<f2> u") 'counsel-unicode-char)
+(global-set-key (kbd "<f2> j") 'counsel-set-variable)
+(global-set-key (kbd "C-x b") 'ivy-switch-buffer)
+(global-set-key (kbd "C-c v") 'ivy-push-view)
+(global-set-key (kbd "C-c V") 'ivy-pop-view)
+
+(require 'ivy-rich)
+(all-the-icons-ivy-rich-mode 1)
+(ivy-rich-mode 1)
+(setcdr (assq t ivy-format-functions-alist) #'ivy-format-function-line)
+(setq ivy-rich-path-style 'abbrev)
+
+
+(require 'ivy-posframe)
+;; display at `ivy-posframe-style'
+(setq ivy-posframe-display-functions-alist '((t . ivy-posframe-display)))
+;; (setq ivy-posframe-display-functions-alist '((t . ivy-posframe-display-at-frame-center)))
+;; (setq ivy-posframe-display-functions-alist '((t . ivy-posframe-display-at-window-center)))
+;; (setq ivy-posframe-display-functions-alist '((t . ivy-posframe-display-at-frame-bottom-left)))
+;; (setq ivy-posframe-display-functions-alist '((t . ivy-posframe-display-at-window-bottom-left)))
+;; (setq ivy-posframe-display-functions-alist '((t . ivy-posframe-display-at-frame-top-center)))
+(ivy-posframe-mode 1)
+(defun posframe-poshandler-window-top-center-offset (info)
+  "Posframe's position handler.
+
+Get a position which let posframe stay onto current window's
+top center.  The structure of INFO can be found in docstring of
+`posframe-show'."
+  (let* ((window-left (plist-get info :parent-window-left))
+         (window-top (plist-get info :parent-window-top))
+         (window-width (plist-get info :parent-window-width))
+         (posframe-width (plist-get info :posframe-width)))
+    (cons (+ window-left (/ (- window-width posframe-width) 2))
+          (+ window-top 48))))
