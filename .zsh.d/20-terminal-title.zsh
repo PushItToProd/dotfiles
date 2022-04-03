@@ -13,12 +13,21 @@ set_term_title_to_pwd() {
   [[ -t 1 ]] || return
   set_term_title "$(print -P %~)"
 }
-set_term_title_to_pwd  # run immediately when we're initializing
+
+# Set the terminal title right away.
+set_term_title_to_pwd
+
+# Update the terminal title on cd.
 chpwd_functions+=(set_term_title_to_pwd)
 
 set_term_title_to_cmd() {
   set_term_title "$1"
 }
+
+# Change the title to the running command so long-running commands like man are
+# easier to identify.
 preexec_functions+=(set_term_title_to_cmd)
 
+# Set the title back to pwd when the prompt is displayed. This resets the title
+# after a long-running command terminates.
 precmd_functions+=(set_term_title_to_pwd)
