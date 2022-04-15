@@ -519,5 +519,10 @@
         "key": "ctrl+shift+enter",
         "command": "testing.runAll",
         "when": "!notebookCellListFocused"
+    },
+    {
+        "key": "alt+enter",
+        "command": "editor.action.quickFix",
+        "when": "editorHasCodeActionsProvider && editorTextFocus && !editorReadonly"
     }
 ]
