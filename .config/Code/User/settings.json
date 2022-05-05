@@ -37,6 +37,7 @@
         "**/.hg": true,
         "**/CVS": true,
         "**/.DS_Store": true,
+        "**/Thumbs.db": true,
         "**/.terraform": true,
         "**/*.tfstate": true,
         "**/*.tfstate*": true,
