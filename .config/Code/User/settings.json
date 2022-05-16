@@ -170,7 +170,7 @@
     "[terraform]": {
         "editor.insertSpaces": true,
         "editor.tabSize": 2,
-        "editor.autoIndent": true
+        "editor.autoIndent": "full"
     },
     "[yaml]": {
         "editor.tabSize": 2
@@ -231,6 +231,7 @@
         "editor.detectIndentation": false,
         "editor.useTabStops": false,
         "editor.wordSeparators": "`~!@$%^&*()=+[{]}\\|;:'\",.<>/?",
+        "editor.guides.indentation": false,
     },
     "coboleditor.tabstops": [],
     "coboleditor.enable_tabstop": false,
