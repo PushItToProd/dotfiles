@@ -207,6 +207,7 @@
    (java . t)
    (js . t)
    (ruby . t)
+   (awk . t)
    ))
 ;; Use python3 in babel
 (setq org-babel-python-command "python3")
