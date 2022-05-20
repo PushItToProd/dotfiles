@@ -188,7 +188,7 @@
 
 ; This doesn't actually do anything afaict.  TODO: figure out how to
 ; make org mode open Firefox instead of Chromium.
-(setq browser-url-browser-function 'browse-url-firefox)
+; (setq browser-url-browser-function 'browse-url-firefox)
 
 ;;; org babel ;;;
 (require 'ob-js)
