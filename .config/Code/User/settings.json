@@ -201,7 +201,6 @@
     "[jinja-html]": {
         "editor.tabSize": 2
     },
-    "workbench.colorTheme": "Tomorrow Night Blue",
     "[verilog]": {
         "editor.tabSize": 2
     },
@@ -223,7 +222,7 @@
             "document"
         ]
     },
-    // "python.languageServer": "Jedi",
+    "python.languageServer": "Jedi",
     "[COBOL]": {
         // "editor.semanticHighlighting.enabled": false,
         "editor.tabSize": 2,
@@ -302,5 +301,6 @@
     "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
     "python.experiments.enabled": false,
     "notebook.output.textLineLimit": 40,
-    "testing.openTesting": "openOnTestFailure"
+    "testing.openTesting": "openOnTestFailure",
+    "workbench.colorTheme": "Tomorrow Night Blue"
 }
