@@ -84,10 +84,6 @@
         "command": "workbench.action.quickOpen"
     },
     {
-        "key": "ctrl+x ctrl+f",
-        "command": "extension.advancedNewFile"
-    },
-    {
         "key": "ctrl+x ctrl+s",
         "command": "workbench.action.files.save"
     },
