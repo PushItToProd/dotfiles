@@ -251,16 +251,16 @@ bindsym $mod+minus exec i3-toggle 100 105
 bindsym $mod+0 exec i3-toggle 0 1 2 3
 
 ## Navigate // Next Workspace // <><Ctrl> L ##
-bindsym $mod+Control+l workspace next
+bindsym $mod+Control+l workspace next_on_output
 
 ## Navigate // Next Workspace // <><Ctrl> → ##
-bindsym $mod+Control+Right workspace next
+bindsym $mod+Control+Right workspace next_on_output
 
 ## Navigate // Previous Workspace // <><Ctrl> H ##
-bindsym $mod+Control+h workspace prev
+bindsym $mod+Control+h workspace prev_on_output
 
 ## Navigate // Previous Workspace // <><Ctrl> ← ##
-bindsym $mod+Control+Left workspace prev
+bindsym $mod+Control+Left workspace prev_on_output
 
 ## Navigate // Focus Parent // <> a ##
 bindsym $mod+a focus parent
