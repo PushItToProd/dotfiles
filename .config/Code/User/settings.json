@@ -305,5 +305,5 @@
     "python.experiments.enabled": false,
     "notebook.output.textLineLimit": 40,
     "testing.openTesting": "openOnTestFailure",
-    "workbench.colorTheme": "Tomorrow Night Blue"
+    "workbench.colorTheme": "Bearded Theme Monokai Stone"
 }
