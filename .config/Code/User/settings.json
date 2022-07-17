@@ -150,9 +150,12 @@
         "editor.tabSize": 2
     },
     "[go]": {
-        "editor.rulers": []
+        "editor.rulers": [120]
     },
     "go.autocompleteUnimportedPackages": true,
+    "gopls": {
+        "ui.semanticTokens": true
+    },
     "[html]": {
         "editor.tabSize": 2,
         "editor.defaultFormatter": "vscode.html-language-features"
