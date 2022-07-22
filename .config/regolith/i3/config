@@ -500,48 +500,9 @@ for_window [class="Gui.pyc"] floating enable  # Lucas Chess
 # Window Resize and Gaps
 ###############################################################################
 
-## Windows // Enter Resize Mode // <Super> r ##
-mode "Resize Mode" {
-        # These bindings trigger as soon as you enter the resize mode
-
-        ## Windows // Resize Window // ↑ ↓ ← → ##
-        bindsym Left resize shrink width 6 px or 6 ppt
-        bindsym Down resize grow height 6 px or 6 ppt
-        bindsym Up resize shrink height 6 px or 6 ppt
-        bindsym Right resize grow width 6 px or 6 ppt
-
-        bindsym Shift+Left resize shrink width 12 px or 12 ppt
-        bindsym Shift+Down resize grow height 12 px or 12 ppt
-        bindsym Shift+Up resize shrink height 12 px or 12 ppt
-        bindsym Shift+Right resize grow width 12 px or 12 ppt
-
-        ## Windows // Resize Window // k j h l ##
-        bindsym h resize shrink width 6 px or 6 ppt
-        bindsym k resize grow height 6 px or 6 ppt
-        bindsym j resize shrink height 6 px or 6 ppt
-        bindsym l resize grow width 6 px or 6 ppt
-
-        bindsym Shift+h resize shrink width 12 px or 12 ppt
-        bindsym Shift+k resize grow height 12 px or 12 ppt
-        bindsym Shift+j resize shrink height 12 px or 12 ppt
-        bindsym Shift+l resize grow width 12 px or 12 ppt
-
-        ## Windows // Window Gaps // + - ##
-        bindsym minus gaps inner current minus 6
-        bindsym plus gaps inner current plus 6
-        bindsym Shift+minus gaps inner current minus 12
-        bindsym Shift+plus gaps inner current plus 12
-
-        ## Windows // Exit Resize Mode // Escape or Enter ##
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
-        bindsym $mod+r mode "default"
-}
-bindsym $mod+r mode "Resize Mode"
-
-## Windows // Enter Move Mode // <Super> x ##
+## Windows // Enter Move/Resize Mode // <Super> r ##
 # move focused window within workspace
-set $mode_move (hjkl/←↓↑→) move window
+set $mode_move (hjkl/←↓↑→) move window, (alt+(shift+)hjkl/←↓↑→) resize window
 mode "$mode_move" {
     # regular directional keys
     bindsym $left move left
@@ -555,11 +516,33 @@ mode "$mode_move" {
     bindsym Up move up
     bindsym Right move right
 
+    # Resize bindings
+    bindsym $alt+Left resize shrink width 6 px or 6 ppt
+    bindsym $alt+Down resize grow height 6 px or 6 ppt
+    bindsym $alt+Up resize shrink height 6 px or 6 ppt
+    bindsym $alt+Right resize grow width 6 px or 6 ppt
+
+    bindsym $alt+Shift+Left resize shrink width 12 px or 12 ppt
+    bindsym $alt+Shift+Down resize grow height 12 px or 12 ppt
+    bindsym $alt+Shift+Up resize shrink height 12 px or 12 ppt
+    bindsym $alt+Shift+Right resize grow width 12 px or 12 ppt
+
+    ## Windows // Resize Window // k j h l ##
+    bindsym $alt+$left resize shrink width 6 px or 6 ppt
+    bindsym $alt+$down resize grow height 6 px or 6 ppt
+    bindsym $alt+$up resize shrink height 6 px or 6 ppt
+    bindsym $alt+$right resize grow width 6 px or 6 ppt
+
+    bindsym $alt+Shift+$left resize shrink width 12 px or 12 ppt
+    bindsym $alt+Shift+$down resize grow height 12 px or 12 ppt
+    bindsym $alt+Shift+$up resize shrink height 12 px or 12 ppt
+    bindsym $alt+Shift+$right resize grow width 12 px or 12 ppt
+
     bindsym Return mode "default"
     bindsym Escape mode "default"
-    bindsym $mod+x mode "default"
+    bindsym $mod+r mode "default"
 }
-bindsym $mod+x mode "$mode_move"
+bindsym $mod+r mode "$mode_move"
 
 ###############################################################################
 # i3 Appearance and Behavior
