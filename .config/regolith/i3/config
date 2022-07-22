@@ -541,7 +541,8 @@ bindsym $mod+r mode "Resize Mode"
 
 ## Windows // Enter Move Mode // <> x ##
 # move focused window within workspace
-mode "move" {
+set $mode_move (hjkl/←↓↑→) move window
+mode "$mode_move" {
     # regular directional keys
     bindsym $left move left
     bindsym $down move down
@@ -558,7 +559,7 @@ mode "move" {
     bindsym Escape mode "default"
     bindsym $mod+x mode "default"
 }
-bindsym $mod+x mode "move"
+bindsym $mod+x mode "$mode_move"
 
 ###############################################################################
 # i3 Appearance and Behavior
