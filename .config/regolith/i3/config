@@ -132,7 +132,7 @@ set_from_resource $ws19 i3-wm.workspace.19.name "19"
 
 set_from_resource $i3-wm.program.files i3-wm.program.files /usr/bin/nautilus --new-window
 
-## Launch // Launch mode // <> / ##
+## Launch // Launch mode // <Super> / ##
 bindsym $mod+slash mode "$mode_launch"
 set $mode_launch (c)ode, (d)iscord, (e)macs, (f)iles, (h)ledger, (m)onitor, (n)vtop, (p)omodoro, t(r)ilium, (s)potify, (t)ext editor | (j)p mode, (w)eb mode
 mode "$mode_launch" {
@@ -172,10 +172,10 @@ mode "$mode_launch_jp" {
      bindsym Escape mode "default"
 }
 
-## Launch // Terminal // <> Enter ##
+## Launch // Terminal // <Super> Enter ##
 bindsym $mod+Return exec /usr/bin/x-terminal-emulator
 
-## Launch // Web Mode // <> W ##
+## Launch // Web Mode // <Super> W ##
 bindsym $mod+w mode "$mode_launch_web"
 set $mode_launch_web new (w)indow | (n)otion, (t)odoist, (l)ast.fm, (r)eddit.com, (d)s note, (a)sahi
 mode "$mode_launch_web" {
@@ -195,49 +195,49 @@ mode "$mode_launch_web" {
 
 set_from_resource $rofiTheme rofi.theme /etc/regolith/styles/lascaille/rofi.rasi
 
-## Launch // Application // <> Space ##
+## Launch // Application // <Super> Space ##
 set_from_resource $i3-wm.program.launcher.app i3-wm.program.launcher.app rofi -show drun -theme $rofiTheme
 bindsym $mod+space exec $i3-wm.program.launcher.app
 
-## Launch // Command // <><Shift> Space ##
+## Launch // Command // <Super><Shift> Space ##
 set_from_resource $i3-wm.program.launcher.cmd i3-wm.program.launcher.cmd rofi -show run -theme $rofiTheme
 bindsym $mod+Shift+space exec $i3-wm.program.launcher.cmd
 
-## Navigate // Window by Name // <> ` ##
+## Navigate // Window by Name // <Super> ` ##
 set_from_resource $i3-wm.program.launcher.window i3-wm.program.launcher.window rofi -show window -theme $rofiTheme
 bindsym $mod+grave exec $i3-wm.program.launcher.window
 
-## Launch // This Dialog // <><Shift> ? ##
+## Launch // This Dialog // <Super><Shift> ? ##
 set_from_resource $i3-wm.program.help i3-wm.program.help /usr/bin/remontoire-toggle
 bindsym $mod+Shift+question exec --no-startup-id $i3-wm.program.help
 
-## Launch // File Search // <><Alt> Space ##
+## Launch // File Search // <Super><Alt> Space ##
 set_from_resource $i3-wm.program.file_search i3-wm.program.file_search rofi -show find -modi find:/usr/share/rofi/modi/finder.sh
 bindsym $mod+$alt+space exec $i3-wm.program.file_search
 
-## Launch // Emoji Picker // <> Z ##
+## Launch // Emoji Picker // <Super> Z ##
 bindsym $mod+z exec --no-startup-id rofimoji
 
-## Launch // Unicode Picker // <> U ##
+## Launch // Unicode Picker // <Super> U ##
 bindsym $mod+u exec --no-startup-id rofi -show unicode -modi "unicode:~/bin/_rofi-select-unicode"
 
 ###############################################################################
 # Window and Workspace Navigation
 ###############################################################################
 
-## Navigate // Relative Window // <> ↑ ↓ ← → ##
+## Navigate // Relative Window // <Super> ↑ ↓ ← → ##
 bindsym $mod+Left focus left
 bindsym $mod+Down focus down
 bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
-## Navigate // Relative Window // <> k j h l ##
+## Navigate // Relative Window // <Super> k j h l ##
 bindsym $mod+h focus left
 bindsym $mod+j focus down
 bindsym $mod+k focus up
 bindsym $mod+l focus right
 
-## Navigate // Toggle Workspaces 0-95 // <> 0..9 ##
+## Navigate // Toggle Workspaces 0-95 // <Super> 0..9 ##
 bindsym $mod+1 exec i3-toggle 10 15
 bindsym $mod+2 exec i3-toggle 20 25
 bindsym $mod+3 exec i3-toggle 30 35
@@ -250,34 +250,34 @@ bindsym $mod+9 exec i3-toggle 90 95
 bindsym $mod+minus exec i3-toggle 100 105
 bindsym $mod+0 exec i3-toggle 0 1 2 3
 
-## Navigate // Next Workspace // <><Ctrl> L ##
+## Navigate // Next Workspace // <Super><Ctrl> L ##
 bindsym $mod+Control+l workspace next_on_output
 
-## Navigate // Next Workspace // <><Ctrl> → ##
+## Navigate // Next Workspace // <Super><Ctrl> → ##
 bindsym $mod+Control+Right workspace next_on_output
 
-## Navigate // Previous Workspace // <><Ctrl> H ##
+## Navigate // Previous Workspace // <Super><Ctrl> H ##
 bindsym $mod+Control+h workspace prev_on_output
 
-## Navigate // Previous Workspace // <><Ctrl> ← ##
+## Navigate // Previous Workspace // <Super><Ctrl> ← ##
 bindsym $mod+Control+Left workspace prev_on_output
 
-## Navigate // Focus Parent // <> a ##
+## Navigate // Focus Parent // <Super> a ##
 bindsym $mod+a focus parent
 
-## Navigate // Focus Child // <> s ##
+## Navigate // Focus Child // <Super> s ##
 bindsym $mod+s focus child
 
-## Navigate // Go to workspace number // <> g ##
+## Navigate // Go to workspace number // <Super> g ##
 bindsym $mod+g exec i3-input -F 'workspace number "%s"' -P 'Go to workspace: '
 
-## Navigate // Mark // <> m ##
+## Navigate // Mark // <Super> m ##
 bindsym $mod+m exec i3-input -F 'mark %s' -l 1 -P 'Mark: '
 
-## Navigate // Go to Mark // <> ' ##
+## Navigate // Go to Mark // <Super> ' ##
 bindsym $mod+apostrophe exec i3-input -F '[con_mark="%s"] focus' -l 1 -P 'Goto: '
 
-## Navigate // List Marks // <><Shift> ' ##
+## Navigate // List Marks // <Super><Shift> ' ##
 bindsym $mod+shift+apostrophe exec ~/.config/i3/scripts/select_a_mark.sh
 
 
@@ -285,28 +285,28 @@ bindsym $mod+shift+apostrophe exec ~/.config/i3/scripts/select_a_mark.sh
 # Window and Workspace Configuration
 ###############################################################################
 
-## Modify // Rename workspace // <><Shift> g ##
+## Modify // Rename workspace // <Super><Shift> g ##
 bindsym $mod+Shift+g exec rofi -markup -e '<span foreground="red" size="large">Use mod+shift+n to rename workspaces now!</span>'
 
-## Modify // Renumber workspace // <><Shift> n ##
+## Modify // Renumber workspace // <Super><Shift> n ##
 bindsym $mod+Shift+n exec i3-input -F 'exec ~/.config/i3/scripts/i3-rename --smart "%s"' -P 'New name/number: '
 
-## Modify // Rename window/container // <> t ##
+## Modify // Rename window/container // <Super> t ##
 bindsym $mod+t exec i3-input -F 'title_format %s' -P 'Rename window/container: '
 
-## Modify // Window Position // <><Alt> ↑ ↓ ← → ##
+## Modify // Window Position // <Super><Alt> ↑ ↓ ← → ##
 bindsym $move+Left move left
 bindsym $move+Down move down
 bindsym $move+Up move up
 bindsym $move+Right move right
 
-## Modify // Window Position // <><Alt> k j h l ##
+## Modify // Window Position // <Super><Alt> k j h l ##
 bindsym $move+h move left
 bindsym $move+j move down
 bindsym $move+k move up
 bindsym $move+l move right
 
-## Modify // Move Workspace to Display // <><Ctrl><Shift> ↑ ↓ ← → ##
+## Modify // Move Workspace to Display // <Super><Ctrl><Shift> ↑ ↓ ← → ##
 bindsym $movespace+Left move workspace to output left
 bindsym $movespace+Down move workspace to output down
 bindsym $movespace+Up move workspace to output up
@@ -316,26 +316,26 @@ bindsym $movespace+j move workspace to output down
 bindsym $movespace+k move workspace to output up
 bindsym $movespace+l move workspace to output right
 
-## Modify // Window Fullscreen Toggle // <> F11 ##
+## Modify // Window Fullscreen Toggle // <Super> F11 ##
 bindsym $mod+F11 fullscreen toggle
 
-## Modify // Window Floating Toggle // <><Shift> f ##
+## Modify // Window Floating Toggle // <Super><Shift> f ##
 bindsym $mod+Shift+f floating toggle
 
-## Modify // Window Floating Toggle // <><Shift> right click ##
+## Modify // Window Floating Toggle // <Super><Shift> right click ##
 bindsym --whole-window $mod+Shift+button3 floating toggle
 
-## Modify // Tile/Float Focus Toggle // <> f ##
+## Modify // Tile/Float Focus Toggle // <Super> f ##
 bindsym $mod+f focus mode_toggle
 
 
-## Modify // Cycle Window Layout Mode // <> Tab ##
+## Modify // Cycle Window Layout Mode // <Super> Tab ##
 bindsym $mod+Tab layout toggle splith tabbed stacking splitv
-## Modify // Cycle Window Layout Mode (prev) // <><Shift> Tab ##
+## Modify // Cycle Window Layout Mode (prev) // <Super><Shift> Tab ##
 bindsym $mod+Shift+Tab layout toggle splith splitv stacking tabbed
 
 # move focused container to workspace, move to workspace
-## Modify // Move Window to Workspace // <><Ctrl><Alt> 0..9 ##
+## Modify // Move Window to Workspace // <Super><Ctrl><Alt> 0..9 ##
 bindsym $moveto+1 exec i3-toggle --move 10 15
 bindsym $moveto+2 exec i3-toggle --move 20 25
 bindsym $moveto+3 exec i3-toggle --move 30 35
@@ -347,15 +347,15 @@ bindsym $moveto+8 exec i3-toggle --move 80 85
 bindsym $moveto+9 exec i3-toggle --move 90 95
 bindsym $moveto+0 exec i3-toggle --move 0 1 2 3
 
-## Modify // Move Window to Workspace by Name // <><Ctrl><Alt> G ##
+## Modify // Move Window to Workspace by Name // <Super><Ctrl><Alt> G ##
 # exec commands must be double quoted for the semicolon argument to work
 # see https://www.reddit.com/r/i3wm/comments/cnil9s/i3input_with_multiple_commands/
 bindsym $moveto+g exec "i3-input -F 'move container to workspace \\"%s\\"; workspace \\"%s\\"' -P 'Move to workspace: '"
 
-## Modify // Move Window to Workspace by Number // <><Ctrl><Alt> N ##
+## Modify // Move Window to Workspace by Number // <Super><Ctrl><Alt> N ##
 bindsym $moveto+n exec "i3-input -F 'move container to workspace number \\"%s\\"; workspace number \\"%s\\"' -P 'Move to workspace number: '"
 
-## Modify // Split Container // <> v ##
+## Modify // Split Container // <Super> v ##
 bindsym $mod+v split vertical
 
 # Use Mouse+$mod to drag floating windows to their wanted position
@@ -375,22 +375,22 @@ exec --no-startup-id synology-drive
 exec --no-startup-id blueman-applet
 exec --no-startup-id blueman-manager
 
-## Scratchpad // Show // <> p ##
+## Scratchpad // Show // <Super> p ##
 bindsym $mod+p scratchpad show
 
-## Scratchpad // Move to Scratchpad // <><Shift> ~ ##
+## Scratchpad // Move to Scratchpad // <Super><Shift> ~ ##
 bindsym $mod+Shift+asciitilde move to scratchpad
 
-## Scratchpad // KeePass // <><Shift> 2 ##
+## Scratchpad // KeePass // <Super><Shift> 2 ##
 bindsym $mod+Shift+2 [class="keepassxc"] scratchpad show
 
-## Scratchpad // PulseAudio // <><Shift> 3 ##
+## Scratchpad // PulseAudio // <Super><Shift> 3 ##
 bindsym $mod+Shift+3 [class="Pavucontrol"] scratchpad show
 
-## Scratchpad // Bluetooth Manager // <><Shift> 4 ##
+## Scratchpad // Bluetooth Manager // <Super><Shift> 4 ##
 bindsym $mod+Shift+4 [class="Blueman-manager"] scratchpad show
 
-## Scratchpad // Calculator // <><Shift> 5 ##
+## Scratchpad // Calculator // <Super><Shift> 5 ##
 bindsym $mod+Shift+5 [title="Calculator"] scratchpad show
 
 # Assign quick apps to scratchpad.
@@ -403,24 +403,24 @@ for_window [class="Blueman-manager"] move to scratchpad, resize set 800 600
 # Session Management
 ###############################################################################
 
-## Session // Exit App // <><Shift> q ##
+## Session // Exit App // <Super><Shift> q ##
 bindsym $mod+Shift+q [con_id="__focused__"] kill
 bindsym $mod+q [con_id="__focused__"] kill
 
-## Session // Exit App // <><Shift> button2 ##
+## Session // Exit App // <Super><Shift> button2 ##
 bindsym --whole-window $mod+button2 kill
 
-## Session // Terminate App // <><Alt> q ##
+## Session // Terminate App // <Super><Alt> q ##
 bindsym $mod+$alt+q [con_id="__focused__"] exec --no-startup-id kill -9 $(xdotool getwindowfocus getwindowpid)
 
-## Session // Reload i3 Config // <><Shift> c ##
+## Session // Reload i3 Config // <Super><Shift> c ##
 bindsym $mod+Shift+c reload
 
-## Session // Refresh Session // <><Shift> r ##
+## Session // Refresh Session // <Super><Shift> r ##
 set_from_resource $i3-wm.program.refresh_ui i3-wm.program.refresh_ui /usr/bin/regolith-look refresh
 bindsym $mod+Shift+r exec --no-startup-id $i3-wm.program.refresh_ui
 
-## Session // Restart i3 // <><Ctrl> r ##
+## Session // Restart i3 // <Super><Ctrl> r ##
 bindsym $mod+Ctrl+r restart
 
 set_from_resource $i3-wm.program.logout i3-wm.program.logout /usr/bin/gnome-session-quit --logout
@@ -429,24 +429,24 @@ set_from_resource $i3-wm.program.shutdown i3-wm.program.shutdown /usr/bin/gnome-
 set_from_resource $i3-wm.program.lock i3-wm.program.lock dbus-send --type=method_call --dest=org.gnome.ScreenSaver /org/gnome/ScreenSaver org.gnome.ScreenSaver.Lock
 set_from_resource $i3-wm.program.sleep i3-wm.program.sleep systemctl suspend
 
-## Session // Shutdown options // <><Shift> e, e ##
+## Session // Shutdown options // <Super><Shift> e, e ##
 bindsym $mod+Shift+e mode "$mode_system"
 
 set $mode_system (x)logout, (l)ock, (s)uspend, (h)ibernate, (Shift+r)eboot, (Shift+s)hutdown
 mode "$mode_system" {
-## Session // Logout // <><Shift> e, x ##
+## Session // Logout // <Super><Shift> e, x ##
     bindsym x exec $i3-wm.program.logout, mode "default"
 
-## Session // Lock Screen // <><Shift> e, l ##
+## Session // Lock Screen // <Super><Shift> e, l ##
     bindsym l exec $i3-wm.program.lock, mode "default"
 
-## Session // Sleep // <><Shift> e, s ##
+## Session // Sleep // <Super><Shift> e, s ##
     bindsym s exec $i3-wm.program.sleep, mode "default"
 
-## Session // Reboot // <><Shift> e, <Shift> r ##
+## Session // Reboot // <Super><Shift> e, <Shift> r ##
     bindsym Shift+r exec $i3-wm.program.reboot, mode "default"
 
-## Session // Power Down // <><Shift> e, <Shift> s ##
+## Session // Power Down // <Super><Shift> e, <Shift> s ##
     bindsym Shift+s exec $i3-wm.program.shutdown, mode "default"
 
     # exit system mode: "Enter" or "Escape"
@@ -458,19 +458,19 @@ mode "$mode_system" {
 # System Management
 ###############################################################################
 
-## Launch // Settings // <> c ##
+## Launch // Settings // <Super> c ##
 set_from_resource $i3-wm.program.settings i3-wm.program.settings gnome-control-center
 bindsym $mod+c exec $i3-wm.program.settings
 
-## Launch // Display Settings // <> d ##
+## Launch // Display Settings // <Super> d ##
 set_from_resource $i3-wm.program.display i3-wm.program.display gnome-control-center display
 bindsym $mod+d exec $i3-wm.program.display
 
-## Launch // Bluetooth Settings // <> b ##
+## Launch // Bluetooth Settings // <Super> b ##
 set_from_resource $i3-wm.program.bluetooth i3-wm.program.bluetooth gnome-control-center bluetooth
 bindsym $mod+b exec $i3-wm.program.bluetooth
 
-## Launch // Notification Viewer // <> n ##
+## Launch // Notification Viewer // <Super> n ##
 set_from_resource $i3-wm.program.notification_ui i3-wm.program.notification_ui /usr/bin/rofication-gui
 bindsym $mod+n exec $i3-wm.program.notification_ui
 
@@ -479,13 +479,13 @@ bindsym $mod+n exec $i3-wm.program.notification_ui
 ###############################################################################
 
 # i3-snapshot for load/save current layout
-## Modify // Save Window Layout // <> , ##
+## Modify // Save Window Layout // <Super> , ##
 bindsym $mod+comma  exec /usr/bin/i3-snapshot -o > /tmp/i3-snapshot
-## Modify // Load Window Layout // <> . ##
+## Modify // Load Window Layout // <Super> . ##
 bindsym $mod+period exec /usr/bin/i3-snapshot -c < /tmp/i3-snapshot
 
 # Toggle bar visibility
-## Modify // Toggle Bar // <> i ##
+## Modify // Toggle Bar // <Super> i ##
 bindsym $mod+i bar mode toggle
 
 # Apps that should float
@@ -500,7 +500,7 @@ for_window [class="Gui.pyc"] floating enable  # Lucas Chess
 # Window Resize and Gaps
 ###############################################################################
 
-## Windows // Enter Resize Mode // <> r ##
+## Windows // Enter Resize Mode // <Super> r ##
 mode "Resize Mode" {
         # These bindings trigger as soon as you enter the resize mode
 
@@ -539,7 +539,7 @@ mode "Resize Mode" {
 }
 bindsym $mod+r mode "Resize Mode"
 
-## Windows // Enter Move Mode // <> x ##
+## Windows // Enter Move Mode // <Super> x ##
 # move focused window within workspace
 set $mode_move (hjkl/←↓↑→) move window
 mode "$mode_move" {
