@@ -238,17 +238,17 @@ bindsym $mod+k focus up
 bindsym $mod+l focus right
 
 ## Navigate // Toggle Workspaces 0-95 // <Super> 0..9 ##
-bindsym $mod+1 exec i3-toggle 10 15
-bindsym $mod+2 exec i3-toggle 20 25
-bindsym $mod+3 exec i3-toggle 30 35
-bindsym $mod+4 exec i3-toggle 40 45
-bindsym $mod+5 exec i3-toggle 50 55
-bindsym $mod+6 exec i3-toggle 60 65
-bindsym $mod+7 exec i3-toggle 70 75
-bindsym $mod+8 exec i3-toggle 80 85
-bindsym $mod+9 exec i3-toggle 90 95
-bindsym $mod+minus exec i3-toggle 100 105
-bindsym $mod+0 exec i3-toggle 0 1 2 3
+bindsym $mod+1 exec i3_toggle.py 10 15
+bindsym $mod+2 exec i3_toggle.py 20 25
+bindsym $mod+3 exec i3_toggle.py 30 35
+bindsym $mod+4 exec i3_toggle.py 40 45
+bindsym $mod+5 exec i3_toggle.py 50 55
+bindsym $mod+6 exec i3_toggle.py 60 65
+bindsym $mod+7 exec i3_toggle.py 70 75
+bindsym $mod+8 exec i3_toggle.py 80 85
+bindsym $mod+9 exec i3_toggle.py 90 95
+bindsym $mod+minus exec i3_toggle.py 100 105
+bindsym $mod+0 exec i3_toggle.py 0 1 2 3
 
 ## Navigate // Next Workspace // <Super><Ctrl> L ##
 bindsym $mod+Control+l workspace next_on_output
@@ -336,16 +336,16 @@ bindsym $mod+Shift+Tab layout toggle splith splitv stacking tabbed
 
 # move focused container to workspace, move to workspace
 ## Modify // Move Window to Workspace // <Super><Ctrl><Alt> 0..9 ##
-bindsym $moveto+1 exec i3-toggle --move 10 15
-bindsym $moveto+2 exec i3-toggle --move 20 25
-bindsym $moveto+3 exec i3-toggle --move 30 35
-bindsym $moveto+4 exec i3-toggle --move 40 45
-bindsym $moveto+5 exec i3-toggle --move 50 55
-bindsym $moveto+6 exec i3-toggle --move 60 65
-bindsym $moveto+7 exec i3-toggle --move 70 75
-bindsym $moveto+8 exec i3-toggle --move 80 85
-bindsym $moveto+9 exec i3-toggle --move 90 95
-bindsym $moveto+0 exec i3-toggle --move 0 1 2 3
+bindsym $moveto+1 exec i3_toggle.py --move 10 15
+bindsym $moveto+2 exec i3_toggle.py --move 20 25
+bindsym $moveto+3 exec i3_toggle.py --move 30 35
+bindsym $moveto+4 exec i3_toggle.py --move 40 45
+bindsym $moveto+5 exec i3_toggle.py --move 50 55
+bindsym $moveto+6 exec i3_toggle.py --move 60 65
+bindsym $moveto+7 exec i3_toggle.py --move 70 75
+bindsym $moveto+8 exec i3_toggle.py --move 80 85
+bindsym $moveto+9 exec i3_toggle.py --move 90 95
+bindsym $moveto+0 exec i3_toggle.py --move 0 1 2 3
 
 ## Modify // Move Window to Workspace by Name // <Super><Ctrl><Alt> G ##
 # exec commands must be double quoted for the semicolon argument to work
