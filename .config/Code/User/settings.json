@@ -309,5 +309,6 @@
     "python.experiments.enabled": false,
     "notebook.output.textLineLimit": 40,
     "testing.openTesting": "openOnTestFailure",
-    "workbench.colorTheme": "Bearded Theme Monokai Stone"
+    "workbench.colorTheme": "Bearded Theme Monokai Stone",
+    "editor.lineHeight": 1.2
 }
