@@ -345,6 +345,7 @@ bindsym $moveto+6 exec i3_toggle.py --move 60 65
 bindsym $moveto+7 exec i3_toggle.py --move 70 75
 bindsym $moveto+8 exec i3_toggle.py --move 80 85
 bindsym $moveto+9 exec i3_toggle.py --move 90 95
+bindsym $moveto+minus exec i3_toggle.py --move 100 105
 bindsym $moveto+0 exec i3_toggle.py --move 0 1 2 3
 
 ## Modify // Move Window to Workspace by Name // <Super><Ctrl><Alt> G ##
