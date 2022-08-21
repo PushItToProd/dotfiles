@@ -56,14 +56,8 @@ set_from_resource $alt  i3-wm.alt Mod1
 # Shift navgiate at the level of workspaces/outputs
 # Alt reposition
 
-# focus = change window/container focus within workspace
-set $focus Mod4
-# focus+movespace = focus output
-set $focusoutput Mod4+Shift
 # focus+move = reposition window/container in workspace
 set $move Mod4+Mod1
-# focus+navigate = go to workspace
-set $goto Mod4+Control
 # focus+navigate+movewin = move window to workspace
 set $moveto Mod4+Control+Mod1
 # focus+navigate+movespace = move workspace (to output)
