@@ -57,10 +57,13 @@ set_from_resource $alt  i3-wm.alt Mod1
 # Alt reposition
 
 # focus+move = reposition window/container in workspace
+# Super+Alt
 set $move Mod4+Mod1
 # focus+navigate+movewin = move window to workspace
+# Super+Ctrl+Alt
 set $moveto Mod4+Control+Mod1
 # focus+navigate+movespace = move workspace (to output)
+# Super+Ctrl+Shift
 set $movespace Mod4+Control+Shift
 
 # vim hjkl direction bindings, because switching between vim-style and
