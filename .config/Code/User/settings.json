@@ -319,5 +319,5 @@
     },
     "editor.lineHeight": 1.2,
 
-    "_ignoreMe": ""  // dummy entry so I don't have to deal with trailing commas
+    "_ignoreMe": "" // dummy entry so I don't have to deal with trailing commas
 }
