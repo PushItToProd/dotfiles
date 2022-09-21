@@ -29,7 +29,8 @@
         "**/i3/config": "i3",
         "*.html5": "html",
         "COMMIT_EDITMSG": "git-commit",
-        "*.h": "c"
+        "*.h": "c",
+        "*.jsonp": "javascript"
     },
     "files.exclude": {
         "**/.git": true,
@@ -319,5 +320,6 @@
     },
     "editor.lineHeight": 1.2,
 
+    "jupyter.askForKernelRestart": false,
     "_ignoreMe": "" // dummy entry so I don't have to deal with trailing commas
 }
