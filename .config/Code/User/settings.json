@@ -100,6 +100,8 @@
     "vim.useCtrlKeys": true,
     "vim.hlsearch": true,
     "vim.leader": "<space>",
+    // allow navigating past folded code: https://github.com/Microsoft/vscode/issues/22276
+    "vim.foldfix": true,
     "vim.insertModeKeyBindings": [
         {"before": ["j", "k"], "after": ["<Esc>"]},
         {"before": ["capslock"], "after": ["<Esc>"]},
