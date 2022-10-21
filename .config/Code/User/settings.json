@@ -323,5 +323,6 @@
     "editor.lineHeight": 1.2,
 
     "jupyter.askForKernelRestart": false,
-    "_ignoreMe": "" // dummy entry so I don't have to deal with trailing commas
+    "svelte.enable-ts-plugin": true,
+    "svelte.plugin.svelte.note-new-transformation": false
 }
