@@ -74,6 +74,17 @@
     "terminal.integrated.fontFamily": "'DejaVu Sans Mono for Powerline', 'DejaVu Sans Mono', 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
     "terminal.integrated.macOptionIsMeta": true,
     "terminal.integrated.rendererType": "dom",
+    "terminal.integrated.allowChords": false,
+    "terminal.integrated.fontSize": 16,
+    "terminal.integrated.scrollback": 10000,
+    // use a login shell so RVM will work
+    "terminal.integrated.defaultProfile.linux": "zsh (login)",
+    "terminal.integrated.profiles.linux": {
+        "zsh (login)": {
+            "path": "zsh",
+            "args": ["-l"]
+        }
+    },
 
     "window.enableMenuBarMnemonics": false,
     "window.openFoldersInNewWindow": "on",
@@ -267,20 +278,10 @@
     },
     "editor.copyWithSyntaxHighlighting": false,
     "editor.selectionClipboard": false,
-    "terminal.integrated.fontSize": 16,
-    "terminal.integrated.scrollback": 10000,
     "[ruby]": {
         "editor.tabSize": 2
     },
 
-    // use a login shell so RVM will work
-    "terminal.integrated.defaultProfile.linux": "zsh (login)",
-    "terminal.integrated.profiles.linux": {
-        "zsh (login)": {
-            "path": "zsh",
-            "args": ["-l"]
-        }
-    },
     "editor.semanticTokenColorCustomizations": {
         "enabled": true
     },
