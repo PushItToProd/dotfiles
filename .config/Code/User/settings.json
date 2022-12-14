@@ -109,6 +109,12 @@
     "vim.incsearch": true,
     "vim.useSystemClipboard": true,
     "vim.useCtrlKeys": true,
+    "vim.handleKeys": {
+        // "<C-d>": true,
+        // "<C-s>": false,
+        // "<C-z>": false,
+        "<C-w>": true
+    },
     "vim.hlsearch": true,
     "vim.leader": "<space>",
     // allow navigating past folded code: https://github.com/Microsoft/vscode/issues/22276
@@ -134,7 +140,6 @@
         {"before": ["<leader>", "3"], "after": ["0", "i", "#", "#", "#", " ", "<Esc>", "$"]},
 
         // saving and closing
-        {"before": ["<C-w>"], "commands": ["workbench.action.closeActiveEditor"]},
         {"before": ["<leader>", "w"], "commands": ["workbench.action.files.save"]},
         {"before": ["<leader>", "q"], "commands": ["workbench.action.closeActiveEditor"]},
 
@@ -152,6 +157,17 @@
         // navigation
         {"before": ["<leader>", "e"], "commands": ["workbench.view.explorer"]},
         {"before": ["<leader>", "E"], "commands": ["workbench.files.action.showActiveFileInExplorer"]},
+
+        // window management
+        {"before": ["<C-w>", "H"], "commands": ["workbench.action.moveEditorToLeftGroup"]},
+        {"before": ["<C-w>", "J"], "commands": ["workbench.action.moveEditorToBelowGroup"]},
+        {"before": ["<C-w>", "K"], "commands": ["workbench.action.moveEditorToAboveGroup"]},
+        {"before": ["<C-w>", "L"], "commands": ["workbench.action.moveEditorToRightGroup"]},
+
+        // text navigation
+        // TODO: map [[ and ]] to navigate to curly braces and blocks
+        // {"before": ["[", "["], "after": ["?", "{", "<CR>"]},
+        // {"before": ["[", "["], "after": ["?", "{", "<CR>"]},
     ],
 
     // azure functions
@@ -244,7 +260,8 @@
             "document"
         ]
     },
-    "python.languageServer": "Jedi",
+    // "python.languageServer": "Jedi",
+    "python.languageServer": "Pylance",
     "[COBOL]": {
         // "editor.semanticHighlighting.enabled": false,
         "editor.tabSize": 2,
@@ -325,5 +342,6 @@
 
     "jupyter.askForKernelRestart": false,
     "svelte.enable-ts-plugin": true,
-    "svelte.plugin.svelte.note-new-transformation": false
+    "svelte.plugin.svelte.note-new-transformation": false,
+    "window.zoomLevel": -1
 }

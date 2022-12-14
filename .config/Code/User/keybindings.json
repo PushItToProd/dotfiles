@@ -130,11 +130,6 @@
         "when": "inputFocus"
     },
     {
-        "key": "ctrl+shift+d",
-        "command": "bookmarks.toggle",
-        "when": "editorTextFocus"
-    },
-    {
         "key": "alt+enter",
         "command": "editor.emmet.action.expandAbbreviation",
         "when": "editorTextFocus && !editorReadonly && !editorTabMovesFocus"
@@ -464,11 +459,6 @@
     },
     {
         "key": "f3",
-        "command": "bookmarks.toggle",
-        "when": "editorTextFocus"
-    },
-    {
-        "key": "f3",
         "command": "-editor.action.nextMatchFindAction",
         "when": "editorFocus"
     },
@@ -550,5 +540,30 @@
         "key": "tab",
         "command": "-editor.action.inlineSuggest.commit",
         "when": "inlineSuggestionHasIndentationLessThanTabSize && inlineSuggestionVisible && !editorTabMovesFocus"
-    }
+    },
+    {
+        "key": "f3",
+        "command": "bookmarks.toggleLabeled",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "ctrl+alt+f",
+        "command": "search.action.openNewEditor"
+    },
+    // allow closing the active window with ctrl-w if it's not an editor
+    {
+        "key": "ctrl+w",
+        "command": "workbench.action.closeActiveEditor",
+        "when": "!editorTextFocus"
+    },
+    {
+        "key": "ctrl+w",
+        "command": "-workbench.action.closeGroup",
+        "when": "activeEditorGroupEmpty && multipleEditorGroups"
+    },
+    {
+        "key": "ctrl+w",
+        "command": "extension.vim_ctrl+w",
+        "when": "editorTextFocus && vim.active && !inDebugRepl"
+    },
 ]
