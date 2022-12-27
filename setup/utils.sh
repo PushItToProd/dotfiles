@@ -15,3 +15,7 @@ padversion() {
     printf '.%03d' "${v}"
   done
 }
+
+apt_repo_exists() {
+  grep -q "$1" /etc/apt/sources.list /etc/apt/sources.list.d/*.list
+}
