@@ -1,3 +1,3 @@
 notice "Installing rofi-code"
 
-go get github.com/Coffelius/rofi-code
+go install github.com/Coffelius/rofi-code@latest
