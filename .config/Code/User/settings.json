@@ -32,7 +32,9 @@
         "*.html5": "html",
         "COMMIT_EDITMSG": "git-commit",
         "*.h": "c",
-        "*.jsonp": "javascript"
+        "*.jsonp": "javascript",
+        "*.scm": "racket",
+        "*.arc": "racket"
     },
     "files.exclude": {
         "**/.git": true,
