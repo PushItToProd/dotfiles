@@ -566,4 +566,8 @@
         "command": "extension.vim_ctrl+w",
         "when": "editorTextFocus && vim.active && !inDebugRepl"
     },
+    {
+        "key": "alt+i",
+        "command": "workbench.action.showAllEditors"
+    },
 ]
