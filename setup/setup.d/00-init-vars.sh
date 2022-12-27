@@ -19,6 +19,7 @@ declare -A homedir_repos=(
 USER=joe
 USER_HOME=/home/$USER
 APPDIR="$USER_HOME/$appdir_name"
+BINDIR="$USER_HOME/.local/bin"
 : "${SETUP_FORCE_INSTALL:=}"
 
 apt_repos=(
