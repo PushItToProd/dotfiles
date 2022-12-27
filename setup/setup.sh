@@ -7,6 +7,9 @@ readonly PROGDIR="$(dirname "$(readlink -f "$0")")"
 # shellcheck source=messages.sh
 source "$PROGDIR/messages.sh"
 
+# shellcheck source=utils.sh
+source "$PROGDIR/utils.sh"
+
 # shellcheck source=install-deb.sh
 source "$PROGDIR/install-deb.sh"
 
