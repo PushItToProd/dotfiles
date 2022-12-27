@@ -13,7 +13,8 @@
 
     "emmet.showSuggestionsAsSnippets": true,
     "emmet.includeLanguages": {
-        "xml": "xml"
+        "xml": "xml",
+        "jinja-html": "html"
     },
 
     "editor.linkedEditing": false,
