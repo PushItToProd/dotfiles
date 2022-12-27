@@ -9,6 +9,7 @@
     "editor.wordWrap": "on",
     "editor.semanticHighlighting.enabled": true,
     "workbench.editor.focusRecentEditorAfterClose": false,
+    "workbench.editor.labelFormat": "short",
 
     "emmet.showSuggestionsAsSnippets": true,
     "emmet.includeLanguages": {
