@@ -10,7 +10,15 @@ _list_workspaces() {
   ' $HOME/.config/Code/User/workspaceStorage/*/workspace.json
 }
 
-# printable workspace name
+# abbreviate_homedir takes a path and, if it is located within the user's
+# home directory, shortens it to begin with ~
+abbreviate_homedir() {
+  # here the # before $HOME indicates that the pattern must match at the start
+  # of the string (see: man zshexpn)
+  printf '%s' "${1/#$HOME/~}"
+}
+
+# abbreviate `/home/USERNAME` to `~/` in the workspace path
 get_friendly_ws_name() {
   local ws="$1"
   ws="$(get_ws_path "$ws")"
@@ -18,13 +26,7 @@ get_friendly_ws_name() {
     return
   fi
 
-  # strip homedir
-  local cleaned="${ws##$HOME/}"
-  if [[ "$cleaned" != "$ws" ]]; then
-    # add `~/` into the string to denote it's relative to the homedir
-    cleaned="~/$cleaned"
-  fi
-  printf '%s\n' "$cleaned"
+  printf '%s\n' "$(abbreviate_homedir "$ws")"
 }
 
 # clean workspace name so it can be passed as a path
@@ -40,7 +42,7 @@ get_ws_path() {
 list_workspaces() {
   local ws
   while read -r ws; do
-    get_friendly_ws_name "$ws"
+    echo "$(abbreviate_homedir "$(get_ws_path "$ws")")"
   done < <(_list_workspaces)
 }
 
