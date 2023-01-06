@@ -7,7 +7,7 @@ _list_workspaces() {
     then .folder
     else .configuration.external
     end
-  ' /home/joe/.config/Code/User/workspaceStorage/*/workspace.json
+  ' $HOME/.config/Code/User/workspaceStorage/*/workspace.json
 }
 
 # printable workspace name
