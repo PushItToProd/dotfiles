@@ -14,7 +14,8 @@
     "emmet.showSuggestionsAsSnippets": true,
     "emmet.includeLanguages": {
         "xml": "xml",
-        "jinja-html": "html"
+        "jinja-html": "html",
+        "vue": "html"
     },
 
     "editor.linkedEditing": false,
