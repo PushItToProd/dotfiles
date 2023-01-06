@@ -1,4 +1,16 @@
 #!/usr/bin/env zsh
+# rofi_code.zsh implements a custom rofi mode for launching VS Code workspaces.
+
+# FIXME this script feels overly-complicated and could probably stand to be
+# simplified
+
+# TODO implement some way of deleting workspaces that aren't useful (maybe a
+# keybinding)
+
+# TODO implement a way of pinning workspaces to the top of the list for easy
+# access.
+
+# XXX alternatively, figure out how to sort workspaces by most recently used.
 
 # dump all workspaces using jq
 _list_workspaces() {
