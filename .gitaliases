@@ -13,6 +13,7 @@
   c = commit --verbose
   ca = commit -a --verbose
   amend = commit --amend --verbose
+  unstage = restore --staged
 
   d = diff --color-words -b
   ds = !"git d --staged"
