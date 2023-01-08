@@ -25,15 +25,6 @@
         "key": "ctrl+k ctrl+right",
         "command": "-workbench.action.focusRightGroup"
     },
-    // cycle recent editors
-    {
-        "key": "alt+left",
-        "command": "workbench.action.previousEditor && !terminalFocus"
-    },
-    {
-        "key": "alt+right",
-        "command": "workbench.action.nextEditor && !terminalFocus"
-    },
     // navigate between tabs with , and .
     {
         "key": "alt+,",
@@ -569,5 +560,25 @@
     {
         "key": "alt+i",
         "command": "workbench.action.showAllEditors"
+    },
+    {
+        "key": "alt+right",
+        "command": "editor.action.indentLines",
+        "when": "editorTextFocus && !editorReadonly"
+    },
+    {
+        "key": "ctrl+]",
+        "command": "editor.action.indentLines",
+        "when": "editorTextFocus && !editorReadonly"
+    },
+    {
+        "key": "ctrl+[",
+        "command": "editor.action.outdentLines",
+        "when": "editorTextFocus && !editorReadonly"
+    },
+    {
+        "key": "alt+left",
+        "command": "editor.action.outdentLines",
+        "when": "editorTextFocus && !editorReadonly"
     },
 ]
