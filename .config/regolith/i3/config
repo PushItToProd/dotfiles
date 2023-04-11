@@ -140,6 +140,7 @@ mode "$mode_launch" {
     bindsym f exec $i3-wm.program.files, mode "default"
     bindsym m exec gnome-system-monitor, mode "default"
     bindsym n exec x-terminal-emulator -e nvtop, mode "default"
+    bindsym o exec flatpak run md.obsidian.Obsidian, mode "default"
     bindsym p exec pomodoro, mode "default"
     bindsym s exec flatpak run com.spotify.Client, mode "default"
 
