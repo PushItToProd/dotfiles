@@ -337,7 +337,7 @@
     "notebook.output.textLineLimit": 40,
     "testing.openTesting": "openOnTestFailure",
 
-    "workbench.colorTheme": "Bearded Theme Arc Reversed",
+    "workbench.colorTheme": "Bearded Theme HC Midnight Void",
     "workbench.colorCustomizations": {
         "[Bearded Theme Monokai Stone]": {
             "editorRuler.foreground": "#4f4f4f"
