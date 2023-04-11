@@ -403,10 +403,6 @@
         "command": "notifications.clearAll"
     },
     {
-        "key": "f5",
-        "command": "python.runtests"
-    },
-    {
         "key": "ctrl+[",
         "command": "outline.toggleVisibility"
     },
@@ -580,5 +576,10 @@
         "key": "alt+left",
         "command": "editor.action.outdentLines",
         "when": "editorTextFocus && !editorReadonly"
+    },
+    {
+        "key": "f5",
+        "command": "python.execInTerminal",
+        "when": "editorTextFocus && editorLangId == 'python'"
     },
 ]
