@@ -11,11 +11,11 @@
     "workbench.editor.focusRecentEditorAfterClose": false,
     "workbench.editor.labelFormat": "short",
 
+    "emmet.triggerExpansionOnTab": true,
     "emmet.showSuggestionsAsSnippets": true,
     "emmet.includeLanguages": {
         "xml": "xml",
-        "jinja-html": "html",
-        "vue": "html"
+        "jinja-html": "html"
     },
 
     "editor.linkedEditing": false,
