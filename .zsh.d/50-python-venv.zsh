@@ -39,7 +39,7 @@ venv() {
 
   local cmd="$1"
   if [[ ! "$cmd" ]]; then
-    read "cmd?venv not available. create one? (Y/n/version) "
+    read "cmd?venv not available. create one? (Y/n/version) [default: $DEFAULT_PYTHON] "
   fi
 
   case $cmd in
@@ -52,7 +52,7 @@ venv() {
     return 1
   }
 
-  echo "Creating virtualenv using $cmd" >&2
+  echo "Creating virtualenv using $cmd in $PWD/venv" >&2
   $cmd -m venv venv
   source venv/bin/activate
 }
