@@ -3,21 +3,67 @@
 # and some other POSIX tools.
 # This is based on get-stack.sh which is copyright (c) 2015-2017, Stack contributors.
 
-#set -e  # causes trouble, https://github.com/simonmichael/hledger/issues/714
+# This was disabled as a workaround for https://github.com/simonmichael/hledger/issues/714
+# It has been left off so that one uninstallable tool doesn't block the others.
+# (XXX though, try_install is supposed to continue on failure)
+#set -e
 set -o pipefail
+
+# This install script's name (can't use $0 when it's piped into bash).
+HLEDGER_INSTALL_TOOL=hledger-install.sh
+
+# This install script's version.
+HLEDGER_INSTALL_VERSION=20230407
+
+# Tools to be installed by this install script, official tools first.
+# Keep synced with the package versions below.
+# When changing remember to also bump HLEDGER_INSTALL_VERSION.
+HLEDGER_TOOLS="\
+hledger \
+hledger-ui \
+hledger-web \
+hledger-stockquotes \
+hledger-edit \
+hledger-plot \
+hledger-interest \
+hledger-iadd \
+"
+
+# Additional install-related tools to be listed
+INSTALL_TOOLS="\
+stack \
+cabal \
+pip \
+"
+
+# Package versions to be installed by this install script.
+# Keep synced with the tools above. 
+# When changing remember to also bump HLEDGER_INSTALL_VERSION.
+# Official:
+HLEDGER_LIB_VERSION=1.29.2
+HLEDGER_VERSION=1.29.2
+HLEDGER_UI_VERSION=1.29.2
+HLEDGER_WEB_VERSION=1.29.2
+# Third-party:
+HLEDGER_IADD_VERSION=1.3.18
+HLEDGER_INTEREST_VERSION=1.6.5
+HLEDGER_STOCKQUOTES_VERSION=0.1.2.1
+HLEDGER_EDIT_VERSION=1.13.2
+HLEDGER_PLOT_VERSION=1.13.2
+HLEDGER_LOTS_VERSION=0.1.3
+
+# this script's one-line description
+HLEDGER_INSTALL_DESC="$HLEDGER_INSTALL_TOOL version $HLEDGER_INSTALL_VERSION to install hledger $HLEDGER_VERSION and related tools"
 
 usage() {
   cat <<HERE
-hledger-install.sh version $HLEDGER_INSTALL_VERSION, installs hledger $HLEDGER_VERSION
+$HLEDGER_INSTALL_DESC
 
 hledger-install.sh [-f|--force-install-stack] [-s|--status] [-v|--verbose]
                    [--version] [-h|--help]
 
 This script builds and installs the current release of hledger and addons,
-on GHC-supporting POSIX system with bash installed, as reliably as possible.
-If cabal is installed and stack is not, and --force-install-stack is not used,
-it will use cabal; otherwise it will use stack, installing stack if needed.
-
+on a GHC-supporting POSIX system with bash installed, as reliably as possible.
 Run it the security-conscious way:
 
  curl -sSLO https://hledger.org/hledger-install.sh  # download
@@ -28,67 +74,42 @@ or the lazy way:
 
  curl -sSL https://hledger.org/hledger-install.sh | bash
 
-Note this can require up to 2G each of free RAM and disk space,
-and could take between a minute and an hour.
+The stack build tool is used by preference, and will be installed if needed.
+The cabal build tool will be used instead if it is installed and stack is not,
+and the -f/--force-install-stack flag is not used,
+
+Note building can require 2G or more of both memory and disk space,
+and could take up to an hour (subsequent runs will be faster).
 You can kill and rerun it without losing progress.
 
-To see what hledger tools are currently installed:
-
- bash hledger-install.sh -s
+To just show which hledger tools are currently installed, run with the -s flag.
 
 HERE
 }
-#TODO https://github.com/commercialhaskell/stack/issues/3055 https://github.com/haskell/hackage-security/issues/187
-#Updating package index Hackage (mirrored at https://s3.amazonaws.com/hackage.fpcomplete.com/) ...
-#   /Users/simon/.stack/indices/Hackage/hackage-security-lock: createDirectory: already exists (File exists)
 
-# this script's name (can't use $0 when it's piped into bash)
-HLEDGER_INSTALL_TOOL=hledger-install.sh
-
-# this script's version
-HLEDGER_INSTALL_VERSION=20211210
+# the oldest version of stack that might possibly work: perhaps 2.5.1
+STACK_MIN_VERSION=2.5.1
 
 # stackage snapshot to use when installing with stack.
 # You can try specifying a different stackage version here, or 
 # commenting out this line to use your current global resolver,
 # to avoid unnecessary building.
-RESOLVER="--resolver=lts-18.18"
+STACK_RESOLVER="--resolver=nightly-2023-04-05"
 
-# things to be installed
+# Dependencies we require that aren't in the above stackage snapshot.
+# (Also requested when using cabal, but that's harmless.)
+# Quotes needed, be careful not to break interpolation in commands below, check with bash:
+STACK_EXTRA_DEPS=""
 
-HLEDGER_MAIN_TOOLS="\
-hledger \
-hledger-ui \
-hledger-web \
-"
+#TODO? https://github.com/commercialhaskell/stack/issues/3055 https://github.com/haskell/hackage-security/issues/187
+#Updating package index Hackage (mirrored at https://s3.amazonaws.com/hackage.fpcomplete.com/) ...
+#   /Users/simon/.stack/indices/Hackage/hackage-security-lock: createDirectory: already exists (File exists)
 
-HLEDGER_OTHER_TOOLS="\
-hledger-iadd \
-hledger-interest \
-"
-
-# Latest hledger package versions.
-# Don't forget to also bump HLEDGER_INSTALL_VERSION above.
-HLEDGER_LIB_VERSION=1.24.1
-HLEDGER_VERSION=1.24.1
-HLEDGER_UI_VERSION=1.24.1
-HLEDGER_WEB_VERSION=1.24.1
-# addons:
-HLEDGER_IADD_VERSION=1.3.16
-HLEDGER_INTEREST_VERSION=1.6.3
-
-# any required dependencies that aren't in the stackage resolver above:
-EXTRA_DEPS="\
-"
-
-# the oldest version of stack that might possibly work:
-# XXX 2.3.1 is doubtful, retest; 2.5.1 ?
-STACK_MIN_VERSION=2.3.1
-
-
-
-# start of (most of) get-stack.sh, https://github.com/commercialhaskell/stack/blob/master/etc/scripts/get-stack.sh
+##############################################################################
+# Below is (most of) FP Complete's/Stack team's get-stack.sh, from
+# https://github.com/commercialhaskell/stack/blob/master/etc/scripts/get-stack.sh .
 # CHANGED marks a few of our customisations, but not all.
+##############################################################################
 
 HOME_LOCAL_BIN="$HOME/.local/bin"
 USR_LOCAL_BIN="/usr/local/bin"
@@ -634,9 +655,14 @@ pkg_install_pkgs() {
     fi
 }
 
-# Get installed Stack version, if any
-stack_version() {
+# Get installed Stack version, if any.
+stack_version_number() {
   stack --version | grep -o 'Version \([[:digit:]]\|\.\)\+'
+}
+
+# Get Stack's --version output, trimmed for sanity, if it is installed.
+stack_version_quiet() {
+  stack --version | grep -E -v '^(Compiled|- |$)'
 }
 
 # Get installed Stack's path
@@ -746,7 +772,7 @@ check_usr_local_bin_on_path() {
 # Check whether Stack is already installed, and print an error if it is.
 check_stack_installed() {
   if [ "$FORCE_INSTALL_STACK" != "true" ] && has_good_stack ; then
-    die "Stack $(stack_version) already appears to be installed at:
+    die "Stack $(stack_version_number) already appears to be installed at:
   $(stack_location)
 Use 'stack upgrade' or your OS's package manager to upgrade,
 or pass --force-install-stack to this script to install anyway."
@@ -810,7 +836,7 @@ ensure_stack() {
       exit 1
     fi
   fi
-  echo "Using stack $(stack --version)"
+  echo "Using stack $(stack_version_quiet)"
 }
 
 # get a sed command that supports EREs
@@ -839,7 +865,7 @@ has_cmd_version() {
 # Show a command's presence in $PATH, and its version if present.
 print_cmd_version() {
   if [[ $(cmd_location "$1") ]]; then
-    echo "$1" $(cmd_version "$1") is installed at $(cmd_location "$1")
+    printf "%-28s is installed at %s\n" "$1 $(cmd_version "$1")" $(cmd_location "$1")
   else
     echo "$1 is not found"
   fi
@@ -847,7 +873,7 @@ print_cmd_version() {
 
 # Show the current installation status of the hledger packages.
 print_installed_versions() {
-  for cmd in $HLEDGER_MAIN_TOOLS $HLEDGER_OTHER_TOOLS $HLEDGER_INSTALL_TOOL ; do print_cmd_version "$cmd"; done
+  for cmd in $INSTALL_TOOLS $HLEDGER_TOOLS ; do print_cmd_version "$cmd"; done
 }
 
 # Run a command, but first log it with "Trying" prepended.
@@ -861,18 +887,29 @@ quietly_run() {
   "$@" 2>/dev/null || true
 }
 
-# Try to install the executables of the given haskell package(s) and versions, 
+# Try to install the executables of the given haskell package versions,
 # using stack or cabal, logging the commands, continuing on failure.
 # It's assumed that either a new-enough stack or cabal-install is already installed.
 # stack is preferred.
 # For stack, you must specify the package(s) you want to install, plus any additional
-# dependency packages which are not in the stackage $RESOLVER configured above.
+# dependency packages which are not in the stackage $STACK_RESOLVER configured above.
 try_install() {
   cd  # ensure we install at user level, not in some project's stack/cabal setup
   if has_cmd stack ; then
-    try_info stack install --install-ghc $RESOLVER "$@" --verbosity="$STACK_VERBOSITY"
+    try_info stack install --install-ghc $STACK_RESOLVER "$@" --verbosity="$STACK_VERBOSITY"
   elif has_cmd cabal ; then
     try_info cabal install "$@" --verbose="$CABAL_VERBOSITY"
+  else
+    echo "Failed to install $@"
+  fi
+}
+
+# Try to install the given python package versions,
+# using pip, logging the commands, continuing on failure.
+try_install_py() {
+  cd  # ensure we install at user level, not in some project's env
+  if has_cmd pip ; then
+    try_info pip install --disable-pip-version-check -U "$@" $PIP_VERBOSITY
   else
     echo "Failed to install $@"
   fi
@@ -922,21 +959,28 @@ if [[ $HELPFLAG ]] ; then
 fi
 
 if [[ $VERSIONFLAG ]] ; then
-  echo "$HLEDGER_INSTALL_TOOL version $HLEDGER_INSTALL_VERSION, installs hledger $HLEDGER_VERSION"
+  echo "$HLEDGER_INSTALL_TOOL version $HLEDGER_INSTALL_VERSION, installs hledger $HLEDGER_VERSION and related tools"
   exit 0
 fi
 
 if [[ $VERBOSEFLAG ]]; then
   CABAL_VERBOSITY=1       # 0-3
   STACK_VERBOSITY=info    # silent, error, warn, info, debug
+  PIP_VERBOSITY=-v
 else
   CABAL_VERBOSITY=0
-  STACK_VERBOSITY=info    # XXX info shows too many warnings, but error hides install plan failure details, and still shows warnings
-  QUIET="true"
+  # info shows too many warnings, but error hides install plan failure details,
+  # and still shows warnings.
+  # STACK_VERBOSITY=info
+  # Try error again. It looks much better, and it might have improved by now.
+  # If there's trouble, they must rerun with --verbose.
+  STACK_VERBOSITY=error
+  PIP_VERBOSITY=-q
+  QUIET=true
 fi
 
 date
-echo "$HLEDGER_INSTALL_TOOL version $HLEDGER_INSTALL_VERSION, installs hledger $HLEDGER_VERSION"
+echo "Running $HLEDGER_INSTALL_DESC"
 
 # ensure ~/.local/bin/ in PATH
 # TODO should check ~/.cabal/bin if using cabal
@@ -950,8 +994,7 @@ if ! on_path "$HOME_LOCAL_BIN" ; then
 fi
 
 # show system info
-echo
-echo "System info:"
+printf "on "
 quietly_run uname -rsv
 quietly_run lsb_release -a
 
@@ -964,9 +1007,9 @@ if [[ $STATUSFLAG ]] ; then
   exit 0
 fi
 
-# explain the planned install method
+# ensure a haskell build tool
 echo
-echo "Install method:"
+echo "Ensuring a Haskell build tool:"
 # if stack is installed, use stack
 # || [[ "$FORCE_INSTALL_STACK" == "true" ]]  #--force-install-stack
 if has_stack ; then
@@ -978,13 +1021,13 @@ if has_stack ; then
   # install stack now (or if new enough, just print its precise version)
   ensure_stack
   echo "Updating stack's package db to see latest packages"
-  try_info stack update
+  try_info stack update --verbosity=error
 # else if cabal is installed, use cabal
 elif has_cmd cabal ; then
   echo "no stack installed, cabal $(cabal --numeric-version) installed; using cabal to install hledger in $HOME/.cabal/bin"
   echo Using $(cabal --version)  # unquoted to squash cabal version to one line
   # run cabal update to make sure it knows about latest packages
-  try_info cabal update
+  try_info cabal update -v0
 # else use stack
 else
   echo "no stack or cabal installed; stack will be installed and used to install hledger in $HOME/.local/bin"
@@ -992,40 +1035,76 @@ else
   ensure_stack
 fi
 
+# ensure a python install tool
+echo
+echo "Ensuring the Python pip install tool:"
+if has_cmd pip ; then
+  echo "$(pip --version) is installed"
+else
+  echo "pip was not found; python-based addons will not be installed"
+fi
+
 # try installing each package that needs installing, in turn
 echo
-echo Installing hledger packages:
+echo "Installing hledger tools:"
 
 if [[ $(cmpver "$(cmd_version hledger 2>/dev/null)" $HLEDGER_VERSION) = 2 ]]; then
   echo Installing hledger
-  try_install hledger-$HLEDGER_VERSION hledger-lib-$HLEDGER_LIB_VERSION $EXTRA_DEPS
+  try_install hledger-$HLEDGER_VERSION hledger-lib-$HLEDGER_LIB_VERSION $STACK_EXTRA_DEPS
   echo
 fi
 
 if [[ $(cmpver "$(cmd_version hledger-ui 2>/dev/null)" $HLEDGER_UI_VERSION) = 2 ]]; then
   echo Installing hledger-ui
-try_install hledger-ui-$HLEDGER_UI_VERSION hledger-$HLEDGER_VERSION hledger-lib-$HLEDGER_LIB_VERSION $EXTRA_DEPS \
+  try_install hledger-ui-$HLEDGER_UI_VERSION hledger-$HLEDGER_VERSION hledger-lib-$HLEDGER_LIB_VERSION $STACK_EXTRA_DEPS \
     # brick-X.Y   # when hledger-iadd requires a special brick, use the same here to reduce rebuilding
   echo
 fi
 
 if [[ $(cmpver "$(cmd_version hledger-web 2>/dev/null)" $HLEDGER_WEB_VERSION) = 2 ]]; then
   echo Installing hledger-web
-  try_install hledger-web-$HLEDGER_WEB_VERSION hledger-$HLEDGER_VERSION hledger-lib-$HLEDGER_LIB_VERSION $EXTRA_DEPS
+  try_install hledger-web-$HLEDGER_WEB_VERSION hledger-$HLEDGER_VERSION hledger-lib-$HLEDGER_LIB_VERSION $STACK_EXTRA_DEPS
   echo
 fi
 
-# Third-party addons. We might build these with an older version
-# of hledger[-lib], if their bounds have not been updated yet.
+# Third-party addons.
+# We might have to build these with an older version of hledger,
+# if they have not been updated yet.
+
 if [[ $(cmpver "$(cmd_version hledger-iadd 2>/dev/null)" $HLEDGER_IADD_VERSION) = 2 ]]; then
   echo Installing hledger-iadd
-  try_install hledger-iadd-$HLEDGER_IADD_VERSION hledger-lib-$HLEDGER_LIB_VERSION $EXTRA_DEPS
+  try_install hledger-iadd-$HLEDGER_IADD_VERSION hledger-lib-$HLEDGER_LIB_VERSION $STACK_EXTRA_DEPS
   echo
 fi
 
 if [[ $(cmpver "$(cmd_version hledger-interest 2>/dev/null)" $HLEDGER_INTEREST_VERSION) = 2 ]]; then
   echo Installing hledger-interest
-  try_install hledger-interest-$HLEDGER_INTEREST_VERSION hledger-lib-$HLEDGER_LIB_VERSION $EXTRA_DEPS
+  try_install hledger-interest-$HLEDGER_INTEREST_VERSION hledger-lib-$HLEDGER_LIB_VERSION $STACK_EXTRA_DEPS
+  echo
+fi
+
+if [[ $(cmpver "$(cmd_version hledger-stockquotes 2>/dev/null)" $HLEDGER_STOCKQUOTES_VERSION) = 2 ]]; then
+  echo Installing hledger-stockquotes
+  try_install hledger-stockquotes-$HLEDGER_STOCKQUOTES_VERSION hledger-lib-$HLEDGER_LIB_VERSION $STACK_EXTRA_DEPS
+  echo
+fi
+
+# hledger-edit, hledger-plot packaged together as hledger-utils, just install it twice for now
+if [[ $(cmpver "$(cmd_version hledger-edit 2>/dev/null)" $HLEDGER_EDIT_VERSION) = 2 ]]; then
+  echo Installing hledger-edit
+  try_install_py hledger-utils
+  echo
+fi
+
+if [[ $(cmpver "$(cmd_version hledger-plot 2>/dev/null)" $HLEDGER_PLOT_VERSION) = 2 ]]; then
+  echo Installing hledger-plot
+  try_install_py hledger-utils
+  echo
+fi
+
+if [[ $(cmpver "$(cmd_version hledger-lots 2>/dev/null)" $HLEDGER_LOTS_VERSION) = 2 ]]; then
+  echo Installing hledger-lots
+  try_install_py hledger-lots
   echo
 fi
 
