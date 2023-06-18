@@ -267,7 +267,7 @@
         ]
     },
     // "python.languageServer": "Jedi",
-    "python.languageServer": "Pylance",
+    "python.languageServer": "Jedi",
     "[COBOL]": {
         // "editor.semanticHighlighting.enabled": false,
         "editor.tabSize": 2,
