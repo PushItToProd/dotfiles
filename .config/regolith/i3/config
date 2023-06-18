@@ -131,7 +131,7 @@ set_from_resource $i3-wm.program.files i3-wm.program.files /usr/bin/nautilus --n
 
 ## Launch // Launch mode // <Super> / ##
 bindsym $mod+slash mode "$mode_launch"
-set $mode_launch (c)ode, (d)iscord, (e)macs, (f)iles, (m)onitor, (n)vtop, (p)omodoro, (s)potify | (w)eb mode
+set $mode_launch (c)ode, (d)iscord, (e)macs, (f)iles, (m)onitor, (n)vtop, (o)bsidian, (p)omodoro, (s)potify | (w)eb mode
 mode "$mode_launch" {
     bindsym c exec ~/.config/i3/scripts/rofi_code.zsh, mode "default"
     bindsym Shift+C exec code -n, mode "default"
