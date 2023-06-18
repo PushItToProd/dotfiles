@@ -340,8 +340,6 @@
     "python.experiments.enabled": false,
     "notebook.output.textLineLimit": 40,
     "testing.openTesting": "openOnTestFailure",
-
-    "workbench.colorTheme": "Bearded Theme HC Midnight Void",
     "workbench.colorCustomizations": {
         "[Bearded Theme Monokai Stone]": {
             "editorRuler.foreground": "#4f4f4f"
@@ -359,5 +357,8 @@
 
     "jupyter.askForKernelRestart": false,
     "svelte.enable-ts-plugin": true,
-    "svelte.plugin.svelte.note-new-transformation": false
+    "svelte.plugin.svelte.note-new-transformation": false,
+    "git.openRepositoryInParentFolders": "never",
+    "workbench.colorTheme": "Bearded Theme Arc EolStorm",
+    "window.zoomLevel": -1
 }
