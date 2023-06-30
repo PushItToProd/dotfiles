@@ -359,6 +359,6 @@
     "svelte.enable-ts-plugin": true,
     "svelte.plugin.svelte.note-new-transformation": false,
     "git.openRepositoryInParentFolders": "never",
-    "workbench.colorTheme": "Bearded Theme Arc EolStorm",
+    "workbench.colorTheme": "Visual Studio 2017 Dark - C++",
     "window.zoomLevel": -1
 }
