@@ -284,6 +284,9 @@ bindsym $mod+apostrophe exec i3-input -F '[con_mark="%s"] focus' -l 1 -P 'Goto: 
 ## Navigate // List Marks // <Super><Shift> ' ##
 bindsym $mod+shift+apostrophe exec ~/.config/i3/scripts/select_a_mark.sh
 
+# Assign default window marks
+for_window [class="obsidian"] mark o
+for_window [class="Spotify"] mark s
 
 ###############################################################################
 # Window and Workspace Configuration
