@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+# Apply a mark to the focused window if the mark is not already in use.
+
+mark_is_set() {
+  local mark="${1:?a mark must be provided to mark_is_set}"
+
+  i3-msg -t get_marks |
+    jq --arg mark "$mark" --exit-status 'contains([$mark])' >/dev/null
+}
+
+main() {
+  local mark="${1:?you must provide a mark to apply to the focused window}"
+
+  if [[ "$mark" == *'"'* ]]; then
+    echo "error: the provided mark name contains double quotes but it shouldn't" >&2
+    return 2
+  fi
+
+  if mark_is_set "$mark"; then
+    echo "mark '$mark' is already set - not setting it again"
+    return 1
+  fi
+
+  echo "applying mark '$mark'"
+  i3-msg "mark \"$mark\""
+}
+if [[ "${BASH_SOURCE[0]}" == "$0" ]]; then
+  main "$@"
+fi
