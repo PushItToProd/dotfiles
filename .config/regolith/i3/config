@@ -285,6 +285,10 @@ bindsym $mod+apostrophe exec i3-input -F '[con_mark="%s"] focus' -l 1 -P 'Goto: 
 bindsym $mod+shift+apostrophe exec ~/.config/i3/scripts/select_a_mark.sh
 
 # Assign default window marks
+
+# FIXME: This always marks the most recent Obsidian window, so opening a new
+# window replaces the mark on the main window. We want to only mark the first
+# window, so this presumably needs a script.
 for_window [class="obsidian"] mark o
 for_window [class="Spotify"] mark s
 
