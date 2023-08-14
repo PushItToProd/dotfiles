@@ -1,21 +1,19 @@
 alias nodejs=node
 
 _init_nvm() {
-  if [[ ! -v NVM_DIR ]]; then
-    echo "info: initializing nvm" >&2
+  echo "info: initializing nvm" >&2
 
-    # unset placeholders
-    unset -f nvm
-    unset -f npm
-    unset -f node
-    unset -f npx
-    unset -f tsc
-    unset -f ts-node
+  # unset placeholders
+  unset -f nvm
+  unset -f npm
+  unset -f node
+  unset -f npx
+  unset -f tsc
+  unset -f ts-node
 
-    export NVM_DIR="$HOME/.nvm"
-    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-  fi
+  export NVM_DIR="$HOME/.nvm"
+  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 }
 
 # XXX the next two functions are unused because they make startup slow
@@ -40,7 +38,10 @@ _init_nvm_placeholders() {
 }
 # XXX end unused functions
 
-if [[ ! -v NVM_DIR ]]; then
+# check if nvm is already declared -- if it isn't, initialize it and our
+# placeholders
+if ! command -v nvm &>/dev/null; then
+  unset NVM_DIR
   nvm() {
     _init_nvm
     # execute nvm directly since it's a shell function that will overwrite this one
