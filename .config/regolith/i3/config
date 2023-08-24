@@ -233,25 +233,25 @@ bindsym $mod+l focus right
 
 ## Navigate // Toggle Workspaces 0-95 // <Super> 0..9 ##
 bindsym $mod+1 exec i3_toggle.py 10 15
-bindsym $mod+$ctrl+1 workspace 15
+bindsym $mod+$alt+1 workspace 15
 bindsym $mod+2 exec i3_toggle.py 20 25
-bindsym $mod+$ctrl+2 workspace 25
+bindsym $mod+$alt+2 workspace 25
 bindsym $mod+3 exec i3_toggle.py 30 35
-bindsym $mod+$ctrl+3 workspace 35
+bindsym $mod+$alt+3 workspace 35
 bindsym $mod+4 exec i3_toggle.py 40 45
-bindsym $mod+$ctrl+4 workspace 45
+bindsym $mod+$alt+4 workspace 45
 bindsym $mod+5 exec i3_toggle.py 50 55
-bindsym $mod+$ctrl+5 workspace 55
+bindsym $mod+$alt+5 workspace 55
 bindsym $mod+6 exec i3_toggle.py 60 65
-bindsym $mod+$ctrl+6 workspace 65
+bindsym $mod+$alt+6 workspace 65
 bindsym $mod+7 exec i3_toggle.py 70 75
-bindsym $mod+$ctrl+7 workspace 75
+bindsym $mod+$alt+7 workspace 75
 bindsym $mod+8 exec i3_toggle.py 80 85
-bindsym $mod+$ctrl+8 workspace 85
+bindsym $mod+$alt+8 workspace 85
 bindsym $mod+9 exec i3_toggle.py 90 95
-bindsym $mod+$ctrl+9 workspace 95
+bindsym $mod+$alt+9 workspace 95
 bindsym $mod+minus exec i3_toggle.py 100 105
-bindsym $mod+$ctrl+minus workspace 105
+bindsym $mod+$alt+minus workspace 105
 bindsym $mod+0 exec i3_toggle.py 0 1 2 3
 
 ## Navigate // Next Workspace // <Super><Ctrl> L ##
