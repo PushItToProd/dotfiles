@@ -36,7 +36,9 @@
         "*.h": "c",
         "*.jsonp": "javascript",
         "*.scm": "racket",
-        "*.arc": "racket"
+        "*.arc": "racket",
+        ".env": "plaintext",
+        ".env.local": "plaintext"
     },
     "files.exclude": {
         "**/.git": true,
@@ -299,6 +301,7 @@
     "[typescript]": {
         "editor.tabSize": 2
     },
+    "typescript.suggest.completeFunctionCalls": true,
     "editor.copyWithSyntaxHighlighting": false,
     "editor.selectionClipboard": false,
     "[ruby]": {
@@ -359,6 +362,5 @@
     "svelte.enable-ts-plugin": true,
     "svelte.plugin.svelte.note-new-transformation": false,
     "git.openRepositoryInParentFolders": "never",
-    "workbench.colorTheme": "Visual Studio 2017 Dark - C++",
-    "window.zoomLevel": -1
+    "workbench.colorTheme": "Bearded Theme Arc Reversed"
 }
