@@ -43,6 +43,11 @@ if [[ "${BASH_SOURCE[0]}" == "$0" ]]; then
       firefox -new-window
       exit $?
       ;;
+    --new-tabs)
+      shift
+      firefox "$@"
+      exit $?
+      ;;
   esac
 
   if firefox_is_open; then
