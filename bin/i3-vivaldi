@@ -42,6 +42,17 @@ if [[ "${BASH_SOURCE[0]}" == "$0" ]]; then
     exit 0
   fi
 
+  case "$1" in
+    -h|--help)
+      print_usage
+      exit 0
+      ;;
+    --new-window)
+      vivaldi -new-window
+      exit $?
+      ;;
+  esac
+
   if vivaldi_is_open; then
     if ! vivaldi_is_focused; then
       focus_vivaldi

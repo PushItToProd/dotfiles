@@ -174,7 +174,7 @@ bindsym $mod+w mode "$mode_launch_web"
 set $mode_launch_web new (w)indow | (n)otion, (t)odoist, (l)ast.fm, (r)eddit.com, (d)s note, (a)sahi
 mode "$mode_launch_web" {
      #bindsym w exec firefox --new-window, mode "default"
-     bindsym w exec vivaldi --new-window, mode "default"
+     bindsym w exec i3-browser --new-window, mode "default"
 
      bindsym n exec i3-browser notion.so, mode "default"
      bindsym t exec i3-browser todoist.com, mode "default"
