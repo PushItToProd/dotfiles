@@ -171,20 +171,21 @@ bindsym $mod+Return exec /usr/bin/x-terminal-emulator
 
 ## Launch // Web Mode // <Super> W ##
 bindsym $mod+w mode "$mode_launch_web"
-set $mode_launch_web new (w)indow | (n)otion, (t)odoist, (l)ast.fm, (r)eddit.com, (d)s note, (a)sahi
+# set $mode_launch_web new (w)indow | (n)otion, (t)odoist, (l)ast.fm, (r)eddit.com, (d)s note, (a)sahi
+set $mode_launch_web new (w)indow | (t)odoist, (r)eddit.com, (a)sahi
 mode "$mode_launch_web" {
      #bindsym w exec firefox --new-window, mode "default"
      bindsym w exec i3-browser --new-window, mode "default"
 
-     bindsym n exec i3-browser notion.so, mode "default"
+    #  bindsym n exec i3-browser notion.so, mode "default"
      bindsym t exec i3-browser todoist.com, mode "default"
-     bindsym l exec i3-browser last.fm, mode "default"
+    #  bindsym l exec i3-browser last.fm, mode "default"
      bindsym r exec i3-browser reddit.com, mode "default"
-     bindsym d exec firefox -new-window notes.zane.cloud, mode "default"
-     bindsym a exec i3-browser asahi.zane.cloud, mode "default"
+    #  bindsym d exec i3-browser --new-window notes.zane.cloud, mode "default"
+    bindsym a exec i3-browser asahi.zane.cloud, mode "default"
 
-     bindsym Return mode "default"
-     bindsym Escape mode "default"
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
 }
 
 set_from_resource $rofiTheme rofi.theme /etc/regolith/styles/lascaille/rofi.rasi
