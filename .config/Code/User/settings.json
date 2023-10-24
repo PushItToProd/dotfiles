@@ -3,12 +3,12 @@
     "editor.rulers": [
         80
     ],
-    "editor.fontFamily":"'Comic Mono', 'Droid Sans Mono', 'monospace', monospace",
     "editor.renderWhitespace": "boundary",
     "editor.accessibilitySupport": "off",
     "editor.detectIndentation": false,
     "editor.wordWrap": "on",
     "editor.semanticHighlighting.enabled": true,
+    "editor.lineNumbers": "on",
     "workbench.editor.focusRecentEditorAfterClose": false,
     "workbench.editor.labelFormat": "short",
 
@@ -189,7 +189,7 @@
         "editor.tabSize": 2
     },
     "[go]": {
-        "editor.rulers": [120]
+        "editor.rulers": []
     },
     "go.autocompleteUnimportedPackages": true,
     "gopls": {
@@ -367,5 +367,18 @@
     "terminal.integrated.commandsToSkipShell": [
         "language-julia.interrupt"
     ],
-    "julia.symbolCacheDownload": true
+    "julia.symbolCacheDownload": true,
+    "[search-result]": {
+        "editor.lineNumbers": "on"
+    },
+    "zenMode.hideLineNumbers": false,
+    "zenMode.restore": false,
+    "editor.fontFamily": "'Comic Mono', 'Droid Sans Mono', 'monospace', monospace",
+    "powermode.enabled": true,
+    "powermode.shake.intensity": 2,
+    "powermode.combo.threshold": 5,
+    "powermode.combo.timeout": 5,
+    "powermode.explosions.maxExplosions": 4,
+    "workbench.editor.empty.hint": "hidden",
+    "window.zoomLevel": -1
 }
