@@ -1,6 +1,9 @@
 #!/usr/bin/env python3.8
 """
-Toggle among a set of given workspaces.
+A helper script for cycling through multiple numbered i3 workspaces, allowing
+one keybinding to access multiple workspaces.
+
+This script takes two or more target workspace numbers to cycle through.
 """
 import argparse
 import logging
@@ -36,15 +39,31 @@ def move_to(i3: i3ipc.Connection, workspace: int):
     i3.command(f"move container to workspace number {workspace}")
 
 
+def get_i3_state(i3: i3ipc.Connection):
+    """
+    Return a tuple with the focused workspace, a list of open workspaces, and a
+    list of visible workspaces.
+    """
+    focused = None
+    workspaces = []
+    visible = []
+    for ws in i3.get_workspaces():
+        workspaces.append(ws.num)
+        if ws.focused:
+            focused = ws.num
+        if ws.visible:
+            visible.append(ws.num)
+    return focused, workspaces, visible
+
+
 def get_target_workspace(focused, open_workspaces, visible, targets):
     """
-    Find the workspace to switch to.
+    Find the workspace to switch to based on the current state of open and
+    visible workspaces.
 
-    - If the focused workspace is a target, go to the next target.
-    - If the focused workspace isn't a target, go to the first open target.
-
-    :param focused: The number of the open workspace.
+    :param focused: The number of the currently focused workspace.
     :param open_workspaces: The numbers of open workspaces.
+    :param visible: The numbers of visible workspaces.
     :param targets: The target workspaces.
     :return: The workspace to jump to.
 
@@ -83,7 +102,7 @@ def get_target_workspace(focused, open_workspaces, visible, targets):
     )
 
     if len(targets) <= 0:
-        logger.debug('No workspaces given - defaulting to focused workspace %s',
+        logger.debug('No workspaces given - staying on focused workspace %s',
                      focused)
         return focused
 
@@ -115,31 +134,18 @@ def get_target_workspace(focused, open_workspaces, visible, targets):
     return targets[0]
 
 
-def get_i3_state(i3: i3ipc.Connection):
-    focused = None
-    workspaces = []
-    visible = []
-    for ws in i3.get_workspaces():
-        workspaces.append(ws.num)
-        if ws.focused:
-            focused = ws.num
-        if ws.visible:
-            visible.append(ws.num)
-    return focused, workspaces, visible
-
-
 def main():
     """Main script entrypoint."""
     args = parser.parse_args()
     assert len(args.workspaces) > 0, "expected at least one target workspace"
-
     targets = args.workspaces
+
     i3 = i3ipc.Connection()
 
     focused, workspaces, visible = get_i3_state(i3)
     logging.debug('Focused workspace: %s', focused)
     logging.debug('Open workspaces: %s', workspaces)
-    logging.debug('visible workspaces: %s', visible)
+    logging.debug('Visible workspaces: %s', visible)
 
     target = get_target_workspace(focused, workspaces, visible, targets)
     logging.info('Going to workspace %s', target)
