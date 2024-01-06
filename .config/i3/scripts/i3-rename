@@ -61,17 +61,17 @@ cmd_smart() {
 }
 
 main() {
+  if (( "$#" < 2 )); then
+    usage
+    exit 1
+  fi
+
   workspace="$(get_current_workspace)"
   workspace_name="$(name "$workspace")"
   workspace_number="$(number "$workspace")"
 
   # get the workspace name without the numeric prefix
   bare_name="${workspace_name##"$workspace_number"}"
-
-  if (( "$#" < 2 )); then
-    usage
-    exit 1
-  fi
 
   new_name=
 
