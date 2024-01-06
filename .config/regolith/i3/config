@@ -161,7 +161,7 @@ set $mode_launch (c)ode, (d)iscord, (e)macs, (f)iles, (m)onitor, (n)vtop, (o)bsi
 mode "$mode_launch" {
     bindsym c exec ~/.config/i3/scripts/rofi_code.zsh, mode "default"
     bindsym Shift+C exec code -n, mode "default"
-    bindsym d exec discord, mode "default"
+    bindsym d exec flatpak run com.discordapp.Discord, mode "default"
     bindsym e exec emacs, mode "default"
     bindsym f exec $i3-wm.program.files, mode "default"
     bindsym m exec gnome-system-monitor, mode "default"
