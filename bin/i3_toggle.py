@@ -1,4 +1,4 @@
-#!/usr/bin/env python3.8
+#!/usr/bin/env python3.11
 """
 A helper script for cycling through multiple numbered i3 workspaces, allowing
 one keybinding to access multiple workspaces.
