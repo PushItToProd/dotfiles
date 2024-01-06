@@ -1,61 +1,99 @@
 #!/usr/bin/env bash
-# Renumber a workspace without renaming or rename without renumbering.
+# i3-rename is a helper script for renaming and renumbering i3 workspaces. i3's
+# rename command sets both name and number, but we often want to change just the
+# name or just the number without affecting the other.
 set -euo pipefail
+
+readonly PROGNAME="$0"
 
 usage() {
   cat <<EOF
-usage: $0 [--name NAME | --number NUMBER]
+usage: $PROGNAME [OPTION]
+Intelligently rename and/or renumber i3 workspaces.
+
+You must provide one of the following commands:
+  --number NUM      Set the workspace number but preserve its current name.
+  --name NAME       Set the workspace name but preserve its current number.
+  --nameif NAME     Set the workspace name only if it isn't already named,
+                    preserving its current number.
+  --smart NUM       (numeric argument) Set the workspace number but preserve its
+                    current name.
+  --smart NAME      (non-numeric argument) Set the workspace name but preserve
+                    its current number.
+  --smart NUM:NAME  Set both the workspace number and name.
 EOF
 } >&2
 
-get_current_workspace() {
+# get focused workspace JSON using i3-msg
+i3::get_current_workspace() {
   i3-msg -t get_workspaces | jq -r '.. | select(.focused?==true)'
 }
 
-# get workspace number
-number() {
+# get workspace number from workspace JSON returned by i3::get_current_workspace
+i3::workspace_number() {
   echo "$1" | jq -r '.num'
 }
 
-# get workspace name
-name() {
+# get workspace name from workspace JSON returned by i3::get_current_workspace
+i3::workspace_name() {
   echo "$1" | jq -r '.name'
 }
 
-rename() {
+# invoke i3 to rename the current workspace
+i3::rename() {
+  # FIXME if the workspace name includes a double quote character, this will
+  # break
   i3-msg "$(printf 'rename workspace to "%s"' "$1")"
 }
 
+# --nameif sets the workspace name only if it currently doesn't have a name.
+# This allows scripts to set workspace names without overriding the user's
+# custom name if one is already set.
 cmd_nameif() {
-  # only rename if there isn't a name set
   if [[ "$bare_name" ]]; then
-    echo "the name '$bare_name' is already set - not renaming"
+    echo "the current workspace already has a name set ('$bare_name') - not renaming" >&2
     return
   fi
 
   new_name="${workspace_number}:$1"
 }
 
+# --name renames the workspace without changing its number or unsets its name if
+# no argument is provided
 cmd_name() {
   # just stick the new name after the current number
   if [[ "$1" ]]; then
     name=":$1"
   else
+    # clear the current workspace name
     name=""
   fi
   new_name="${workspace_number}${name}"
 }
 
+# --number sets the workspace number without changing its name
 cmd_number() {
   new_name="$1${bare_name}"
 }
 
+# --smart can rename or renumber a workspace or both depending on its argument.
+#
+# - If the argument is numeric, then it sets the workspace number, preserving
+#   any existing name.
+# - If the argument starts with a number and a colon (ex. "15:xyz") then it sets
+#   both the workspace number and name.
+# - Otherwise, it takes the argument as a new name to set without altering the
+#   workspace number. If the argument is blank, this will clear the workspace
+#   name.
 cmd_smart() {
   if [[ "$1" =~ ^[0-9]+$ ]]; then
+    # the argument is entirely numeric -> just renumber the workspace
     cmd_number "$1"
   elif [[ "$1" =~ ^[0-9]+: ]]; then
+    # the argument starts with a number and a colon -> rename and renumber
     new_name="$1"
   else
+    # the argument doesn't start with a number -> just rename the workspace
     cmd_name "$1"
   fi
 }
@@ -66,15 +104,19 @@ main() {
     exit 1
   fi
 
-  workspace="$(get_current_workspace)"
-  workspace_name="$(name "$workspace")"
-  workspace_number="$(number "$workspace")"
+  workspace="$(i3::get_current_workspace)"
+  workspace_name="$(i3::workspace_name "$workspace")"
+  workspace_number="$(i3::workspace_number "$workspace")"
 
   # get the workspace name without the numeric prefix
   bare_name="${workspace_name##"$workspace_number"}"
 
+  # global variable holding the new name for the workspace, which is to be
+  # updated by the cmd_* functions.
   new_name=
 
+  # dispatch to the appropriate cmd_* function. these functions update new_name
+  # as appropriate, which is then used to rename the workspace
   case "$1" in
     --nameif)
       cmd_nameif "$2"
@@ -96,12 +138,12 @@ main() {
   esac
 
   if [[ ! "$new_name" ]]; then
-    echo "no new name set - not renaming"
+    echo "no new name set - not renaming" >&2
     exit 0
   fi
 
   echo "renaming to $new_name"
-  rename "$new_name"
+  i3::rename "$new_name"
 }
 if [[ "${BASH_SOURCE[0]}" == "$0" ]]; then
   main "$@"
