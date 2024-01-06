@@ -38,7 +38,8 @@
         "*.scm": "racket",
         "*.arc": "racket",
         ".env": "plaintext",
-        ".env.local": "plaintext"
+        ".env.local": "plaintext",
+        "*.makefile": "makefile"
     },
     "files.exclude": {
         "**/.git": true,
@@ -108,7 +109,6 @@
     "zenMode.fullScreen": false,
     "zenMode.hideActivityBar": false,
     "zenMode.hideStatusBar": false,
-    "zenMode.hideTabs": false,
 
     /// Plugin Settings ///
     // vscodevim
@@ -293,7 +293,6 @@
     "lean.input.leader": "/",
     "update.showReleaseNotes": false,
     "update.mode": "manual",
-    "workbench.editor.untitled.hint": "hidden",
     "notebook.cellToolbarLocation": {
         "default": "right",
         "jupyter-notebook": "left"
@@ -380,5 +379,5 @@
     "powermode.combo.timeout": 5,
     "powermode.explosions.maxExplosions": 4,
     "workbench.editor.empty.hint": "hidden",
-    "window.zoomLevel": -1
+    "workbench.editor.tabActionCloseVisibility": false
 }
