@@ -67,31 +67,38 @@ def get_target_workspace(focused, open_workspaces, visible, targets):
     :param targets: The target workspaces.
     :return: The workspace to jump to.
 
+    - If there's only one target, focus that target.
+    - If the focused workspace is a target, focus the next target after it in
+      the targets list (wrapping around if necessary).
+    - If a target is visible, focus the first visible target in the list.
+    - If a target is open, focus the first open target in the list.
+    - Otherwise, focus the first target in the list.
+
     When the focused workspace isn't a target and we only have one target,
     go to the target.
     >>> get_target_workspace(-1, [-1], [-1], [1])
     1
 
-    When the focused workspace is a target, go to the next target.
+    When the focused workspace is a target, go to the next target in the list.
     >>> get_target_workspace(1, [1, 2], [1], [1, 2])
     2
     >>> get_target_workspace(2, [1, 2], [2], [1, 2])
     1
 
-    Focused workspace is not a target, not all targets are open, and none are
-    visible, so we should go to the first open workspace.
+    When the focused workspace is not a target and none of the targets are
+    visible, we should go to the first open target in the list.
     >>> get_target_workspace(-1, [2], [-1], [1, 2])
     2
 
-    Focused workspace is a target and not all targets are open, but we should
-    still go to the first open workspace.
+    When the focused workspace is a target and there's another target that isn't
+    open, we should open that other target workspace.
     >>> get_target_workspace(2, [2], [2], [1, 2])
     1
     >>> get_target_workspace(1, [1], [1], [1, 2])
     2
 
-    Focused workspace is not a target. Two target workspaces are open but one is
-    visible, so we should go to the visible one.
+    When the focused workspace is not a target and multiple targets are open, we
+    should go to any visible target before going to other targets.
     >>> get_target_workspace(-1, [-1, 1, 2], [-1, 2], [1, 2, 3])
     2
     """
