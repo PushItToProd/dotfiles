@@ -256,7 +256,7 @@
     "[haskell]": {
         "editor.tabSize": 2
     },
-    "explorer.openEditors.visible": 0,
+    "explorer.openEditors.visible": 10,
     "python.defaultInterpreterPath": "/usr/bin/python3.9",
     "python.showStartPage": false,
     "workbench.editorAssociations": {
