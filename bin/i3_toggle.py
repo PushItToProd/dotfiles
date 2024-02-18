@@ -1,9 +1,13 @@
 #!/usr/bin/env python3.11
 """
-A helper script for cycling through multiple numbered i3 workspaces, allowing
-one keybinding to access multiple workspaces.
+A helper script for i3 that allows one keybinding to access and cycle through
+multiple numbered workspaces, as well as move containers to them.
 
-This script takes two or more target workspace numbers to cycle through.
+This script should be invoked with a list of two or more workspace numbers to
+target for navigation. It will navigate between them intuitively, cycling focus
+through the listed workspaces when one of them is focused and otherwise finding
+the first reasonable one to open.
+
 """
 import argparse
 import logging
@@ -56,10 +60,15 @@ def get_i3_state(i3: i3ipc.Connection):
     return focused, workspaces, visible
 
 
-def get_target_workspace(focused, open_workspaces, visible, targets):
+def get_target_workspace(
+    focused: int,
+    open_workspaces: list[int],
+    visible: list[int],
+    targets: list[int]
+):
     """
-    Find the workspace to switch to based on the current state of open and
-    visible workspaces.
+    Find the target workspace to switch to based on the current state of open
+    and visible workspaces.
 
     :param focused: The number of the currently focused workspace.
     :param open_workspaces: The numbers of open workspaces.
@@ -67,12 +76,14 @@ def get_target_workspace(focused, open_workspaces, visible, targets):
     :param targets: The target workspaces.
     :return: The workspace to jump to.
 
-    - If there's only one target, focus that target.
-    - If the focused workspace is a target, focus the next target after it in
-      the targets list (wrapping around if necessary).
-    - If a target is visible, focus the first visible target in the list.
-    - If a target is open, focus the first open target in the list.
-    - Otherwise, focus the first target in the list.
+    The workspace to switch to is selected based on the following algorithm:
+
+    - If the focused workspace is a target, cycle to the next target in the list
+      after the focused workspace.
+    - If the focused workspace isn't a target, go to the first visible target in
+      the list.
+    - If no targets are visible, go to the first open target in the list.
+    - If no targets are open, go to the first target in the list.
 
     When the focused workspace isn't a target and we only have one target,
     go to the target.
@@ -123,8 +134,13 @@ def get_target_workspace(focused, open_workspaces, visible, targets):
         target_index %= len(targets)
         return targets[target_index]
 
+    # Here we identify which workspace to switch to.
     logger.debug("Focused workspace isn't a target - going to first open or "
                  "visible target")
+
+    # This loop finds the first visible or open workspace in the targets list.
+    # If a target is visible, we go to that one immediately. If a target is
+    # open, we save the first open target and go to that one.
     first_open = None
     for ws in targets:
         if ws in visible:
