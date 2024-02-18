@@ -361,7 +361,7 @@
     "svelte.enable-ts-plugin": true,
     "svelte.plugin.svelte.note-new-transformation": false,
     "git.openRepositoryInParentFolders": "never",
-    "workbench.colorTheme": "Bearded Theme Arc Reversed",
+    "workbench.colorTheme": "Bearded Theme Black & Diamond",
     "notebook.lineNumbers": "on",
     "terminal.integrated.commandsToSkipShell": [
         "language-julia.interrupt"
@@ -372,12 +372,15 @@
     },
     "zenMode.hideLineNumbers": false,
     "zenMode.restore": false,
-    "editor.fontFamily": "'Comic Mono', 'Droid Sans Mono', 'monospace', monospace",
     "powermode.enabled": true,
     "powermode.shake.intensity": 2,
     "powermode.combo.threshold": 5,
     "powermode.combo.timeout": 5,
     "powermode.explosions.maxExplosions": 4,
     "workbench.editor.empty.hint": "hidden",
-    "workbench.editor.tabActionCloseVisibility": false
+    "workbench.editor.tabActionCloseVisibility": false,
+    "editor.fontFamily": "'Comic Mono', 'JetBrains Mono', 'Droid Sans Mono', 'monospace', monospace",
+    "files.autoSave": "afterDelay",
+    // "editor.fontFamily": "'Noto Sans Mono', 'Droid Sans Mono', 'monospace', monospace",
+    // "editor.fontWeight": 750,
 }
