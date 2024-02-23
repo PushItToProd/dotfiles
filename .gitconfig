@@ -16,8 +16,11 @@
   name = pushittoprod
   email = 31714132+PushItToProd@users.noreply.github.com
 [diff]
-    tool = default-difftool
+  tool = default-difftool
+  algorithm = histogram
 [difftool "default-difftool"]
-    cmd = code --wait --diff $LOCAL $REMOTE
+  cmd = code --wait --diff $LOCAL $REMOTE
 [init]
-    defaultBranch = main
+  defaultBranch = main
+[merge]
+  conflictstyle = diff3
