@@ -361,7 +361,7 @@
     "svelte.enable-ts-plugin": true,
     "svelte.plugin.svelte.note-new-transformation": false,
     "git.openRepositoryInParentFolders": "never",
-    "workbench.colorTheme": "Bearded Theme Black & Diamond",
+    "workbench.colorTheme": "Visual Studio Dark",
     "notebook.lineNumbers": "on",
     "terminal.integrated.commandsToSkipShell": [
         "language-julia.interrupt"
