@@ -381,6 +381,7 @@
     "workbench.editor.tabActionCloseVisibility": false,
     "editor.fontFamily": "'Comic Mono', 'JetBrains Mono', 'Droid Sans Mono', 'monospace', monospace",
     "files.autoSave": "afterDelay",
+    "editor.wrappingIndent": "deepIndent",
     // "editor.fontFamily": "'Noto Sans Mono', 'Droid Sans Mono', 'monospace', monospace",
     // "editor.fontWeight": 750,
 }
