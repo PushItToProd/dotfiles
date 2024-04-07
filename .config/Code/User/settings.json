@@ -362,7 +362,6 @@
     "svelte.plugin.svelte.note-new-transformation": false,
     "git.openRepositoryInParentFolders": "never",
     "workbench.colorTheme": "Visual Studio Dark",
-    "notebook.lineNumbers": "on",
     "terminal.integrated.commandsToSkipShell": [
         "language-julia.interrupt"
     ],
@@ -382,6 +381,7 @@
     "editor.fontFamily": "'Comic Mono', 'JetBrains Mono', 'Droid Sans Mono', 'monospace', monospace",
     "files.autoSave": "afterDelay",
     "editor.wrappingIndent": "deepIndent",
+    "notebook.lineNumbers": "on",
     // "editor.fontFamily": "'Noto Sans Mono', 'Droid Sans Mono', 'monospace', monospace",
     // "editor.fontWeight": 750,
 }
