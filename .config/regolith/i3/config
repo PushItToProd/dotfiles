@@ -534,6 +534,7 @@ for_window [class="Org.gnome.Nautilus"] floating enable, resize set 1600 1200
 for_window [class="Blueman-manager"] floating enable, sticky enable
 for_window [class="Pomodoro"] floating enable, sticky enable
 for_window [class="Gui.pyc"] floating enable  # Lucas Chess
+for_window [class="Org.gnome.clocks"] floating enable, resize set 640 480
 
 ###############################################################################
 # Window Resize and Gaps
