@@ -21,6 +21,7 @@
 .config/Code/User/workspaceStorage
 .config/Code/User/globalStorage
 .config/Code/User/History
+*.vscdb.backup
 
 !.zshrc
 !.zsh
