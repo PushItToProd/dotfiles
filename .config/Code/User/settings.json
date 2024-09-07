@@ -382,6 +382,12 @@
     "files.autoSave": "afterDelay",
     "editor.wrappingIndent": "deepIndent",
     "notebook.lineNumbers": "on",
+    "notebook.output.fontSize": 18,
+    "notebook.output.scrolling": true,
+    "notebook.consolidatedOutputButton": false,
+    "notebook.showFoldingControls": "always",
+    "notebook.output.lineHeight": 1.1,
+    "notebook.markup.fontSize": 24,
     // "editor.fontFamily": "'Noto Sans Mono', 'Droid Sans Mono', 'monospace', monospace",
     // "editor.fontWeight": 750,
 }

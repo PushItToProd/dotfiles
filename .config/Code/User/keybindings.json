@@ -97,7 +97,13 @@
     },
     {
         "key": "alt+m",
-        "command": "workbench.action.editor.changeLanguageMode"
+        "command": "workbench.action.editor.changeLanguageMode",
+        "when": "!notebookEditorFocused"
+    },
+    {
+        "key": "alt+m",
+        "command": "notebook.cell.changeLanguage",
+        "when": "notebookEditorFocused"
     },
     {
         "key": "alt+p",
