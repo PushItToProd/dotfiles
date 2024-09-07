@@ -12,13 +12,14 @@
 
 # XXX alternatively, figure out how to sort workspaces by most recently used.
 
+readonly PROGPATH="${(%):-%N}"
+readonly PROGDIR="${PROGPATH:A:h}"
+
 # dump all workspaces using jq
 _list_workspaces() {
-  jq -r '
-    if .folder
-    then .folder
-    else .configuration.external
-    end
+  jq -L"$PROGDIR" -r '
+    include "urldecode";
+    (.folder // .workspace // .configuration.external) | urldecode
   ' $HOME/.config/Code/User/workspaceStorage/*/workspace.json
 }
 
