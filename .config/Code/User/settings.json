@@ -12,6 +12,8 @@
     "workbench.editor.focusRecentEditorAfterClose": false,
     "workbench.editor.labelFormat": "short",
 
+    "explorer.sortOrder": "type",
+
     "emmet.triggerExpansionOnTab": true,
     "emmet.showSuggestionsAsSnippets": true,
     "emmet.includeLanguages": {
@@ -39,7 +41,8 @@
         "*.arc": "racket",
         ".env": "plaintext",
         ".env.local": "plaintext",
-        "*.makefile": "makefile"
+        "*.makefile": "makefile",
+        "*.tcss": "Textual CSS"
     },
     "files.exclude": {
         "**/.git": true,
@@ -210,6 +213,9 @@
         "editor.tabSize": 2,
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
+    "[jsonnet]": {
+        "editor.tabSize": 2,
+    },
     "[markdown]": {
         "editor.semanticHighlighting.enabled": true,
         "editor.tabSize": 2,
@@ -275,7 +281,7 @@
         "editor.tabSize": 2,
         "files.autoGuessEncoding": false,
         "editor.snippetSuggestions": "bottom",
-        "editor.renderIndentGuides": false,
+        // "editor.renderIndentGuides": false,
         // "editor.autoIndent": "advanced",
         "editor.insertSpaces": true,
         "editor.formatOnType": true,
@@ -339,7 +345,6 @@
     },
     "editor.suggestSelection": "first",
     "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
-    "python.experiments.enabled": false,
     "notebook.output.textLineLimit": 40,
     "testing.openTesting": "openOnTestFailure",
     "workbench.colorCustomizations": {
@@ -352,7 +357,8 @@
         },
         "[Bearded Theme Arc Reversed]": {
             // TODO: make file explorer font brighter
-            "editorRuler.foreground": "#4f4f4f"
+            "editorRuler.foreground": "#4f4f4f",
+            "panel.border": "#4f4f4f"
         }
     },
     "editor.lineHeight": 1.2,
@@ -360,8 +366,11 @@
     "jupyter.askForKernelRestart": false,
     "svelte.enable-ts-plugin": true,
     "svelte.plugin.svelte.note-new-transformation": false,
+    "[svelte]": {
+        "editor.tabSize": 2
+    },
     "git.openRepositoryInParentFolders": "never",
-    "workbench.colorTheme": "Visual Studio Dark",
+    "workbench.colorTheme": "Bearded Theme Arc Reversed",
     "terminal.integrated.commandsToSkipShell": [
         "language-julia.interrupt"
     ],
