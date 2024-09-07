@@ -404,7 +404,11 @@
     },
     {
         "key": "ctrl+[",
-        "command": "outline.toggleVisibility"
+        "command": "workbench.action.toggleSidebarVisibility"
+    },
+    {
+        "key": "ctrl+]",
+        "command": "workbench.action.toggleAuxiliaryBar"
     },
     {
         "key": "ctrl+[",
@@ -560,16 +564,6 @@
     {
         "key": "alt+right",
         "command": "editor.action.indentLines",
-        "when": "editorTextFocus && !editorReadonly"
-    },
-    {
-        "key": "ctrl+]",
-        "command": "editor.action.indentLines",
-        "when": "editorTextFocus && !editorReadonly"
-    },
-    {
-        "key": "ctrl+[",
-        "command": "editor.action.outdentLines",
         "when": "editorTextFocus && !editorReadonly"
     },
     {
