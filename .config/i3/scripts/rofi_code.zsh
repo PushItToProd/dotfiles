@@ -16,14 +16,39 @@
 
 readonly PROGPATH="${(%):-%N}"
 readonly PROGDIR="${PROGPATH:A:h}"
+readonly WORKSPACE_STORAGE_PATH="$HOME/.config/Code/User/workspaceStorage"
 
-# dump all workspaces using jq
+# _list_workspace_files lists all workspace directories sorted by last modified
+# date
+_list_workspace_files() {
+  local state_file
+  local workspace_file
+  find "$WORKSPACE_STORAGE_PATH" -name state.vscdb -printf "%T@ %p\0" |
+    sort --zero-terminated --numeric-sort --reverse |
+    while read -r -d '' _ state_file; do
+      workspace_file="$(dirname "$state_file")/workspace.json"
+      if [[ -f "$workspace_file" ]]; then
+        printf '%s\n' "$workspace_file"
+      fi
+    done
+}
+
+# _list_workspaces calls jq on all the files emitted by _list_workspace_files
 _list_workspaces() {
+  # shellcheck disable=SC2046
   jq -L"$PROGDIR" -r '
     include "urldecode";
     (.folder // .workspace // .configuration.external) | urldecode
-  ' $HOME/.config/Code/User/workspaceStorage/*/workspace.json
+  ' $(_list_workspace_files)
 }
+
+# # dump all workspaces using jq
+# _list_workspaces() {
+#   jq -L"$PROGDIR" -r '
+#     include "urldecode";
+#     (.folder // .workspace // .configuration.external) | urldecode
+#   ' $HOME/.config/Code/User/workspaceStorage/*/workspace.json
+# }
 
 # abbreviate_homedir takes a path and, if it is located within the user's
 # home directory, shortens it to begin with ~
