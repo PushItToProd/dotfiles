@@ -11,6 +11,8 @@
 # access.
 
 # XXX alternatively, figure out how to sort workspaces by most recently used.
+# -> It looks like each directory contains a state.vscdb file that gets modified
+# each time the workspace is used.
 
 readonly PROGPATH="${(%):-%N}"
 readonly PROGDIR="${PROGPATH:A:h}"
