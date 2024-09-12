@@ -13,6 +13,22 @@ readonly PROGPATH="${(%):-%N}"
 readonly PROGDIR="${PROGPATH:A:h}"
 readonly WORKSPACE_STORAGE_PATH="$HOME/.config/Code/User/workspaceStorage"
 
+rofi_error() {
+  echo -e "\0prompt\x1fError!"
+  echo -e "\0no-custom\x1ftrue"
+  echo -e "\0data\x1fFAIL"
+  echo -e "\0urgent\x1f0,1"
+  echo -e "Error: $*\0urgent\x1ftrue"
+  echo -e "Please add Go to your shell profile script and try again."
+}
+
+ensure_go() {
+  if ! command -v go &>/dev/null; then
+    rofi_error "Go is not installed or isn't on the PATH"
+    exit 1
+  fi
+}
+
 list_workspaces() {
   go run $HOME/bin/list_vscode_workspaces/cmd/list_workspaces/main.go "$@"
 }
@@ -38,6 +54,11 @@ rofi_main() {
   # TODO: use ROFI_RETV to determine behavior.
   # https://davatorium.github.io/rofi/1.7.5/rofi-script.5/#rofi_retv
 
+  # check if Go is available and display an error if not.
+  if ! ensure_go; then
+    exit 1
+  fi
+
   # If there are no arugments, list workspaces in a format suitable for rofi.
   if (( $# == 0 )); then
     list_workspaces
@@ -49,6 +70,10 @@ rofi_main() {
 
 # the main entrypoint for the script
 main() {
+  if [[ "$ROFI_DATA" == FAIL ]]; then
+    echo "ROFI_DATA is set to FAIL due to a previous error - giving up" >&2
+  fi
+
   # if ROFI_RETV is set, then we're invoked from within rofi
   if [[ -v ROFI_RETV ]]; then
     rofi_main "$@"
