@@ -9,21 +9,49 @@ import (
 	"log"
 	"os"
 	"path"
+	"path/filepath"
 	"slices"
+	"strings"
 	"time"
 )
 
 var ErrPathNotInJson = errors.New("workspace path not found in workspace.json")
+var ErrSkipEntry = errors.New("skipping this entry")
 
 type WorkspaceEntry struct {
-	WorkspacePath string    // path to the underlying workspace
-	ModTime       time.Time // last modified time of state.vscdb
+	WsCodePath string    // path to the underlying workspace - i.e. where the code actually resides
+	ModTime    time.Time // last modified time of state.vscdb
 }
 
 func (e WorkspaceEntry) String() string {
-	return fmt.Sprintf("%v %v", e.ModTime, e.WorkspacePath)
+	return fmt.Sprintf("%v %v", e.ModTime, e.WsCodePath)
 }
 
+func RemoveFileSchema(path string) string {
+	path, _ = strings.CutPrefix(path, "file://")
+	return path
+}
+
+// TruncateDirPrefix converts a path like /home/joe/foo/bar/baz to ~/foo/bar/baz,
+// given an invocation like TruncateDirPrefix("/home/joe/foo/bar/baz", "/home/joe", "~")
+func TruncateDirPrefix(path string, basedir string, replacement string) string {
+	relPath, err := filepath.Rel(basedir, path)
+	if err != nil {
+		return path
+	}
+	if replacement == "" {
+		return relPath
+	}
+	return filepath.Join("~", relPath)
+}
+
+func CleanPath(homedir, path string) string {
+	cleanedPath := RemoveFileSchema(path)
+	cleanedPath = TruncateDirPrefix(cleanedPath, homedir, "~")
+	return cleanedPath
+}
+
+// sortWorkspaceEntryList orders a list of WorkspaceEntries newest to oldest.
 func sortWorkspaceEntryList(entries []WorkspaceEntry) {
 	slices.SortStableFunc(entries, func(a, b WorkspaceEntry) int {
 		// negate so the most recent entries will be at the top
@@ -31,6 +59,7 @@ func sortWorkspaceEntryList(entries []WorkspaceEntry) {
 	})
 }
 
+// WorkspaceJson is used for unmarshaling the workspace.json files for each workspace.
 type WorkspaceJson struct {
 	Folder        string `json:"folder"`
 	Workspace     string `json:"workspace"`
@@ -39,12 +68,29 @@ type WorkspaceJson struct {
 	} `json:"configuration"`
 }
 
+func (wsj WorkspaceJson) CodePath() string {
+	paths := []string{
+		wsj.Folder,
+		wsj.Workspace,
+		wsj.Configuration.External,
+	}
+	for _, path := range paths {
+		if path != "" {
+			return path
+		}
+	}
+	return ""
+}
+
+// WithMessagef wraps an error with a formatted message.
 func WithMessagef(err error, format string, a ...any) error {
 	fstr := format + ": %w"
 	a = append(a, err)
 	return fmt.Errorf(fstr, a...)
 }
 
+// getWsModTime returns the last modified time of the state file for the given
+// workspace directory.
 func getWsModTime(wsDir string) (time.Time, error) {
 	stateFile := path.Join(wsDir, "state.vscdb")
 	stat, err := os.Lstat(stateFile)
@@ -55,6 +101,7 @@ func getWsModTime(wsDir string) (time.Time, error) {
 	return stat.ModTime(), err
 }
 
+// getWsCodePath attempts to locate the underlying directory.
 func getWsCodePath(wsDir string) (string, error) {
 	wsFile := path.Join(wsDir, "workspace.json")
 
@@ -69,19 +116,43 @@ func getWsCodePath(wsDir string) (string, error) {
 		return "", WithMessagef(err, "couldn't unmarshal workspace json %s", wsFile)
 	}
 
-	if wsJson.Folder != "" {
-		return wsJson.Folder, nil
+	path := wsJson.CodePath()
+	if path == "" {
+		return "", WithMessagef(ErrPathNotInJson, "couldn't find a workspace path in %s", wsFile)
 	}
-	if wsJson.Workspace != "" {
-		return wsJson.Workspace, nil
-	}
-	if wsJson.Configuration.External != "" {
-		return wsJson.Configuration.External, nil
-	}
-
-	return "", WithMessagef(ErrPathNotInJson, "couldn't find a workspace path in %s", wsFile)
+	return path, nil
 }
 
+// getWsEntry returns a single workspace entry for the given path (or an error
+// if no valid workspace could be found.)
+func getWsEntry(wsStoragePath string, entry fs.DirEntry) (WorkspaceEntry, error) {
+	var none WorkspaceEntry
+	if !entry.IsDir() {
+		return none, ErrSkipEntry
+	}
+
+	name := entry.Name()
+	wsDir := path.Join(wsStoragePath, name)
+
+	modTime, err := getWsModTime(wsDir)
+	if err != nil {
+		return none, err
+	}
+
+	// read the workspace path from the file
+	wsFile, err := getWsCodePath(wsDir)
+	if err != nil {
+		return none, err
+	}
+
+	return WorkspaceEntry{
+		WsCodePath: wsFile,
+		ModTime:    modTime,
+	}, nil
+}
+
+// getWorkspaceEntries searches the given directory path for VS Code workspaces
+// and returns a slice of WorkspaceEntry structs.
 func getWorkspaceEntries(wsStoragePath string) ([]WorkspaceEntry, error) {
 	entries, err := os.ReadDir(wsStoragePath)
 	if err != nil {
@@ -90,37 +161,22 @@ func getWorkspaceEntries(wsStoragePath string) ([]WorkspaceEntry, error) {
 
 	workspaces := make([]WorkspaceEntry, 0, 1000)
 	for _, entry := range entries {
-		if !entry.IsDir() {
+		wsEntry, err := getWsEntry(wsStoragePath, entry)
+		if errors.Is(err, ErrSkipEntry) {
 			continue
 		}
-
-		name := entry.Name()
-		wsDir := path.Join(wsStoragePath, name)
-
-		modTime, err := getWsModTime(wsDir)
 		if err != nil {
-			if errors.Is(err, fs.ErrNotExist) {
-				continue
-			}
-			log.Fatal(err)
+			log.Printf("error processing %s: %v\n", entry.Name(), err)
+			continue
 		}
-
-		// read the workspace path from the file
-		wsFile, err := getWsCodePath(wsDir)
-		if err != nil {
-			if errors.Is(err, fs.ErrNotExist) || errors.Is(err, ErrPathNotInJson) {
-				continue
-			}
-			log.Fatal(err)
-		}
-
-		workspaces = append(workspaces, WorkspaceEntry{
-			WorkspacePath: wsFile,
-			ModTime:       modTime,
-		})
+		workspaces = append(workspaces, wsEntry)
 	}
 
 	return workspaces, nil
+}
+
+func PrintRofi(cleanedPath, rawPath string) string {
+	return fmt.Sprintf("%s\000info\x1f%s\n", cleanedPath, rawPath)
 }
 
 func main() {
@@ -138,6 +194,8 @@ func main() {
 	sortWorkspaceEntryList(wsEntries)
 
 	for _, entry := range wsEntries {
-		fmt.Println(entry)
+		cleanedPath := CleanPath(homedir, entry.WsCodePath)
+
+		fmt.Printf("%s %s\n", entry.ModTime, cleanedPath)
 	}
 }
