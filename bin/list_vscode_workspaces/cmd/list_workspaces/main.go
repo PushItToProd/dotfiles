@@ -4,6 +4,7 @@ package main
 import (
 	"encoding/json"
 	"errors"
+	"flag"
 	"fmt"
 	"io/fs"
 	"log"
@@ -17,6 +18,7 @@ import (
 
 var ErrPathNotInJson = errors.New("workspace path not found in workspace.json")
 var ErrSkipEntry = errors.New("skipping this entry")
+var plainFlag = flag.Bool("plain", false, "If provided, print output to stdout in a plaintext format instead of rofi row format.")
 
 type WorkspaceEntry struct {
 	WsCodePath string    // path to the underlying workspace - i.e. where the code actually resides
@@ -176,10 +178,13 @@ func getWorkspaceEntries(wsStoragePath string) ([]WorkspaceEntry, error) {
 }
 
 func PrintRofi(cleanedPath, rawPath string) string {
+	// https://davatorium.github.io/rofi/1.7.5/rofi-script.5/#parsing-row-options
 	return fmt.Sprintf("%s\000info\x1f%s\n", cleanedPath, rawPath)
 }
 
 func main() {
+	flag.Parse()
+
 	homedir, err := os.UserHomeDir()
 	if err != nil {
 		log.Fatalf("failed to get homedir: %v", err)
@@ -194,8 +199,13 @@ func main() {
 	sortWorkspaceEntryList(wsEntries)
 
 	for _, entry := range wsEntries {
-		cleanedPath := CleanPath(homedir, entry.WsCodePath)
+		rawPath := entry.WsCodePath
+		cleanedPath := CleanPath(homedir, rawPath)
 
-		fmt.Printf("%s %s\n", entry.ModTime, cleanedPath)
+		if *plainFlag {
+			fmt.Printf("%s %s (%s)\n", entry.ModTime, cleanedPath, rawPath)
+		} else {
+			fmt.Println(PrintRofi(cleanedPath, rawPath))
+		}
 	}
 }
