@@ -31,25 +31,25 @@ func (e WorkspaceEntry) String() string {
 
 // DecodeUrl tries to parse the workspace path as a file:// URL and
 // returns just the path.
-func DecodeUrl(path string) (string, error) {
-	u, err := url.Parse(path)
+func DecodeUrl(wsUrl string) (string, error) {
+	u, err := url.Parse(wsUrl)
 	if err != nil {
-		log.Printf("failed to parse workspace path as URL: %v: %s", err, path)
-		return path, err
+		log.Printf("failed to parse workspace path as URL: %v: %s", err, wsUrl)
+		return wsUrl, err
 	}
 	if u.Scheme != "file" {
-		log.Printf("found non-file workspace path: %s", path)
-		return path, nil // XXX return an error here?
+		log.Printf("found non-file workspace path: %s", wsUrl)
+		return wsUrl, nil // XXX return an error here?
 	}
 
-	// // remove URL encoding entities
-	// decodedPath, err := url.QueryUnescape(u.Path)
-	// if err != nil {
-	// 	log.Printf("failed to decode entities in workspace path: %v: %s", err, path)
-	// 	return path, err
-	// }
+	// remove URL encoding entities
+	decodedPath, err := url.QueryUnescape(u.Path)
+	if err != nil {
+		log.Printf("failed to decode entities in workspace path: %v: %s", err, wsUrl)
+		return wsUrl, err
+	}
 
-	return u.Path, nil
+	return decodedPath, nil
 }
 
 // TruncateDirPrefix converts a path like /home/joe/foo/bar/baz to ~/foo/bar/baz,
@@ -63,17 +63,6 @@ func TruncateDirPrefix(path string, basedir string, replacement string) string {
 		return relPath
 	}
 	return filepath.Join("~", relPath)
-}
-
-func CleanPath(homedir, path string) (string, error) {
-	var err error
-	cleanedPath, err := DecodeUrl(path)
-	if err != nil {
-		// XXX handle errors here
-		cleanedPath = path
-	}
-	cleanedPath = TruncateDirPrefix(cleanedPath, homedir, "~")
-	return cleanedPath, err
 }
 
 // sortWorkspaceEntryList orders a list of WorkspaceEntries newest to oldest.
@@ -176,9 +165,10 @@ func getWsEntry(wsStoragePath string, entry fs.DirEntry) (WorkspaceEntry, error)
 	// them here because they're invalid anywhere we'd use them. (If you run
 	// `code file:///foo%20bar/workspace.json` it will attempt to open the
 	// literal path `/foo%20bar/workspace.json` instead of `/foo bar/workspace.json`.)
-	decodedPath, err := url.PathUnescape(wsCodePath)
+	decodedPath, err := DecodeUrl(wsCodePath)
 	if err != nil {
 		log.Printf("failed to decode path: %s: %s", err, wsCodePath)
+		// If we failed to decode the path, try just using it anyway.
 		decodedPath = wsCodePath
 	}
 
@@ -239,12 +229,12 @@ func main() {
 		}
 
 		rawPath := entry.WsCodePath
-		cleanedPath, _ := CleanPath(homedir, rawPath)
+		friendlyPath := TruncateDirPrefix(rawPath, homedir, "~")
 
 		if *plainFlag {
-			fmt.Printf("%s %s (%s)\n", entry.ModTime, cleanedPath, rawPath)
+			fmt.Printf("%s %s (%s)\n", entry.ModTime, friendlyPath, rawPath)
 		} else {
-			fmt.Println(PrintRofi(cleanedPath, rawPath))
+			fmt.Println(PrintRofi(friendlyPath, rawPath))
 		}
 	}
 }
