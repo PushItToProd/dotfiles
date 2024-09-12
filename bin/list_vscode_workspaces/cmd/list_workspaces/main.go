@@ -13,6 +13,7 @@ import (
 	"path"
 	"path/filepath"
 	"slices"
+	"strings"
 	"time"
 )
 
@@ -29,21 +30,26 @@ func (e WorkspaceEntry) String() string {
 	return fmt.Sprintf("%v %v", e.ModTime, e.WsCodePath)
 }
 
-// DecodeUrl tries to parse the workspace path as a file:// URL and
-// returns just the path.
+// DecodeUrl parses a workspace URL as found in a workspace.json file and
+// returns it in a format suitable for passing to the `code` CLI to open the
+// workspace. This means stripping the file:// scheme part and URL decoding
+// any entities.
 func DecodeUrl(wsUrl string) (string, error) {
-	u, err := url.Parse(wsUrl)
-	if err != nil {
-		log.Printf("failed to parse workspace path as URL: %v: %s", err, wsUrl)
-		return wsUrl, err
-	}
-	if u.Scheme != "file" {
-		log.Printf("found non-file workspace path: %s", wsUrl)
-		return wsUrl, nil // XXX return an error here?
-	}
+	// In the past, I tried using url.Parse() here, but url.Parse() fails on
+	// URLs that contain % entities in the hostname, which is a problem since VS
+	// Code uses %2B as a delimiter in the hostname part of certain remote
+	// workspaces' URLs. (See also: https://github.com/golang/go/issues/30844)
+	// So, I've just given up on proper URL parsing and am instead resorting to
+	// stripping off the file:// prefix with string manipulation like a
+	// goddamned caveman.
+	path, _ := strings.CutPrefix(wsUrl, "file://")
 
-	// remove URL encoding entities
-	decodedPath, err := url.QueryUnescape(u.Path)
+	// TODO: truncate vscode-remote:// workspace URLs. XXX for that matter,
+	// should we even bother returning remote workspaces? Will they actually
+	// work from the CLI?
+
+	// Remove URL encoding entities
+	decodedPath, err := url.QueryUnescape(path)
 	if err != nil {
 		log.Printf("failed to decode entities in workspace path: %v: %s", err, wsUrl)
 		return wsUrl, err
