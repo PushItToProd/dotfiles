@@ -8,11 +8,11 @@ import (
 	"fmt"
 	"io/fs"
 	"log"
+	"net/url"
 	"os"
 	"path"
 	"path/filepath"
 	"slices"
-	"strings"
 	"time"
 )
 
@@ -29,9 +29,27 @@ func (e WorkspaceEntry) String() string {
 	return fmt.Sprintf("%v %v", e.ModTime, e.WsCodePath)
 }
 
-func RemoveFileSchema(path string) string {
-	path, _ = strings.CutPrefix(path, "file://")
-	return path
+// DecodeUrl tries to parse the workspace path as a file:// URL and
+// returns just the path.
+func DecodeUrl(path string) (string, error) {
+	u, err := url.Parse(path)
+	if err != nil {
+		log.Printf("failed to parse workspace path as URL: %v: %s", err, path)
+		return path, err
+	}
+	if u.Scheme != "file" {
+		log.Printf("found non-file workspace path: %s", path)
+		return path, nil // XXX return an error here?
+	}
+
+	// // remove URL encoding entities
+	// decodedPath, err := url.QueryUnescape(u.Path)
+	// if err != nil {
+	// 	log.Printf("failed to decode entities in workspace path: %v: %s", err, path)
+	// 	return path, err
+	// }
+
+	return u.Path, nil
 }
 
 // TruncateDirPrefix converts a path like /home/joe/foo/bar/baz to ~/foo/bar/baz,
@@ -47,10 +65,15 @@ func TruncateDirPrefix(path string, basedir string, replacement string) string {
 	return filepath.Join("~", relPath)
 }
 
-func CleanPath(homedir, path string) string {
-	cleanedPath := RemoveFileSchema(path)
+func CleanPath(homedir, path string) (string, error) {
+	var err error
+	cleanedPath, err := DecodeUrl(path)
+	if err != nil {
+		// XXX handle errors here
+		cleanedPath = path
+	}
 	cleanedPath = TruncateDirPrefix(cleanedPath, homedir, "~")
-	return cleanedPath
+	return cleanedPath, err
 }
 
 // sortWorkspaceEntryList orders a list of WorkspaceEntries newest to oldest.
@@ -70,6 +93,8 @@ type WorkspaceJson struct {
 	} `json:"configuration"`
 }
 
+// CodePath tries to find the workspace file or folder in the unmarshaled
+// workspace.json.
 func (wsj WorkspaceJson) CodePath() string {
 	paths := []string{
 		wsj.Folder,
@@ -142,15 +167,25 @@ func getWsEntry(wsStoragePath string, entry fs.DirEntry) (WorkspaceEntry, error)
 	}
 
 	// read the workspace path from the file
-	wsFile, err := getWsCodePath(wsDir)
+	wsCodePath, err := getWsCodePath(wsDir)
 	if err != nil {
 		return none, err
 	}
 
+	// The code CLI doesn't decode entities in URLs it's given, so we decode
+	// them here because they're invalid anywhere we'd use them. (If you run
+	// `code file:///foo%20bar/workspace.json` it will attempt to open the
+	// literal path `/foo%20bar/workspace.json` instead of `/foo bar/workspace.json`.)
+	decodedPath, err := url.PathUnescape(wsCodePath)
+	if err != nil {
+		log.Printf("failed to decode path: %s: %s", err, wsCodePath)
+		decodedPath = wsCodePath
+	}
+
 	return WorkspaceEntry{
-		WsCodePath: wsFile,
+		WsCodePath: decodedPath,
 		ModTime:    modTime,
-	}, nil
+	}, err
 }
 
 // getWorkspaceEntries searches the given directory path for VS Code workspaces
@@ -199,8 +234,12 @@ func main() {
 	sortWorkspaceEntryList(wsEntries)
 
 	for _, entry := range wsEntries {
+		if entry.WsCodePath == "" {
+			continue
+		}
+
 		rawPath := entry.WsCodePath
-		cleanedPath := CleanPath(homedir, rawPath)
+		cleanedPath, _ := CleanPath(homedir, rawPath)
 
 		if *plainFlag {
 			fmt.Printf("%s %s (%s)\n", entry.ModTime, cleanedPath, rawPath)
