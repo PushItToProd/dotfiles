@@ -1,0 +1,9 @@
+configuration {
+	modi: "window,drun,run";
+	font: "Source Code Pro Medium 16";
+	show-icons: true;
+	icon-theme: "Arc";
+	drun-display-format: "{name}";
+	window-format: " {n} {t}";
+	theme: "/usr/share/rofi/themes/android_notification.rasi";
+}
