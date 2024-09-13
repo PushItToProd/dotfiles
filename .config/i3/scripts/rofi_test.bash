@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-# readonly PROGPATH="${BASH_SOURCE[0]}"
+# Testing out Rofi.
+
 readonly PROGPATH="$(readlink -f "$0")"
 
 log() {
