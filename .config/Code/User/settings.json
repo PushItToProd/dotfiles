@@ -397,6 +397,7 @@
     "notebook.showFoldingControls": "always",
     "notebook.output.lineHeight": 1.1,
     "notebook.markup.fontSize": 24,
+    "go.toolsManagement.autoUpdate": true,
     // "editor.fontFamily": "'Noto Sans Mono', 'Droid Sans Mono', 'monospace', monospace",
     // "editor.fontWeight": 750,
 }
