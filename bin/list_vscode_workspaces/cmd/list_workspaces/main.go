@@ -79,6 +79,18 @@ func sortWorkspaceEntryList(entries []WorkspaceEntry) {
 	})
 }
 
+// dedupeWorkspaceEntryList removes any duplicates from the list.
+func dedupeWorkspaceEntryList(entries []WorkspaceEntry) []WorkspaceEntry {
+	paths := make(map[string]bool)
+	return slices.DeleteFunc(entries, func(e WorkspaceEntry) bool {
+		if paths[e.WsCodePath] {
+			return true
+		}
+		paths[e.WsCodePath] = true
+		return false
+	})
+}
+
 // WorkspaceJson is used for unmarshaling the workspace.json files for each workspace.
 type WorkspaceJson struct {
 	Folder        string `json:"folder"`
@@ -228,6 +240,7 @@ func main() {
 	}
 
 	sortWorkspaceEntryList(wsEntries)
+	wsEntries = dedupeWorkspaceEntryList(wsEntries)
 
 	for _, entry := range wsEntries {
 		if entry.WsCodePath == "" {
