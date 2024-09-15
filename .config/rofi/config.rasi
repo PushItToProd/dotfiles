@@ -1,5 +1,5 @@
 configuration {
-	modi: "window,drun,run";
+	modi: "window,drun,run,keys";
 	font: "Source Code Pro Medium 16";
 	show-icons: true;
 	icon-theme: "Arc";
