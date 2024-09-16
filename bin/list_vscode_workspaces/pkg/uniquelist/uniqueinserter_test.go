@@ -55,7 +55,7 @@ func TestInsertIsSorted(t *testing.T) {
 }
 
 func TestNewSortedInserter(t *testing.T) {
-	ui := uniquelist.NewSortedInserter[int](intComparator)
+	ui := uniquelist.NewSortedInserter(intComparator)
 	ui.Insert(3)
 	ui.Insert(1)
 	ui.Insert(2)
