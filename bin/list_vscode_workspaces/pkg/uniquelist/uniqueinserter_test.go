@@ -1,6 +1,7 @@
 package uniquelist_test
 
 import (
+	"cmp"
 	"slices"
 	"testing"
 
@@ -9,6 +10,13 @@ import (
 
 var intComparator uniquelist.Comparator[int] = func(a, b int) int {
 	return a - b
+}
+
+func assertSliceEquals[T cmp.Ordered](t *testing.T, actual []T, expected ...T) {
+	if slices.Compare(actual, expected) != 0 {
+		t.Helper()
+		t.Errorf("expected slice to look like %v but got this instead: %v", expected, actual)
+	}
 }
 
 func TestInsertRejectsDupes(t *testing.T) {
@@ -20,17 +28,13 @@ func TestInsertRejectsDupes(t *testing.T) {
 	if !ok {
 		t.Errorf("expected insert to be ok, but it was not: %+v", ui)
 	}
-	if slices.Compare(ui.S, []int{1}) != 0 {
-		t.Errorf("expected slice to look like [1] after insert but got this instead: %+v", ui.S)
-	}
+	assertSliceEquals(t, ui.S, 1)
 
 	ok = ui.Insert(1)
 	if ok {
 		t.Errorf("expected duplicate insert to be rejected")
 	}
-	if slices.Compare(ui.S, []int{1}) != 0 {
-		t.Errorf("expected slice to look like [1] after insert but got this instead: %+v", ui.S)
-	}
+	assertSliceEquals(t, ui.S, 1)
 }
 
 func TestInsertIsSorted(t *testing.T) {
@@ -38,14 +42,10 @@ func TestInsertIsSorted(t *testing.T) {
 
 	ui.Insert(3)
 	ui.Insert(1)
-	if slices.Compare(ui.S, []int{1, 3}) != 0 {
-		t.Errorf("expected slice to look like [1 3] but got this instead: %v", ui.S)
-	}
+	assertSliceEquals(t, ui.S, 1, 3)
 
 	ui.Insert(2)
-	if slices.Compare(ui.S, []int{1, 2, 3}) != 0 {
-		t.Errorf("expected slice to look like [1 2 3] but got this instead: %v", ui.S)
-	}
+	assertSliceEquals(t, ui.S, 1, 2, 3)
 }
 
 func TestNewSortedInserter(t *testing.T) {
@@ -53,8 +53,5 @@ func TestNewSortedInserter(t *testing.T) {
 	ui.Insert(3)
 	ui.Insert(1)
 	ui.Insert(2)
-
-	if slices.Compare(ui.S, []int{1, 2, 3}) != 0 {
-		t.Errorf("expected slice to look like [1 2 3] but got this instead: %v", ui.S)
-	}
+	assertSliceEquals(t, ui.S, 1, 2, 3)
 }
