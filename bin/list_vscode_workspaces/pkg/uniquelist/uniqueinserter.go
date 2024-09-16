@@ -8,9 +8,8 @@ type Comparator[T any] func(a, b T) int
 type SortedInserter[T any] struct {
 	// Cmp should be a comparison function that satifies the definition in
 	// https://pkg.go.dev/slices#BinarySearchFunc.
-	Cmp        Comparator[T]
-	S          *[]T
-	AllowDupes bool
+	Cmp Comparator[T]
+	S   *[]T
 }
 
 func NewSortedInserter[T any](cmp Comparator[T]) SortedInserter[T] {
