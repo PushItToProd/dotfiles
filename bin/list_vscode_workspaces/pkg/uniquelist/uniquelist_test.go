@@ -26,6 +26,27 @@ func (mot myOtherType) Compare(b uniquelist.Comparable) (int, bool) {
 	return -1, true
 }
 
+type myIntType int
+
+func (mit myIntType) Compare(b uniquelist.Comparable) (int, bool) {
+	other, ok := b.(myIntType)
+	if !ok {
+		return -1, false
+	}
+	return cmp.Compare(mit, other), true
+}
+
+func TestUniqueListInsertInt(t *testing.T) {
+	ul := uniquelist.UniqueList[myIntType]{}
+	ul.Insert(3)
+	ul.Insert(1)
+	ul.Insert(2)
+
+	if len(ul) != 3 || ul[0] != 1 || ul[1] != 2 || ul[2] != 3 {
+		t.Errorf("expected slice to look like [1 2 3], but got %+v instead", ul)
+	}
+}
+
 func TestUniqueListInsert(t *testing.T) {
 	ul := uniquelist.UniqueList[myType]{}
 	ok := ul.Insert(myType{1})
