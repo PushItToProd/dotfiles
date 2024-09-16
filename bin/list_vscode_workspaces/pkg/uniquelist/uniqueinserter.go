@@ -4,19 +4,17 @@ import "slices"
 
 // SortedInserter uses binary search to insert elements into a slice in sorted order.
 type SortedInserter[T any] struct {
-	Cmp        func(a, b T) (int, bool)
+	// Cmp should be a comparison function that satifies the definition in
+	// https://pkg.go.dev/slices#BinarySearchFunc.
+	Cmp        func(a, b T) int
 	S          *[]T
 	AllowDupes bool
 }
 
 func (ui SortedInserter[T]) Insert(e T) bool {
-	shouldInsert := true
 	n, found := slices.BinarySearchFunc(*ui.S, e, func(e, t T) int {
-		n, ok := ui.Cmp(e, t)
-		shouldInsert = ok
-		return n
+		return ui.Cmp(e, t)
 	})
-	_ = shouldInsert
 	if found {
 		return false
 	}

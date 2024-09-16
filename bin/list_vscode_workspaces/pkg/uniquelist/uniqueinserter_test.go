@@ -8,8 +8,8 @@ import (
 
 func intInserter(s *[]int) uniquelist.SortedInserter[int] {
 	return uniquelist.SortedInserter[int]{
-		Cmp: func(a, b int) (int, bool) {
-			return a - b, true
+		Cmp: func(a, b int) int {
+			return a - b
 		},
 		S: s,
 	}
