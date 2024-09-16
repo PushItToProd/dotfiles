@@ -11,7 +11,9 @@ var intComparator = func(a, b int) int {
 }
 
 func TestInsertRejectsDupes(t *testing.T) {
-	ui := uniquelist.NewSortedInserter(intComparator)
+	ui := uniquelist.SortedInserter[int]{
+		Cmp: intComparator,
+	}
 
 	ok := ui.Insert(1)
 	if !ok {
