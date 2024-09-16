@@ -13,6 +13,8 @@ type SortedInserter[T any] struct {
 	// S is the underlying slice. If a non-empty slice is provided, it must be
 	// sorted.
 	S []T
+	// AllowDuplicates decides whether or not duplicates should be allowed.
+	AllowDuplicates bool
 }
 
 // NewSortedInserter creates a SortedInserter with a new slice of type []T. You
@@ -25,12 +27,14 @@ func NewSortedInserter[T any](cmp Comparator[T]) SortedInserter[T] {
 	}
 }
 
-// Insert adds an element to the slice in sorted order.
+// Insert adds an element to the slice in sorted order. It returns true if the
+// element was added successfully or false if it was rejected for being a
+// duplicate entry.
 func (ui *SortedInserter[T]) Insert(e T) bool {
 	n, found := slices.BinarySearchFunc(ui.S, e, func(e, t T) int {
 		return ui.Cmp(e, t)
 	})
-	if found {
+	if found && !ui.AllowDuplicates {
 		return false
 	}
 

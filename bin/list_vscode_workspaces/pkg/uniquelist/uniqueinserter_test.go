@@ -55,3 +55,15 @@ func TestNewSortedInserter(t *testing.T) {
 	ui.Insert(2)
 	assertSliceEquals(t, ui.S, 1, 2, 3)
 }
+
+func TestAllowDupes(t *testing.T) {
+	ui := uniquelist.NewSortedInserter(intComparator)
+	ui.AllowDuplicates = true
+
+	ui.Insert(1)
+	ui.Insert(2)
+	assertSliceEquals(t, ui.S, 1, 2)
+
+	ui.Insert(1)
+	assertSliceEquals(t, ui.S, 1, 1, 2)
+}
