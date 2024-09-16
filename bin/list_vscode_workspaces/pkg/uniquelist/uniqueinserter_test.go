@@ -6,12 +6,14 @@ import (
 	"github.com/pushittoprod/list_vscode_workspaces/pkg/uniquelist"
 )
 
+var intComparator = func(a, b int) int {
+	return a - b
+}
+
 func intInserter(s *[]int) uniquelist.SortedInserter[int] {
 	return uniquelist.SortedInserter[int]{
-		Cmp: func(a, b int) int {
-			return a - b
-		},
-		S: s,
+		Cmp: intComparator,
+		S:   s,
 	}
 }
 
@@ -50,5 +52,16 @@ func TestInsertIsSorted(t *testing.T) {
 	if len(s) != 3 || s[0] != 1 || s[1] != 2 || s[2] != 3 {
 		t.Errorf("expected slice to look like [1 2 3] but got this instead: %v", s)
 	}
+}
 
+func TestNewSortedInserter(t *testing.T) {
+	ui := uniquelist.NewSortedInserter[int](intComparator)
+	ui.Insert(3)
+	ui.Insert(1)
+	ui.Insert(2)
+
+	s := *ui.S
+	if len(s) != 3 || s[0] != 1 || s[1] != 2 || s[2] != 3 {
+		t.Errorf("expected slice to look like [1 2 3] but got this instead: %v", s)
+	}
 }

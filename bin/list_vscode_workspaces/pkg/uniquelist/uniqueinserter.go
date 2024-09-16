@@ -2,13 +2,22 @@ package uniquelist
 
 import "slices"
 
+type Comparator[T any] func(a, b T) int
+
 // SortedInserter uses binary search to insert elements into a slice in sorted order.
 type SortedInserter[T any] struct {
 	// Cmp should be a comparison function that satifies the definition in
 	// https://pkg.go.dev/slices#BinarySearchFunc.
-	Cmp        func(a, b T) int
+	Cmp        Comparator[T]
 	S          *[]T
 	AllowDupes bool
+}
+
+func NewSortedInserter[T any](cmp Comparator[T]) SortedInserter[T] {
+	return SortedInserter[T]{
+		Cmp: cmp,
+		S:   new([]T),
+	}
 }
 
 func (ui SortedInserter[T]) Insert(e T) bool {
