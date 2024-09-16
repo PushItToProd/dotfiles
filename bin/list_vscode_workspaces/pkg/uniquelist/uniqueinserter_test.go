@@ -6,7 +6,7 @@ import (
 	"github.com/pushittoprod/list_vscode_workspaces/pkg/uniquelist"
 )
 
-var intComparator = func(a, b int) int {
+var intComparator uniquelist.Comparator[int] = func(a, b int) int {
 	return a - b
 }
 
