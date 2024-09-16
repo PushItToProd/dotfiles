@@ -15,7 +15,9 @@ type SortedInserter[T any] struct {
 	S []T
 }
 
-// NewSortedInserter creates a SortedInserter with a new slice of type []T.
+// NewSortedInserter creates a SortedInserter with a new slice of type []T. You
+// can generally omit the type argument to this function since it can be
+// inferred from the type of cmp.
 func NewSortedInserter[T any](cmp Comparator[T]) SortedInserter[T] {
 	return SortedInserter[T]{
 		Cmp: cmp,
