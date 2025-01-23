@@ -126,6 +126,8 @@ workspace 90 output DP-1-1
 workspace 95 output DP-1-3 DP-1-1
 workspace 100 output DP-1-1
 workspace 105 output DP-1-3 DP-1-1
+workspace 110 output DP-1-1
+workspace 115 output DP-1-3 DP-1-1
 
 
 # These are the labels which define each i3 workspace.
@@ -279,6 +281,8 @@ bindsym $mod+9 exec i3_toggle.py 90 95
 bindsym $mod+$alt+9 workspace 95
 bindsym $mod+minus exec i3_toggle.py 100 105
 bindsym $mod+$alt+minus workspace 105
+bindsym $mod+equal exec i3_toggle.py 110 115
+bindsym $mod+$alt+equal workspace 115
 bindsym $mod+0 exec i3_toggle.py 0 1 2 3
 
 ## Navigate // Next Workspace // <Super><Ctrl> L ##
@@ -384,6 +388,7 @@ bindsym $moveto+7 exec i3_toggle.py --move 70 75
 bindsym $moveto+8 exec i3_toggle.py --move 80 85
 bindsym $moveto+9 exec i3_toggle.py --move 90 95
 bindsym $moveto+minus exec i3_toggle.py --move 100 105
+bindsym $moveto+equal exec i3_toggle.py --move 110 115
 bindsym $moveto+0 exec i3_toggle.py --move 0 1 2 3
 
 ## Modify // Move Window to Workspace by Name // <Super><Ctrl><Alt> G ##
