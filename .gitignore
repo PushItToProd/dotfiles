@@ -20,7 +20,7 @@
 !.config/Code/User
 .config/Code/User/globalStorage
 .config/Code/User/History
-.config/Code/User/profiles
+.config/Code/User/profiles/*
 .config/Code/User/sync
 .config/Code/User/workspaceStorage
 *.vscdb
