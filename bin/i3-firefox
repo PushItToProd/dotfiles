@@ -21,11 +21,15 @@ get_focused_window_class() {
 }
 
 firefox_is_focused() {
-  [[ "$(get_focused_window_class)" == "Firefox" ]]
+  [[ "$(get_focused_window_class)" == "firefox" ]]
 }
 
 focus_firefox() {
-  i3-msg '[class="Firefox" workspace="__focused__"] focus'
+  i3-msg '[class="firefox" workspace="__focused__"] focus'
+}
+
+firefox() {
+  flatpak run org.mozilla.firefox "$@"
 }
 
 if [[ "${BASH_SOURCE[0]}" == "$0" ]]; then
