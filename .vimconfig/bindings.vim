@@ -64,3 +64,5 @@ nnoremap <Leader><Leader>l gt
 " quick vertical navigation between viewports
 nnoremap <Leader><Leader>j <C-w>j
 nnoremap <Leader><Leader>k <C-w>k
+
+command Wq wq
