@@ -1,403 +1,457 @@
 {
-    /// VS Code Settings ///
-    "editor.rulers": [
-        80
-    ],
-    "editor.renderWhitespace": "boundary",
-    "editor.accessibilitySupport": "off",
-    "editor.detectIndentation": false,
-    "editor.wordWrap": "on",
-    "editor.semanticHighlighting.enabled": true,
-    "editor.lineNumbers": "on",
-    "workbench.editor.focusRecentEditorAfterClose": false,
-    "workbench.editor.labelFormat": "short",
+  /// VS Code Settings ///
+  "editor.rulers": [80],
+  "editor.renderWhitespace": "boundary",
+  "editor.accessibilitySupport": "off",
+  "editor.detectIndentation": false,
+  "editor.wordWrap": "on",
+  "editor.semanticHighlighting.enabled": true,
+  "editor.lineNumbers": "on",
+  "workbench.editor.focusRecentEditorAfterClose": false,
+  "workbench.editor.labelFormat": "short",
 
-    "explorer.sortOrder": "type",
+  "explorer.sortOrder": "type",
 
-    "emmet.triggerExpansionOnTab": true,
-    "emmet.showSuggestionsAsSnippets": true,
-    "emmet.includeLanguages": {
-        "xml": "xml",
-        "jinja-html": "html"
-    },
+  "emmet.triggerExpansionOnTab": true,
+  "emmet.showSuggestionsAsSnippets": true,
+  "emmet.includeLanguages": {
+    "xml": "xml",
+    "jinja-html": "html"
+  },
 
-    "editor.linkedEditing": false,
+  "editor.linkedEditing": false,
 
-    "explorer.autoReveal": false,
+  "explorer.autoReveal": false,
 
-    "files.associations": {
-        "ansible": "ini",
-        "inventory": "ini",
-        "*.service": "ini",
-        ".pylintrc": "ini",
-        "todo": "markdown",
-        "*.html": "html",
-        "**/i3/config": "i3",
-        "*.html5": "html",
-        "COMMIT_EDITMSG": "git-commit",
-        "*.h": "c",
-        "*.jsonp": "javascript",
-        "*.scm": "racket",
-        "*.arc": "racket",
-        ".env": "plaintext",
-        ".env.local": "plaintext",
-        "*.makefile": "makefile",
-        "*.tcss": "Textual CSS"
-    },
-    "files.exclude": {
-        "**/.git": true,
-        "**/.svn": true,
-        "**/.hg": true,
-        "**/CVS": true,
-        "**/.DS_Store": true,
-        "**/Thumbs.db": true,
-        "**/.terraform": true,
-        "**/*.tfstate": true,
-        "**/*.tfstate*": true,
-        "**/*~": true,
-        "**/terraform.d": true,
-        "**/terraform.tfstate.d": true,
-        "**/__pycache__": true,
-        "**/*.egg-info": true,
-        "**/*.olean": true,
-        "**/node_modules": false,
-        "**/.classpath": true,
-        "**/.project": true,
-        "**/.settings": true,
-        "**/.factorypath": true
-    },
-    "files.watcherExclude": {
-        "**/.git/objects/**": true,
-        "**/.git/subtree-cache/**": true,
-        "**/.hg/store/**": true,
-        "**/node_modules/*/**": true,
-        "**/venv/**": true,
-        "**/venv/*/**": true
-    },
-    "files.trimTrailingWhitespace": true,
+  "files.associations": {
+    "ansible": "ini",
+    "inventory": "ini",
+    "*.service": "ini",
+    ".pylintrc": "ini",
+    "todo": "markdown",
+    "*.html": "html",
+    "**/i3/config": "i3",
+    "*.html5": "html",
+    "COMMIT_EDITMSG": "git-commit",
+    "*.h": "c",
+    "*.jsonp": "javascript",
+    "*.scm": "racket",
+    "*.arc": "racket",
+    ".env": "plaintext",
+    ".env.local": "plaintext",
+    "*.makefile": "makefile",
+    "*.tcss": "Textual CSS"
+  },
+  "files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/CVS": true,
+    "**/.DS_Store": true,
+    "**/Thumbs.db": true,
+    "**/.terraform": true,
+    "**/*.tfstate": true,
+    "**/*.tfstate*": true,
+    "**/*~": true,
+    "**/terraform.d": true,
+    "**/terraform.tfstate.d": true,
+    "**/__pycache__": true,
+    "**/*.egg-info": true,
+    "**/*.olean": true,
+    "**/node_modules": false,
+    "**/.classpath": true,
+    "**/.project": true,
+    "**/.settings": true,
+    "**/.factorypath": true
+  },
+  "files.watcherExclude": {
+    "**/.git/objects/**": true,
+    "**/.git/subtree-cache/**": true,
+    "**/.hg/store/**": true,
+    "**/node_modules/*/**": true,
+    "**/venv/**": true,
+    "**/venv/*/**": true
+  },
+  "files.trimTrailingWhitespace": true,
 
-    "search.useIgnoreFiles": false,
-    "search.exclude": {
-        "**/venv": true,
-        "**/*.log": true
-    },
+  "search.useIgnoreFiles": false,
+  "search.exclude": {
+    "**/venv": true,
+    "**/*.log": true
+  },
 
-    "telemetry.enableTelemetry": false,
-    "terminal.integrated.fontFamily": "'DejaVu Sans Mono for Powerline', 'DejaVu Sans Mono', 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
-    "terminal.integrated.macOptionIsMeta": true,
-    "terminal.integrated.rendererType": "dom",
-    "terminal.integrated.allowChords": false,
-    "terminal.integrated.fontSize": 16,
-    "terminal.integrated.scrollback": 10000,
-    // use a login shell so RVM will work
-    "terminal.integrated.defaultProfile.linux": "zsh (login)",
-    "terminal.integrated.profiles.linux": {
-        "zsh (login)": {
-            "path": "zsh",
-            "args": ["-l"]
-        }
-    },
+  "telemetry.enableTelemetry": false,
+  "terminal.integrated.fontFamily": "'DejaVu Sans Mono for Powerline', 'DejaVu Sans Mono', 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
+  "terminal.integrated.macOptionIsMeta": true,
+  "terminal.integrated.rendererType": "dom",
+  "terminal.integrated.allowChords": false,
+  "terminal.integrated.fontSize": 16,
+  "terminal.integrated.scrollback": 10000,
+  // use a login shell so RVM will work
+  "terminal.integrated.defaultProfile.linux": "zsh (login)",
+  "terminal.integrated.profiles.linux": {
+    "zsh (login)": {
+      "path": "zsh",
+      "args": ["-l"]
+    }
+  },
 
-    "window.enableMenuBarMnemonics": false,
-    "window.openFoldersInNewWindow": "on",
-    "window.title": "${dirty}${activeEditorShort}${separator}${rootName}",
-    "window.titleBarStyle": "custom",
+  "window.enableMenuBarMnemonics": false,
+  "window.openFoldersInNewWindow": "on",
+  "window.title": "${dirty}${activeEditorShort}${separator}${rootName}",
+  "window.titleBarStyle": "custom",
 
-    "workbench.editor.openPositioning": "right",
-    "workbench.editor.tabCloseButton": "off",
-    "workbench.enableExperiments": false,
-    "workbench.startupEditor": "none",
-    "workbench.tree.indent": 16,
+  "workbench.editor.openPositioning": "right",
+  "workbench.editor.tabCloseButton": "off",
+  "workbench.enableExperiments": false,
+  "workbench.startupEditor": "none",
+  "workbench.tree.indent": 16,
 
-    "zenMode.fullScreen": false,
-    "zenMode.hideActivityBar": false,
-    "zenMode.hideStatusBar": false,
+  "zenMode.fullScreen": false,
+  "zenMode.hideActivityBar": false,
+  "zenMode.hideStatusBar": false,
 
-    /// Plugin Settings ///
-    // vscodevim
-    // workaround required for setxkbmap to remap capslock to esc on Ubuntu
-    "keyboard.dispatch": "keyCode",
-    "vim.incsearch": true,
-    "vim.useSystemClipboard": true,
-    "vim.useCtrlKeys": true,
-    "vim.handleKeys": {
-        // "<C-d>": true,
-        // "<C-s>": false,
-        // "<C-z>": false,
-        "<C-w>": true
-    },
-    "vim.hlsearch": true,
-    "vim.leader": "<space>",
-    // allow navigating past folded code: https://github.com/Microsoft/vscode/issues/22276
-    "vim.foldfix": true,
-    "vim.insertModeKeyBindings": [
-        {"before": ["j", "k"], "after": ["<Esc>"]},
-        {"before": ["capslock"], "after": ["<Esc>"]},
-        {"before": ["<C-v>"],  "commands": ["editor.action.clipboardPasteAction"]}
-    ],
-    "vim.normalModeKeyBindings": [
-        {"before": ["j"], "after": ["g", "j"]},
-        {"before": ["k"], "after": ["g", "k"]},
-
-        // file navigation
-        {"before": ["H"], "commands": ["cursorHome"]},
-        {"before": ["L"], "commands": ["cursorEnd"]},
-        {"before": ["J"], "after": ["<C-d>"]},
-        {"before": ["K"], "after": ["<C-u>"]},
-
-        // setext-style headers for markdown and plain text
-        {"before": ["<leader>", "1"], "after": ["y", "y", "p", "V", "r", "="]},
-        {"before": ["<leader>", "2"], "after": ["y", "y", "p", "V", "r", "-"]},
-        {"before": ["<leader>", "3"], "after": ["0", "i", "#", "#", "#", " ", "<Esc>", "$"]},
-
-        // saving and closing
-        {"before": ["<leader>", "w"], "commands": ["workbench.action.files.save"]},
-        {"before": ["<leader>", "q"], "commands": ["workbench.action.closeActiveEditor"]},
-
-        // vscode-native searching
-        {"before": ["<leader>", "f"], "commands": ["actions.find"]},
-        {"before": ["<leader>", "r"], "commands": ["editor.action.startFindReplaceAction"]},
-
-        // reset vim search highlight
-        {"before": ["<leader>", "/"], "commands": [":nohl"]},
-
-        // quick commands
-        {"before": ["<leader>", "p"], "commands": ["workbench.action.showCommands"]},
-        {"before": ["<leader>", "o"], "commands": ["workbench.action.quickOpen"]},
-
-        // navigation
-        {"before": ["<leader>", "e"], "commands": ["workbench.view.explorer"]},
-        {"before": ["<leader>", "E"], "commands": ["workbench.files.action.showActiveFileInExplorer"]},
-
-        // window management
-        {"before": ["<C-w>", "H"], "commands": ["workbench.action.moveEditorToLeftGroup"]},
-        {"before": ["<C-w>", "J"], "commands": ["workbench.action.moveEditorToBelowGroup"]},
-        {"before": ["<C-w>", "K"], "commands": ["workbench.action.moveEditorToAboveGroup"]},
-        {"before": ["<C-w>", "L"], "commands": ["workbench.action.moveEditorToRightGroup"]},
-
-        // text navigation
-        // TODO: map [[ and ]] to navigate to curly braces and blocks
-        // {"before": ["[", "["], "after": ["?", "{", "<CR>"]},
-        // {"before": ["[", "["], "after": ["?", "{", "<CR>"]},
-    ],
-
-    // azure functions
-    "azureFunctions.enablePowerShell": true,
-
-    /// Language Specific Settings ///
-    "[ansible]": {
-        "editor.tabSize": 2
-    },
-    "[bats]": {
-        "editor.tabSize": 2
-    },
-    "[go]": {
-        "editor.rulers": []
-    },
-    "go.autocompleteUnimportedPackages": true,
-    "gopls": {
-        "ui.semanticTokens": true
-    },
-    "[html]": {
-        "editor.tabSize": 2,
-        "editor.defaultFormatter": "vscode.html-language-features"
-    },
-    "[css]": {
-        "editor.tabSize": 2,
-    },
-    "[javascript]": {
-        "editor.tabSize": 2,
-        "editor.defaultFormatter": "vscode.typescript-language-features"
-    },
-    "[json]": {
-        "editor.tabSize": 2,
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
-    "[jsonnet]": {
-        "editor.tabSize": 2,
-    },
-    "[markdown]": {
-        "editor.semanticHighlighting.enabled": true,
-        "editor.tabSize": 2,
-        "files.trimTrailingWhitespace": false,
-        "editor.rulers": []
-    },
-    "markdown.preview.fontSize": 18,
-    "[shellscript]": {
-        "editor.tabSize": 2
-    },
-    "[terraform]": {
-        "editor.insertSpaces": true,
-        "editor.tabSize": 2,
-        "editor.autoIndent": "full"
-    },
-    "[yaml]": {
-        "editor.tabSize": 2
-    },
-    "[dockercompose]": {
-        "editor.tabSize": 2
-    },
-    "shellcheck.disableVersionCheck": true,
-    "shellcheck.customArgs": ["-x"],
-    "explorer.confirmDragAndDrop": false,
-
-    "newFile.relativeTo": "file",
-    "newFile.showPathRelativeTo": "project",
-    "newFile.defaultFileExtension": "",
-    "[plaintext]": {
-        "editor.tabSize": 2
-    },
-    "[jinja-md]": {
-        "editor.tabSize": 2
-    },
-    "[jinja-html]": {
-        "editor.tabSize": 2
-    },
-    "[verilog]": {
-        "editor.tabSize": 2
-    },
-    "[systemverilog]": {
-        "editor.tabSize": 2
-    },
-    "[haskell]": {
-        "editor.tabSize": 2
-    },
-    "explorer.openEditors.visible": 10,
-    "python.defaultInterpreterPath": "/usr/bin/python3.9",
-    "python.showStartPage": false,
-    "workbench.editorAssociations": {
-      "*.ipynb": "jupyter-notebook"
-    },
-    "[vue]": {
-        "editor.tabSize": 2,
-        "gitlens.codeLens.scopes": [
-            "document"
-        ]
-    },
-    // "python.languageServer": "Jedi",
-    "python.languageServer": "Jedi",
-    "[COBOL]": {
-        // "editor.semanticHighlighting.enabled": false,
-        "editor.tabSize": 2,
-        "files.autoGuessEncoding": false,
-        "editor.snippetSuggestions": "bottom",
-        // "editor.renderIndentGuides": false,
-        // "editor.autoIndent": "advanced",
-        "editor.insertSpaces": true,
-        "editor.formatOnType": true,
-        // "editor.rulers": [6, 7, 11, 72],
-        "editor.rulers": [80],
-        "editor.detectIndentation": false,
-        "editor.useTabStops": false,
-        "editor.wordSeparators": "`~!@$%^&*()=+[{]}\\|;:'\",.<>/?",
-        "editor.guides.indentation": false,
-    },
-    "coboleditor.tabstops": [],
-    "coboleditor.enable_tabstop": false,
-    "jupyter.alwaysTrustNotebooks": true,
-    "plantuml.exportFormat": "png",
-    "lean.input.leader": "/",
-    "update.showReleaseNotes": false,
-    "update.mode": "manual",
-    "notebook.cellToolbarLocation": {
-        "default": "right",
-        "jupyter-notebook": "left"
-    },
-    "[typescript]": {
-        "editor.tabSize": 2
-    },
-    "typescript.suggest.completeFunctionCalls": true,
-    "editor.copyWithSyntaxHighlighting": false,
-    "editor.selectionClipboard": false,
-    "[ruby]": {
-        "editor.tabSize": 2
-    },
-
-    "editor.semanticTokenColorCustomizations": {
-        "enabled": true
-    },
-    "[twee3-sugarcube-2]": {
-        "editor.rulers": [],
-        "editor.tabSize": 2
-    },
-    "[liquid]": {
-        "editor.tabSize": 2
-    },
-    "security.workspace.trust.untrustedFiles": "open",
-    "[java]": {
-        "editor.rulers": [120]
-    },
-    "java.configuration.runtimes": [
-
+  /// Plugin Settings ///
+  // vscodevim
+  // workaround required for setxkbmap to remap capslock to esc on Ubuntu
+  "keyboard.dispatch": "keyCode",
+  "vim.incsearch": true,
+  "vim.useSystemClipboard": true,
+  "vim.useCtrlKeys": true,
+  "vim.handleKeys": {
+    // "<C-d>": true,
+    // "<C-s>": false,
+    // "<C-z>": false,
+    "<C-w>": true
+  },
+  "vim.hlsearch": true,
+  "vim.leader": "<space>",
+  // allow navigating past folded code: https://github.com/Microsoft/vscode/issues/22276
+  "vim.foldfix": true,
+  "vim.insertModeKeyBindings": [
+    { "before": ["j", "k"], "after": ["<Esc>"] },
+    { "before": ["capslock"], "after": ["<Esc>"] },
+    { "before": ["<C-v>"], "commands": ["editor.action.clipboardPasteAction"] }
+  ],
+  "vim.normalModeKeyBindingsNonRecursive": [
+    {
+      "before": ["u"],
+      "after": [],
+      "commands": [
         {
-            "name": "JavaSE-17",
-            "path": "/usr/lib/jvm/java-17-openjdk-amd64",
-            "default": true
+          "command": "undo",
+          "args": []
         }
-    ],
-    "[python]": {
+      ]
     },
-    "[jsonc]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
-    "[forth]": {
-        "editor.tabSize": 2
-    },
-    "editor.suggestSelection": "first",
-    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
-    "notebook.output.textLineLimit": 40,
-    "testing.openTesting": "openOnTestFailure",
-    "workbench.colorCustomizations": {
-        "[Bearded Theme Monokai Stone]": {
-            "editorRuler.foreground": "#4f4f4f"
-        },
-        "[Bearded Theme Arc EolStorm]": {
-            // TODO: make file explorer font brighter
-            "editorRuler.foreground": "#4f4f4f"
-        },
-        "[Bearded Theme Arc Reversed]": {
-            // TODO: make file explorer font brighter
-            "editorRuler.foreground": "#4f4f4f",
-            "panel.border": "#4f4f4f"
+    {
+      "before": ["<C-r>"],
+      "after": [],
+      "commands": [
+        {
+          "command": "redo",
+          "args": []
         }
-    },
-    "editor.lineHeight": 1.2,
+      ]
+    }
+  ],
+  "vim.normalModeKeyBindings": [
+    { "before": ["j"], "after": ["g", "j"] },
+    { "before": ["k"], "after": ["g", "k"] },
 
-    "jupyter.askForKernelRestart": false,
-    "svelte.enable-ts-plugin": true,
-    "svelte.plugin.svelte.note-new-transformation": false,
-    "[svelte]": {
-        "editor.tabSize": 2
+    // file navigation
+    { "before": ["H"], "commands": ["cursorHome"] },
+    { "before": ["L"], "commands": ["cursorEnd"] },
+    { "before": ["J"], "after": ["<C-d>"] },
+    { "before": ["K"], "after": ["<C-u>"] },
+
+    // setext-style headers for markdown and plain text
+    { "before": ["<leader>", "1"], "after": ["y", "y", "p", "V", "r", "="] },
+    { "before": ["<leader>", "2"], "after": ["y", "y", "p", "V", "r", "-"] },
+    {
+      "before": ["<leader>", "3"],
+      "after": ["0", "i", "#", "#", "#", " ", "<Esc>", "$"]
     },
-    "git.openRepositoryInParentFolders": "never",
-    "workbench.colorTheme": "Bearded Theme Arc Reversed",
-    "terminal.integrated.commandsToSkipShell": [
-        "language-julia.interrupt"
-    ],
-    "julia.symbolCacheDownload": true,
-    "[search-result]": {
-        "editor.lineNumbers": "on"
+
+    // saving and closing
+    {
+      "before": ["<leader>", "w"],
+      "commands": ["workbench.action.files.save"]
     },
-    "zenMode.hideLineNumbers": false,
-    "zenMode.restore": false,
-    "powermode.enabled": true,
-    "powermode.shake.intensity": 2,
-    "powermode.combo.threshold": 5,
-    "powermode.combo.timeout": 5,
-    "powermode.explosions.maxExplosions": 4,
-    "workbench.editor.empty.hint": "hidden",
-    "workbench.editor.tabActionCloseVisibility": false,
-    "editor.fontFamily": "'Comic Mono', 'JetBrains Mono', 'Droid Sans Mono', 'monospace', monospace",
-    "files.autoSave": "afterDelay",
-    "editor.wrappingIndent": "deepIndent",
-    "notebook.lineNumbers": "on",
-    "notebook.output.fontSize": 18,
-    "notebook.output.scrolling": true,
-    "notebook.consolidatedOutputButton": false,
-    "notebook.showFoldingControls": "always",
-    "notebook.output.lineHeight": 1.1,
-    "notebook.markup.fontSize": 24,
-    "go.toolsManagement.autoUpdate": true,
-    // "editor.fontFamily": "'Noto Sans Mono', 'Droid Sans Mono', 'monospace', monospace",
-    // "editor.fontWeight": 750,
+    {
+      "before": ["<leader>", "q"],
+      "commands": ["workbench.action.closeActiveEditor"]
+    },
+
+    // vscode-native searching
+    { "before": ["<leader>", "f"], "commands": ["actions.find"] },
+    {
+      "before": ["<leader>", "r"],
+      "commands": ["editor.action.startFindReplaceAction"]
+    },
+
+    // reset vim search highlight
+    { "before": ["<leader>", "/"], "commands": [":nohl"] },
+
+    // quick commands
+    {
+      "before": ["<leader>", "p"],
+      "commands": ["workbench.action.showCommands"]
+    },
+    { "before": ["<leader>", "o"], "commands": ["workbench.action.quickOpen"] },
+
+    // navigation
+    { "before": ["<leader>", "e"], "commands": ["workbench.view.explorer"] },
+    {
+      "before": ["<leader>", "E"],
+      "commands": ["workbench.files.action.showActiveFileInExplorer"]
+    },
+
+    // window management
+    {
+      "before": ["<C-w>", "H"],
+      "commands": ["workbench.action.moveEditorToLeftGroup"]
+    },
+    {
+      "before": ["<C-w>", "J"],
+      "commands": ["workbench.action.moveEditorToBelowGroup"]
+    },
+    {
+      "before": ["<C-w>", "K"],
+      "commands": ["workbench.action.moveEditorToAboveGroup"]
+    },
+    {
+      "before": ["<C-w>", "L"],
+      "commands": ["workbench.action.moveEditorToRightGroup"]
+    }
+
+    // text navigation
+    // TODO: map [[ and ]] to navigate to curly braces and blocks
+    // {"before": ["[", "["], "after": ["?", "{", "<CR>"]},
+    // {"before": ["[", "["], "after": ["?", "{", "<CR>"]},
+  ],
+
+  // azure functions
+  "azureFunctions.enablePowerShell": true,
+
+  /// Language Specific Settings ///
+  "[ansible]": {
+    "editor.tabSize": 2
+  },
+  "[bats]": {
+    "editor.tabSize": 2
+  },
+  "[go]": {
+    "editor.rulers": [120]
+  },
+  "go.autocompleteUnimportedPackages": true,
+  "gopls": {
+    "ui.semanticTokens": true
+  },
+  "[html]": {
+    "editor.tabSize": 2,
+    "editor.defaultFormatter": "vscode.html-language-features"
+  },
+  "[css]": {
+    "editor.tabSize": 2
+  },
+  "[javascript]": {
+    "editor.tabSize": 2,
+    "editor.defaultFormatter": "vscode.typescript-language-features"
+  },
+  "[json]": {
+    "editor.tabSize": 2,
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[jsonnet]": {
+    "editor.tabSize": 2
+  },
+  "[markdown]": {
+    "editor.semanticHighlighting.enabled": true,
+    "editor.tabSize": 2,
+    "files.trimTrailingWhitespace": false,
+    "editor.rulers": []
+  },
+  "markdown.preview.fontSize": 18,
+  "[shellscript]": {
+    "editor.tabSize": 2
+  },
+  "[terraform]": {
+    "editor.insertSpaces": true,
+    "editor.tabSize": 2,
+    "editor.autoIndent": "full"
+  },
+  "[yaml]": {
+    "editor.tabSize": 2
+  },
+  "[dockercompose]": {
+    "editor.tabSize": 2
+  },
+  "shellcheck.disableVersionCheck": true,
+  "shellcheck.customArgs": ["-x"],
+  "explorer.confirmDragAndDrop": false,
+
+  "newFile.relativeTo": "file",
+  "newFile.showPathRelativeTo": "project",
+  "newFile.defaultFileExtension": "",
+  "[plaintext]": {
+    "editor.tabSize": 2
+  },
+  "[jinja-md]": {
+    "editor.tabSize": 2
+  },
+  "[jinja-html]": {
+    "editor.tabSize": 2
+  },
+  "[verilog]": {
+    "editor.tabSize": 2
+  },
+  "[systemverilog]": {
+    "editor.tabSize": 2
+  },
+  "[haskell]": {
+    "editor.tabSize": 2
+  },
+  "explorer.openEditors.visible": 10,
+  "python.defaultInterpreterPath": "/usr/bin/python3.9",
+  "python.showStartPage": false,
+  "workbench.editorAssociations": {
+    "*.ipynb": "jupyter-notebook"
+  },
+  "[vue]": {
+    "editor.tabSize": 2,
+    "gitlens.codeLens.scopes": ["document"]
+  },
+  // "python.languageServer": "Jedi",
+  "python.languageServer": "Jedi",
+  "[COBOL]": {
+    // "editor.semanticHighlighting.enabled": false,
+    "editor.tabSize": 2,
+    "files.autoGuessEncoding": false,
+    "editor.snippetSuggestions": "bottom",
+    // "editor.renderIndentGuides": false,
+    // "editor.autoIndent": "advanced",
+    "editor.insertSpaces": true,
+    "editor.formatOnType": true,
+    // "editor.rulers": [6, 7, 11, 72],
+    "editor.rulers": [80],
+    "editor.detectIndentation": false,
+    "editor.useTabStops": false,
+    "editor.wordSeparators": "`~!@$%^&*()=+[{]}\\|;:'\",.<>/?",
+    "editor.guides.indentation": false
+  },
+  "coboleditor.tabstops": [],
+  "coboleditor.enable_tabstop": false,
+  "jupyter.alwaysTrustNotebooks": true,
+  "plantuml.exportFormat": "png",
+  "lean.input.leader": "/",
+  "update.showReleaseNotes": false,
+  "update.mode": "manual",
+  "notebook.cellToolbarLocation": {
+    "default": "right",
+    "jupyter-notebook": "left"
+  },
+  "[typescript]": {
+    "editor.tabSize": 2
+  },
+  "typescript.suggest.completeFunctionCalls": true,
+  "editor.copyWithSyntaxHighlighting": false,
+  "editor.selectionClipboard": false,
+  "[ruby]": {
+    "editor.tabSize": 2
+  },
+
+  "editor.semanticTokenColorCustomizations": {
+    "enabled": true
+  },
+  "[twee3-sugarcube-2]": {
+    "editor.rulers": [],
+    "editor.tabSize": 2
+  },
+  "[liquid]": {
+    "editor.tabSize": 2
+  },
+  "security.workspace.trust.untrustedFiles": "open",
+  "[java]": {
+    "editor.rulers": [120]
+  },
+  "java.configuration.runtimes": [
+    {
+      "name": "JavaSE-17",
+      "path": "/usr/lib/jvm/java-17-openjdk-amd64",
+      "default": true
+    }
+  ],
+  "[python]": {},
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[forth]": {
+    "editor.tabSize": 2
+  },
+  "editor.suggestSelection": "first",
+  "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+  "notebook.output.textLineLimit": 40,
+  "testing.openTesting": "openOnTestFailure",
+  "workbench.colorCustomizations": {
+    "[Bearded Theme Monokai Stone]": {
+      "editorRuler.foreground": "#4f4f4f"
+    },
+    "[Bearded Theme Arc EolStorm]": {
+      // TODO: make file explorer font brighter
+      "editorRuler.foreground": "#4f4f4f"
+    },
+    "[Bearded Theme Arc Reversed]": {
+      // TODO: make file explorer font brighter
+      "editorRuler.foreground": "#4f4f4f",
+      "panel.border": "#4f4f4f"
+    }
+  },
+  "editor.lineHeight": 1.2,
+
+  "jupyter.askForKernelRestart": false,
+  "svelte.enable-ts-plugin": true,
+  "svelte.plugin.svelte.note-new-transformation": false,
+  "[svelte]": {
+    "editor.tabSize": 2
+  },
+  "git.openRepositoryInParentFolders": "never",
+  "workbench.colorTheme": "Bearded Theme Arc Reversed",
+  "terminal.integrated.commandsToSkipShell": ["language-julia.interrupt"],
+  "julia.symbolCacheDownload": true,
+  "[search-result]": {
+    "editor.lineNumbers": "on"
+  },
+  "zenMode.hideLineNumbers": false,
+  "zenMode.restore": false,
+  "powermode.enabled": true,
+  "powermode.shake.intensity": 2,
+  "powermode.combo.threshold": 5,
+  "powermode.combo.timeout": 5,
+  "powermode.explosions.maxExplosions": 4,
+  "workbench.editor.empty.hint": "hidden",
+  "workbench.editor.tabActionCloseVisibility": false,
+  "editor.fontFamily": "'Comic Mono', 'JetBrains Mono', 'Droid Sans Mono', 'monospace', monospace",
+  "files.autoSave": "afterDelay",
+  "editor.wrappingIndent": "deepIndent",
+  "notebook.lineNumbers": "on",
+  "notebook.output.fontSize": 18,
+  "notebook.output.scrolling": true,
+  "notebook.consolidatedOutputButton": false,
+  "notebook.showFoldingControls": "always",
+  "notebook.output.lineHeight": 1.1,
+  "notebook.markup.fontSize": 24,
+  "go.toolsManagement.autoUpdate": true,
+  // "editor.fontFamily": "'Noto Sans Mono', 'Droid Sans Mono', 'monospace', monospace",
+  // "editor.fontWeight": 750,
+  "[lua]": {
+    "editor.tabSize": 2
+  },
+  "github.copilot.enable": {
+    "*": true,
+    "plaintext": false,
+    "markdown": false,
+    "scminput": false
+  },
+  "testing.automaticallyOpenTestResults": "openOnTestFailure"
 }

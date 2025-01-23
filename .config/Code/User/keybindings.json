@@ -303,6 +303,14 @@
         "when": "terminalFocus"
     },
     {
+      "key": "shift+alt+pageup",
+      "command": "workbench.action.moveEditorLeftInGroup",
+    },
+    {
+      "key": "shift+alt+pagedown",
+      "command": "workbench.action.moveEditorRightInGroup",
+    },
+    {
         "key": "alt+a",
         "command": "workbench.action.keepEditor"
     },
