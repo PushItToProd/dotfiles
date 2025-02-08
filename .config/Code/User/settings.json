@@ -190,28 +190,35 @@
     },
 
     // vscode-native searching
-    { "before": ["<leader>", "f"], "commands": ["actions.find"] },
-    {
-      "before": ["<leader>", "r"],
-      "commands": ["editor.action.startFindReplaceAction"]
-    },
+    // { "before": ["<leader>", "f"], "commands": ["actions.find"] },
+    // {
+    //   "before": ["<leader>", "r"],
+    //   "commands": ["editor.action.startFindReplaceAction"]
+    // },
 
     // reset vim search highlight
     { "before": ["<leader>", "/"], "commands": [":nohl"] },
 
     // quick commands
-    {
-      "before": ["<leader>", "p"],
-      "commands": ["workbench.action.showCommands"]
-    },
-    { "before": ["<leader>", "o"], "commands": ["workbench.action.quickOpen"] },
+    // {"before": ["<leader>", "p"], "commands": ["workbench.action.showCommands"]},
+    // {"before": ["<leader>", "o"], "commands": ["workbench.action.quickOpen"]},
 
     // navigation
-    { "before": ["<leader>", "e"], "commands": ["workbench.view.explorer"] },
-    {
-      "before": ["<leader>", "E"],
-      "commands": ["workbench.files.action.showActiveFileInExplorer"]
-    },
+    {"before": ["<leader>", "p"], "commands": ["editor.action.marker.next"]},
+    {"before": ["<leader>", "P"], "commands": ["workbench.panel.markers.view.focus"]},
+    {"before": ["<leader>", "t"], "commands": ["workbench.action.terminal.focus"]},
+    {"before": ["<leader>", "e"], "commands": ["workbench.view.explorer"]},
+    {"before": ["<leader>", "E"], "commands": ["workbench.files.action.showActiveFileInExplorer"]},
+    {"before": ["<leader>", "f"], "commands": ["workbench.action.findInFiles"]},
+
+    {"before": ["g", "p", "d"], "commands": ["editor.action.peekDefinition"]},
+    {"before": ["g", "h"], "commands": ["editor.action.showDefinitionPreviewHover"]},
+    {"before": ["g", "i"], "commands": ["editor.action.goToImplementation"]},
+    {"before": ["g", "p", "i"], "commands": ["editor.action.peekImplementation"]},
+    {"before": ["g", "q"], "commands": ["editor.action.quickFix"]},
+    {"before": ["g", "r"], "commands": ["editor.action.referenceSearch.trigger"]},
+    {"before": ["g", "t"], "commands": ["editor.action.goToTypeDefinition"]},
+    {"before": ["g", "p", "t"], "commands": ["editor.action.peekTypeDefinition"]},
 
     // window management
     {
