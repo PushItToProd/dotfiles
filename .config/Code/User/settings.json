@@ -9,6 +9,11 @@
   "editor.lineNumbers": "on",
   "workbench.editor.focusRecentEditorAfterClose": false,
   "workbench.editor.labelFormat": "short",
+  "workbench.editor.customLabels.enabled": true,
+  "workbench.editor.customLabels.patterns": {
+    "/usr/local/go/**": "⛔${filename} (EXT)",
+    "/home/joe/go/**": "⛔${filename} (EXT)",
+  },
 
   "explorer.sortOrder": "type",
 
