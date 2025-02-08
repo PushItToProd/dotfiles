@@ -1,4 +1,4 @@
-source .vimrc
+source ~/.vimrc
 
 " use the system clipboard
 " https://youtrack.jetbrains.com/issue/VIM-429/IdeaVim-should-provide-option-to-yank-to-system-clipboard
@@ -7,3 +7,5 @@ set clipboard+=unnamed
 " map ctrl-V to paste in insert mode
 " inoremap <C-v> <C-O>p
 sethandler <C-v> i-v:vim i:ide
+
+map gr <Action>(FindUsages)
