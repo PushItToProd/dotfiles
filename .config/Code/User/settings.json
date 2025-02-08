@@ -45,8 +45,9 @@
     ".env": "plaintext",
     ".env.local": "plaintext",
     "*.makefile": "makefile",
-    "*.tcss": "Textual CSS"
-  },
+    "*.tcss": "Textual CSS",
+    "*.mcmeta": "json"
+},
   "files.exclude": {
     "**/.git": true,
     "**/.svn": true,
