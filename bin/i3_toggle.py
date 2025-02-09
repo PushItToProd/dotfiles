@@ -62,16 +62,17 @@ def get_i3_state(i3: i3ipc.Connection):
 
 def get_target_workspace(
     focused: int,
-    open_workspaces: list[int],
+    opened: list[int],
     visible: list[int],
     targets: list[int]
 ):
     """
     Find the target workspace to switch to based on the current state of open
-    and visible workspaces.
+    and visible workspaces. The workspaces are all identified based on their i3
+    workspace number.
 
     :param focused: The number of the currently focused workspace.
-    :param open_workspaces: The numbers of open workspaces.
+    :param opened: The numbers of open workspaces.
     :param visible: The numbers of visible workspaces.
     :param targets: The target workspaces.
     :return: The workspace to jump to.
@@ -87,36 +88,36 @@ def get_target_workspace(
 
     When the focused workspace isn't a target and we only have one target,
     go to the target.
-    >>> get_target_workspace(-1, [-1], [-1], [1])
+    >>> get_target_workspace(-1, opened=[-1], visible=[-1], targets=[1])
     1
 
     When the focused workspace is a target, go to the next target in the list.
-    >>> get_target_workspace(1, [1, 2], [1], [1, 2])
+    >>> get_target_workspace(1, opened=[1, 2], visible=[1], targets=[1, 2])
     2
-    >>> get_target_workspace(2, [1, 2], [2], [1, 2])
+    >>> get_target_workspace(2, opened=[1, 2], visible=[2], targets=[1, 2])
     1
 
     When the focused workspace is not a target and none of the targets are
     visible, we should go to the first open target in the list.
-    >>> get_target_workspace(-1, [2], [-1], [1, 2])
+    >>> get_target_workspace(-1, opened=[2], visible=[-1], targets=[1, 2])
     2
 
     When the focused workspace is a target and there's another target that isn't
     open, we should open that other target workspace.
-    >>> get_target_workspace(2, [2], [2], [1, 2])
+    >>> get_target_workspace(2, opened=[2], visible=[2], targets=[1, 2])
     1
-    >>> get_target_workspace(1, [1], [1], [1, 2])
+    >>> get_target_workspace(1, opened=[1], visible=[1], targets=[1, 2])
     2
 
     When the focused workspace is not a target and multiple targets are open, we
     should go to any visible target before going to other targets.
-    >>> get_target_workspace(-1, [-1, 1, 2], [-1, 2], [1, 2, 3])
+    >>> get_target_workspace(-1, opened=[-1, 1, 2], visible=[-1, 2], targets=[1, 2, 3])
     2
     """
     # TODO: support workspace names too
     logger.debug(
         'get_target_workspace(focused: %s, open: %s, visible: %s, targets: %s)',
-        focused, open_workspaces, visible, targets
+        focused, opened, visible, targets
     )
 
     if len(targets) <= 0:
@@ -146,7 +147,7 @@ def get_target_workspace(
         if ws in visible:
             logger.debug('Found visible target %s - going there', ws)
             return ws
-        if ws in open_workspaces and first_open is None:
+        if ws in opened and first_open is None:
             logger.debug('Found open target %s', ws)
             first_open = ws
 
