@@ -121,6 +121,8 @@
   // vscodevim
   // workaround required for setxkbmap to remap capslock to esc on Ubuntu
   "keyboard.dispatch": "keyCode",
+  "vim.easymotion": true,
+  "vim.surround": true,
   "vim.incsearch": true,
   "vim.useSystemClipboard": true,
   "vim.useCtrlKeys": true,
@@ -159,7 +161,11 @@
           "args": []
         }
       ]
-    }
+    },
+    // {
+    //   "before": ["<leader>", "s"],
+    //   "after":
+    // }
   ],
   "vim.normalModeKeyBindings": [
     { "before": ["j"], "after": ["g", "j"] },
@@ -170,6 +176,10 @@
     { "before": ["L"], "commands": ["cursorEnd"] },
     { "before": ["J"], "after": ["<C-d>"] },
     { "before": ["K"], "after": ["<C-u>"] },
+
+    { "before": ["g", "<"], "commands": ["editor.gotoPreviousFold"]},
+    { "before": ["g", ">"], "commands": ["editor.gotoNextFold"]},
+    { "before": ["g", "p"], "commands": ["editor.gotoParentFold"]},
 
     // setext-style headers for markdown and plain text
     { "before": ["<leader>", "1"], "after": ["y", "y", "p", "V", "r", "="] },
@@ -219,6 +229,8 @@
     {"before": ["g", "r"], "commands": ["editor.action.referenceSearch.trigger"]},
     {"before": ["g", "t"], "commands": ["editor.action.goToTypeDefinition"]},
     {"before": ["g", "p", "t"], "commands": ["editor.action.peekTypeDefinition"]},
+    {"before": ["g", "s"], "after": ["v", "a", "w", "g", "s"]},
+    // {"before": ["g", "f12"], "args": {}}
 
     // window management
     {
@@ -242,6 +254,16 @@
     // TODO: map [[ and ]] to navigate to curly braces and blocks
     // {"before": ["[", "["], "after": ["?", "{", "<CR>"]},
     // {"before": ["[", "["], "after": ["?", "{", "<CR>"]},
+  ],
+
+  "vim.visualModeKeyBindings": [
+    {"before": ["g", "s"], "commands": [{
+      "command": "workbench.action.findInFiles",
+      "args": {
+        "triggerSearch": true,
+        "query": "${selectedText}",
+      },
+    }]},
   ],
 
   // azure functions
@@ -273,6 +295,10 @@
     "editor.defaultFormatter": "vscode.typescript-language-features"
   },
   "[json]": {
+    "editor.tabSize": 2,
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[jsonc]": {
     "editor.tabSize": 2,
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
@@ -396,9 +422,6 @@
     }
   ],
   "[python]": {},
-  "[jsonc]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
   "[forth]": {
     "editor.tabSize": 2
   },
@@ -420,6 +443,31 @@
       "panel.border": "#4f4f4f"
     }
   },
+  "editor.tokenColorCustomizations": {
+    "[*Light*]": {
+      "textMateRules": [
+        {
+          "scope": "ref.matchtext",
+          "settings": {
+            "foreground": "#000"
+          }
+        }
+      ]
+    },
+    "[*Dark*]": {
+      "textMateRules": [
+        {
+          "scope": "ref.matchtext",
+          "settings": {
+            "foreground": "#fff"
+          }
+        }
+      ]
+    },
+    "[Bearded Theme Arc EolStorm]": {
+      "comments": "#e9e9e9",
+    }
+  },
   "editor.lineHeight": 1.2,
 
   "jupyter.askForKernelRestart": false,
@@ -429,7 +477,7 @@
     "editor.tabSize": 2
   },
   "git.openRepositoryInParentFolders": "never",
-  "workbench.colorTheme": "Bearded Theme Arc Reversed",
+  "workbench.colorTheme": "Bearded Theme Arc EolStorm",
   "terminal.integrated.commandsToSkipShell": ["language-julia.interrupt"],
   "julia.symbolCacheDownload": true,
   "[search-result]": {
@@ -461,10 +509,18 @@
     "editor.tabSize": 2
   },
   "github.copilot.enable": {
-    "*": true,
+    "*": false,
     "plaintext": false,
     "markdown": false,
-    "scminput": false
+    "scminput": false,
+    "twee3-sugarcube-2": false
   },
-  "testing.automaticallyOpenTestResults": "openOnTestFailure"
+  "testing.automaticallyOpenTestResults": "openOnTestFailure",
+  "github.copilot.chat.scopeSelection": true,
+  "github.copilot.chat.editor.temporalContext.enabled": true,
+  "github.copilot.selectedCompletionModel": "",
+  "editor.codeActionsOnSave": {},
+  "workbench.editorLargeFileConfirmation": 50,
+  "luahelper.format.indent_width": 2,
+  "notebook.consolidatedRunButton": true,
 }
