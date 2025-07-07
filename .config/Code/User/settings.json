@@ -231,6 +231,7 @@
     {"before": ["g", "t"], "commands": ["editor.action.goToTypeDefinition"]},
     {"before": ["g", "p", "t"], "commands": ["editor.action.peekTypeDefinition"]},
     {"before": ["g", "s"], "after": ["v", "a", "w", "g", "s"]},
+    {"before": ["g", "B"], "commands": ["editor.action.selectHighlights"]},
     // {"before": ["g", "f12"], "args": {}}
 
     // window management
