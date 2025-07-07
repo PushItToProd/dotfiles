@@ -296,6 +296,9 @@
     "editor.tabSize": 2,
     "editor.defaultFormatter": "vscode.typescript-language-features"
   },
+  "[javascriptreact]": {
+    "editor.tabSize": 2
+  },
   "[json]": {
     "editor.tabSize": 2,
     "editor.defaultFormatter": "esbenp.prettier-vscode"
