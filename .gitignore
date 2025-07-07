@@ -10,12 +10,12 @@
 .config/*
 !.config/i3
 !.config/i3status
-!.config/Code
 !.config/regolith
+.config/regolith/flags/ui-fingerprint
 !.config/rofi
 !.config/powerline-shell
-.config/regolith/flags/ui-fingerprint
 
+!.config/Code
 .config/Code/*
 !.config/Code/User
 .config/Code/User/globalStorage
