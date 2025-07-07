@@ -367,7 +367,7 @@
     "gitlens.codeLens.scopes": ["document"]
   },
   // "python.languageServer": "Jedi",
-  "python.languageServer": "Jedi",
+  "python.languageServer": "Pylance",
   "[COBOL]": {
     // "editor.semanticHighlighting.enabled": false,
     "editor.tabSize": 2,
@@ -528,4 +528,8 @@
   "workbench.editorLargeFileConfirmation": 50,
   "luahelper.format.indent_width": 2,
   "notebook.consolidatedRunButton": true,
+  "python.analysis.languageServerMode": "light",
+  "typescript.autoClosingTags": false,
+  "javascript.autoClosingTags": false,
+  "security.promptForLocalFileProtocolHandling": false,
 }
