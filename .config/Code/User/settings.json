@@ -139,7 +139,8 @@
   "vim.insertModeKeyBindings": [
     { "before": ["j", "k"], "after": ["<Esc>"] },
     { "before": ["capslock"], "after": ["<Esc>"] },
-    { "before": ["<C-v>"], "commands": ["editor.action.clipboardPasteAction"] }
+    { "before": ["<C-v>"], "commands": ["editor.action.clipboardPasteAction"] },
+    { "before": ["<C-n>"], "commands": ["editor.action.triggerSuggest"] }
   ],
   "vim.normalModeKeyBindingsNonRecursive": [
     {
