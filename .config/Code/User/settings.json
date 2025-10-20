@@ -169,6 +169,7 @@
     // }
   ],
   "vim.normalModeKeyBindings": [
+    {"before": ["%"], "commands": ["editor.action.jumpToBracket"]},
     { "before": ["j"], "after": ["g", "j"] },
     { "before": ["k"], "after": ["g", "k"] },
 
@@ -231,6 +232,7 @@
     {"before": ["g", "t"], "commands": ["editor.action.goToTypeDefinition"]},
     {"before": ["g", "p", "t"], "commands": ["editor.action.peekTypeDefinition"]},
     {"before": ["g", "s"], "after": ["v", "a", "w", "g", "s"]},
+    {"before": ["g", "l", "s"], "after": ["v", "a", "w", "g", "l", "s"]},
     {"before": ["g", "B"], "commands": ["editor.action.selectHighlights"]},
     // {"before": ["g", "f12"], "args": {}}
 
@@ -259,13 +261,40 @@
   ],
 
   "vim.visualModeKeyBindings": [
-    {"before": ["g", "s"], "commands": [{
-      "command": "workbench.action.findInFiles",
-      "args": {
-        "triggerSearch": true,
-        "query": "${selectedText}",
-      },
-    }]},
+    {
+      "before": ["g", "s"],
+      "commands": [{
+        "command": "workbench.action.findInFiles",
+        "args": {
+          "triggerSearch": true,
+          "query": "${selectedText}",
+        },
+      }],
+    },
+    // search for highlighted text in the current file's directory
+    {
+      "before": ["g", "l", "s"],
+      "commands": [{
+        "command": "workbench.action.findInFiles",
+        "args": {
+          "triggerSearch": true,
+          "query": "${selectedText}",
+          "filesToInclude": "${relativeFileDirname}",
+        },
+      }],
+    },
+    // search for highlighted text everywhere
+    {
+      "before": ["g", "a", "s"],
+      "commands": [{
+        "command": "workbench.action.findInFiles",
+        "args": {
+          "triggerSearch": true,
+          "query": "${selectedText}",
+          "filesToInclude": "",
+        },
+      }],
+    },
   ],
 
   // azure functions
@@ -532,4 +561,5 @@
   "typescript.autoClosingTags": false,
   "javascript.autoClosingTags": false,
   "security.promptForLocalFileProtocolHandling": false,
+  "remote.tunnels.access.preventSleep": true,
 }
