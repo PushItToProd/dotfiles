@@ -85,13 +85,16 @@
     "**/venv": true,
     "**/*.log": true
   },
+  "settingsSync.ignoredSettings": [
+    "-python.defaultInterpreterPath"
+  ],
 
   "telemetry.enableTelemetry": false,
   "terminal.integrated.fontFamily": "'DejaVu Sans Mono for Powerline', 'DejaVu Sans Mono', 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
   "terminal.integrated.macOptionIsMeta": true,
   "terminal.integrated.rendererType": "dom",
   "terminal.integrated.allowChords": false,
-  "terminal.integrated.fontSize": 16,
+  "terminal.integrated.fontSize": 18,
   "terminal.integrated.scrollback": 10000,
   // use a login shell so RVM will work
   "terminal.integrated.defaultProfile.linux": "zsh (login)",
@@ -323,8 +326,9 @@
   },
   "[javascript]": {
     "editor.tabSize": 2,
-    "editor.defaultFormatter": "vscode.typescript-language-features"
+    "editor.defaultFormatter": "vscode.typescript-language-features",
   },
+  "problems.visibility": true,
   "[javascriptreact]": {
     "editor.tabSize": 2
   },
@@ -387,7 +391,6 @@
   },
   "explorer.openEditors.visible": 10,
   "python.defaultInterpreterPath": "/usr/bin/python3.9",
-  "python.showStartPage": false,
   "workbench.editorAssociations": {
     "*.ipynb": "jupyter-notebook"
   },
