@@ -1,5 +1,12 @@
 alias nodejs=node
 
+# support overriding paths -- on devices using homebrew, you should create
+# .zsh.d/49-nvm.nocommit.zsh and set the nvm.sh and bash_completion paths to
+# those listed in `brew info nvm`
+: "${_my_nvm__NVM_DIR:="$HOME/.nvm"}"
+: "${_my_nvm__nvm_sh_path:="$NVM_DIR/nvm.sh"}"
+: "${_my_nvm__bash_completion_path:="$NVM_DIR/bash_completion"}"
+
 _init_nvm() {
   echo "info: initializing nvm" >&2
 
@@ -11,9 +18,9 @@ _init_nvm() {
   unset -f tsc
   unset -f ts-node
 
-  export NVM_DIR="$HOME/.nvm"
-  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+  export NVM_DIR="$_my_nvm__NVM_DIR"
+  [ -s "$_my_nvm__nvm_sh_path" ] && \. "$_my_nvm__nvm_sh_path"  # This loads nvm
+  [ -s "$_my_nvm__bash_completion_path" ] && \. "$_my_nvm__bash_completion_path"  # This loads nvm bash_completion
 }
 
 # XXX the next two functions are unused because they make startup slow
