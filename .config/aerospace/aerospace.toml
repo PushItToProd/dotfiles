@@ -261,6 +261,13 @@ on-mode-changed = []
         exec-and-forget osascript -e 'tell application "iTerm2" to create window with default profile'
     """, 'mode main']
 
+    # TODO: semihyper+space -- open Application picker
+
+    ##: semihyper+backtick -- open choose_window.sh
+    ctrl-cmd-alt-backtick = 'exec-and-forget "$HOME/.config/aerospace/scripts/choose_window.sh"'
+    ##: cmd+backtick -- open choose_window.sh
+    cmd-backtick = 'exec-and-forget "$HOME/.config/aerospace/scripts/choose_window.sh"'
+
 ## MARK: 'service' mode
 # 'service' binding mode declaration.
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
