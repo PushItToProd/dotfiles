@@ -111,6 +111,7 @@ on-mode-changed = []
     ctrl-cmd-alt-tab = 'layout tiles accordion'
     # Toggle between horizontal and vertical layouts.
     ctrl-cmd-alt-shift-tab = 'layout horizontal vertical'
+    ctrl-cmd-alt-q = 'layout horizontal vertical'
     # Toggle between floating and tiling
     ctrl-cmd-alt-f = 'layout floating tiling'
 
