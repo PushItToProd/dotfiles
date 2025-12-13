@@ -144,6 +144,12 @@ on-mode-changed = []
     ctrl-cmd-alt-shift-k = 'move up'
     ctrl-cmd-alt-shift-l = 'move right'
 
+    # ctrl+alt+hjkl -- join
+    ctrl-alt-h = 'join-with left'
+    ctrl-alt-j = 'join-with down'
+    ctrl-alt-k = 'join-with up'
+    ctrl-alt-l = 'join-with right'
+
     # See: https://nikitabobko.github.io/AeroSpace/commands#resize
     ctrl-cmd-alt-minus = 'resize smart -50'
     ctrl-cmd-alt-equal = 'resize smart +50'
