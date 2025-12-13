@@ -107,12 +107,13 @@ on-mode-changed = []
 
     ## MARK: layout control
     # See: https://nikitabobko.github.io/AeroSpace/commands#layout
-    # Toggle between tiles and accordion layouts.
+    ##: semihyper+tab: toggle tile/accordion layout
     ctrl-cmd-alt-tab = 'layout tiles accordion'
-    # Toggle between horizontal and vertical layouts.
+    ##: hyper+tab -- toggle horizontal/vertical layout
     ctrl-cmd-alt-shift-tab = 'layout horizontal vertical'
+    ##: semihyper+q -- toggle horizontal/vertical layout
     ctrl-cmd-alt-q = 'layout horizontal vertical'
-    # Toggle between floating and tiling
+    ##: semihyper+f -- toggle floating/tiling
     ctrl-cmd-alt-f = 'layout floating tiling'
 
     ##: semihyper+v -- split the current container
