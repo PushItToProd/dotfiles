@@ -1,3 +1,11 @@
+### AeroSpace config ###
+# Setup: (from the root of this Git repo)
+#   ln -s $PWD/.config/aerospace ~/.config/aerospace
+#
+# Required dependencies:
+# * brew tap FelixKratz/formulae && brew install sketchybar
+# * brew install choose-gui
+
 config-version = 2
 
 # You can use it to add commands that run after AeroSpace startup.
