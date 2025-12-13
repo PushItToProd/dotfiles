@@ -58,3 +58,4 @@ bin/dataspell
 
 # Mac stuff
 !.aerospace.toml
+!.config/sketchybar

@@ -2,7 +2,12 @@ config-version = 2
 
 # You can use it to add commands that run after AeroSpace startup.
 # Available commands : https://nikitabobko.github.io/AeroSpace/commands
-after-startup-command = []
+after-startup-command = ['exec-and-forget sketchybar']
+
+# Notify Sketchybar about workspace change
+exec-on-workspace-change = ['/bin/bash', '-c',
+    'sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE'
+]
 
 # Start AeroSpace at login
 start-at-login = false
@@ -238,7 +243,11 @@ on-mode-changed = []
     ##: semihyper+; -- enter service mode
     ctrl-cmd-alt-semicolon = 'mode service'
     ##: hyper+; -- reload config
-    ctrl-cmd-alt-shift-semicolon = 'reload-config'
+    ctrl-cmd-alt-shift-semicolon = [
+        'reload-config',
+        'exec-and-forget sketchybar --reload',
+        'mode main'
+    ]
 
     ##: semihyper+/ -- enter launch mode
     ctrl-cmd-alt-slash = 'mode launch'
@@ -258,7 +267,11 @@ on-mode-changed = []
 [mode.service.binding]
     esc = 'mode main'
     semicolon = 'mode main'
-    r = ['reload-config', 'mode main']
+    r = [
+        'reload-config',
+        'exec-and-forget sketchybar --reload',
+        'mode main'
+    ]
     f = ['layout floating tiling', 'mode main'] # Toggle between floating and tiling layout
 
     alt-h = ['join-with left', 'mode main']
