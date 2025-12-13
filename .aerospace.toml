@@ -124,34 +124,38 @@ on-mode-changed = []
     # ctrl-cmd-alt-shift-tab = 'layout v_tiles v_accordion h_accordion h_tiles'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#focus
+    ##: ctrl+hjkl -- change focus
     ctrl-h = 'focus left'
     ctrl-j = 'focus down'
     ctrl-k = 'focus up'
     ctrl-l = 'focus right'
 
+    ##: semihyper+hjkl -- change focus
     ctrl-cmd-alt-h = 'focus left'
     ctrl-cmd-alt-j = 'focus down'
     ctrl-cmd-alt-k = 'focus up'
     ctrl-cmd-alt-l = 'focus right'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#move
+    ##: ctrl+shift+hjkl -- move
     ctrl-shift-h = 'move left'
     ctrl-shift-j = 'move down'
     ctrl-shift-k = 'move up'
     ctrl-shift-l = 'move right'
-
+    ##: hyper+hjkl -- move
     ctrl-cmd-alt-shift-h = 'move left'
     ctrl-cmd-alt-shift-j = 'move down'
     ctrl-cmd-alt-shift-k = 'move up'
     ctrl-cmd-alt-shift-l = 'move right'
 
-    # ctrl+alt+hjkl -- join
+    ##: ctrl+alt+hjkl -- join
     ctrl-alt-h = 'join-with left'
     ctrl-alt-j = 'join-with down'
     ctrl-alt-k = 'join-with up'
     ctrl-alt-l = 'join-with right'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#resize
+    ##: semihyper+minus/plus -- resize smaller/larger
     ctrl-cmd-alt-minus = 'resize smart -50'
     ctrl-cmd-alt-equal = 'resize smart +50'
 
@@ -170,8 +174,11 @@ on-mode-changed = []
     # ctrl-8 = 'workspace 8'
     # ctrl-9 = 'workspace 9'
 
+    ##: semihyper+left/right -- switch neighboring workspaces
     ctrl-cmd-alt-right = 'workspace next'
     ctrl-cmd-alt-left = 'workspace prev'
+
+    ##: semihyper+[1-9] -- switch to workspaces
     ctrl-cmd-alt-1 = 'workspace 1'
     ctrl-cmd-alt-2 = 'workspace 2'
     ctrl-cmd-alt-3 = 'workspace 3'
@@ -197,8 +204,10 @@ on-mode-changed = []
     # ctrl-shift-8 = 'move-node-to-workspace 8'
     # ctrl-shift-9 = 'move-node-to-workspace 9'
 
+    ##: hyper+left/right -- move node to neighboring workspace
     ctrl-cmd-alt-shift-left = 'move-node-to-workspace --focus-follows-window --wrap-around prev'
     ctrl-cmd-alt-shift-right = 'move-node-to-workspace --focus-follows-window --wrap-around next'
+    ##: hyper+[1-9] -- move node to numbered workspace
     ctrl-cmd-alt-shift-1 = 'move-node-to-workspace 1'
     ctrl-cmd-alt-shift-2 = 'move-node-to-workspace 2'
     ctrl-cmd-alt-shift-3 = 'move-node-to-workspace 3'
@@ -210,16 +219,20 @@ on-mode-changed = []
     ctrl-cmd-alt-shift-9 = 'move-node-to-workspace 9'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#workspace-back-and-forth
+
+    ##: alt+tab -- cycle last two workspaces
     alt-tab = 'workspace-back-and-forth'
     # See: https://nikitabobko.github.io/AeroSpace/commands#move-workspace-to-monitor
     # ctrl-cmd-alt-shift-tab = 'move-workspace-to-monitor --wrap-around next'
 
     ## MARK: custom modes
     # See: https://nikitabobko.github.io/AeroSpace/commands#mode
+    ##: semihyper+; -- enter service mode
     ctrl-cmd-alt-semicolon = 'mode service'
+    ##: hyper+; -- reload config
     ctrl-cmd-alt-shift-semicolon = 'reload-config'
 
-    # launch mode
+    ##: semihyper+/ -- enter launch mode
     ctrl-cmd-alt-slash = 'mode launch'
 
 ## MARK: 'service' mode
