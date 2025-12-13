@@ -191,13 +191,15 @@ on-mode-changed = []
     # See: https://nikitabobko.github.io/AeroSpace/commands#move-workspace-to-monitor
     # ctrl-cmd-alt-shift-tab = 'move-workspace-to-monitor --wrap-around next'
 
+    ## MARK: custom modes
     # See: https://nikitabobko.github.io/AeroSpace/commands#mode
     ctrl-cmd-alt-semicolon = 'mode service'
     ctrl-cmd-alt-shift-semicolon = 'reload-config'
 
-    # Launch mode
+    # launch mode
     ctrl-cmd-alt-slash = 'mode launch'
 
+## MARK: 'service' mode
 # 'service' binding mode declaration.
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
 [mode.service.binding]
@@ -213,7 +215,7 @@ on-mode-changed = []
     alt-k = ['join-with up', 'mode main']
     alt-l = ['join-with right', 'mode main']
 
-# Launch mode
+## MARK: 'launch' mode
 [mode.launch.binding]
     ctrl-slash = 'mode main'
     esc = 'mode main'
@@ -221,7 +223,7 @@ on-mode-changed = []
     c = ['exec-and-forget code -n', 'mode main']
 
 
-## MARK: floating windows
+## MARK: floating apps
 [[on-window-detected]]
     if.app-id = 'org.keepassxc.keepassxc'
     run = ['layout floating', 'move-node-to-workspace 1']
