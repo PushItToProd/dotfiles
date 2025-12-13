@@ -105,11 +105,22 @@ on-mode-changed = []
     # end tell'
     # '''
 
+    ## MARK: layout control
     # See: https://nikitabobko.github.io/AeroSpace/commands#layout
-    # ctrl-cmd-alt-tab = 'layout tiles horizontal vertical'
-    # ctrl-cmd-alt-shift-tab = 'layout accordion horizontal vertical'
+    # Toggle between tiles and accordion layouts.
+    ctrl-cmd-alt-tab = 'layout tiles accordion'
+    # Toggle between horizontal and vertical layouts.
+    ctrl-cmd-alt-shift-tab = 'layout horizontal vertical'
+    # Toggle between floating and tiling
+    ctrl-cmd-alt-f = 'layout floating tiling'
 
-    ctrl-cmd-alt-tab = 'layout tiles horizontal vertical'
+    # XXX: this doesn't work how I wanted. Instead of cycling through all
+    # options, Aerospace only picks the first option that isn't currently in
+    # use, meaning it just toggles between the first two options.
+    #
+    # # h_tiles|v_tiles|h_accordion|v_accordion
+    # ctrl-cmd-alt-tab = 'layout h_tiles h_accordion v_accordion v_tiles'
+    # ctrl-cmd-alt-shift-tab = 'layout v_tiles v_accordion h_accordion h_tiles'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#focus
     ctrl-h = 'focus left'
@@ -186,8 +197,6 @@ on-mode-changed = []
 
     # Launch mode
     ctrl-cmd-alt-slash = 'mode launch'
-
-    ctrl-cmd-alt-f = 'layout floating tiling'
 
 # 'service' binding mode declaration.
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
