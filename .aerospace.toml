@@ -243,6 +243,12 @@ on-mode-changed = []
     ##: semihyper+r -- enter resize/move mode
     ctrl-cmd-alt-r = 'mode resize-move'
 
+    ##: semihyper+t -- launch terminal
+    # TODO: if iTerm is already focused, open a new tab
+    ctrl-cmd-alt-t = ["""\
+        exec-and-forget osascript -e 'tell application "iTerm2" to create window with default profile'
+    """, 'mode main']
+
 ## MARK: 'service' mode
 # 'service' binding mode declaration.
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
@@ -261,7 +267,9 @@ on-mode-changed = []
 [mode.launch.binding]
     ctrl-slash = 'mode main'
     esc = 'mode main'
-    t = ['exec-and-forget open -a iTerm', 'mode main']
+    t = ["""\
+        exec-and-forget osascript -e 'tell application "iTerm2" to create window with default profile'
+    """, 'mode main']
     c = ['exec-and-forget code -n', 'mode main']
     w = ['exec-and-forget firefox --new-window', 'mode main']
 
