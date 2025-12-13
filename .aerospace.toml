@@ -106,8 +106,10 @@ on-mode-changed = []
     # '''
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#layout
+    # ctrl-cmd-alt-tab = 'layout tiles horizontal vertical'
+    # ctrl-cmd-alt-shift-tab = 'layout accordion horizontal vertical'
+
     ctrl-cmd-alt-tab = 'layout tiles horizontal vertical'
-    ctrl-cmd-alt-shift-tab = 'layout accordion horizontal vertical'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#focus
     ctrl-h = 'focus left'
@@ -125,12 +127,12 @@ on-mode-changed = []
     ctrl-cmd-alt-minus = 'resize smart -50'
     ctrl-cmd-alt-equal = 'resize smart +50'
 
+    ## MARK: workspace navigation
+    # See: https://nikitabobko.github.io/AeroSpace/commands#workspace
     ctrl-right = 'workspace next'
     ctrl-left = 'workspace prev'
     ctrl-cmd-alt-right = 'workspace next'
     ctrl-cmd-alt-left = 'workspace prev'
-
-    # See: https://nikitabobko.github.io/AeroSpace/commands#workspace
     ctrl-1 = 'workspace 1'
     ctrl-2 = 'workspace 2'
     ctrl-3 = 'workspace 3'
@@ -150,7 +152,10 @@ on-mode-changed = []
     ctrl-cmd-alt-8 = 'workspace 8'
     ctrl-cmd-alt-9 = 'workspace 9'
 
+    ## MARK: move nodes to workspaces
     # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
+    ctrl-shift-left = 'move-node-to-workspace --focus-follows-window --wrap-around prev'
+    ctrl-shift-right = 'move-node-to-workspace --focus-follows-window --wrap-around next'
     ctrl-shift-1 = 'move-node-to-workspace 1'
     ctrl-shift-2 = 'move-node-to-workspace 2'
     ctrl-shift-3 = 'move-node-to-workspace 3'
@@ -205,3 +210,9 @@ on-mode-changed = []
     esc = 'mode main'
     t = ['exec-and-forget open -a iTerm', 'mode main']
     c = ['exec-and-forget code -n', 'mode main']
+
+
+## MARK: floating windows
+[[on-window-detected]]
+    if.app-id = 'org.keepassxc.keepassxc'
+    run = ['layout floating', 'move-node-to-workspace 1']
