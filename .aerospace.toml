@@ -235,6 +235,9 @@ on-mode-changed = []
     ##: semihyper+/ -- enter launch mode
     ctrl-cmd-alt-slash = 'mode launch'
 
+    ##: semihyper+r -- enter resize/move mode
+    ctrl-cmd-alt-r = 'mode resize-move'
+
 ## MARK: 'service' mode
 # 'service' binding mode declaration.
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
@@ -255,9 +258,30 @@ on-mode-changed = []
     esc = 'mode main'
     t = ['exec-and-forget open -a iTerm', 'mode main']
     c = ['exec-and-forget code -n', 'mode main']
+    w = ['exec-and-forget firefox --new-window', 'mode main']
 
+## MARK: 'resize/move' mode
+[mode.resize-move.binding]
+    esc = 'mode main'
+    ctrl-cmd-alt-r = 'mode main'
+
+    h = 'move left'
+    j = 'move down'
+    k = 'move up'
+    l = 'move right'
+
+    alt-h = 'join-with left'
+    alt-j = 'join-with down'
+    alt-k = 'join-with up'
+    alt-l = 'join-with right'
+
+    minus = 'resize smart -50'
+    shift-minus = 'resize smart -200'
+    equal = 'resize smart +50'
+    shift-equal = 'resize smart +200'
 
 ## MARK: floating apps
 [[on-window-detected]]
     if.app-id = 'org.keepassxc.keepassxc'
     run = ['layout floating', 'move-node-to-workspace 1']
+    # TODO: add more floating apps
