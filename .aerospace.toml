@@ -8,8 +8,8 @@ after-startup-command = []
 start-at-login = false
 
 # Normalizations. See: https://nikitabobko.github.io/AeroSpace/guide#normalization
-enable-normalization-flatten-containers = true
-enable-normalization-opposite-orientation-for-nested-containers = true
+enable-normalization-flatten-containers = false
+enable-normalization-opposite-orientation-for-nested-containers = false
 
 # See: https://nikitabobko.github.io/AeroSpace/guide#layouts
 # The 'accordion-padding' specifies the size of accordion padding
@@ -114,6 +114,10 @@ on-mode-changed = []
     ctrl-cmd-alt-q = 'layout horizontal vertical'
     # Toggle between floating and tiling
     ctrl-cmd-alt-f = 'layout floating tiling'
+
+    ##: semihyper+v -- split the current container
+    ctrl-cmd-alt-v = 'split opposite'
+
 
     # XXX: this doesn't work how I wanted. Instead of cycling through all
     # options, Aerospace only picks the first option that isn't currently in
