@@ -271,9 +271,9 @@ on-mode-changed = []
 
     # TODO: semihyper+space -- open Application picker
 
-    ##: semihyper+backtick -- open choose_window.sh
-    ctrl-cmd-alt-backtick = 'exec-and-forget "$HOME/.config/aerospace/scripts/choose_window.sh"'
-    ##: cmd+backtick -- open choose_window.sh
+    ##: semihyper+backtick -- choose workspace from list
+    ctrl-cmd-alt-backtick = 'exec-and-forget "$HOME/.config/aerospace/scripts/choose_workspace.sh"'
+    ##: cmd+backtick -- choose window from list
     cmd-backtick = 'exec-and-forget "$HOME/.config/aerospace/scripts/choose_window.sh"'
 
     # Disable annoying macOS shortcuts
