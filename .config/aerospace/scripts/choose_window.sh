@@ -17,14 +17,25 @@ list_windows() {
     --format '%{window-id}%{right-padding} | %{app-name}%{right-padding} | %{window-title}'
 }
 
+
 main() {
-  selection="$(list_windows | choose)"
+  aerospace_windows_str=$(list_windows)
 
-  IFS='|' read -r window_id _ <<<"$selection"
+  # copy window list to an array so we can look up windows by selection index
+  mapfile aerospace_windows <<<"$aerospace_windows_str"
 
-  # AeroSpace will throw an error if we include any surrounding spaces in
-  # $window_id.
+  # remove the first field (window ID) from each displayed option
+  display_text=$(sed 's/[^|]* \| //' <<<"$aerospace_windows_str")
+
+  # get the selection index
+  selection="$(choose -i <<< "$display_text")"
+  # echo "selected: ${aerospace_windows["$selection"]}"
+
+  # parse the window_id from the selection and trim surrounding spaces
+  IFS='|' read -r window_id _ <<<"${aerospace_windows["$selection"]}"
   window_id="$(trim_string "$window_id")"
+
+  # finally, we can switch to the given window
   aerospace focus --window-id "$window_id"
 }
 if [[ "${BASH_SOURCE[0]}" == "$0" ]]; then
