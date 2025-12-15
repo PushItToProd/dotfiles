@@ -89,9 +89,7 @@ group_by_workspace() {
   done  # reads from stdin
 }
 
-main() {
-  shopt -s lastpipe
-
+list_all_workspace_windows() {
   declare -A workspace_windows
   aerospace::list_workspace_windows | group_by_workspace workspace_windows
 
@@ -100,8 +98,26 @@ main() {
     apps="${workspace_windows["$ws"]}"
     printf '%s | %s\n' "$ws" "$apps"
   done | sort
+}
 
-  # TODO: pipe to choose-gui and allow picking
+main() {
+  shopt -s lastpipe
+
+  if [[ "$1" == list ]]; then
+    list_all_workspace_windows
+    return
+  fi
+
+  selection="$(list_all_workspace_windows | choose)"
+  IFS=$'|' read -r workspace_id _ <<<"$selection"
+  workspace_id=$(trim_string "$workspace_id")
+
+  if [[ "$1" == test ]]; then
+    echo "You selected: $workspace_id"
+    return
+  fi
+
+  aerospace workspace "$workspace_id"
 }
 if [[ "${BASH_SOURCE[0]}" == "$0" ]]; then
   main "$@"
