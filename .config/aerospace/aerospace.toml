@@ -263,9 +263,9 @@ on-mode-changed = []
     ##: semihyper+r -- enter resize/move mode
     ctrl-cmd-alt-r = 'mode resize-move'
 
-    ##: semihyper+t -- launch terminal
+    ##: semihyper+enter -- launch terminal
     # TODO: if iTerm is already focused, open a new tab
-    ctrl-cmd-alt-t = ["""\
+    ctrl-cmd-alt-enter = ["""\
         exec-and-forget osascript -e 'tell application "iTerm2" to create window with default profile'
     """, 'mode main']
 
