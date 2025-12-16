@@ -28,6 +28,9 @@ parser.add_argument(
     help='Move the focused container to the given workspace.',
 )
 parser.add_argument(
+    '-d', '--dry-run', action='store_true'
+)
+parser.add_argument(
     'workspaces', type=str, nargs='+', help='Workspace numbers to toggle.'
 )
 
@@ -160,11 +163,7 @@ def get_target_workspace(
     >>> get_target_workspace(-1, opened=[-1, 1, 2], visible=[-1, 2], targets=[1, 2, 3])
     2
     """
-    # TODO: support workspace names too
-    logger.debug(
-        'get_target_workspace(focused: %s, open: %s, visible: %s, targets: %s)',
-        focused, opened, visible, targets
-    )
+    # TODO: support i3-style workspace number prefixes
 
     if len(targets) <= 0:
         logger.debug('No workspaces given - staying on focused workspace %s',
@@ -221,13 +220,16 @@ def main():
     target = get_target_workspace(state.focused, state.workspaces, state.visible, targets)
     logging.info('Going to workspace %s', target)
 
-    # if args.move:
-    #     logging.info('Moving node to target workspace')
-    #     aerospace.move_node_to_workspace(target)
-    # else:
-    #     aerospace.go_to_workspace(target)
+    if args.dry_run:
+        logging.info('Dry run - exiting')
+        return
+
+    if args.move:
+        logging.info('Moving node to target workspace')
+        aerospace.move_node_to_workspace(target)
+    else:
+        aerospace.go_to_workspace(target)
 
 
 if __name__ == '__main__':
     main()
-
