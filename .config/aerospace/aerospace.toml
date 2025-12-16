@@ -54,7 +54,8 @@ automatically-unhide-macos-hidden-apps = false
 # This config version is only available since 'config-version = 2'
 # Fallback value (if you omit the key): persistent-workspaces = []
 persistent-workspaces = [
-    "1", "2", "3", "4", "5", "6", "7", "8", "9",
+    "10", "20", "30", "40", "50", "60", "70", "80", "90",
+    "15", "25", "35", "45", "55", "65", "75", "85", "95",
     # "A", "B", "C",
     # "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O",
     # "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z",
@@ -185,59 +186,59 @@ on-mode-changed = []
 
     ctrl-right = 'workspace next'
     ctrl-left = 'workspace prev'
-    ctrl-1 = 'workspace 1'
-    ctrl-2 = 'workspace 2'
-    ctrl-3 = 'workspace 3'
-    ctrl-4 = 'workspace 4'
-    ctrl-5 = 'workspace 5'
-    ctrl-6 = 'workspace 6'
-    ctrl-7 = 'workspace 7'
-    ctrl-8 = 'workspace 8'
-    ctrl-9 = 'workspace 9'
+    ctrl-1 = 'workspace 10'
+    ctrl-2 = 'workspace 20'
+    ctrl-3 = 'workspace 30'
+    ctrl-4 = 'workspace 40'
+    ctrl-5 = 'workspace 50'
+    ctrl-6 = 'workspace 60'
+    ctrl-7 = 'workspace 70'
+    ctrl-8 = 'workspace 80'
+    ctrl-9 = 'workspace 90'
 
     ##: semihyper+left/right -- switch neighboring workspaces
     ctrl-cmd-alt-right = 'workspace next'
     ctrl-cmd-alt-left = 'workspace prev'
 
     ##: semihyper+[1-9] -- switch to workspaces
-    ctrl-cmd-alt-1 = 'workspace 1'
-    ctrl-cmd-alt-2 = 'workspace 2'
-    ctrl-cmd-alt-3 = 'workspace 3'
-    ctrl-cmd-alt-4 = 'workspace 4'
-    ctrl-cmd-alt-5 = 'workspace 5'
-    ctrl-cmd-alt-6 = 'workspace 6'
-    ctrl-cmd-alt-7 = 'workspace 7'
-    ctrl-cmd-alt-8 = 'workspace 8'
-    ctrl-cmd-alt-9 = 'workspace 9'
+    ctrl-cmd-alt-1 = 'workspace 10'
+    ctrl-cmd-alt-2 = 'workspace 20'
+    ctrl-cmd-alt-3 = 'workspace 30'
+    ctrl-cmd-alt-4 = 'workspace 40'
+    ctrl-cmd-alt-5 = 'workspace 50'
+    ctrl-cmd-alt-6 = 'workspace 60'
+    ctrl-cmd-alt-7 = 'workspace 70'
+    ctrl-cmd-alt-8 = 'workspace 80'
+    ctrl-cmd-alt-9 = 'workspace 90'
 
     ## MARK: move nodes to workspaces
     # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
 
     ctrl-shift-left = 'move-node-to-workspace --focus-follows-window --wrap-around prev'
     ctrl-shift-right = 'move-node-to-workspace --focus-follows-window --wrap-around next'
-    ctrl-shift-1 = 'move-node-to-workspace 1'
-    ctrl-shift-2 = 'move-node-to-workspace 2'
-    ctrl-shift-3 = 'move-node-to-workspace 3'
-    ctrl-shift-4 = 'move-node-to-workspace 4'
-    ctrl-shift-5 = 'move-node-to-workspace 5'
-    ctrl-shift-6 = 'move-node-to-workspace 6'
-    ctrl-shift-7 = 'move-node-to-workspace 7'
-    ctrl-shift-8 = 'move-node-to-workspace 8'
-    ctrl-shift-9 = 'move-node-to-workspace 9'
+    ctrl-shift-1 = 'move-node-to-workspace 10'
+    ctrl-shift-2 = 'move-node-to-workspace 20'
+    ctrl-shift-3 = 'move-node-to-workspace 30'
+    ctrl-shift-4 = 'move-node-to-workspace 40'
+    ctrl-shift-5 = 'move-node-to-workspace 50'
+    ctrl-shift-6 = 'move-node-to-workspace 60'
+    ctrl-shift-7 = 'move-node-to-workspace 70'
+    ctrl-shift-8 = 'move-node-to-workspace 80'
+    ctrl-shift-9 = 'move-node-to-workspace 90'
 
     ##: hyper+left/right -- move node to neighboring workspace
     ctrl-cmd-alt-shift-left = 'move-node-to-workspace --focus-follows-window --wrap-around prev'
     ctrl-cmd-alt-shift-right = 'move-node-to-workspace --focus-follows-window --wrap-around next'
     ##: hyper+[1-9] -- move node to numbered workspace
-    ctrl-cmd-alt-shift-1 = 'move-node-to-workspace --focus-follows-window 1'
-    ctrl-cmd-alt-shift-2 = 'move-node-to-workspace --focus-follows-window 2'
-    ctrl-cmd-alt-shift-3 = 'move-node-to-workspace --focus-follows-window 3'
-    ctrl-cmd-alt-shift-4 = 'move-node-to-workspace --focus-follows-window 4'
-    ctrl-cmd-alt-shift-5 = 'move-node-to-workspace --focus-follows-window 5'
-    ctrl-cmd-alt-shift-6 = 'move-node-to-workspace --focus-follows-window 6'
-    ctrl-cmd-alt-shift-7 = 'move-node-to-workspace --focus-follows-window 7'
-    ctrl-cmd-alt-shift-8 = 'move-node-to-workspace --focus-follows-window 8'
-    ctrl-cmd-alt-shift-9 = 'move-node-to-workspace --focus-follows-window 9'
+    ctrl-cmd-alt-shift-1 = 'move-node-to-workspace --focus-follows-window 10'
+    ctrl-cmd-alt-shift-2 = 'move-node-to-workspace --focus-follows-window 20'
+    ctrl-cmd-alt-shift-3 = 'move-node-to-workspace --focus-follows-window 30'
+    ctrl-cmd-alt-shift-4 = 'move-node-to-workspace --focus-follows-window 40'
+    ctrl-cmd-alt-shift-5 = 'move-node-to-workspace --focus-follows-window 50'
+    ctrl-cmd-alt-shift-6 = 'move-node-to-workspace --focus-follows-window 60'
+    ctrl-cmd-alt-shift-7 = 'move-node-to-workspace --focus-follows-window 70'
+    ctrl-cmd-alt-shift-8 = 'move-node-to-workspace --focus-follows-window 80'
+    ctrl-cmd-alt-shift-9 = 'move-node-to-workspace --focus-follows-window 90'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#workspace-back-and-forth
 
@@ -333,5 +334,5 @@ on-mode-changed = []
 ## MARK: floating apps
 [[on-window-detected]]
     if.app-id = 'org.keepassxc.keepassxc'
-    run = ['layout floating', 'move-node-to-workspace 1']
+    run = ['layout floating', 'move-node-to-workspace 10']
     # TODO: add more floating apps
