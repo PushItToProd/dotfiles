@@ -186,10 +186,8 @@ on-mode-changed = []
     ## MARK: workspace navigation
     # See: https://nikitabobko.github.io/AeroSpace/commands#workspace
 
-    # TODO: implement a script that jumps to the next/prev workspace with open
-    # windows, skipping empty ones.
-    ctrl-right = 'workspace next'
-    ctrl-left = 'workspace prev'
+    ctrl-right = 'exec-and-forget $HOME/.config/aerospace/scripts/aerospace_navigate.py go next'
+    ctrl-left = 'exec-and-forget $HOME/.config/aerospace/scripts/aerospace_navigate.py go prev'
 
     ctrl-1 = 'exec-and-forget $HOME/.config/aerospace/scripts/aerospace_navigate.py toggle 10 15'
     ctrl-2 = 'exec-and-forget $HOME/.config/aerospace/scripts/aerospace_navigate.py toggle 20 25'
@@ -202,8 +200,9 @@ on-mode-changed = []
     ctrl-9 = 'exec-and-forget $HOME/.config/aerospace/scripts/aerospace_navigate.py toggle 90 95'
 
     ##: semihyper+left/right -- switch neighboring workspaces
-    ctrl-cmd-alt-right = 'workspace next'
-    ctrl-cmd-alt-left = 'workspace prev'
+
+    ctrl-cmd-alt-right = 'exec-and-forget $HOME/.config/aerospace/scripts/aerospace_navigate.py go next'
+    ctrl-cmd-alt-left = 'exec-and-forget $HOME/.config/aerospace/scripts/aerospace_navigate.py go prev'
 
     ##: semihyper+[1-9] -- switch to workspaces
     ctrl-cmd-alt-1 = 'exec-and-forget $HOME/.config/aerospace/scripts/aerospace_navigate.py toggle 10 15'
@@ -219,8 +218,8 @@ on-mode-changed = []
     ## MARK: move nodes to workspaces
     # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
 
-    ctrl-shift-left = 'move-node-to-workspace --focus-follows-window --wrap-around prev'
-    ctrl-shift-right = 'move-node-to-workspace --focus-follows-window --wrap-around next'
+    ctrl-shift-left = 'exec-and-forget $HOME/.config/aerospace/scripts/aerospace_navigate.py go --move prev'
+    ctrl-shift-right = 'exec-and-forget $HOME/.config/aerospace/scripts/aerospace_navigate.py go --move next'
 
     ctrl-shift-1 = 'exec-and-forget $HOME/.config/aerospace/scripts/aerospace_navigate.py toggle --move 10 15'
     ctrl-shift-2 = 'exec-and-forget $HOME/.config/aerospace/scripts/aerospace_navigate.py toggle --move 20 25'
@@ -233,8 +232,11 @@ on-mode-changed = []
     ctrl-shift-9 = 'exec-and-forget $HOME/.config/aerospace/scripts/aerospace_navigate.py toggle --move 90 95'
 
     ##: hyper+left/right -- move node to neighboring workspace
-    ctrl-cmd-alt-shift-left = 'move-node-to-workspace --focus-follows-window --wrap-around prev'
-    ctrl-cmd-alt-shift-right = 'move-node-to-workspace --focus-follows-window --wrap-around next'
+
+    # ctrl-cmd-alt-shift-left = 'move-node-to-workspace --focus-follows-window --wrap-around prev'
+    # ctrl-cmd-alt-shift-right = 'move-node-to-workspace --focus-follows-window --wrap-around next'
+    ctrl-cmd-alt-shift-left = 'exec-and-forget $HOME/.config/aerospace/scripts/aerospace_navigate.py go --move prev'
+    ctrl-cmd-alt-shift-right = 'exec-and-forget $HOME/.config/aerospace/scripts/aerospace_navigate.py go --move next'
 
     ##: hyper+[1-9] -- move node to numbered workspace
     ctrl-cmd-alt-shift-1 = 'exec-and-forget $HOME/.config/aerospace/scripts/aerospace_navigate.py toggle --move 10 15'
