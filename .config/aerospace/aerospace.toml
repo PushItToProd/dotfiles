@@ -87,7 +87,8 @@ on-mode-changed = []
     outer.top =        0
     outer.right =      0
 
-# TODO: add $HOME/.config/aerospace/scripts/ to PATH
+# TODO: add $HOME/.config/aerospace/scripts/ to PATH. (I tried this already, but
+# for some reason invoking aerospace_navigate.py didn't work.)
 # https://nikitabobko.github.io/AeroSpace/guide#exec-env-vars
 
 # MARK: 'main' mode
