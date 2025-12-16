@@ -116,7 +116,6 @@ class AeroSpace:
             for line in output.splitlines()
         ]
 
-
     @staticmethod
     def _new_workspace_info(workspace: str, is_focused: str, is_visible: str) -> AeroSpaceWorkspaceInfo:
         return AeroSpaceWorkspaceInfo(
@@ -124,7 +123,6 @@ class AeroSpace:
             is_focused == 'true',
             is_visible == 'true',
         )
-
 
     def _get_workspace_info(self, cmd: list[str]) -> list[AeroSpaceWorkspaceInfo]:
         """
@@ -136,7 +134,6 @@ class AeroSpace:
 
         output: str = proc.stdout
         return self._parse_workspace_info(output)
-
 
     def get_focused_workspace(self) -> AeroSpaceWorkspaceInfo:
         if ws := self._get_workspace_info(["list-workspaces", "--focused"]):
