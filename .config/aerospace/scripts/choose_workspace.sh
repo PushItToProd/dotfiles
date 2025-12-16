@@ -113,7 +113,11 @@ main() {
   workspace_id=$(trim_string "$workspace_id")
 
   if [[ "$1" == test ]]; then
-    echo "You selected: $workspace_id"
+    echo "You selected: '$workspace_id'"
+    return
+  fi
+
+  if [[ ! "$workspace_id" ]]; then
     return
   fi
 

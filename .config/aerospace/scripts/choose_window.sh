@@ -17,7 +17,6 @@ list_windows() {
     --format '%{window-id}%{right-padding} | %{app-name}%{right-padding} | %{window-title}'
 }
 
-
 main() {
   aerospace_windows_str=$(list_windows)
 
@@ -30,6 +29,11 @@ main() {
   # get the selection index
   selection="$(choose -i <<< "$display_text")"
   # echo "selected: ${aerospace_windows["$selection"]}"
+
+  if [[ "$selection" == -1 ]]; then
+    # no selection - exit early
+    return
+  fi
 
   # parse the window_id from the selection and trim surrounding spaces
   IFS='|' read -r window_id _ <<<"${aerospace_windows["$selection"]}"
