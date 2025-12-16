@@ -186,6 +186,8 @@ on-mode-changed = []
     ## MARK: workspace navigation
     # See: https://nikitabobko.github.io/AeroSpace/commands#workspace
 
+    # TODO: implement a script that jumps to the next/prev workspace with open
+    # windows, skipping empty ones.
     ctrl-right = 'workspace next'
     ctrl-left = 'workspace prev'
 
