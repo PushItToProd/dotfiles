@@ -103,16 +103,11 @@ class AeroSpace:
             self._new_workspace_info(*line.split('|'))
             for line in output.splitlines()
         ]
-        workspaces.sort(key=lambda info: info.name)
-
-        # deduplicate the list of workspaces by name
-        workspaces = functools.reduce(
-            lambda L, ws: L + ([] if L and L[-1].name == ws.name else [ws]),
-            workspaces, []
-        )
 
         return workspaces
 
+    def get_focused_workspace(self) -> AeroSpaceWorkspaceInfo:
+        return self._get_workspace_info(["list-workspaces", "--focused"])
 
     def get_all_workspaces(self) -> list[AeroSpaceWorkspaceInfo]:
         return self._get_workspace_info(["list-workspaces", "--all"])
@@ -124,6 +119,14 @@ class AeroSpace:
         return self._get_workspace_info(["list-windows", "--all"])
 
 
+def unique_workspaces(workspaces: list[AeroSpaceWorkspaceInfo]) -> list[AeroSpaceWorkspaceInfo]:
+    workspaces = sorted(workspaces, key=lambda ws: ws.name)
+    return functools.reduce(
+        lambda L, ws: L + ([] if L and L[-1].name == ws.name else [ws]),
+        workspaces, []
+    )
+
+
 @dataclass
 class WorkspaceStates:
     focused: str
@@ -131,7 +134,10 @@ class WorkspaceStates:
     visible: list[str]
 
 
-def summarize_workspaces(ws_info: list[AeroSpaceWorkspaceInfo]):
+def summarize_workspaces(ws_info: list[AeroSpaceWorkspaceInfo]) -> WorkspaceStates:
+    """
+    Summarize current workspace states.
+    """
     focused = None
     workspaces = []
     visible = []
@@ -247,7 +253,8 @@ def main():
     targets = args.workspaces
 
     aerospace = AeroSpace()
-    workspaces = aerospace.get_active_workspaces()
+    workspaces = aerospace.get_active_workspaces() + aerospace.get_focused_workspace()
+    workspaces = unique_workspaces(workspaces)
     state = summarize_workspaces(workspaces)
 
     logging.debug('Focused workspace: %s', state.focused)
