@@ -310,7 +310,10 @@ on-mode-changed = []
     # TODO: if iTerm is already focused, open a new tab
     ctrl-cmd-alt-enter = ["""\
         exec-and-forget osascript -e 'tell application "iTerm2" to create window with default profile'
-    """, 'mode main']
+    """]
+
+    ##: semihyper+w -- launch web browser
+    ctrl-cmd-alt-w = ['exec-and-forget firefox --new-window']
 
     # TODO: semihyper+space -- open Application picker
 
