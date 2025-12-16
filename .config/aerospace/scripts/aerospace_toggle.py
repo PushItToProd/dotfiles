@@ -130,33 +130,33 @@ def unique_workspaces(workspaces: list[AeroSpaceWorkspaceInfo]) -> list[AeroSpac
 @dataclass
 class WorkspaceStates:
     focused: str
-    workspaces: list[str]
-    visible: list[str]
+    workspaces: set[str]
+    visible: set[str]
 
 
 def summarize_workspaces(ws_info: list[AeroSpaceWorkspaceInfo]) -> WorkspaceStates:
     """
     Summarize current workspace states.
     """
-    focused = None
-    workspaces = []
-    visible = []
+    focused: str = None
+    workspaces: set[str] = set()
+    visible: set(str) = set()
 
     for ws in ws_info:
-        workspaces.append(ws.name)
+        workspaces.add(ws.name)
         if ws.is_focused:
             focused = ws.name
         if ws.is_visible:
-            visible.append(ws.name)
+            visible.add(ws.name)
 
     return WorkspaceStates(focused, workspaces, visible)
 
 
 def get_target_workspace(
-    focused: int,
-    opened: list[int],
-    visible: list[int],
-    targets: list[int]
+    focused: str,
+    opened: set[str],
+    visible: set[str],
+    targets: list[str]
 ):
     """
     Find the target workspace to switch to based on the current state of open
@@ -258,8 +258,8 @@ def main():
     state = summarize_workspaces(workspaces)
 
     logging.debug('Focused workspace: %s', state.focused)
-    logging.debug('Open workspaces: %s', state.workspaces)
-    logging.debug('Visible workspaces: %s', state.visible)
+    logging.debug('Open workspaces: %s', sorted(state.workspaces))
+    logging.debug('Visible workspaces: %s', sorted(state.visible))
 
     target = get_target_workspace(state.focused, state.workspaces, state.visible, targets)
     logging.info('Going to workspace %s', target)
