@@ -207,7 +207,7 @@ def get_target_workspace(
                      focused)
         return focused
 
-    if len(targets) == 0:
+    if len(targets) == 1:
         logger.debug('Only one workspace given - going to it: %s', targets[0])
         return targets[0]
 
