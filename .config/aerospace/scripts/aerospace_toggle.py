@@ -92,9 +92,9 @@ class AeroSpace:
 
     def _get_workspace_info(self, cmd: list[str]) -> list[AeroSpaceWorkspaceInfo]:
         """
-        _get_workspace_info invokes aerospace with the given subcommand, passing
-        the --format flag with WORKSPACE_INFO_FORMAT and parsing the result into
-        a list of AeroSpaceWorkspaceInfo objects.
+        Invoke aerospace with the given subcommand, passing the --format flag
+        with WORKSPACE_INFO_FORMAT and parsing the result into a list of
+        AeroSpaceWorkspaceInfo objects.
         """
         proc = self._aerospace([*cmd, "--format", self.WORKSPACE_INFO_FORMAT], capture_output=True)
 
@@ -107,16 +107,34 @@ class AeroSpace:
         return workspaces
 
     def get_focused_workspace(self) -> AeroSpaceWorkspaceInfo:
-        return self._get_workspace_info(["list-workspaces", "--focused"])
+        if ws := self._get_workspace_info(["list-workspaces", "--focused"]):
+            return ws[0]
+        return None
 
     def get_all_workspaces(self) -> list[AeroSpaceWorkspaceInfo]:
         return self._get_workspace_info(["list-workspaces", "--all"])
 
-    def get_active_workspaces(self) -> list[AeroSpaceWorkspaceInfo]:
+    def get_true_active_workspaces(self) -> list[AeroSpaceWorkspaceInfo]:
+        """
+        Get the list of workspaces containing windows. Note that this may or may
+        not include the currently focused workspace. (To ensure the focused
+        workspace is included, use get_active_workspaces() instead.)
+        """
         # Note here that we use list-windows, not list-workspaces. This ensures
         # we only get workspaces that actually have open windows assigned to
-        # them.
+        # them. However, this also won't include the focused workspace if it
+        # has no open windows.
         return self._get_workspace_info(["list-windows", "--all"])
+
+    def get_active_workspaces(self) -> list[AeroSpaceWorkspaceInfo]:
+        """
+        Get the list of active workspaces, including the currently focused
+        workspace.
+        """
+        workspaces = self.get_true_active_workspaces()
+        if focused_ws := self.get_focused_workspace():
+            return [focused_ws] + workspaces
+        return workspaces
 
 
 def unique_workspaces(workspaces: list[AeroSpaceWorkspaceInfo]) -> list[AeroSpaceWorkspaceInfo]:
@@ -253,7 +271,7 @@ def main():
     targets = args.workspaces
 
     aerospace = AeroSpace()
-    workspaces = aerospace.get_active_workspaces() + aerospace.get_focused_workspace()
+    workspaces = aerospace.get_active_workspaces()
     workspaces = unique_workspaces(workspaces)
     state = summarize_workspaces(workspaces)
 
