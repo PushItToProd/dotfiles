@@ -48,8 +48,10 @@ def get_parser():
     ## subcommand: go
     parser_go = subparsers.add_parser('go')
     parser_go.set_defaults(handler=main_go)
+    parser_go.add_argument('direction', choices=['prev', 'next'])
     parser_go.add_argument(
-        'target', choices=['prev', 'next'],
+        '-m', '--move', action='store_true',
+        help='Move the focused container to the given workspace.',
     )
     parser_go.add_argument('-w', '--wrap')
 
@@ -312,14 +314,30 @@ def main_toggle(args):
 
 
 def main_go(args):
-    target = args.target
+    direction = args.direction
+    if direction not in ('next', 'prev'):
+        raise ValueError(f"invalid direction: {direction}")
 
-    if target == 'next':
-        raise NotImplementedError()
-    elif target == 'prev':
-        raise NotImplementedError()
+    aerospace = AeroSpace()
+    workspaces = aerospace.get_active_workspaces()
+    workspaces = unique_workspaces(workspaces)
+    state = summarize_workspaces(workspaces)
+
+    # the target list is the full list of workspaces sorted by name
+    target_workspaces = sorted(state.workspaces, reverse=direction == 'prev')
+
+    target = get_target_workspace(state.focused, state.workspaces, state.visible, target_workspaces)
+    logging.info('Going to workspace %s', target)
+    if args.dry_run:
+        logging.info('Dry run - exiting')
+        return
+
+    if args.move:
+        logging.info('Moving node to target workspace')
+        aerospace.move_node_to_workspace(target)
     else:
-        raise ValueError(f"invalid target: {target}")
+        aerospace.go_to_workspace(target)
+
 
 
 def main():
