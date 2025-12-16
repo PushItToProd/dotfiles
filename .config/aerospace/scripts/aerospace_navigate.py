@@ -178,11 +178,17 @@ def unique_workspaces(workspaces: list[AeroSpaceWorkspaceInfo]) -> list[AeroSpac
     Given a list of AeroSpaceWorkspaceInfo objects that may be unsorted, sort
     the list and deduplicate by name.
     """
+    if not workspaces:
+        return []
+
     workspaces = sorted(workspaces, key=lambda ws: ws.name)
+
     # Iterate over the list of sorted workspaces, collecting unique ones.
     return functools.reduce(
-        lambda L, ws: L + ([] if L and L[-1].name == ws.name else [ws]),
-        workspaces, []
+        # Append items to the list only when their name doesn't match the
+        # previous entry.
+        lambda L, ws: L + ([ws] if L[-1].name != ws.name else []),
+        workspaces[1:], [workspaces[0]]
     )
 
 
