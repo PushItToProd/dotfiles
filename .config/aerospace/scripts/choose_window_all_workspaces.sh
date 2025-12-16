@@ -30,7 +30,7 @@ main() {
   display_text=$(sed 's/[^|]* \| //' <<<"$aerospace_windows_str")
 
   # get the selection index
-  selection="$(choose -iz <<< "$display_text")"
+  selection="$(choose -izp "Select a window (all workspaces)" <<< "$display_text")"
   # echo "selected: ${aerospace_windows["$selection"]}"
 
   # a selection of -1 means the user hit escape or otherwise exited without

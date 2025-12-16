@@ -27,7 +27,7 @@ main() {
   display_text=$(sed 's/[^|]* \| //' <<<"$aerospace_windows_str")
 
   # get the selection index
-  selection="$(choose -i <<< "$display_text")"
+  selection="$(choose -izp "Select a window" <<< "$display_text")"
   # echo "selected: ${aerospace_windows["$selection"]}"
 
   if [[ "$selection" == -1 ]]; then
