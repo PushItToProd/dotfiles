@@ -1,12 +1,11 @@
 #!/usr/bin/env python3
 """
-A helper script for AeroSpace that allows one keybinding to access and cycle
-through multiple workspaces, as well as move nodes to them.
+A helper script for AeroSpace with subcommands that enable navigation more like
+what I have in i3. See the --help text for details.
 
-This script should be invoked with a list of two or more workspace names to
-target for navigation. It will navigate between them intuitively, cycling focus
-through the listed workspaces when one of them is focused and otherwise finding
-the first reasonable one to open.
+To avoid needing to install dependencies, this script only uses Python standard
+library packages available under Python 3.9.6, the version installed on macOS
+Sequoia 15.5 (24F74).
 """
 import argparse
 import functools
@@ -27,15 +26,17 @@ def get_parser():
     parser = argparse.ArgumentParser()
 
     # global flags
-    parser.add_argument(
-        '-d', '--dry-run', action='store_true'
-    )
+    parser.add_argument('-d', '--dry-run', action='store_true')
 
     ## subparsers
     subparsers = parser.add_subparsers(required=True)
 
     ## subcommand: toggle
-    parser_toggle = subparsers.add_parser('toggle')
+    parser_toggle = subparsers.add_parser('toggle', help='''
+        Given a list of two or more workspace names, navigate between them
+        intuitively, cycling focus through the listed workspaces when one of
+        them is focused and otherwise finding the first reasonable one to open.
+    ''')
     parser_toggle.set_defaults(handler=main_toggle)
     parser_toggle.add_argument(
         '-m', '--move', action='store_true',
@@ -46,14 +47,17 @@ def get_parser():
     )
 
     ## subcommand: go
-    parser_go = subparsers.add_parser('go')
+    parser_go = subparsers.add_parser('go', help='''
+        Given a direction -- 'prev' or 'next' -- go to the previous or next
+        workspace that has open windows, wrapping around if we're at the first
+        or last workspace.
+    ''')
     parser_go.set_defaults(handler=main_go)
     parser_go.add_argument('direction', choices=['prev', 'next'])
     parser_go.add_argument(
         '-m', '--move', action='store_true',
         help='Move the focused container to the given workspace.',
     )
-    parser_go.add_argument('-w', '--wrap')
 
     return parser
 
@@ -66,6 +70,9 @@ class AeroSpaceWorkspaceInfo:
 
 
 class AeroSpace:
+    """
+    Wrapper for the `aerospace` CLI.
+    """
     def __init__(self, aerospace_cmd="aerospace"):
         self.aerospace_cmd = aerospace_cmd
 
@@ -97,6 +104,10 @@ class AeroSpace:
 
     @classmethod
     def _parse_workspace_info(cls, output: str):
+        """
+        Parse the output of an aerospace CLI command invoked with
+        WORKSPACE_INFO_FORMAT passed as its --format argument.
+        """
         return [
             cls._new_workspace_info(*line.split('|'))
             for line in output.splitlines()
@@ -121,6 +132,7 @@ class AeroSpace:
         proc = self._aerospace([*cmd, "--format", self.WORKSPACE_INFO_FORMAT], capture_output=True)
 
         output: str = proc.stdout
+        # TODO: replace with self._parse_workspace_info(output)
         workspaces = [
             self._new_workspace_info(*line.split('|'))
             for line in output.splitlines()
@@ -134,6 +146,10 @@ class AeroSpace:
         return None
 
     def get_all_workspaces(self) -> list[AeroSpaceWorkspaceInfo]:
+        """
+        Get the list of all workspaces, including persistent workspaces that may
+        not have open windows.
+        """
         return self._get_workspace_info(["list-workspaces", "--all"])
 
     def get_true_active_workspaces(self) -> list[AeroSpaceWorkspaceInfo]:
@@ -176,7 +192,7 @@ class WorkspaceStates:
 
 def summarize_workspaces(ws_info: list[AeroSpaceWorkspaceInfo]) -> WorkspaceStates:
     """
-    Summarize current workspace states.
+    Summarize current workspace states for ease of navigation.
     """
     focused: str = None
     workspaces: set[str] = set()
@@ -193,6 +209,8 @@ def summarize_workspaces(ws_info: list[AeroSpaceWorkspaceInfo]) -> WorkspaceStat
 
 
 def get_target_workspace(
+    # TODO: take a WorkspaceStates instance here
+    # states: WorkspaceStates,
     focused: str,
     opened: set[str],
     visible: set[str],
@@ -287,6 +305,7 @@ def get_target_workspace(
 
 
 def main_toggle(args):
+    """Entrypoint for the 'toggle' subcommand."""
     targets = args.workspaces
     assert targets, "expected at least one target workspace"
 
@@ -314,6 +333,7 @@ def main_toggle(args):
 
 
 def main_go(args):
+    """Entrypoint for the 'go' subcommand."""
     direction = args.direction
     if direction not in ('next', 'prev'):
         raise ValueError(f"invalid direction: {direction}")
