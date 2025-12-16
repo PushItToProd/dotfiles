@@ -293,6 +293,9 @@ on-mode-changed = []
     ##: cmd+backtick -- choose window from list (current workspace only)
     cmd-backtick = 'exec-and-forget "$HOME/.config/aerospace/scripts/choose_window.sh"'
 
+    # TODO: cmd+tab -- list all open apps
+    # TODO: cmd+backtick (or something else?) -- list all windows of the currently open app
+
     # Disable annoying macOS shortcuts
     cmd-h = [] # Disable "hide application"
     cmd-alt-h = [] # Disable "hide others"
