@@ -107,6 +107,9 @@ class AeroSpace:
         """
         Parse the output of an aerospace CLI command invoked with
         WORKSPACE_INFO_FORMAT passed as its --format argument.
+
+        We do this rather than using aerospace's --json flag because the JSON
+        output doesn't provide all the information that we want.
         """
         return [
             cls._new_workspace_info(*line.split('|'))
@@ -132,13 +135,8 @@ class AeroSpace:
         proc = self._aerospace([*cmd, "--format", self.WORKSPACE_INFO_FORMAT], capture_output=True)
 
         output: str = proc.stdout
-        # TODO: replace with self._parse_workspace_info(output)
-        workspaces = [
-            self._new_workspace_info(*line.split('|'))
-            for line in output.splitlines()
-        ]
+        return self._parse_workspace_info(output)
 
-        return workspaces
 
     def get_focused_workspace(self) -> AeroSpaceWorkspaceInfo:
         if ws := self._get_workspace_info(["list-workspaces", "--focused"]):
