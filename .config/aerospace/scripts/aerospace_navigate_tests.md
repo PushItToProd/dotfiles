@@ -1,4 +1,4 @@
-# Functional Tests for `aerospace_toggle.py`
+# Functional Tests for `aerospace_navigate.py`
 
 TODO: automate these.
 
@@ -6,8 +6,9 @@ For now, just documenting how I do these manually.
 
 Run all these tests from a workspace that isn't 990, 995, or 999.
 
+## `toggle` test cases
 
-## Test case 1: navigate to first workspace in list
+### Test case 1: navigate to first workspace in list
 
 ```sh
 python aerospace_navigate.py --dry-run toggle 990 995 999
@@ -25,7 +26,7 @@ Expected output:
 [INFO] main_toggle - Dry run - exiting
 ```
 
-## Test case 2a: navigate to second workspace in list when we're on the first
+### Test case 2a: navigate to second workspace in list when we're on the first
 
 ```sh
 aerospace workspace 990
@@ -44,7 +45,7 @@ Expected output:
 [INFO] main_toggle - Dry run - exiting
 ```
 
-## Test case 2b: navigate to second workspace in list when we're on the first
+### Test case 2b: navigate to second workspace in list when we're on the first
 
 ```sh
 aerospace workspace 990
@@ -63,7 +64,7 @@ Expected output:
 [INFO] main_toggle - Dry run - exiting
 ```
 
-## Test case 3a: navigate back to the first workspace when we're on the second and there are only two in the list
+### Test case 3a: navigate back to the first workspace when we're on the second and there are only two in the list
 
 ```sh
 aerospace workspace 995
@@ -82,7 +83,7 @@ Expected output:
 [INFO] main_toggle - Dry run - exiting
 ```
 
-## Test case 3b: navigate to third workspace in list when we're on the second and there's a third target in the list
+### Test case 3b: navigate to third workspace in list when we're on the second and there's a third target in the list
 
 ```sh
 aerospace workspace 995
@@ -100,5 +101,3 @@ Expected output:
 [INFO] main_toggle - Going to workspace 999
 [INFO] main_toggle - Dry run - exiting
 ```
-
-
