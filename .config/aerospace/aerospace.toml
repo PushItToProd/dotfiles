@@ -186,6 +186,7 @@ on-mode-changed = []
 
     ctrl-right = 'workspace next'
     ctrl-left = 'workspace prev'
+
     ctrl-1 = 'workspace 10'
     ctrl-2 = 'workspace 20'
     ctrl-3 = 'workspace 30'
@@ -195,6 +196,16 @@ on-mode-changed = []
     ctrl-7 = 'workspace 70'
     ctrl-8 = 'workspace 80'
     ctrl-9 = 'workspace 90'
+    ctrl-f1 = 'workspace 15'
+    ctrl-f2 = 'workspace 25'
+    ctrl-f3 = 'workspace 35'
+    ctrl-f4 = 'workspace 45'
+    ctrl-f5 = 'workspace 55'
+    ctrl-f6 = 'workspace 65'
+    ctrl-f7 = 'workspace 75'
+    ctrl-f8 = 'workspace 85'
+    ctrl-f9 = 'workspace 95'
+
 
     ##: semihyper+left/right -- switch neighboring workspaces
     ctrl-cmd-alt-right = 'workspace next'
@@ -211,6 +222,16 @@ on-mode-changed = []
     ctrl-cmd-alt-8 = 'workspace 80'
     ctrl-cmd-alt-9 = 'workspace 90'
 
+    ctrl-cmd-alt-f1 = 'workspace 15'
+    ctrl-cmd-alt-f2 = 'workspace 25'
+    ctrl-cmd-alt-f3 = 'workspace 35'
+    ctrl-cmd-alt-f4 = 'workspace 45'
+    ctrl-cmd-alt-f5 = 'workspace 55'
+    ctrl-cmd-alt-f6 = 'workspace 65'
+    ctrl-cmd-alt-f7 = 'workspace 75'
+    ctrl-cmd-alt-f8 = 'workspace 85'
+    ctrl-cmd-alt-f9 = 'workspace 95'
+
     ## MARK: move nodes to workspaces
     # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
 
@@ -226,9 +247,20 @@ on-mode-changed = []
     ctrl-shift-8 = 'move-node-to-workspace 80'
     ctrl-shift-9 = 'move-node-to-workspace 90'
 
+    ctrl-shift-f1 = 'move-node-to-workspace 15'
+    ctrl-shift-f2 = 'move-node-to-workspace 25'
+    ctrl-shift-f3 = 'move-node-to-workspace 35'
+    ctrl-shift-f4 = 'move-node-to-workspace 45'
+    ctrl-shift-f5 = 'move-node-to-workspace 55'
+    ctrl-shift-f6 = 'move-node-to-workspace 65'
+    ctrl-shift-f7 = 'move-node-to-workspace 75'
+    ctrl-shift-f8 = 'move-node-to-workspace 85'
+    ctrl-shift-f9 = 'move-node-to-workspace 95'
+
     ##: hyper+left/right -- move node to neighboring workspace
     ctrl-cmd-alt-shift-left = 'move-node-to-workspace --focus-follows-window --wrap-around prev'
     ctrl-cmd-alt-shift-right = 'move-node-to-workspace --focus-follows-window --wrap-around next'
+
     ##: hyper+[1-9] -- move node to numbered workspace
     ctrl-cmd-alt-shift-1 = 'move-node-to-workspace --focus-follows-window 10'
     ctrl-cmd-alt-shift-2 = 'move-node-to-workspace --focus-follows-window 20'
@@ -239,6 +271,16 @@ on-mode-changed = []
     ctrl-cmd-alt-shift-7 = 'move-node-to-workspace --focus-follows-window 70'
     ctrl-cmd-alt-shift-8 = 'move-node-to-workspace --focus-follows-window 80'
     ctrl-cmd-alt-shift-9 = 'move-node-to-workspace --focus-follows-window 90'
+
+    ctrl-cmd-alt-shift-f1 = 'move-node-to-workspace --focus-follows-window 15'
+    ctrl-cmd-alt-shift-f2 = 'move-node-to-workspace --focus-follows-window 25'
+    ctrl-cmd-alt-shift-f3 = 'move-node-to-workspace --focus-follows-window 35'
+    ctrl-cmd-alt-shift-f4 = 'move-node-to-workspace --focus-follows-window 45'
+    ctrl-cmd-alt-shift-f5 = 'move-node-to-workspace --focus-follows-window 55'
+    ctrl-cmd-alt-shift-f6 = 'move-node-to-workspace --focus-follows-window 65'
+    ctrl-cmd-alt-shift-f7 = 'move-node-to-workspace --focus-follows-window 75'
+    ctrl-cmd-alt-shift-f8 = 'move-node-to-workspace --focus-follows-window 85'
+    ctrl-cmd-alt-shift-f9 = 'move-node-to-workspace --focus-follows-window 95'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#workspace-back-and-forth
 
