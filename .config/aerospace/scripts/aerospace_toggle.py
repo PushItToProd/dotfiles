@@ -9,6 +9,7 @@ through the listed workspaces when one of them is focused and otherwise finding
 the first reasonable one to open.
 """
 import argparse
+import functools
 import logging
 import os
 import subprocess
@@ -69,22 +70,58 @@ class AeroSpace:
             check=True,
         )
 
-    def get_workspaces(self) -> list[AeroSpaceWorkspaceInfo]:
-        workspace_list_format = '%{workspace}|%{workspace-is-focused}|%{workspace-is-visible}'
-        proc = self._aerospace(["list-workspaces", "--all", "--format", workspace_list_format], capture_output=True)
+    # required format for generating AeroSpaceWorkspaceInfo entries
+    WORKSPACE_INFO_FORMAT = '%{workspace}|%{workspace-is-focused}|%{workspace-is-visible}'
 
-        def _new_workspace_info(workspace, is_focused, is_visible) -> AeroSpaceWorkspaceInfo:
-            return AeroSpaceWorkspaceInfo(
-                workspace,
-                is_focused == 'true',
-                is_visible == 'true',
-            )
-
-        output: str = proc.stdout
+    @classmethod
+    def _parse_workspace_info(cls, output: str):
         return [
-            _new_workspace_info(*line.split('|'))
+            cls._new_workspace_info(*line.split('|'))
             for line in output.splitlines()
         ]
+
+
+    @staticmethod
+    def _new_workspace_info(workspace: str, is_focused: str, is_visible: str) -> AeroSpaceWorkspaceInfo:
+        return AeroSpaceWorkspaceInfo(
+            workspace,
+            is_focused == 'true',
+            is_visible == 'true',
+        )
+
+
+    def _get_workspace_info(self, cmd: list[str]) -> list[AeroSpaceWorkspaceInfo]:
+        """
+        _get_workspace_info invokes aerospace with the given subcommand, passing
+        the --format flag with WORKSPACE_INFO_FORMAT and parsing the result into
+        a list of AeroSpaceWorkspaceInfo objects.
+        """
+        proc = self._aerospace([*cmd, "--format", self.WORKSPACE_INFO_FORMAT], capture_output=True)
+
+        output: str = proc.stdout
+        workspaces = [
+            self._new_workspace_info(*line.split('|'))
+            for line in output.splitlines()
+        ]
+        workspaces.sort(key=lambda info: info.name)
+
+        # deduplicate the list of workspaces by name
+        workspaces = functools.reduce(
+            lambda L, ws: L + ([] if L and L[-1].name == ws.name else [ws]),
+            workspaces, []
+        )
+
+        return workspaces
+
+
+    def get_all_workspaces(self) -> list[AeroSpaceWorkspaceInfo]:
+        return self._get_workspace_info(["list-workspaces", "--all"])
+
+    def get_active_workspaces(self) -> list[AeroSpaceWorkspaceInfo]:
+        # Note here that we use list-windows, not list-workspaces. This ensures
+        # we only get workspaces that actually have open windows assigned to
+        # them.
+        return self._get_workspace_info(["list-windows", "--all"])
 
 
 @dataclass
@@ -210,7 +247,7 @@ def main():
     targets = args.workspaces
 
     aerospace = AeroSpace()
-    workspaces = aerospace.get_workspaces()
+    workspaces = aerospace.get_active_workspaces()
     state = summarize_workspaces(workspaces)
 
     logging.debug('Focused workspace: %s', state.focused)
