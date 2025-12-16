@@ -165,13 +165,21 @@ class AeroSpace:
         workspace.
         """
         workspaces = self.get_true_active_workspaces()
+        # Since the focused workspace may not have any open windows, we make
+        # sure to add it. I don't think this can actually be None, but if it is,
+        # it's not added to the list.
         if focused_ws := self.get_focused_workspace():
             return [focused_ws] + workspaces
         return workspaces
 
 
 def unique_workspaces(workspaces: list[AeroSpaceWorkspaceInfo]) -> list[AeroSpaceWorkspaceInfo]:
+    """
+    Given a list of AeroSpaceWorkspaceInfo objects that may be unsorted, sort
+    the list and deduplicate by name.
+    """
     workspaces = sorted(workspaces, key=lambda ws: ws.name)
+    # Iterate over the list of sorted workspaces, collecting unique ones.
     return functools.reduce(
         lambda L, ws: L + ([] if L and L[-1].name == ws.name else [ws]),
         workspaces, []
@@ -180,6 +188,10 @@ def unique_workspaces(workspaces: list[AeroSpaceWorkspaceInfo]) -> list[AeroSpac
 
 @dataclass
 class WorkspaceStates:
+    """
+    Represent the current state of workspaces -- which one is focused, which
+    ones are visible, and all workspaces that are currently active.
+    """
     focused: str
     workspaces: set[str]
     visible: set[str]
