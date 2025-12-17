@@ -225,6 +225,38 @@ func PrintRofi(cleanedPath, rawPath string) string {
 	return fmt.Sprintf("%s\000info\x1f%s\n", cleanedPath, rawPath)
 }
 
+func isDirectory(path string) (bool, error) {
+	fileInfo, err := os.Stat(path)
+	if err != nil {
+		return false, err // Return error if the path doesn't exist or is inaccessible
+	}
+	return fileInfo.IsDir(), nil // Return the result of IsDir()
+}
+
+func findWorkspaceStorage(homedir string) (string, error) {
+	subdirs := []string{
+		".config/Code/User/workspaceStorage",
+		"./Library/Application Support/Code/User/workspaceStorage",
+	}
+
+	var errs []error
+	for _, subdirpath := range subdirs {
+		fullpath := path.Join(homedir, subdirpath)
+		isDir, err := isDirectory(fullpath)
+		if err != nil {
+			errs = append(errs, err)
+			continue
+		}
+		if isDir {
+			return fullpath, nil
+		}
+	}
+	if errs == nil {
+		return "", errors.New("couldn't find workspaceStorage")
+	}
+	return "", errors.Join(errs...)
+}
+
 func main() {
 	flag.Parse()
 
@@ -233,7 +265,10 @@ func main() {
 		log.Fatalf("failed to get homedir: %v", err)
 	}
 
-	wsStoragePath := path.Join(homedir, ".config/Code/User/workspaceStorage")
+	wsStoragePath, err := findWorkspaceStorage(homedir)
+	if err != nil {
+		log.Fatalf("%v", err)
+	}
 	wsEntries, err := getWorkspaceEntries(wsStoragePath)
 	if err != nil {
 		log.Fatalf("error getting workspaces: %v", err)
@@ -251,7 +286,7 @@ func main() {
 		friendlyPath := TruncateDirPrefix(rawPath, homedir, "~")
 
 		if *plainFlag {
-			fmt.Printf("%s %s (%s)\n", entry.ModTime, friendlyPath, rawPath)
+			fmt.Printf("%s|%s|%s\n", entry.ModTime, friendlyPath, rawPath)
 		} else {
 			fmt.Println(PrintRofi(friendlyPath, rawPath))
 		}
