@@ -6,8 +6,10 @@ import (
 	"errors"
 	"flag"
 	"fmt"
+	"io"
 	"io/fs"
 	"log"
+	"maps"
 	"net/url"
 	"os"
 	"path"
@@ -19,7 +21,7 @@ import (
 
 var ErrPathNotInJson = errors.New("workspace path not found in workspace.json")
 var ErrSkipEntry = errors.New("skipping this entry")
-var plainFlag = flag.Bool("plain", false, "If provided, print output to stdout in a plaintext format instead of rofi row format.")
+var formatFlag = flag.String("format", "plain", fmt.Sprintf("Must be one of %s", validFormatters))
 
 type WorkspaceEntry struct {
 	WsCodePath string    // path to the underlying workspace - i.e. where the code actually resides
@@ -220,11 +222,6 @@ func getWorkspaceEntries(wsStoragePath string) ([]WorkspaceEntry, error) {
 	return workspaces, nil
 }
 
-func PrintRofi(cleanedPath, rawPath string) string {
-	// https://davatorium.github.io/rofi/1.7.5/rofi-script.5/#parsing-row-options
-	return fmt.Sprintf("%s\000info\x1f%s\n", cleanedPath, rawPath)
-}
-
 func isDirectory(path string) (bool, error) {
 	fileInfo, err := os.Stat(path)
 	if err != nil {
@@ -257,8 +254,37 @@ func findWorkspaceStorage(homedir string) (string, error) {
 	return "", errors.Join(errs...)
 }
 
+type OutputEntry struct {
+	WorkspaceEntry
+	FriendlyPath string
+}
+
+type OutputFormatter func(io.Writer, OutputEntry) error
+
+var formatters = map[string]OutputFormatter{
+	"rofi":  FormatRofi,
+	"plain": FormatPlain,
+}
+
+var validFormatters = strings.Join(slices.Collect(maps.Keys(formatters)), ", ")
+
+func FormatRofi(w io.Writer, entry OutputEntry) error {
+	_, err := fmt.Fprintf(w, "%s\000info\x1f%s\n", entry.FriendlyPath, entry.WsCodePath)
+	return err
+}
+
+func FormatPlain(w io.Writer, entry OutputEntry) error {
+	_, err := fmt.Fprintf(w, "%s|%s|%s\n", entry.ModTime, entry.FriendlyPath, entry.WsCodePath)
+	return err
+}
+
 func main() {
 	flag.Parse()
+
+	formatter, ok := formatters[*formatFlag]
+	if !ok {
+		log.Fatalf("invalid format: %v (expected one of %s)", *formatFlag, validFormatters)
+	}
 
 	homedir, err := os.UserHomeDir()
 	if err != nil {
@@ -284,11 +310,8 @@ func main() {
 
 		rawPath := entry.WsCodePath
 		friendlyPath := TruncateDirPrefix(rawPath, homedir, "~")
+		outputEntry := OutputEntry{entry, friendlyPath}
 
-		if *plainFlag {
-			fmt.Printf("%s|%s|%s\n", entry.ModTime, friendlyPath, rawPath)
-		} else {
-			fmt.Println(PrintRofi(friendlyPath, rawPath))
-		}
+		formatter(os.Stdout, outputEntry)
 	}
 }

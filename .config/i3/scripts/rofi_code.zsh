@@ -30,7 +30,7 @@ ensure_go() {
 }
 
 list_workspaces() {
-  go run $HOME/bin/list_vscode_workspaces/cmd/list_workspaces/main.go "$@"
+  go run $HOME/bin/list_vscode_workspaces/cmd/list_workspaces/main.go --format rofi "$@"
 }
 
 # handle_selection takes the selection from rofi and invokes VS Code with it
