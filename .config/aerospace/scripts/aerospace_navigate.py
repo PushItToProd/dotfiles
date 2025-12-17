@@ -372,7 +372,6 @@ def main_go(args):
         aerospace.go_to_workspace(target)
 
 
-
 def main():
     """Main script entrypoint."""
     args = get_parser().parse_args()
