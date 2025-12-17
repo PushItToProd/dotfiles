@@ -1,10 +1,20 @@
 ### AeroSpace config ###
-# Setup: (from the root of this Git repo)
-#   ln -s $PWD/.config/aerospace ~/.config/aerospace
+# Setup: (from the root of this Git repo) ln -s "$PWD"/.config/aerospace
+#   ~/.config/aerospace
 #
 # Required dependencies:
-# * brew tap FelixKratz/formulae && brew install sketchybar
-# * brew install choose-gui
+# * `brew tap FelixKratz/formulae && brew install sketchybar` -- i3-bar
+#   replacement
+#     * Set System Settings > Control Center > "Automatically hide and show the
+#       menu bar" to "Always".
+# * `brew install choose-gui` -- Rofi replacement
+#
+# Suggested:
+# * brew install swipeaerospace
+#     * Disable all three finger swipe gestures in the System Settings under
+#       Trackpad.
+# * Use Karabiner to map caps lock and backslash to ctrl+cmd+alt ("semihyper")
+#   when held.
 
 config-version = 2
 
