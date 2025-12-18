@@ -46,10 +46,18 @@ link() {
   fi
 
   if [[ "$DRY_RUN" ]]; then
-    printf '  -> ** dry run: ln -s %q %q\n' "$src" "$dest"
+    printf '  -> ** ⛔️ dry run: ln -s %q %q\n' "$src" "$dest"
   else
     ln -s "$src" "$dest"
   fi
+}
+
+ensure_dir() {
+  local path="$1"
+  local dir="$INSTALL_DIR/$path"
+
+  mkdir -p "$dir" || fatal "couldn't create path '$path' ⚠️"
+  printf 'ensure_dir: "%s" ✅\n' "$path"
 }
 
 main() {
@@ -58,8 +66,13 @@ main() {
   echo "DOTFILES_DIR: $DOTFILES_DIR"
   echo "INSTALL_DIR: $INSTALL_DIR"
 
+  echo
+  echo ---
+  echo
+
+  ensure_dir .config
   link ".config/aerospace"
-  mkdir -p "$INSTALL_DIR/.config/sketchybar"
+  ensure_dir "$INSTALL_DIR/.config/sketchybar"
   link ".config/sketchybar/sketchybarrc"
   link ".config/sketchybar/plugins"
 }
