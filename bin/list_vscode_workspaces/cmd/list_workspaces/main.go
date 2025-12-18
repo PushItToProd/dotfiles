@@ -262,8 +262,9 @@ type OutputEntry struct {
 type OutputFormatter func(io.Writer, OutputEntry) error
 
 var formatters = map[string]OutputFormatter{
-	"rofi":  FormatRofi,
-	"plain": FormatPlain,
+	"rofi":   FormatRofi,
+	"plain":  FormatPlain,
+	"choose": FormatChoose,
 }
 
 var validFormatters = strings.Join(slices.Collect(maps.Keys(formatters)), ", ")
@@ -275,6 +276,11 @@ func FormatRofi(w io.Writer, entry OutputEntry) error {
 
 func FormatPlain(w io.Writer, entry OutputEntry) error {
 	_, err := fmt.Fprintf(w, "%s|%s|%s\n", entry.ModTime, entry.FriendlyPath, entry.WsCodePath)
+	return err
+}
+
+func FormatChoose(w io.Writer, entry OutputEntry) error {
+	_, err := fmt.Fprintf(w, "%s | %s\n", entry.WsCodePath, entry.FriendlyPath)
 	return err
 }
 

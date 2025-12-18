@@ -75,6 +75,10 @@ main() {
   ensure_dir "$INSTALL_DIR/.config/sketchybar"
   link ".config/sketchybar/sketchybarrc"
   link ".config/sketchybar/plugins"
+
+  ensure_dir "$INSTALL_DIR/bin"
+  link "bin/list_vscode_workspaces"
+
 }
 if [[ "${BASH_SOURCE[0]}" == "$0" ]]; then
   main "$@"

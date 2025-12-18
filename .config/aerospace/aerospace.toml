@@ -337,7 +337,8 @@ on-mode-changed = []
     t = ["""\
         exec-and-forget osascript -e 'tell application "iTerm2" to create window with default profile'
     """, 'mode main']
-    c = ['exec-and-forget code -n', 'mode main']
+    shift-c = ['exec-and-forget code -n', 'mode main']
+    c = ['exec-and-forget $HOME/.config/aerospace/scripts/choose_vscode.sh', 'mode main']
     w = ['exec-and-forget firefox --new-window', 'mode main']
 
 ## MARK: 'resize/move' mode
