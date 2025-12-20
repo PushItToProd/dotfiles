@@ -4,19 +4,13 @@
 #
 # This is basically a reimplementation of rofi_code.zsh from my i3 setup.config/aerospace/aerospace.toml.
 
-trim_string() {
-    # Usage: trim_string "   example   string    " (emits "example string")
-    : "${1#"${1%%[![:space:]]*}"}"
-    : "${_%"${_##*[![:space:]]}"}"
-    printf '%s\n' "$_"
-}
+PROGDIR="$(cd -P "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
+
+# shellcheck source=common.bash
+source "$PROGDIR/common.bash"
 
 list_workspaces() {
   go run "$HOME"/bin/list_vscode_workspaces/cmd/list_workspaces/main.go --format choose
-}
-
-remove_first_field_from_lines() {
-  sed 's/[^|]* \| //'
 }
 
 main() {

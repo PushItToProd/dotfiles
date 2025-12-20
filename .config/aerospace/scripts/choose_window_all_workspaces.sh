@@ -2,12 +2,10 @@
 # choose_window.sh uses choose-gui to display a list of windows open in the
 # current AeroSpace workspace. The selected window is then focused.
 
-trim_string() {
-    # Usage: trim_string "   example   string    " (emits "example string")
-    : "${1#"${1%%[![:space:]]*}"}"
-    : "${_%"${_##*[![:space:]]}"}"
-    printf '%s\n' "$_"
-}
+PROGDIR="$(cd -P "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
+
+# shellcheck source=common.bash
+source "$PROGDIR/common.bash"
 
 list_windows() {
   # The --format argument here is the default value used by aerospace, but we
@@ -16,10 +14,6 @@ list_windows() {
     "$@" \
     --format '%{window-id}%{right-padding} | %{workspace}%{right-padding} | %{app-name}%{right-padding} | %{window-title}' \
     | sort --field-separator='|' --ignore-leading-blanks --sort=numeric --key=2
-}
-
-remove_first_field_from_lines() {
-  sed 's/[^|]* \| //'
 }
 
 main() {

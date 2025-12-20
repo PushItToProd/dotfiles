@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+PROGDIR="$(cd -P "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
+
+# shellcheck source=common.bash
+source "$PROGDIR/common.bash"
+
 MAX_TITLE_LEN=20
 
 # IGNORE_TITLES specifies window titles that should not be returned
@@ -18,30 +23,8 @@ HIDE_APP_TITLES=(
   ["KeePassXC"]=1
 )
 
-fatal() {
-  printf '%s\n' "$*" >&2
-  exit 1
-}
-
-is_assoc_array() {
-  local -n __is_assoc_array__var="$1"
-  [[ "${__is_assoc_array__var@a}" == *A* ]]
-}
-
-trim_string() {
-    # Usage: trim_string "   example   string    " (emits "example string")
-    : "${1#"${1%%[![:space:]]*}"}"
-    : "${_%"${_##*[![:space:]]}"}"
-    printf '%s\n' "$_"
-}
-
-truncate_str() {
-  local str="$1"
-  local maxlen="${2-$MAX_TITLE_LEN}"
-  printf '%s' "$(trim_string "${str:0:$maxlen}")"
-  if [[ "${#str}" -gt "$maxlen" ]]; then
-    printf '%s' "..."
-  fi
+truncate_title() {
+  truncate_str "$1" "${2-$MAX_TITLE_LEN}"
 }
 
 aerospace::list_workspace_windows() {
@@ -57,7 +40,7 @@ _generate_app_label() {
     return
   fi
 
-  win_title="$(truncate_str "$win_title")"
+  win_title="$(truncate_title "$win_title")"
   if [[ "${IGNORE_TITLES["$win_title"]}" ]]; then
     return
   fi
