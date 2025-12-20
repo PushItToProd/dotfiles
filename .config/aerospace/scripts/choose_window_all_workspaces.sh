@@ -18,6 +18,9 @@ list_windows() {
     | sort --field-separator='|' --ignore-leading-blanks --sort=numeric --key=2
 }
 
+remove_first_field_from_lines() {
+  sed 's/[^|]* \| //'
+}
 
 main() {
   aerospace_windows_str=$(list_windows --all)
@@ -26,8 +29,7 @@ main() {
   mapfile aerospace_windows <<<"$aerospace_windows_str"
 
   # remove the first field (window ID) from each displayed option
-  # shellcheck disable=SC2001
-  display_text=$(sed 's/[^|]* \| //' <<<"$aerospace_windows_str")
+  display_text=$(remove_first_field_from_lines <<<"$aerospace_windows_str")
 
   # get the selection index
   selection="$(choose -izp "Select a window (all workspaces)" <<< "$display_text")"

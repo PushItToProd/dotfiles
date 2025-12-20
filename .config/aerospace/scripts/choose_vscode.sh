@@ -15,13 +15,17 @@ list_workspaces() {
   go run "$HOME"/bin/list_vscode_workspaces/cmd/list_workspaces/main.go --format choose
 }
 
+remove_first_field_from_lines() {
+  sed 's/[^|]* \| //'
+}
+
 main() {
   vscode_workspaces_str="$(list_workspaces)"
 
   mapfile vscode_workspaces<<<"$vscode_workspaces_str"
 
-  # remove the first field (window ID) from each displayed option
-  display_text=$(sed 's/[^|]* \| //' <<<"$vscode_workspaces_str")
+  # Remove the first field (window ID) from each displayed option.
+  display_text=$(remove_first_field_from_lines <<<"$vscode_workspaces_str")
 
   selection="$(choose -izp "Select a VS Code workspace" <<< "$display_text")"
   if [[ "$selection" == -1 ]]; then

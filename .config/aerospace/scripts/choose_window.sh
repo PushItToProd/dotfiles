@@ -17,6 +17,10 @@ list_windows() {
     --format '%{window-id}%{right-padding} | %{app-name}%{right-padding} | %{window-title}'
 }
 
+remove_first_field_from_lines() {
+  sed 's/[^|]* \| //'
+}
+
 main() {
   aerospace_windows_str=$(list_windows)
 
@@ -24,7 +28,7 @@ main() {
   mapfile aerospace_windows <<<"$aerospace_windows_str"
 
   # remove the first field (window ID) from each displayed option
-  display_text=$(sed 's/[^|]* \| //' <<<"$aerospace_windows_str")
+  display_text=$(remove_first_field_from_lines <<<"$aerospace_windows_str")
 
   # get the selection index
   selection="$(choose -izp "Select a window" <<< "$display_text")"
