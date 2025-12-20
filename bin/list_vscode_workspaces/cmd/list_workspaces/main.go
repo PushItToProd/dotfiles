@@ -70,7 +70,7 @@ func TruncateDirPrefix(path string, basedir string, replacement string) string {
 	if replacement == "" {
 		return relPath
 	}
-	return filepath.Join("~", relPath)
+	return filepath.Join(replacement, relPath)
 }
 
 // sortWorkspaceEntryList orders a list of WorkspaceEntries newest to oldest.
