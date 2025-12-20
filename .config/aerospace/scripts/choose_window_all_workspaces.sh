@@ -26,7 +26,7 @@ main() {
   display_text=$(remove_first_field_from_lines <<<"$aerospace_windows_str")
 
   # get the selection index
-  selection="$(choose -izp "Select a window (all workspaces)" <<< "$display_text")"
+  selection="$(choose -izp "Select a window (all workspaces)" -w 50 -n 20 <<< "$display_text")"
   # echo "selected: ${aerospace_windows["$selection"]}"
 
   # a selection of -1 means the user hit escape or otherwise exited without

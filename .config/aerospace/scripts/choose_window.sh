@@ -25,7 +25,7 @@ main() {
   display_text=$(remove_first_field_from_lines <<<"$aerospace_windows_str")
 
   # get the selection index
-  selection="$(choose -izp "Select a window" <<< "$display_text")"
+  selection="$(choose -izp "Select a window" -w 50 <<< "$display_text")"
   # echo "selected: ${aerospace_windows["$selection"]}"
 
   if [[ "$selection" == -1 ]]; then

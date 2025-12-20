@@ -21,7 +21,7 @@ main() {
   # Remove the first field (window ID) from each displayed option.
   display_text=$(remove_first_field_from_lines <<<"$vscode_workspaces_str")
 
-  selection="$(choose -izp "Select a VS Code workspace" <<< "$display_text")"
+  selection="$(choose -izp "Select a VS Code workspace" -w 50 -n 20 <<< "$display_text")"
   if [[ "$selection" == -1 ]]; then
     # no selection - exit early
     return

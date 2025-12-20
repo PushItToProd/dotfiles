@@ -91,7 +91,7 @@ main() {
     return
   fi
 
-  selection="$(list_all_workspace_windows | choose -zp "Select a workspace")"
+  selection="$(list_all_workspace_windows | choose -zp "Select a workspace" -w 50 -n 20)"
   IFS=$'|' read -r workspace_id _ <<<"$selection"
   workspace_id=$(trim_string "$workspace_id")
 
