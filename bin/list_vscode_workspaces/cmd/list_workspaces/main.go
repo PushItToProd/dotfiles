@@ -14,6 +14,7 @@ import (
 	"os"
 	"path"
 	"path/filepath"
+	"regexp"
 	"slices"
 	"strings"
 	"time"
@@ -22,6 +23,22 @@ import (
 var ErrPathNotInJson = errors.New("workspace path not found in workspace.json")
 var ErrSkipEntry = errors.New("skipping this entry")
 var formatFlag = flag.String("format", "plain", fmt.Sprintf("Must be one of %s", validFormatters))
+
+// findNamedStringSubmatch takes a [regexp.Regexp] re with named capture groups and a string s to match in, and returns
+// a map associating each named group with the value that re matched in s.
+func findNamedStringSubmatch(re *regexp.Regexp, s string) map[string]string {
+	matches := re.FindStringSubmatch(s)
+	namedMatches := map[string]string{}
+	for i, name := range re.SubexpNames() {
+		if name != "" && i < len(matches) && matches[i] != "" {
+			namedMatches[name] = matches[i]
+		}
+	}
+	if len(namedMatches) == 0 {
+		return nil
+	}
+	return namedMatches
+}
 
 type WorkspaceEntry struct {
 	WsCodePath string    // path to the underlying workspace - i.e. where the code actually resides
@@ -73,6 +90,22 @@ func TruncateDirPrefix(path string, basedir string, replacement string) (shortPa
 	return filepath.Join(replacement, relPath), true
 }
 
+var remoteWorkspaceRegexp = regexp.MustCompile(
+	`^vscode-remote://(?<remoteType>[\w-]+)(\+)(?<hostname>[\w.-]+)(?<path>/.*)$`,
+)
+
+func MakeFriendlyPathForRemoteWorkspace(workspaceUri string) (friendlyPath string, isRemote bool) {
+	// If the given path is a remote workspace, it'll be a URI like
+	// vscode-remote://ssh-remote+HOSTNAME/home/user/foo/bar/baz.
+
+	matches := findNamedStringSubmatch(remoteWorkspaceRegexp, workspaceUri)
+	if matches == nil || matches["remoteType"] == "" || matches["hostname"] == "" || matches["path"] == "" {
+		return "", false
+	}
+
+	return fmt.Sprintf("[%s:%s] %s", matches["remoteType"], matches["hostname"], matches["path"]), true
+}
+
 // MakeFriendlyPath takes the user's home directory and a path to a VS Code workspace, and performs substitutions on the
 // given path to make it more human-readable.
 func MakeFriendlyPath(homedir string, path string) string {
@@ -85,22 +118,10 @@ func MakeFriendlyPath(homedir string, path string) string {
 		return path
 	}
 
-	// remote workspaces start with a string like `vscode-remote://ssh-remote+`
-	// e.g. vscode-remote://ssh-remote+HOSTNAME/home/user/foo/bar/baz
-	if rest, found := strings.CutPrefix(path, "vscode-remote://ssh-remote+"); found {
-		// now we have a string like "HOSTNAME/home/user/foo/bar/baz"
-		hostname, wsDir, found := strings.Cut(rest, "/")
-		// if found:
-		//    hostname => "HOSTNAME"
-		//    wsDir => "home/user/foo/bar/baz"  (note the lack of leading slash)
-		if !found {
-			return "[SSH] " + rest
-		}
-
-		wsDir = "/" + wsDir
-
-		return fmt.Sprintf("[SSH:%s] %s", hostname, wsDir)
+	if friendlyPath, wasReplaced := MakeFriendlyPathForRemoteWorkspace(path); wasReplaced {
+		return friendlyPath
 	}
+
 	return path
 }
 
