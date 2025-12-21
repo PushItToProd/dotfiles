@@ -155,8 +155,9 @@ func WithMessagef(err error, format string, a ...any) error {
 	return fmt.Errorf(fstr, a...)
 }
 
-// getWsModTime returns the last modified time of the state file for the given
-// workspace directory.
+// getWsModTime reads and returns the last modified time of the state.vscdb file for the given workspace directory.
+// state.vscdb is a SQLite database that VS Code updates when the workspace is used, so this gives us a way to tell
+// which workspaces have been most recently active.
 func getWsModTime(wsDir string) (time.Time, error) {
 	stateFile := path.Join(wsDir, "state.vscdb")
 	stat, err := os.Lstat(stateFile)
@@ -191,13 +192,14 @@ func getWsCodePath(wsDir string) (string, error) {
 
 // getWsEntry returns a single workspace entry for the given path (or an error
 // if no valid workspace could be found.)
-func getWsEntry(wsStoragePath string, entry fs.DirEntry) (WorkspaceEntry, error) {
+func getWsEntry(wsStoragePath string, fsEntry fs.DirEntry) (WorkspaceEntry, error) {
 	var none WorkspaceEntry
-	if !entry.IsDir() {
+
+	if !fsEntry.IsDir() {
 		return none, ErrSkipEntry
 	}
 
-	name := entry.Name()
+	name := fsEntry.Name()
 	wsDir := path.Join(wsStoragePath, name)
 
 	modTime, err := getWsModTime(wsDir)
@@ -236,7 +238,7 @@ func getWorkspaceEntries(wsStoragePath string) ([]WorkspaceEntry, error) {
 		log.Fatalf("failed to read entries in %s: %v", wsStoragePath, err)
 	}
 
-	workspaces := make([]WorkspaceEntry, 0, 1000)
+	workspaces := make([]WorkspaceEntry, 0, len(entries))
 	for _, entry := range entries {
 		wsEntry, err := getWsEntry(wsStoragePath, entry)
 		if errors.Is(err, ErrSkipEntry) {
