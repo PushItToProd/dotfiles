@@ -1,4 +1,5 @@
-// list_workspaces/main.go lists recently used VS Code workspaces.
+// list_workspaces/main.go lists recently used VS Code workspaces, printing output in a format suitable for use by a
+// helper script (namely, rofi_code.zsh or choose_vscode.sh).
 package main
 
 import (
@@ -40,19 +41,20 @@ func findNamedStringSubmatch(re *regexp.Regexp, s string) map[string]string {
 	return namedMatches
 }
 
+// WorkspaceEntry holds metadata about a VS Code workspace retrieved from workspaceStorage.
 type WorkspaceEntry struct {
-	WsCodePath string    // path to the underlying workspace - i.e. where the code actually resides
-	ModTime    time.Time // last modified time of state.vscdb
+	// WsCodePath holds the path or URI of the workspace that should be passed to VS Code
+	WsCodePath string
+	// ModTime holds the file modification time of state.vscdb, used to sort workspaces by most recently used.
+	ModTime time.Time
 }
 
 func (e WorkspaceEntry) String() string {
 	return fmt.Sprintf("%v %v", e.ModTime, e.WsCodePath)
 }
 
-// DecodeUrl parses a workspace URL as found in a workspace.json file and
-// returns it in a format suitable for passing to the `code` CLI to open the
-// workspace. This means stripping the file:// scheme part and URL decoding
-// any entities.
+// DecodeUrl parses a workspace URL as found in a workspace.json file and returns it in a format suitable for passing to
+// the `code` CLI to open the workspace. This means stripping the file:// scheme part and URL decoding any entities.
 func DecodeUrl(wsUrl string) (string, error) {
 	// In the past, I tried using url.Parse() here, but url.Parse() fails on
 	// URLs that contain % entities in the hostname, which is a problem since VS
@@ -189,7 +191,8 @@ func getWsModTime(wsDir string) (time.Time, error) {
 	return stat.ModTime(), err
 }
 
-// getWsCodePath attempts to locate the underlying directory.
+// getWsCodePath parses the workspaceStorage directory's workspace.json and uses WorkspaceJson.CodePath to try to find
+// the path/URI of the underlying workspace directory or workspace.json file.
 func getWsCodePath(wsDir string) (string, error) {
 	wsFile := path.Join(wsDir, "workspace.json")
 
@@ -211,9 +214,9 @@ func getWsCodePath(wsDir string) (string, error) {
 	return path, nil
 }
 
-// getWsEntry returns a single workspace entry for the given path (or an error
-// if no valid workspace could be found.)
-func getWsEntry(wsStoragePath string, fsEntry fs.DirEntry) (WorkspaceEntry, error) {
+// GetWorkspaceEntry returns a single workspace entry for the given path (or an error if no valid workspace could be
+// found.)
+func GetWorkspaceEntry(wsStoragePath string, fsEntry fs.DirEntry) (WorkspaceEntry, error) {
 	var none WorkspaceEntry
 
 	if !fsEntry.IsDir() {
@@ -251,9 +254,9 @@ func getWsEntry(wsStoragePath string, fsEntry fs.DirEntry) (WorkspaceEntry, erro
 	}, err
 }
 
-// getWorkspaceEntries searches the given directory path for VS Code workspaces
+// GetWorkspaceEntries searches the given directory path for VS Code workspaces
 // and returns a slice of WorkspaceEntry structs.
-func getWorkspaceEntries(wsStoragePath string) ([]WorkspaceEntry, error) {
+func GetWorkspaceEntries(wsStoragePath string) ([]WorkspaceEntry, error) {
 	entries, err := os.ReadDir(wsStoragePath)
 	if err != nil {
 		log.Fatalf("failed to read entries in %s: %v", wsStoragePath, err)
@@ -261,7 +264,7 @@ func getWorkspaceEntries(wsStoragePath string) ([]WorkspaceEntry, error) {
 
 	workspaces := make([]WorkspaceEntry, 0, len(entries))
 	for _, entry := range entries {
-		wsEntry, err := getWsEntry(wsStoragePath, entry)
+		wsEntry, err := GetWorkspaceEntry(wsStoragePath, entry)
 		if errors.Is(err, ErrSkipEntry) {
 			continue
 		}
@@ -275,6 +278,7 @@ func getWorkspaceEntries(wsStoragePath string) ([]WorkspaceEntry, error) {
 	return workspaces, nil
 }
 
+// isDirectory takes the path to a file and returns whether it's a directory.
 func isDirectory(path string) (bool, error) {
 	fileInfo, err := os.Stat(path)
 	if err != nil {
@@ -283,7 +287,9 @@ func isDirectory(path string) (bool, error) {
 	return fileInfo.IsDir(), nil // Return the result of IsDir()
 }
 
-func findWorkspaceStorage(homedir string) (string, error) {
+// FindWorkspaceStorage finds the path to the VS Code workspaceStorage directory using the default paths on Linux and
+// macOS.
+func FindWorkspaceStorage(homedir string) (string, error) {
 	subdirs := []string{
 		".config/Code/User/workspaceStorage",
 		"./Library/Application Support/Code/User/workspaceStorage",
@@ -307,11 +313,14 @@ func findWorkspaceStorage(homedir string) (string, error) {
 	return "", errors.Join(errs...)
 }
 
+// OutputEntry is an extension of WorkspaceEntry with an extra FriendlyPath field that contains the path to display to
+// the user.
 type OutputEntry struct {
 	WorkspaceEntry
 	FriendlyPath string
 }
 
+// OutputFormatter is a function type used to render an OutputEntry for display.
 type OutputFormatter func(io.Writer, OutputEntry) error
 
 var formatters = map[string]OutputFormatter{
@@ -350,11 +359,11 @@ func main() {
 		log.Fatalf("failed to get homedir: %v", err)
 	}
 
-	wsStoragePath, err := findWorkspaceStorage(homedir)
+	wsStoragePath, err := FindWorkspaceStorage(homedir)
 	if err != nil {
 		log.Fatalf("%v", err)
 	}
-	wsEntries, err := getWorkspaceEntries(wsStoragePath)
+	wsEntries, err := GetWorkspaceEntries(wsStoragePath)
 	if err != nil {
 		log.Fatalf("error getting workspaces: %v", err)
 	}
