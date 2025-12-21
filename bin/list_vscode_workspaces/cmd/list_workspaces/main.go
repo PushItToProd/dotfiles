@@ -1,6 +1,14 @@
 // list_workspaces/main.go lists recently used VS Code workspaces.
 package main
 
+// FIXME: remote workspace URLs are incorrectly mangled -- e.g. this:
+//
+//	vscode-remote://ssh-remote+HOSTNAME/foo/bar/baz
+//
+// gets incorrectly turned into this at some point:
+//
+//	~/vscode-remote:/ssh-remote+HOSTNAME/foo/bar/baz
+
 import (
 	"encoding/json"
 	"errors"
@@ -39,16 +47,12 @@ func (e WorkspaceEntry) String() string {
 func DecodeUrl(wsUrl string) (string, error) {
 	// In the past, I tried using url.Parse() here, but url.Parse() fails on
 	// URLs that contain % entities in the hostname, which is a problem since VS
-	// Code uses %2B as a delimiter in the hostname part of certain remote
+	// Code uses %2B (+) as a delimiter in the hostname part of certain remote
 	// workspaces' URLs. (See also: https://github.com/golang/go/issues/30844)
 	// So, I've just given up on proper URL parsing and am instead resorting to
 	// stripping off the file:// prefix with string manipulation like a
 	// goddamned caveman.
 	path, _ := strings.CutPrefix(wsUrl, "file://")
-
-	// TODO: truncate vscode-remote:// workspace URLs. XXX for that matter,
-	// should we even bother returning remote workspaces? Will they actually
-	// work from the CLI?
 
 	// Remove URL encoding entities
 	decodedPath, err := url.QueryUnescape(path)
@@ -60,17 +64,52 @@ func DecodeUrl(wsUrl string) (string, error) {
 	return decodedPath, nil
 }
 
-// TruncateDirPrefix converts a path like /home/joe/foo/bar/baz to ~/foo/bar/baz,
-// given an invocation like TruncateDirPrefix("/home/joe/foo/bar/baz", "/home/joe", "~")
-func TruncateDirPrefix(path string, basedir string, replacement string) string {
+// TruncateDirPrefix converts a path like /home/joe/foo/bar/baz to ~/foo/bar/baz, given an invocation like
+// TruncateDirPrefix("/home/joe/foo/bar/baz", "/home/joe", "~"). If path and basedir are equal, then no replacement is
+// performed.
+func TruncateDirPrefix(path string, basedir string, replacement string) (shortPath string, wasReplaced bool) {
 	relPath, err := filepath.Rel(basedir, path)
 	if err != nil {
-		return path
+		return path, false
+	}
+	if relPath == "." {
+		return path, true
 	}
 	if replacement == "" {
-		return relPath
+		return relPath, true
 	}
-	return filepath.Join(replacement, relPath)
+	return filepath.Join(replacement, relPath), true
+}
+
+// MakeFriendlyPath takes the user's home directory and a path to a VS Code workspace, and performs substitutions on the
+// given path to make it more human-readable.
+func MakeFriendlyPath(homedir string, path string) string {
+	// If the path starts with a slash, it's assume to be local.
+	if path[0] == '/' {
+		// If the local path starts with the user's home directory, replace the homedir with a tilde.
+		if shortPath, wasReplaced := TruncateDirPrefix(path, homedir, "~"); wasReplaced {
+			return shortPath
+		}
+		return path
+	}
+
+	// remote workspaces start with a string like `vscode-remote://ssh-remote+`
+	// e.g. vscode-remote://ssh-remote+HOSTNAME/home/user/foo/bar/baz
+	if rest, found := strings.CutPrefix(path, "vscode-remote://ssh-remote+"); found {
+		// now we have a string like "HOSTNAME/home/user/foo/bar/baz"
+		hostname, wsDir, found := strings.Cut(rest, "/")
+		// if found:
+		//    hostname => "HOSTNAME"
+		//    wsDir => "home/user/foo/bar/baz"  (note the lack of leading slash)
+		if !found {
+			return "[SSH] " + rest
+		}
+
+		wsDir = "/" + wsDir
+
+		return fmt.Sprintf("[SSH:%s] %s", hostname, wsDir)
+	}
+	return path
 }
 
 // sortWorkspaceEntryList orders a list of WorkspaceEntries newest to oldest.
@@ -102,8 +141,7 @@ type WorkspaceJson struct {
 	} `json:"configuration"`
 }
 
-// CodePath tries to find the workspace file or folder in the unmarshaled
-// workspace.json.
+// CodePath tries to find the workspace file or folder in the unmarshaled workspace.json.
 func (wsj WorkspaceJson) CodePath() string {
 	paths := []string{
 		wsj.Folder,
@@ -310,14 +348,13 @@ func main() {
 	wsEntries = dedupeWorkspaceEntryList(wsEntries)
 
 	for _, entry := range wsEntries {
-		if entry.WsCodePath == "" {
+		workspacePath := entry.WsCodePath
+		if workspacePath == "" {
 			continue
 		}
 
-		rawPath := entry.WsCodePath
-		friendlyPath := TruncateDirPrefix(rawPath, homedir, "~")
+		friendlyPath := MakeFriendlyPath(homedir, workspacePath)
 		outputEntry := OutputEntry{entry, friendlyPath}
-
 		formatter(os.Stdout, outputEntry)
 	}
 }
