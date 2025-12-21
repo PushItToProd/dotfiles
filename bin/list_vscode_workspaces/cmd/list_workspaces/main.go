@@ -7,7 +7,6 @@ import (
 	"errors"
 	"flag"
 	"fmt"
-	"io"
 	"io/fs"
 	"log"
 	"maps"
@@ -23,6 +22,7 @@ import (
 
 var ErrPathNotInJson = errors.New("workspace path not found in workspace.json")
 var ErrSkipEntry = errors.New("skipping this entry")
+
 var formatFlag = flag.String("format", "plain", fmt.Sprintf("Must be one of %s", validFormatters))
 
 // findNamedStringSubmatch takes a [regexp.Regexp] re with named capture groups and a string s to match in, and returns
@@ -321,7 +321,7 @@ type OutputEntry struct {
 }
 
 // OutputFormatter is a function type used to render an OutputEntry for display.
-type OutputFormatter func(io.Writer, OutputEntry) error
+type OutputFormatter func(OutputEntry) string
 
 var formatters = map[string]OutputFormatter{
 	"rofi":   FormatRofi,
@@ -331,25 +331,22 @@ var formatters = map[string]OutputFormatter{
 
 var validFormatters = strings.Join(slices.Collect(maps.Keys(formatters)), ", ")
 
-func FormatRofi(w io.Writer, entry OutputEntry) error {
-	_, err := fmt.Fprintf(w, "%s\000info\x1f%s\n", entry.FriendlyPath, entry.WsCodePath)
-	return err
+func FormatRofi(entry OutputEntry) string {
+	return fmt.Sprintf("%s\000info\x1f%s\n", entry.FriendlyPath, entry.WsCodePath)
 }
 
-func FormatPlain(w io.Writer, entry OutputEntry) error {
-	_, err := fmt.Fprintf(w, "%s|%s|%s\n", entry.ModTime, entry.FriendlyPath, entry.WsCodePath)
-	return err
+func FormatPlain(entry OutputEntry) string {
+	return fmt.Sprintf("%s|%s|%s\n", entry.ModTime, entry.FriendlyPath, entry.WsCodePath)
 }
 
-func FormatChoose(w io.Writer, entry OutputEntry) error {
-	_, err := fmt.Fprintf(w, "%s | %s\n", entry.WsCodePath, entry.FriendlyPath)
-	return err
+func FormatChoose(entry OutputEntry) string {
+	return fmt.Sprintf("%s | %s\n", entry.WsCodePath, entry.FriendlyPath)
 }
 
 func main() {
 	flag.Parse()
 
-	formatter, ok := formatters[*formatFlag]
+	formatOutput, ok := formatters[*formatFlag]
 	if !ok {
 		log.Fatalf("invalid format: %v (expected one of %s)", *formatFlag, validFormatters)
 	}
@@ -379,6 +376,6 @@ func main() {
 
 		friendlyPath := MakeFriendlyPath(homedir, workspacePath)
 		outputEntry := OutputEntry{entry, friendlyPath}
-		formatter(os.Stdout, outputEntry)
+		fmt.Print(formatOutput(outputEntry))
 	}
 }
