@@ -2,7 +2,7 @@
 # A script for easily opening recent VS Code workspaces using choose-gui on
 # macOS.
 #
-# This is basically a reimplementation of rofi_code.zsh from my i3 setup.config/aerospace/aerospace.toml.
+# This is basically a reimplementation of rofi_code.zsh from my i3 setup.
 
 PROGDIR="$(cd -P "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
 
@@ -36,7 +36,9 @@ main() {
   fi
 
   echo "Selection: $selected_workspace"
-  code -n "$selected_workspace"
+
+  # To open remote workspaces, we need to use the --folder-uri flag.
+  code --new-window --folder-uri "$selected_workspace"
 }
 if [[ "${BASH_SOURCE[0]}" == "$0" ]]; then
   main "$@"

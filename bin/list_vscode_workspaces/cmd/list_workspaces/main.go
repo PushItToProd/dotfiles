@@ -1,14 +1,6 @@
 // list_workspaces/main.go lists recently used VS Code workspaces.
 package main
 
-// FIXME: remote workspace URLs are incorrectly mangled -- e.g. this:
-//
-//	vscode-remote://ssh-remote+HOSTNAME/foo/bar/baz
-//
-// gets incorrectly turned into this at some point:
-//
-//	~/vscode-remote:/ssh-remote+HOSTNAME/foo/bar/baz
-
 import (
 	"encoding/json"
 	"errors"
