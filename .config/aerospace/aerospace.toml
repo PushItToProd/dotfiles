@@ -210,6 +210,16 @@ on-mode-changed = []
     ctrl-8 = 'exec-and-forget $HOME/.config/aerospace/scripts/aerospace_navigate.py toggle 80 85'
     ctrl-9 = 'exec-and-forget $HOME/.config/aerospace/scripts/aerospace_navigate.py toggle 90 95'
 
+    ctrl-f1 = 'workspace 15'
+    ctrl-f2 = 'workspace 25'
+    ctrl-f3 = 'workspace 35'
+    ctrl-f4 = 'workspace 45'
+    ctrl-f5 = 'workspace 55'
+    ctrl-f6 = 'workspace 65'
+    ctrl-f7 = 'workspace 75'
+    ctrl-f8 = 'workspace 85'
+    ctrl-f9 = 'workspace 95'
+
     ##: semihyper+left/right -- switch neighboring workspaces
 
     ctrl-cmd-alt-right = 'exec-and-forget $HOME/.config/aerospace/scripts/aerospace_navigate.py go next'
@@ -225,6 +235,16 @@ on-mode-changed = []
     ctrl-cmd-alt-7 = 'exec-and-forget $HOME/.config/aerospace/scripts/aerospace_navigate.py toggle 70 75'
     ctrl-cmd-alt-8 = 'exec-and-forget $HOME/.config/aerospace/scripts/aerospace_navigate.py toggle 80 85'
     ctrl-cmd-alt-9 = 'exec-and-forget $HOME/.config/aerospace/scripts/aerospace_navigate.py toggle 90 95'
+
+    ctrl-cmd-alt-f1 = 'workspace 15'
+    ctrl-cmd-alt-f2 = 'workspace 25'
+    ctrl-cmd-alt-f3 = 'workspace 35'
+    ctrl-cmd-alt-f4 = 'workspace 45'
+    ctrl-cmd-alt-f5 = 'workspace 55'
+    ctrl-cmd-alt-f6 = 'workspace 65'
+    ctrl-cmd-alt-f7 = 'workspace 75'
+    ctrl-cmd-alt-f8 = 'workspace 85'
+    ctrl-cmd-alt-f9 = 'workspace 95'
 
     ## MARK: move nodes to workspaces
     # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
