@@ -197,9 +197,6 @@ on-mode-changed = []
     ## MARK: workspace navigation
     # See: https://nikitabobko.github.io/AeroSpace/commands#workspace
 
-    ctrl-right = 'exec-and-forget $HOME/.config/aerospace/scripts/aerospace_navigate.py go next'
-    ctrl-left = 'exec-and-forget $HOME/.config/aerospace/scripts/aerospace_navigate.py go prev'
-
     ctrl-1 = 'exec-and-forget $HOME/.config/aerospace/scripts/aerospace_navigate.py toggle 10 15'
     ctrl-2 = 'exec-and-forget $HOME/.config/aerospace/scripts/aerospace_navigate.py toggle 20 25'
     ctrl-3 = 'exec-and-forget $HOME/.config/aerospace/scripts/aerospace_navigate.py toggle 30 35'
@@ -220,7 +217,11 @@ on-mode-changed = []
     ctrl-f8 = 'workspace 85'
     ctrl-f9 = 'workspace 95'
 
-    ##: semihyper+left/right -- switch neighboring workspaces
+    ##: ctrl+left/right -- switch neighboring workspaces (all workspaces)
+    ctrl-left = 'workspace prev'
+    ctrl-right = 'workspace next'
+
+    ##: semihyper+left/right -- switch neighboring workspaces (active windows only)
 
     ctrl-cmd-alt-right = 'exec-and-forget $HOME/.config/aerospace/scripts/aerospace_navigate.py go next'
     ctrl-cmd-alt-left = 'exec-and-forget $HOME/.config/aerospace/scripts/aerospace_navigate.py go prev'
@@ -249,9 +250,6 @@ on-mode-changed = []
     ## MARK: move nodes to workspaces
     # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
 
-    ctrl-shift-left = 'exec-and-forget $HOME/.config/aerospace/scripts/aerospace_navigate.py go --move prev'
-    ctrl-shift-right = 'exec-and-forget $HOME/.config/aerospace/scripts/aerospace_navigate.py go --move next'
-
     ctrl-shift-1 = 'exec-and-forget $HOME/.config/aerospace/scripts/aerospace_navigate.py toggle --move 10 15'
     ctrl-shift-2 = 'exec-and-forget $HOME/.config/aerospace/scripts/aerospace_navigate.py toggle --move 20 25'
     ctrl-shift-3 = 'exec-and-forget $HOME/.config/aerospace/scripts/aerospace_navigate.py toggle --move 30 35'
@@ -262,12 +260,15 @@ on-mode-changed = []
     ctrl-shift-8 = 'exec-and-forget $HOME/.config/aerospace/scripts/aerospace_navigate.py toggle --move 80 85'
     ctrl-shift-9 = 'exec-and-forget $HOME/.config/aerospace/scripts/aerospace_navigate.py toggle --move 90 95'
 
-    ##: hyper+left/right -- move node to neighboring workspace
+    ##: ctrl+shift+left/right -- move node to neighboring workspace
 
-    # ctrl-cmd-alt-shift-left = 'move-node-to-workspace --focus-follows-window --wrap-around prev'
-    # ctrl-cmd-alt-shift-right = 'move-node-to-workspace --focus-follows-window --wrap-around next'
-    ctrl-cmd-alt-shift-left = 'exec-and-forget $HOME/.config/aerospace/scripts/aerospace_navigate.py go --move prev'
-    ctrl-cmd-alt-shift-right = 'exec-and-forget $HOME/.config/aerospace/scripts/aerospace_navigate.py go --move next'
+    ctrl-shift-left = 'move-node-to-workspace --focus-follows-window --wrap-around prev'
+    ctrl-shift-right = 'move-node-to-workspace --focus-follows-window --wrap-around next'
+
+    ##: hyper+left/right -- move node to neighboring workspace (active windows only)
+
+    ctrl-cmd-alt-shift-left = 'move-node-to-workspace --focus-follows-window --wrap-around prev'
+    ctrl-cmd-alt-shift-right = 'move-node-to-workspace --focus-follows-window --wrap-around next'
 
     ##: hyper+[1-9] -- move node to numbered workspace
     ctrl-cmd-alt-shift-1 = 'exec-and-forget $HOME/.config/aerospace/scripts/aerospace_navigate.py toggle --move 10 15'
