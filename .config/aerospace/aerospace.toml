@@ -8,6 +8,7 @@
 #     * Set System Settings > Control Center > "Automatically hide and show the
 #       menu bar" to "Always".
 # * `brew install choose-gui` -- Rofi replacement
+# * `go install github.com/cristianoliveira/aerospace-marks@latest` -- i3 marks emulation
 #
 # Suggested:
 # * brew install swipeaerospace
@@ -96,6 +97,15 @@ on-mode-changed = []
     outer.bottom =     0
     outer.top =        0
     outer.right =      0
+
+[exec.env-vars]
+    # Expose commands needed for custom bindings and scripts:
+    #   - /opt/homebrew/bin is where the aerospace CLI lives.
+    #   - $HOME/go/bin is where aerospace-marks lives.
+    #
+    # Beware that, unlike the bindings below, the bracketed ${VAR} notation is
+    # required here. For some reason, just $HOME or $PATH doesn't work.
+    PATH = '/opt/homebrew/bin:${HOME}/go/bin:${PATH}'
 
 # TODO: add $HOME/.config/aerospace/scripts/ to PATH. (I tried this already, but
 # for some reason invoking aerospace_navigate.py didn't work.)
@@ -330,6 +340,16 @@ on-mode-changed = []
     cmd-h = [] # Disable "hide application"
     cmd-alt-h = [] # Disable "hide others"
     cmd-m = [] # Disable minimize
+
+    ## MARK: aerospace-marks
+    # semihyper+m -- mark window
+    ctrl-cmd-alt-m = """exec-and-forget aerospace-marks mark "$(osascript -e 'text returned of (display dialog "mark" default answer "")')" """
+
+    # semihyper+' -- pick marked window from list
+    ctrl-cmd-alt-quote = """exec-and-forget "$HOME/.config/aerospace/scripts/choose_aerospace_mark.sh" """
+
+    # hyper+' -- focus marked window
+    ctrl-cmd-alt-shift-quote = """exec-and-forget aerospace-marks focus "$(osascript -e 'text returned of (display dialog "focus (mark)" default answer "")')" """
 
 
 ## MARK: 'service' mode
