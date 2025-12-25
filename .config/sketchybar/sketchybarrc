@@ -93,8 +93,8 @@ sketchybar --add item clock right \
 ##### Aerospace Space Listing and Indicators #####
 sketchybar --add event aerospace_workspace_change
 
-# TODO: this workspace list is static, so if we add/remove workspaces, it won't
-# be kept up to date.
+# XXX: If we add/remove workspaces at runtime, they won't appear in sketchybar
+# until it's reloaded. Not sure if there's a good way to fix this.
 for sid in $(aerospace list-workspaces --all); do
     # sketchybar won't show items with an identifier like `space.1`, so we add
     # the prefix "WS" to make numbered workspaces appear properly
