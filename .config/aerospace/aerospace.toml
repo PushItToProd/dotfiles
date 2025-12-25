@@ -8,12 +8,15 @@
 #     * Set System Settings > Control Center > "Automatically hide and show the
 #       menu bar" to "Always".
 # * `brew install choose-gui` -- Rofi replacement
-# * `go install github.com/cristianoliveira/aerospace-marks@latest` -- i3 marks emulation
+# * `go install github.com/cristianoliveira/aerospace-marks@latest` -- i3 marks
+#   emulation
 #
 # Suggested:
 # * brew install swipeaerospace
 #     * Disable all three finger swipe gestures in the System Settings under
-#       Trackpad.
+#       Trackpad. Before I did that, I noticed extreme slowdowns every time I
+#       swiped, as if SwipeAeroSpace and the system were fighting over which got
+#       to handle the gesture.
 # * Use Karabiner to map caps lock and backslash to ctrl+cmd+alt ("semihyper")
 #   when held.
 
