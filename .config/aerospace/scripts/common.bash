@@ -20,8 +20,12 @@ remove_first_field_from_lines() {
   sed 's/[^|]* \| //'
 }
 
+error() {
+  printf 'error: %s\n' "$*" >&2
+}
+
 fatal() {
-  printf '%s\n' "$*" >&2
+  printf 'fatal: %s\n' "$*" >&2
   exit 1
 }
 
