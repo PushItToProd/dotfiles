@@ -7,6 +7,8 @@ PROGDIR="$(cd -P "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
 source "$PROGDIR/common.bash"
 HOWTOINCLUDE
 
+: "${ACTIVE_WORKSPACES_FILE="/tmp/aerospace_active_workspaces.txt"}"
+
 trim_string() {
     # Usage: trim_string "   example   string    " (emits "example string")
     : "${1#"${1%%[![:space:]]*}"}"
