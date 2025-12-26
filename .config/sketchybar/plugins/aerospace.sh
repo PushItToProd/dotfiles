@@ -13,6 +13,10 @@
 # searching for "ws:$1" below.
 active_workspaces="$(</tmp/aerospace_active_workspaces.txt)"
 
+## Log debug info:
+# echo "$(date -Iseconds) arg='$1' NAME='$NAME' FOCUSED_WORKSPACE='$FOCUSED_WORKSPACE'" >> /tmp/sketchybar_aerospace_plugin.log
+# env > /tmp/sketchybar_aerospace_plugin_env.txt
+
 # Beware: if you set any properties in any of these branches, you have to set
 # them in all branches or they'll be permanently applied to the label until
 # sketchybar restarts.
