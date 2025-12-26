@@ -25,8 +25,8 @@ config-version = 2
 # You can use it to add commands that run after AeroSpace startup.
 # Available commands : https://nikitabobko.github.io/AeroSpace/commands
 after-startup-command = [
-    'exec-and-forget sketchybar',
     'exec-and-forget "$HOME/.config/aerospace/scripts/_update_active_workspaces.sh"',
+    'exec-and-forget sketchybar',
 ]
 
 # Notify Sketchybar about workspace change
