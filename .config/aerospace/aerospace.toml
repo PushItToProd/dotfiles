@@ -33,7 +33,7 @@ after-startup-command = [
 exec-on-workspace-change = ['/bin/bash', '-c',
     '''
     "$HOME/.config/aerospace/scripts/_update_active_workspaces.sh"
-    sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE
+    sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE="$AEROSPACE_FOCUSED_WORKSPACE"
     '''
 ]
 
