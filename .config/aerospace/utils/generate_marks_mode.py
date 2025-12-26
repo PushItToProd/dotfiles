@@ -1,7 +1,9 @@
 """
 Simple utility to generate Aerospace modes for setting and focusing marks. This
 way I can just hit, say, `semihyper+m x` to mark the current window and
-`semihyper+' x` to go back to it.
+`semihyper+' x` to go back to it. This saves at least one whole keystroke(!!)
+compared to the simpler option of showing an AppleScript or choose-gui window to
+prompt for a mark, which requires hitting enter after pressing the mark key.
 
 Currently, only marks comprised of a single uppercase or lowercase ASCII letter
 are supported.
