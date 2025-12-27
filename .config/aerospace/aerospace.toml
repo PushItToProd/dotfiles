@@ -526,6 +526,17 @@ on-mode-changed = []
     shift-z = ["exec-and-forget aerospace-marks focus Z", "mode main"]
 
 
+## FIXME: this is supposed to update the state of each workspace item in
+# sketchybar, but instead it just shows all workspaces as inactive.
+#
+# [[on-window-detected]]
+#     run = [
+#         'exec-and-forget "$HOME/.config/aerospace/scripts/_update_active_workspaces.sh"',
+#         'exec-and-forget sketchybar --trigger aerospace_workspace_change',
+#     ]
+#     check-further-callbacks = true
+
+
 ## MARK: floating apps
 [[on-window-detected]]
     if.app-id = 'org.keepassxc.keepassxc'

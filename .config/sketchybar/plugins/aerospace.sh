@@ -38,6 +38,8 @@ update_sketchybar() {
   # to find a way leave the workspace label gray and italic until it has open
   # windows. However, since this script only gets run when the focused workspace
   # changes, it won't update the active workspace.
+
+  # if has_open_windows; then
   if has_open_windows || is_focused_workspace; then
     # If the workspace has open windows, make its label white and bold.
     echo "Workspace $ws_name has open windows and/or is focused"
