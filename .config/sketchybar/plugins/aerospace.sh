@@ -3,15 +3,9 @@
 ## Uncomment this line to enable debug logging:
 # AEROSPACE_SKETCHYBAR_DEBUG=1
 
-# TODO: work out how to make this highlight the correct workspace when I run
-# `sketchybar --reload`. Currently, it leads to no space being highlighted since
-# AEROSPACE_FOCUSED_WORKSPACE (and, thus, FOCUSED_WORKSPACE) is unset.
-
-# XXX: this currently only gets run on exec-on-workspace-change, so the current
-# workspace label doesn't get changed from gray and italic to white and bold if
-# I open a window.
-
-# IDEA: hide labels for workspaces that are inactive.
+# TODO: Try finding a good way to hide labels for workspaces that are inactive.
+# I tried using label.drawing=off, but that adds weird amounts of space between
+# the labels that are visible.
 
 has_open_windows() {
   [[ "$has_open_windows" ]]
@@ -28,8 +22,10 @@ update_sketchybar() {
   label_color=0xffdddddd
   label_font_style=Italic
 
-  # XXX: for now, we include the focused workspace here, but ideally I'd like to
-  # leave the workspace label gray and italic until it has open windows.
+  # TODO: For now, we include the focused workspace here, but ideally I'd like
+  # to find a way leave the workspace label gray and italic until it has open
+  # windows. However, since this script only gets run when the focused workspace
+  # changes, it won't update the active workspace.
   if has_open_windows || is_focused_workspace; then
     # If the workspace has open windows, make its label white and bold.
     echo "Workspace $ws_name has open windows and/or is focused"
