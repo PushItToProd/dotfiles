@@ -73,9 +73,9 @@ check_workspace_state() {
 
   is_focused_workspace=
   # When sketchybar is restarted/reloaded, FOCUSED_WORKSPACE will be unset.
-  # Checking the active workspaces file for the focused workspace lets us
-  # highlight the focused workspace even in this scenario.
-  if [[ "$ws_name" == "$FOCUSED_WORKSPACE" ]] || [[ "$active_workspaces" == *"focused:$ws_name"* ]]; then
+  # Therefore, iff FOCUSED_WORKSPACE is null, we check the active workspaces
+  # file to see if this workspace is focused.
+  if [[ "$FOCUSED_WORKSPACE" == "$ws_name" || ( ! "$FOCUSED_WORKSPACE" && "$active_workspaces" == *"focused:$ws_name"* ) ]]; then
     is_focused_workspace=1
   fi
 }
