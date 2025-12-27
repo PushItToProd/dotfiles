@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
+# This is a callback script to be called for sketchybar items corresponding to
+# each AeroSpace workspace. It updates each item's styling based on the state of
+# the item's workspace.
 
 ## Uncomment this line to enable debug logging:
 # AEROSPACE_SKETCHYBAR_DEBUG=1
@@ -7,14 +10,23 @@
 # I tried using label.drawing=off, but that adds weird amounts of space between
 # the labels that are visible.
 
+# Check whether this item's workspace has open windows.
+#
+# Preconditions: check_workspace_state must be run first to set
+# $has_open_windows.
 has_open_windows() {
   [[ "$has_open_windows" ]]
 }
 
+# Check whether this item's workspace is currently focused.
+#
+# Preconditions: check_workspace_state must be run first to set
+# $is_focused_workspace.
 is_focused_workspace() {
   [[ "$is_focused_workspace" ]]
 }
 
+# Generate formatting params for the sketchybar item corresponding to ws_name.
 update_sketchybar() {
   # Set default properties for each attribute to be sure they're always set.
   # BEWARE: Make sure to add properties here.
@@ -56,6 +68,8 @@ update_sketchybar() {
   sketchybar --set "$NAME" "${params[@]}"
 }
 
+# Read the active workspaces file and update globals with the state of the
+# focused workspace.
 check_workspace_state() {
   # aerospace_active_workspaces.txt is updated by _update_active_workspaces.sh,
   # which should be invoked in exec-on-workspace-change and after-startup-command
