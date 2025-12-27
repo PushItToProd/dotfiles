@@ -4,6 +4,22 @@
 # `sketchybar --reload`. Currently, it leads to no space being highlighted since
 # AEROSPACE_FOCUSED_WORKSPACE (and, thus, FOCUSED_WORKSPACE) is unset.
 
+# XXX: this currently only gets run on exec-on-workspace-change, so the current
+# workspace label doesn't get changed from gray and italic to white and bold if
+# I open a window.
+
+# IDEA: hide labels for workspaces that are inactive.
+
+
+## Uncomment this line to enable debug logging:
+# exec >"/tmp/sketchybar_aerospace_plugin_$1.log" 2>&1
+
+echo "=========================================================================="
+echo "===== $(date) -- ws_name=$1 ====="
+set -x
+
+ws_name="$1"
+
 # aerospace_active_workspaces.txt is updated by _update_active_workspaces.sh,
 # which should be invoked in exec-on-workspace-change and after-startup-command
 # in aerospace.toml.
@@ -13,20 +29,63 @@
 # searching for "ws:$1" below.
 active_workspaces="$(</tmp/aerospace_active_workspaces.txt)"
 
-## Log debug info:
-# echo "$(date -Iseconds) arg='$1' NAME='$NAME' FOCUSED_WORKSPACE='$FOCUSED_WORKSPACE'" >> /tmp/sketchybar_aerospace_plugin.log
-# env > /tmp/sketchybar_aerospace_plugin_env.txt
-
-# Beware: if you set any properties in any of these branches, you have to set
-# them in all branches or they'll be permanently applied to the label until
-# sketchybar restarts.
-if [ "$1" = "$FOCUSED_WORKSPACE" ]; then
-    sketchybar --set "$NAME" background.drawing=on label.color=0xffffffff label.font.style=Bold
-elif [[ "$active_workspaces" == *"ws:$1"* ]]; then
-    # If the given workspace is in the list of active workspaces (i.e. it has
-    # open windows), make it white and bold.
-    sketchybar --set "$NAME" background.drawing=off label.color=0xffffffff label.font.style=Bold
-else
-    # Make non-active workspaces (no windows) gray and italic.
-    sketchybar --set "$NAME" background.drawing=off label.color=0xffdddddd label.font.style=Italic
+has_open_windows=
+if [[ "$active_workspaces" == *"ws:$ws_name"* ]]; then
+  has_open_windows=1
 fi
+
+is_focused_workspace=
+# When sketchybar is restarted/reloaded, FOCUSED_WORKSPACE will be unset.
+# Checking the active workspaces file for the focused workspace lets us
+# highlight the focused workspace even in this scenario.
+if [[ "$ws_name" == "$FOCUSED_WORKSPACE" ]] || [[ "$active_workspaces" == *"focused:$ws_name"* ]]; then
+  is_focused_workspace=1
+fi
+
+has_open_windows() {
+  [[ "$has_open_windows" ]]
+}
+
+is_focused_workspace() {
+  [[ "$is_focused_workspace" ]]
+}
+
+# Set default properties for each attribute to be sure they're always set.
+# BEWARE: Make sure to add properties here.
+bg_drawing=off
+label_color=0xffdddddd
+label_font_style=Italic
+
+# XXX: for now, we include the focused workspace here, but ideally I'd like to
+# leave the workspace label gray and italic until it has open windows.
+if has_open_windows || is_focused_workspace; then
+  # If the workspace has open windows, make its label white and bold.
+  echo "Workspace $ws_name has open windows and/or is focused"
+  label_color=0xffffffff
+  label_font_style=Bold
+else
+  # If the workspace has no open windows, make its label grey and italic.
+  echo "Workspace $ws_name has no open windows and is not focused"
+  label_color=0xffdddddd
+  label_font_style=Italic
+fi
+
+if is_focused_workspace; then
+  # Draw a background for the focused workspace item only.
+  echo "Workspace $ws_name is focused"
+  bg_drawing=on
+else
+  echo "Workspace $ws_name is not focused"
+  bg_drawing=off
+fi
+
+params=(
+  background.drawing="$bg_drawing"
+  label.color="$label_color"
+  label.font.style="$label_font_style"
+)
+
+sketchybar --set "$NAME" "${params[@]}"
+
+set +x
+echo "=========================================================================="

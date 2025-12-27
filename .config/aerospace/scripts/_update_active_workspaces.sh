@@ -9,6 +9,7 @@ source "$PROGDIR/common.bash"
 
 {
   echo "Last update: $(date -Iseconds)"
+  printf 'focused:%s\n' "$(aerospace list-workspaces --focused)"
   # Print workspace names with a distinct prefix in case any workspace name is
   # a substring of a different workspace name.
   aerospace list-windows --all --format 'ws:%{workspace}' | sort | uniq
