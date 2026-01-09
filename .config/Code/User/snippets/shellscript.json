@@ -34,5 +34,14 @@
   "#!/usr/bin/env bash": {
     "prefix": "shebang",
     "body": ["#!/usr/bin/env bash"]
+  },
+  "fatal": {
+    "prefix": "fatal",
+    "body": [
+        "fatal() {",
+        "  echo \"fatal: $*\" >&2",
+        "  exit 1",
+        "}"
+    ]
   }
 }

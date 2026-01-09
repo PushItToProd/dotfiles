@@ -7,12 +7,27 @@
   "editor.wordWrap": "on",
   "editor.semanticHighlighting.enabled": true,
   "editor.lineNumbers": "on",
+  "editor.formatOnPaste": true,
   "workbench.editor.focusRecentEditorAfterClose": false,
   "workbench.editor.labelFormat": "short",
   "workbench.editor.customLabels.enabled": true,
   "workbench.editor.customLabels.patterns": {
-    "/usr/local/go/**": "⛔${filename} (EXT)",
-    "/home/joe/go/**": "⛔${filename} (EXT)",
+    "**/node_modules/*": "⛔${filename} (EXT)",
+    "**/venv/**": "⛔️${filename} (EXT)",
+    "**/.venv/**": "⛔️${filename} (EXT)",
+    "/home/linuxbrew/**": "⛔️${filename} (EXT)",
+    "/opt/homebrew/**": "⛔️${filename} (EXT)",
+    "/home/*/go/**": "⛔️${filename} (EXT)",
+    "/Users/*/go/**": "⛔️${filename} (EXT)",
+  },
+  "autoReadOnly.files": {
+    "**/node_modules/*": true,
+    "**/venv/**": true,
+    "**/.venv/**": true,
+    "/home/linuxbrew/**": true,
+    "/opt/homebrew/**": true,
+    "/home/*/go/**": true,
+    "/Users/*/go/**": true,
   },
 
   "explorer.sortOrder": "type",
@@ -83,10 +98,11 @@
   "search.useIgnoreFiles": false,
   "search.exclude": {
     "**/venv": true,
-    "**/*.log": true
+    "**/*.log": true,
+    "**/node_modules": true,
   },
   "settingsSync.ignoredSettings": [
-    "-python.defaultInterpreterPath"
+    "godotTools.editorPath.godot4"
   ],
 
   "telemetry.enableTelemetry": false,
@@ -94,7 +110,7 @@
   "terminal.integrated.macOptionIsMeta": true,
   "terminal.integrated.rendererType": "dom",
   "terminal.integrated.allowChords": false,
-  "terminal.integrated.fontSize": 18,
+  "terminal.integrated.fontSize": 16,
   "terminal.integrated.scrollback": 10000,
   // use a login shell so RVM will work
   "terminal.integrated.defaultProfile.linux": "zsh (login)",
@@ -124,6 +140,7 @@
   // vscodevim
   // workaround required for setxkbmap to remap capslock to esc on Ubuntu
   "keyboard.dispatch": "keyCode",
+  "vim.showMarksInGutter": true,
   "vim.easymotion": true,
   "vim.surround": true,
   "vim.incsearch": true,
@@ -170,9 +187,13 @@
     //   "before": ["<leader>", "s"],
     //   "after":
     // }
+    {
+      "before": ["<leader>", "m"],
+      "after": [":", "m", "a", "r", "k", "s", "<CR>"]
+    }
   ],
   "vim.normalModeKeyBindings": [
-    {"before": ["%"], "commands": ["editor.action.jumpToBracket"]},
+    { "before": ["%"], "commands": ["editor.action.jumpToBracket"] },
     { "before": ["j"], "after": ["g", "j"] },
     { "before": ["k"], "after": ["g", "k"] },
 
@@ -334,7 +355,7 @@
   },
   "[json]": {
     "editor.tabSize": 2,
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "vscode.json-language-features"
   },
   "[jsonc]": {
     "editor.tabSize": 2,
@@ -422,7 +443,6 @@
   "plantuml.exportFormat": "png",
   "lean.input.leader": "/",
   "update.showReleaseNotes": false,
-  "update.mode": "manual",
   "notebook.cellToolbarLocation": {
     "default": "right",
     "jupyter-notebook": "left"
@@ -430,7 +450,6 @@
   "[typescript]": {
     "editor.tabSize": 2
   },
-  "typescript.suggest.completeFunctionCalls": true,
   "editor.copyWithSyntaxHighlighting": false,
   "editor.selectionClipboard": false,
   "[ruby]": {
@@ -530,7 +549,6 @@
   "workbench.editor.empty.hint": "hidden",
   "workbench.editor.tabActionCloseVisibility": false,
   "editor.fontFamily": "'Comic Mono', 'JetBrains Mono', 'Droid Sans Mono', 'monospace', monospace",
-  "files.autoSave": "afterDelay",
   "editor.wrappingIndent": "deepIndent",
   "notebook.lineNumbers": "on",
   "notebook.output.fontSize": 18,
@@ -565,4 +583,37 @@
   "javascript.autoClosingTags": false,
   "security.promptForLocalFileProtocolHandling": false,
   "remote.tunnels.access.preventSleep": true,
+  "editor.wordBasedSuggestions": "currentDocument",
+  "editor.minimap.size": "fit",
+  "shellcheck.ignorePatterns": {
+    "**/*.bats": true
+  },
+
+  "godotTools.editorPath.godot4": "/Applications/Godot_mono.app/Contents/MacOS/Godot",
+  "editor.minimap.sectionHeaderFontSize": 12,
+  "github.copilot.nextEditSuggestions.enabled": true,
+  "pkl.cli.path": "/opt/homebrew/bin/pkl-lsp",
+  "pkl.lsp.java.path": "/opt/homebrew/Cellar/openjdk/25.0.1/bin/java",
+  "editor.minimap.maxColumn": 120,
+  "editor.minimap.markSectionHeaderRegex": "\\b(MARK:|SECTION:)\\s*(?<separator>-?)\\s*(?<label>.*)$",
+  "diffEditor.ignoreTrimWhitespace": false,
+  "go.diagnostic.vulncheck": "Imports",
+  "go.editorContextMenuCommands": {
+    "fillStruct": true,
+    "compilerDetails": true,
+    "benchmarkAtCursor": true
+  },
+  "go.inlayHints.compositeLiteralFields": true,
+  "editor.inlayHints.enabled": "offUnlessPressed",
+  "go.inlayHints.assignVariableTypes": true,
+  "go.inlayHints.constantValues": true,
+  "go.inlayHints.functionTypeParameters": true,
+  "go.inlayHints.ignoredError": true,
+  "go.inlayHints.parameterNames": true,
+  "go.inlayHints.rangeVariableTypes": true,
+  "editor.inlayHints.fontSize": 14,
+  "git.blame.editorDecoration.enabled": false,
+  "git.confirmSync": false,
+  "git.autofetch": true,
+  "files.autoSave": "afterDelay",
 }

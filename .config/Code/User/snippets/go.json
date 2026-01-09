@@ -12,10 +12,40 @@
 	// 	],
 	// 	"description": "Log output to console"
 	// }
+    "pmain": {
+        "prefix": "pmain",
+        "body": [
+            "package main"
+        ]
+    },
     "main": {
         "prefix": "main",
         "body": [
             "func main() {",
+            "\t$0",
+            "}"
+        ]
+    },
+    "init": {
+        "prefix": "init",
+        "body": [
+            "func init() {",
+            "\t$0",
+            "}"
+        ]
+    },
+    "subtest": {
+        "prefix": "tRun",
+        "body": [
+            "t.Run(${1:testname}, func(t *testing.T) {",
+            "\t$0",
+            "})"
+        ]
+    },
+    "recv": {
+        "prefix": "recv",
+        "body": [
+            "func (${1:receiver} ${2:Type}) ${3:name}(${4:args}) ${5:return} {",
             "\t$0",
             "}"
         ]
