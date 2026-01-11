@@ -74,8 +74,8 @@ automatically-unhide-macos-hidden-apps = false
 # This config version is only available since 'config-version = 2'
 # Fallback value (if you omit the key): persistent-workspaces = []
 persistent-workspaces = [
-    "10", "20", "30", "40", "50", "60", "70", "80", "90",
-    "15", "25", "35", "45", "55", "65", "75", "85", "95",
+    "10", "20", "30", "40", "50", "60", "70", "80", "90", "100",
+    "15", "25", "35", "45", "55", "65", "75", "85", "95", "105",
     # "A", "B", "C",
     # "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O",
     # "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z",
@@ -223,6 +223,7 @@ on-mode-changed = []
     ctrl-7 = 'exec-and-forget aerospace_navigate.py toggle 70 75'
     ctrl-8 = 'exec-and-forget aerospace_navigate.py toggle 80 85'
     ctrl-9 = 'exec-and-forget aerospace_navigate.py toggle 90 95'
+    ctrl-0 = 'exec-and-forget aerospace_navigate.py toggle 100 105'
 
     ctrl-f1 = 'workspace 15'
     ctrl-f2 = 'workspace 25'
@@ -233,6 +234,7 @@ on-mode-changed = []
     ctrl-f7 = 'workspace 75'
     ctrl-f8 = 'workspace 85'
     ctrl-f9 = 'workspace 95'
+    ctrl-f10 = 'workspace 105'
 
     ##: ctrl+left/right -- switch neighboring workspaces (all workspaces)
     ctrl-left = 'workspace prev'
@@ -253,6 +255,7 @@ on-mode-changed = []
     ctrl-cmd-alt-7 = 'exec-and-forget aerospace_navigate.py toggle 70 75'
     ctrl-cmd-alt-8 = 'exec-and-forget aerospace_navigate.py toggle 80 85'
     ctrl-cmd-alt-9 = 'exec-and-forget aerospace_navigate.py toggle 90 95'
+    ctrl-cmd-alt-0 = 'exec-and-forget aerospace_navigate.py toggle 100 105'
 
     ##: semihyper+fN -- switch to odd-numbered workspace
     ctrl-cmd-alt-f1 = 'workspace 15'
@@ -264,6 +267,7 @@ on-mode-changed = []
     ctrl-cmd-alt-f7 = 'workspace 75'
     ctrl-cmd-alt-f8 = 'workspace 85'
     ctrl-cmd-alt-f9 = 'workspace 95'
+    ctrl-cmd-alt-f10 = 'workspace 105'
 
     ## MARK: move nodes to workspaces
     # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
@@ -278,6 +282,7 @@ on-mode-changed = []
     ctrl-shift-7 = 'exec-and-forget aerospace_navigate.py toggle --move 70 75'
     ctrl-shift-8 = 'exec-and-forget aerospace_navigate.py toggle --move 80 85'
     ctrl-shift-9 = 'exec-and-forget aerospace_navigate.py toggle --move 90 95'
+    ctrl-shift-0 = 'exec-and-forget aerospace_navigate.py toggle --move 100 105'
 
     ##: ctrl+shift+fN -- move node to odd-numbered workspace
     ctrl-shift-f1 = 'move-node-to-workspace --focus-follows-window 15'
@@ -289,6 +294,7 @@ on-mode-changed = []
     ctrl-shift-f7 = 'move-node-to-workspace --focus-follows-window 75'
     ctrl-shift-f8 = 'move-node-to-workspace --focus-follows-window 85'
     ctrl-shift-f9 = 'move-node-to-workspace --focus-follows-window 95'
+    ctrl-shift-f10 = 'move-node-to-workspace --focus-follows-window 105'
 
     ##: ctrl+shift+left/right -- move node to neighboring workspace
 
@@ -310,6 +316,7 @@ on-mode-changed = []
     ctrl-cmd-alt-shift-7 = 'exec-and-forget aerospace_navigate.py toggle --move 70 75'
     ctrl-cmd-alt-shift-8 = 'exec-and-forget aerospace_navigate.py toggle --move 80 85'
     ctrl-cmd-alt-shift-9 = 'exec-and-forget aerospace_navigate.py toggle --move 90 95'
+    ctrl-cmd-alt-shift-0 = 'exec-and-forget aerospace_navigate.py toggle --move 100 105'
 
     ##: hyper+fN -- move node to odd-numbered workspace
     ctrl-cmd-alt-shift-f1 = 'move-node-to-workspace --focus-follows-window 15'
@@ -321,6 +328,7 @@ on-mode-changed = []
     ctrl-cmd-alt-shift-f7 = 'move-node-to-workspace --focus-follows-window 75'
     ctrl-cmd-alt-shift-f8 = 'move-node-to-workspace --focus-follows-window 85'
     ctrl-cmd-alt-shift-f9 = 'move-node-to-workspace --focus-follows-window 95'
+    ctrl-cmd-alt-shift-f10 = 'move-node-to-workspace --focus-follows-window 105'
 
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#workspace-back-and-forth
