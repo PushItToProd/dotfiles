@@ -45,6 +45,7 @@ def get_parser():
     parser_toggle.add_argument(
         'workspaces', type=str, nargs='+', help='Workspace numbers to toggle.'
     )
+    parser_toggle.add_argument('-d', '--dry-run', action='store_true')
 
     ## subcommand: go
     parser_go = subparsers.add_parser('go', help='''
@@ -58,6 +59,7 @@ def get_parser():
         '-m', '--move', action='store_true',
         help='Move the focused container to the given workspace.',
     )
+    parser_go.add_argument('-d', '--dry-run', action='store_true')
 
     return parser
 
