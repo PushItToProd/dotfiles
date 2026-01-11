@@ -200,11 +200,11 @@ on-mode-changed = []
     ctrl-cmd-alt-shift-k = 'move up'
     ctrl-cmd-alt-shift-l = 'move right'
 
-    ##: ctrl+alt+hjkl -- join
-    ctrl-alt-h = 'join-with left'
-    ctrl-alt-j = 'join-with down'
-    ctrl-alt-k = 'join-with up'
-    ctrl-alt-l = 'join-with right'
+    # XXX: find alternative use for ctrl-alt mapping
+    # ctrl-alt-h = 'join-with left'
+    # ctrl-alt-j = 'join-with down'
+    # ctrl-alt-k = 'join-with up'
+    # ctrl-alt-l = 'join-with right'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#resize
     ##: semihyper+minus/plus -- resize smaller/larger
