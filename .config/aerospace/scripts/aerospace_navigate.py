@@ -175,7 +175,26 @@ class AeroSpace:
         return workspaces
 
 
-def unique_workspaces(workspaces: list[AeroSpaceWorkspaceInfo]) -> list[AeroSpaceWorkspaceInfo]:
+def try_int(s: str):
+    try:
+        return int(s)
+    except:
+        return s
+
+
+def sort_workspaces(workspaces: list[AeroSpaceWorkspaceInfo], reverse=False) -> list[AeroSpaceWorkspaceInfo]:
+    """
+    >>> ws_names = '10', '15', '20', '50', '60', '65', '80', '85', '90', '100'
+    >>> wses = [AeroSpaceWorkspaceInfo(name, False, False) for name in ws_names] # doctest: +ELLIPSIS
+    ...
+    >>> [ws.name for ws in sort_workspaces(wses)]
+    ['10', '15', '20', '50', '60', '65', '80', '85', '90', '100']
+    """
+    workspaces.sort(key=lambda ws: try_int(ws.name), reverse=reverse)
+    return workspaces
+
+
+def unique_workspaces(workspaces: list[AeroSpaceWorkspaceInfo], reverse=False) -> list[AeroSpaceWorkspaceInfo]:
     """
     Given a list of AeroSpaceWorkspaceInfo objects that may be unsorted, sort
     the list and deduplicate by name.
@@ -183,7 +202,7 @@ def unique_workspaces(workspaces: list[AeroSpaceWorkspaceInfo]) -> list[AeroSpac
     if not workspaces:
         return []
 
-    workspaces = sorted(workspaces, key=lambda ws: ws.name)
+    workspaces = sort_workspaces(workspaces, reverse=reverse)
 
     # Iterate over the list of sorted workspaces, collecting unique ones.
     return functools.reduce(
@@ -355,13 +374,20 @@ def main_go(args):
 
     aerospace = AeroSpace()
     workspaces = aerospace.get_active_workspaces()
-    workspaces = unique_workspaces(workspaces)
+    workspaces = unique_workspaces(workspaces, reverse=direction == 'prev')
+    logging.debug('Unique workspaces: %s', workspaces)
     state = summarize_workspaces(workspaces)
 
+    logging.debug('Focused workspace: %s', state.focused)
+    logging.debug('Open workspaces: %s', sorted(state.workspaces))
+    logging.debug('Visible workspaces: %s', sorted(state.visible))
+
     # the target list is the full list of workspaces sorted by name
-    target_workspaces = sorted(state.workspaces, reverse=direction == 'prev')
+    target_workspaces = sorted(state.workspaces, key=try_int, reverse=direction == 'prev')
+    logging.debug('Target workspaces: %s', target_workspaces)
 
     target = get_target_workspace(state.focused, state.workspaces, state.visible, target_workspaces)
+
     logging.info('Going to workspace %s', target)
     if args.dry_run:
         logging.info('Dry run - exiting')
