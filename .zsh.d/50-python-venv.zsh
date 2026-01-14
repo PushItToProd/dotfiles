@@ -4,6 +4,16 @@ DEFAULT_PYTHON=python3.14
 
 PYTHON_VIRTUALENV_DIRS=(venv .venv)
 
+__relative_path() {
+  local _path="$1"  # named _path to avoid conflictiing with zsh's $path array
+  local workdir="${2:-$PWD}"
+
+  _path="${_path/#$workdir/.}"  # /some/really/long/path/venv => ./venv
+  _path="${_path/#$HOME/~}"     # /home/user/blah/blah/venv => ~/blah/blah/venv
+
+  printf '%s' "$_path"
+}
+
 find_venv_dir() {
   if [[ ! $PYTHON_VIRTUALENV_DIRS ]]; then
     echo "finding virtualenv failed: PYTHON_VIRTUALENV_DIRS is empty or unset" >&2
@@ -36,7 +46,7 @@ activate_venv_if_exists() {
   fi
 
   if [[ "$venv_dir" ]]; then
-    echo "Activating virtualenv in ${venv_dir}"
+    echo "Activating virtualenv in $(__relative_path ${venv_dir})"
     source "${venv_dir}/bin/activate"
     return 0
   fi
@@ -47,7 +57,7 @@ activate_venv_if_exists() {
 # activate a venv if one is found, otherwise offer to create one
 venv() {
   if [[ $VIRTUAL_ENV ]]; then
-    echo "virtualenv already active: $VIRTUAL_ENV"
+    echo "virtualenv already active: $(__relative_path $VIRTUAL_ENV)"
     return 1
   fi
   activate_venv_if_exists
