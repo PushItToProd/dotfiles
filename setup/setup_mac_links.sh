@@ -79,6 +79,8 @@ main() {
   ensure_dir "$INSTALL_DIR/bin"
   link "bin/list_vscode_workspaces"
 
+  link ".zprofile"
+
 }
 if [[ "${BASH_SOURCE[0]}" == "$0" ]]; then
   main "$@"
