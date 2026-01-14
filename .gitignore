@@ -60,3 +60,4 @@ bin/dataspell
 !.aerospace.toml
 !.config/aerospace
 !.config/sketchybar
+!.zprofile
