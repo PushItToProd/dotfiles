@@ -69,6 +69,7 @@ venv() {
 
   case $cmd in
     [Yy]*|''|-y) cmd="$DEFAULT_PYTHON" ;;
+    [Nn]*) return 0 ;;
     ^[0-9]) cmd="python$cmd" ;;
   esac
 
