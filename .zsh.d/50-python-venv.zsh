@@ -46,6 +46,10 @@ activate_venv_if_exists() {
 
 # activate a venv if one is found, otherwise offer to create one
 venv() {
+  if [[ $VIRTUAL_ENV ]]; then
+    echo "virtualenv already active: $VIRTUAL_ENV"
+    return 1
+  fi
   activate_venv_if_exists
   local exit=$?
   if [[ $exit == 0 || $exit == 2 ]]; then
