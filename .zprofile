@@ -1,6 +1,9 @@
 # prevent duplicate path entries
 typeset -U path
 
+# Allow pasting code with comments into the prompt without annoying errors.
+setopt interactive_comments
+
 # Homebrew
 eval "$(/opt/homebrew/bin/brew shellenv)"
 HOMEBREW_NO_ENV_HINTS=1
