@@ -89,3 +89,6 @@ export PATH="$PATH:/Users/joe/Library/Application Support/JetBrains/Toolbox/scri
 
 # Python virtualenv
 source "$HOME/dotfiles/.zsh.d/50-python-venv.zsh"
+
+# Ensure clang is on the path
+export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
