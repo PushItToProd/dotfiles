@@ -87,7 +87,7 @@ alias egrep="egrep $__grep_flags"
 export TWEEGO_PATH="$HOME/Code/scratch/twine/storyformats"
 
 # Added by Toolbox App
-export PATH="$PATH:/Users/joe/Library/Application Support/JetBrains/Toolbox/scripts"
+export PATH="$PATH:$HOME/Library/Application Support/JetBrains/Toolbox/scripts"
 
 # Python virtualenv
 source "$HOME/dotfiles/.zsh.d/50-python-venv.zsh"
