@@ -1,7 +1,9 @@
 # prevent duplicate path entries
 typeset -U path
 
-# Allow pasting code with comments into the prompt without annoying errors.
+# Allow comments in code entered at the prompt. Otherwise zsh won't treat `#` as
+# a special character in interactive mode, which is especially annoying when
+# pasting code into the shell.
 setopt interactive_comments
 
 # Homebrew
