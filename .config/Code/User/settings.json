@@ -1,6 +1,6 @@
 {
   /// VS Code Settings ///
-  "editor.rulers": [80],
+  "editor.rulers": [80, 120],
   "editor.renderWhitespace": "boundary",
   "editor.accessibilitySupport": "off",
   "editor.detectIndentation": false,
@@ -83,7 +83,7 @@
     "**/.classpath": true,
     "**/.project": true,
     "**/.settings": true,
-    "**/.factorypath": true
+    "**/.factorypath": true,
   },
   "files.watcherExclude": {
     "**/.git/objects/**": true,
@@ -91,15 +91,20 @@
     "**/.hg/store/**": true,
     "**/node_modules/*/**": true,
     "**/venv/**": true,
-    "**/venv/*/**": true
+    "**/.venv/**": true,
+    "**/.mypy_cache": true,
+    "**/.ruff_cache": true,
   },
   "files.trimTrailingWhitespace": true,
 
   "search.useIgnoreFiles": false,
   "search.exclude": {
     "**/venv": true,
+    "**/.venv": true,
     "**/*.log": true,
     "**/node_modules": true,
+    "**/.mypy_cache": true,
+    "**/.ruff_cache": true,
   },
   "settingsSync.ignoredSettings": [
     "godotTools.editorPath.godot4"
@@ -110,7 +115,7 @@
   "terminal.integrated.macOptionIsMeta": true,
   "terminal.integrated.rendererType": "dom",
   "terminal.integrated.allowChords": false,
-  "terminal.integrated.fontSize": 16,
+  "terminal.integrated.fontSize": 18,
   "terminal.integrated.scrollback": 10000,
   // use a login shell so RVM will work
   "terminal.integrated.defaultProfile.linux": "zsh (login)",
@@ -143,6 +148,7 @@
   "vim.showMarksInGutter": true,
   "vim.easymotion": true,
   "vim.surround": true,
+  // "vim.sneak": true,
   "vim.incsearch": true,
   "vim.useSystemClipboard": true,
   "vim.useCtrlKeys": true,
@@ -183,14 +189,29 @@
         }
       ]
     },
-    // {
-    //   "before": ["<leader>", "s"],
-    //   "after":
-    // }
     {
       "before": ["<leader>", "m"],
       "after": [":", "m", "a", "r", "k", "s", "<CR>"]
-    }
+    },
+
+    // remap vanilla f/F to easymotion
+    {
+      "before": ["<leader>", "f"],
+      "after": ["<leader>", "<leader>", "f"]
+    },
+    {
+      "before": ["<leader>", "F"],
+      "after": ["<leader>", "<leader>", "F"]
+    },
+    // easymotion shortcut
+    {
+      "before": ["s"],
+      "after": ["<leader>", "<leader>", "s"]
+    },
+    {
+      "before": ["<leader>", "s"],
+      "after": ["<leader>", "<leader>", "s"]
+    },
   ],
   "vim.normalModeKeyBindings": [
     { "before": ["%"], "commands": ["editor.action.jumpToBracket"] },
@@ -245,7 +266,7 @@
     {"before": ["<leader>", "t"], "commands": ["workbench.action.terminal.focus"]},
     {"before": ["<leader>", "e"], "commands": ["workbench.view.explorer"]},
     {"before": ["<leader>", "E"], "commands": ["workbench.files.action.showActiveFileInExplorer"]},
-    {"before": ["<leader>", "f"], "commands": ["workbench.action.findInFiles"]},
+    // {"before": ["<leader>", "f"], "commands": ["workbench.action.findInFiles"]},
 
     {"before": ["g", "p", "d"], "commands": ["editor.action.peekDefinition"]},
     {"before": ["g", "h"], "commands": ["editor.action.showDefinitionPreviewHover"]},
@@ -276,15 +297,18 @@
     {
       "before": ["<C-w>", "L"],
       "commands": ["workbench.action.moveEditorToRightGroup"]
-    }
+    },
 
     // text navigation
-    // TODO: map [[ and ]] to navigate to curly braces and blocks
     // {"before": ["[", "["], "after": ["?", "{", "<CR>"]},
     // {"before": ["[", "["], "after": ["?", "{", "<CR>"]},
+
+    // {"before": ["[", "["], "after": ["v", "i", "i"]},
+    // {"before": ["[", "["], "after": ["?", "{", "<CR>"]},
+
   ],
 
-  "vim.visualModeKeyBindings": [
+  "vim.visualModeKeyBindingsNonRecursive": [
     {
       "before": ["g", "s"],
       "commands": [{
@@ -319,6 +343,11 @@
         },
       }],
     },
+    // paste without overriding the current register
+    {
+      "before": ["p"],
+      "after": ["p", "g", "v", "y"]
+    }
   ],
 
   // azure functions
@@ -336,6 +365,7 @@
   },
   "go.autocompleteUnimportedPackages": true,
   "gopls": {
+    "ui.completion.completeFunctionCalls": true,
     "ui.semanticTokens": true
   },
   "[html]": {
@@ -486,18 +516,10 @@
   "notebook.output.textLineLimit": 40,
   "testing.openTesting": "openOnTestFailure",
   "workbench.colorCustomizations": {
-    "[Bearded Theme Monokai Stone]": {
-      "editorRuler.foreground": "#4f4f4f"
-    },
-    "[Bearded Theme Arc EolStorm]": {
-      // TODO: make file explorer font brighter
-      "editorRuler.foreground": "#4f4f4f"
-    },
-    "[Bearded Theme Arc Reversed]": {
-      // TODO: make file explorer font brighter
-      "editorRuler.foreground": "#4f4f4f",
-      "panel.border": "#4f4f4f"
-    }
+    // TODO: make file explorer font brighter
+    "editorRuler.foreground": "#4f4f4f",
+    "panel.border": "#4f4f4f",
+    "terminal.border": "#6f6f6f"
   },
   "editor.tokenColorCustomizations": {
     "[*Light*]": {
@@ -615,5 +637,17 @@
   "git.blame.editorDecoration.enabled": false,
   "git.confirmSync": false,
   "git.autofetch": true,
+  "window.newWindowProfile": "Default",
+  "editor.cursorBlinking": "smooth",
+  "dev.containers.dockerSocketPath": "tcp://127.0.0.1:65502",
+  "dev.containers.dockerPath": "/Users/joe/bin/docker-in-minikube",
+  "chat.viewSessions.orientation": "stacked",
+  "explorer.confirmDelete": false,
+  "C_Cpp.clang_format_fallbackStyle": "LLVM",
+  "chat.fontSize": 16,
+  "terminal.integrated.enableMultiLinePasteWarning": "never",
+  "go.survey.prompt": false,
+  "go.showWelcome": false,
   "files.autoSave": "afterDelay",
+  "python.analysis.typeCheckingMode": "basic",
 }
