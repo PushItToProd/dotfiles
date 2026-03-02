@@ -47,5 +47,18 @@
           "class ${1:MyException}(BaseException):",
           "    pass$0"
       ]
+  },
+  "pdb": {
+    "prefix": "pdb",
+    "body": ["import pdb; pdb.set_trace()"]
+  },
+  "get_parser": {
+    "prefix": "get_parser",
+    "body": [
+        "def get_parser():",
+        "    parser = argparse.ArgumentParser()",
+        "    parser.$0",
+        "    return parser"
+    ]
   }
 }

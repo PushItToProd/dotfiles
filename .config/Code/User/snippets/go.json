@@ -49,5 +49,15 @@
             "\t$0",
             "}"
         ]
+    },
+    "benchmark function": {
+        "prefix": "bf",
+        "body": [
+            "func Benchmark$1(b *testing.B) {",
+            "\tfor b.Loop() {",
+            "\t\t$0",
+            "\t}",
+            "}"
+        ]
     }
 }

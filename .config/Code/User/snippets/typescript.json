@@ -12,12 +12,20 @@
 	// 	],
 	// 	"description": "Log output to console"
 	// }
-    "Deno test": {
-        "prefix": "Deno.test",
-        "body": [
-            "Deno.test('${1}', () => {",
-            "  ${0}",
-            "});",
-        ]
-    }
+  "Deno test": {
+    "prefix": "Deno.test",
+    "body": [
+      "Deno.test('${1}', () => {",
+      "  ${0}",
+      "});",
+    ]
+  },
+  "function": {
+    "prefix": "func",
+    "body": [
+      "function${1}(${2}) {",
+      "  ${0}",
+      "}"
+    ]
+  }
 }
