@@ -101,8 +101,8 @@ main() {
     exec >"/tmp/sketchybar_aerospace_plugin_$1.log" 2>&1
   fi
 
-  echo "===== $(date) -- ws_name=$1 ====="
-  set -x
+  # echo "===== $(date) -- ws_name=$1 ====="
+  # set -x
 
   ws_name="$1"
 
