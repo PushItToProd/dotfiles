@@ -90,7 +90,7 @@ sketchybar --add item clock right \
            --set battery update_freq=120 script="$PLUGIN_DIR/battery.sh" \
            --subscribe battery system_woke power_source_change \
            --add item mempressure right \
-           --set mempressure update_freq=10 icon= script="$PLUGIN_DIR/memory_pressure.sh" \
+           --set mempressure update_freq=30 icon= script="$PLUGIN_DIR/memory_pressure.sh" \
            --add item mempressure right
 
 ##### Aerospace Space Listing and Indicators #####
