@@ -1,30 +1,53 @@
 [[ "$DEBUG" == "1" ]] && echo Configuring Python helpers
 
-DEFAULT_PYTHON=python3.13
+DEFAULT_PYTHON=python3.14
 
-# recurse up the directory tree to find a virtualenv directory
-find_venv() {
-  # on principle, I refuse to support virtualenvs in /
-  if [[ "$(pwd)" == / ]]; then
-    return 1
+PYTHON_VIRTUALENV_DIRS=(venv .venv)
+
+__relative_path() {
+  local _path="$1"  # named _path to avoid conflictiing with zsh's $path array
+  local workdir="${2:-$PWD}"
+
+  _path="${_path/#$workdir/.}"  # /some/really/long/path/venv => ./venv
+  _path="${_path/#$HOME/~}"     # /home/user/blah/blah/venv => ~/blah/blah/venv
+
+  printf '%s' "$_path"
+}
+
+find_venv_dir() {
+  if [[ ! $PYTHON_VIRTUALENV_DIRS ]]; then
+    echo "finding virtualenv failed: PYTHON_VIRTUALENV_DIRS is empty or unset" >&2
+    return 2
   fi
+  pushd . >/dev/null
+  {
+    local dirname
+    while [[ "$PWD" != / ]]; do
+      for dirname in $PYTHON_VIRTUALENV_DIRS; do
+        if [[ -x $dirname/bin/python ]] && [[ -f $dirname/bin/activate ]]; then
+          printf '%s/%s' "$PWD" "$dirname"
+          return 0
+        fi
+      done
+      cd .. || return 1
+    done
+  } always {
+    popd >/dev/null
+  }
 
-  if [[ -d venv ]]; then
-    pwd
-    return 0
-  fi
-
-  pushd .. >/dev/null
-  find_venv
-  popd >/dev/null
+  return 1
 }
 
 activate_venv_if_exists() {
-  local -r venv_location="$(find_venv)"
+  local venv_dir
+  venv_dir="$(find_venv_dir)"
+  if [[ $? == 2 ]]; then
+    return 2
+  fi
 
-  if [[ "$venv_location" ]]; then
-    echo "Activating virtualenv in ${venv_location}"
-    source "${venv_location}/venv/bin/activate"
+  if [[ "$venv_dir" ]]; then
+    echo "Activating virtualenv in $(__relative_path ${venv_dir})"
+    source "${venv_dir}/bin/activate"
     return 0
   fi
 
@@ -33,9 +56,25 @@ activate_venv_if_exists() {
 
 # activate a venv if one is found, otherwise offer to create one
 venv() {
-  if activate_venv_if_exists; then
+  if [[ $VIRTUAL_ENV ]]; then
+    echo "virtualenv already active: $(__relative_path $VIRTUAL_ENV)"
+    return 1
+  fi
+  activate_venv_if_exists
+  local exit=$?
+  if [[ $exit == 0 || $exit == 2 ]]; then
     return
   fi
+
+  # TODO: use uv
+  #
+  # local reply
+  # if command -v uv &>/dev/null; then
+  #   read "reply?virtualenv not available. create one with uv? (Y/n) "
+  #   case $reply in
+  #   [Yy]*) TODO
+  #   esac
+  # fi
 
   local cmd="$1"
   if [[ ! "$cmd" ]]; then
@@ -44,6 +83,7 @@ venv() {
 
   case $cmd in
     [Yy]*|''|-y) cmd="$DEFAULT_PYTHON" ;;
+    [Nn]*) return 0 ;;
     ^[0-9]) cmd="python$cmd" ;;
   esac
 
