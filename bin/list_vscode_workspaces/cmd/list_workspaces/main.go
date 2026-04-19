@@ -12,7 +12,6 @@ import (
 	"maps"
 	"net/url"
 	"os"
-	"path"
 	"path/filepath"
 	"regexp"
 	"slices"
@@ -187,13 +186,11 @@ func WithMessagef(err error, format string, a ...any) error {
 // state.vscdb is a SQLite database that VS Code updates when the workspace is used, so this gives us a way to tell
 // which workspaces have been most recently active.
 func getWsModTime(wsDir string) (time.Time, error) {
-	stateFile := path.Join(wsDir, "state.vscdb")
+	stateFile := filepath.Join(wsDir, "state.vscdb")
 	stat, err := os.Lstat(stateFile)
 	if err != nil {
 		err = WithMessagef(err, "failed to stat state file %s", stateFile)
-	}
-	if stat == nil {
-		return time.Time{}, fmt.Errorf("stat returned nil for %s", wsDir)
+		return time.Time{}, err
 	}
 
 	return stat.ModTime(), err
@@ -202,7 +199,7 @@ func getWsModTime(wsDir string) (time.Time, error) {
 // getWsCodePath parses the workspaceStorage directory's workspace.json and uses WorkspaceJson.CodePath to try to find
 // the path/URI of the underlying workspace directory or workspace.json file.
 func getWsCodePath(wsDir string) (string, error) {
-	wsFile := path.Join(wsDir, "workspace.json")
+	wsFile := filepath.Join(wsDir, "workspace.json")
 
 	wsJsonBytes, err := os.ReadFile(wsFile)
 	if err != nil {
@@ -232,7 +229,7 @@ func GetWorkspaceEntry(wsStoragePath string, fsEntry fs.DirEntry) (WorkspaceEntr
 	}
 
 	name := fsEntry.Name()
-	wsDir := path.Join(wsStoragePath, name)
+	wsDir := filepath.Join(wsStoragePath, name)
 
 	modTime, err := getWsModTime(wsDir)
 	if err != nil {
@@ -307,7 +304,7 @@ func FindWorkspaceStorage(homedir string) (string, error) {
 
 	var errs []error
 	for _, subdirpath := range subdirs {
-		fullpath := path.Join(homedir, subdirpath)
+		fullpath := filepath.Join(homedir, subdirpath)
 		isDir, err := isDirectory(fullpath)
 		if err != nil {
 			errs = append(errs, err)
