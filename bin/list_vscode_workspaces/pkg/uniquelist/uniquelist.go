@@ -20,7 +20,7 @@ type UniqueList[T Comparable] []T
 
 // Insert inserts an element into the UniqueList if it's not already present
 func (ul *UniqueList[T]) Insert(elem T) bool {
-	var shouldInsert bool = true
+	shouldInsert := true
 	index, found := slices.BinarySearchFunc(*ul, elem, func(e, t T) int {
 		n, ok := e.Compare(t)
 		if !ok {
