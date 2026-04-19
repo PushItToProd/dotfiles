@@ -187,6 +187,9 @@ func getWsModTime(wsDir string) (time.Time, error) {
 	if err != nil {
 		err = WithMessagef(err, "failed to stat state file %s", stateFile)
 	}
+	if stat == nil {
+		return time.Time{}, fmt.Errorf("stat returned nil for %s", wsDir)
+	}
 
 	return stat.ModTime(), err
 }
