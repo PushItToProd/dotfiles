@@ -63,10 +63,10 @@ func DecodeUrl(wsUrl string) (string, error) {
 	// So, I've just given up on proper URL parsing and am instead resorting to
 	// stripping off the file:// prefix with string manipulation like a
 	// goddamned caveman.
-	path, _ := strings.CutPrefix(wsUrl, "file://")
+	urlPath, _ := strings.CutPrefix(wsUrl, "file://")
 
 	// Remove URL encoding entities
-	decodedPath, err := url.QueryUnescape(path)
+	decodedPath, err := url.QueryUnescape(urlPath)
 	if err != nil {
 		log.Printf("failed to decode entities in workspace path: %v: %s", err, wsUrl)
 		return wsUrl, err
@@ -110,21 +110,21 @@ func MakeFriendlyPathForRemoteWorkspace(workspaceUri string) (friendlyPath strin
 
 // MakeFriendlyPath takes the user's home directory and a path to a VS Code workspace, and performs substitutions on the
 // given path to make it more human-readable.
-func MakeFriendlyPath(homedir string, path string) string {
+func MakeFriendlyPath(homedir string, wsPath string) string {
 	// If the path starts with a slash, it's assume to be local.
-	if path[0] == '/' {
+	if wsPath[0] == '/' {
 		// If the local path starts with the user's home directory, replace the homedir with a tilde.
-		if shortPath, wasReplaced := TruncateDirPrefix(path, homedir, "~"); wasReplaced {
+		if shortPath, wasReplaced := TruncateDirPrefix(wsPath, homedir, "~"); wasReplaced {
 			return shortPath
 		}
-		return path
+		return wsPath
 	}
 
-	if friendlyPath, wasReplaced := MakeFriendlyPathForRemoteWorkspace(path); wasReplaced {
+	if friendlyPath, wasReplaced := MakeFriendlyPathForRemoteWorkspace(wsPath); wasReplaced {
 		return friendlyPath
 	}
 
-	return path
+	return wsPath
 }
 
 // sortWorkspaceEntryList orders a list of WorkspaceEntries newest to oldest.
@@ -163,9 +163,9 @@ func (wsj WorkspaceJson) CodePath() string {
 		wsj.Workspace,
 		wsj.Configuration.External,
 	}
-	for _, path := range paths {
-		if path != "" {
-			return path
+	for _, wsPath := range paths {
+		if wsPath != "" {
+			return wsPath
 		}
 	}
 	return ""
@@ -210,11 +210,11 @@ func getWsCodePath(wsDir string) (string, error) {
 		return "", WithMessagef(err, "couldn't unmarshal workspace json %s", wsFile)
 	}
 
-	path := wsJson.CodePath()
-	if path == "" {
+	wsPath := wsJson.CodePath()
+	if wsPath == "" {
 		return "", WithMessagef(ErrPathNotInJson, "couldn't find a workspace path in %s", wsFile)
 	}
-	return path, nil
+	return wsPath, nil
 }
 
 // GetWorkspaceEntry returns a single workspace entry for the given path (or an error if no valid workspace could be
@@ -247,7 +247,9 @@ func GetWorkspaceEntry(wsStoragePath string, fsEntry fs.DirEntry) (WorkspaceEntr
 	decodedPath, err := DecodeUrl(wsCodePath)
 	if err != nil {
 		log.Printf("failed to decode path: %s: %s", err, wsCodePath)
-		// If we failed to decode the path, try just using it anyway.
+		// If we failed to decode the path, try just using it anyway. This can lead to confusing output, but it's better
+		// than no output at all, and the user can hopefully figure out the correct path from the encoded one if they
+		// need to.
 		decodedPath = wsCodePath
 	}
 
@@ -282,8 +284,8 @@ func GetWorkspaceEntries(wsStoragePath string) ([]WorkspaceEntry, error) {
 }
 
 // isDirectory takes the path to a file and returns whether it's a directory.
-func isDirectory(path string) (bool, error) {
-	fileInfo, err := os.Stat(path)
+func isDirectory(filePath string) (bool, error) {
+	fileInfo, err := os.Stat(filePath)
 	if err != nil {
 		return false, err // Return error if the path doesn't exist or is inaccessible
 	}
