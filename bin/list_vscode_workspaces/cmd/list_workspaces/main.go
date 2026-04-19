@@ -93,7 +93,7 @@ func TruncateDirPrefix(path string, basedir string, replacement string) (shortPa
 }
 
 var remoteWorkspaceRegexp = regexp.MustCompile(
-	`^vscode-remote://(?<remoteType>[\w-]+)(\+)(?<hostname>[\w.-]+)(?<path>/.*)$`,
+	`^vscode-remote://(?<remoteType>[\w-]+)\+(?<hostname>[\w.-]+)(?<path>/.*)$`,
 )
 
 func MakeFriendlyPathForRemoteWorkspace(workspaceUri string) (friendlyPath string, isRemote bool) {
@@ -111,6 +111,11 @@ func MakeFriendlyPathForRemoteWorkspace(workspaceUri string) (friendlyPath strin
 // MakeFriendlyPath takes the user's home directory and a path to a VS Code workspace, and performs substitutions on the
 // given path to make it more human-readable.
 func MakeFriendlyPath(homedir string, wsPath string) string {
+	// The path shouldn't be empty, but if it is, we return early to avoid panicking or doing unnecessary work.
+	if wsPath == "" {
+		return wsPath
+	}
+
 	// If the path starts with a slash, it's assume to be local.
 	if wsPath[0] == '/' {
 		// If the local path starts with the user's home directory, replace the homedir with a tilde.
@@ -334,7 +339,7 @@ var formatters = map[string]OutputFormatter{
 	"choose": FormatChoose,
 }
 
-var validFormatters = strings.Join(slices.Collect(maps.Keys(formatters)), ", ")
+var validFormatters = strings.Join(slices.Sorted(maps.Keys(formatters)), ", ")
 
 func FormatRofi(entry OutputEntry) string {
 	return fmt.Sprintf("%s\000info\x1f%s\n", entry.FriendlyPath, entry.WsCodePath)
