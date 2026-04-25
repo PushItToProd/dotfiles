@@ -94,3 +94,5 @@ source "$HOME/dotfiles/.zsh.d/50-python-venv.zsh"
 
 # Ensure clang is on the path
 export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
+# Added by Obsidian
+export PATH="$PATH:/Applications/Obsidian.app/Contents/MacOS"
