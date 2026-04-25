@@ -1,8 +1,14 @@
 alias nodejs=node
 
-# support overriding paths -- on devices using homebrew, you should create
-# .zsh.d/49-nvm.nocommit.zsh and set the nvm.sh and bash_completion paths to
-# those listed in `brew info nvm`
+# initialize nvm from homebrew if present
+if [[ -f "$__HOMEBREW_OPT/nvm/nvm.sh" ]]; then
+  : "${_my_nvm__nvm_sh_path:="$__HOMEBREW_OPT/nvm/nvm.sh"}"
+  : "${_my_nvm__bash_completion_path:="$__HOMEBREW_OPT/nvm/etc/bash_completion.d/nvm"}"
+fi
+
+# support overriding paths -- on devices using something other than homebrew or
+# these paths, you can create a file named e.g. .zsh.d/49-nvm.nocommit.zsh and
+# set the nvm.sh and bash_completion paths to those listed in `brew info nvm`
 : "${_my_nvm__NVM_DIR:="$HOME/.nvm"}"
 : "${_my_nvm__nvm_sh_path:="$NVM_DIR/nvm.sh"}"
 : "${_my_nvm__bash_completion_path:="$NVM_DIR/bash_completion"}"
