@@ -84,6 +84,10 @@ alias grep="grep $__grep_flags"
 alias fgrep="fgrep $__grep_flags"
 alias egrep="egrep $__grep_flags"
 
+duhd() {
+  du -hd1 "$@" 2>/dev/null | sort -h
+}
+
 export TWEEGO_PATH="$HOME/Code/scratch/twine/storyformats"
 
 # Added by Toolbox App
