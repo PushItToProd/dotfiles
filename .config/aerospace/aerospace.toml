@@ -416,13 +416,16 @@ on-mode-changed = []
 
 ## MARK: 'launch' mode
 [mode.launch.binding]
-    ctrl-slash = 'mode main'
+    ctrl-cmd-alt-slash = 'mode main'
     esc = 'mode main'
+    shift-c = ['exec-and-forget code -n', 'mode main']
+    c = ['exec-and-forget choose_vscode.sh', 'mode main']
+    d = ['exec-and-forget open -a "Discord"', 'mode main']
+    o = ['exec-and-forget open -a "Obsidian"', 'mode main']
+    s = ['exec-and-forget open -a "Spotify"', 'mode main']
     t = ["""\
         exec-and-forget osascript -e 'tell application "iTerm2" to create window with default profile'
     """, 'mode main']
-    shift-c = ['exec-and-forget code -n', 'mode main']
-    c = ['exec-and-forget choose_vscode.sh', 'mode main']
     w = ['exec-and-forget firefox --new-window', 'mode main']
 
 ## MARK: 'resize/move' mode
