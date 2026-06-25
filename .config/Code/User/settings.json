@@ -677,6 +677,7 @@
     "sleep": true,
     "nl": true,
     "grep": true,
+    "jq": true,
     "/^git(\\s+(-C\\s+\\S+|--no-pager))*\\s+status\\b/": true,
     "/^git(\\s+(-C\\s+\\S+|--no-pager))*\\s+log\\b/": true,
     "/^git(\\s+(-C\\s+\\S+|--no-pager))*\\s+log\\b.*\\s--output(=|\\s|$)/": false,
@@ -711,6 +712,7 @@
     "/^npm\\s+config\\s+(list|get)\\b/": true,
     "/^npm\\s+pkg\\s+get\\b/": true,
     "/^npm\\s+audit$/": true,
+    "/^npm\\s+audit --json$/": true,
     "/^npm\\s+cache\\s+verify\\b/": true,
     "/^yarn\\s+(list|outdated|info|why|bin|help|versions)\\b/": true,
     "/^yarn\\s+licenses\\b/": true,
@@ -768,7 +770,6 @@
     "Set-ItemProperty": false,
     "sp": false,
     "Set-Acl": false,
-    "jq": false,
     "xargs": false,
     "eval": false,
     "Invoke-Expression": false,
@@ -778,8 +779,45 @@
       "matchCommandLine": true
     }
   },
+  "chat.tools.edits.autoApprove": {
+    "**/*": true,
+    "**/.vscode/*.json": false,
+    "**/.git/**": false,
+    "**/{package.json,server.xml,build.rs,web.config,.gitattributes,.env}": false,
+    "**/*.{code-workspace,csproj,fsproj,vbproj,vcxproj,proj,targets,props}": false,
+    "**/*.lock": false,
+    "**/*-lock.{yaml,json}": false,
+    "/dev/null": true
+  },
   "markdown.extension.orderedList.marker": "one",
   "notebook.output.wordWrap": true,
   "diffEditor.hideUnchangedRegions.enabled": true,
-  "remote.SSH.connectTimeout": 30
+  "remote.SSH.connectTimeout": 30,
+  "json.schemaDownload.trustedDomains": {
+    "https://developer.microsoft.com/json-schemas/": true,
+    "https://json-schema.org/": true,
+    "https://json.schemastore.org/": true,
+    "https://models.dev": true,
+    "https://opencode.ai": true,
+    "https://raw.githubusercontent.com/devcontainers/spec/": true,
+    "https://raw.githubusercontent.com/microsoft/vscode/": true,
+    "https://schemastore.azurewebsites.net/": true,
+    "https://www.schemastore.org/": true
+  },
+  "workbench.editor.useModal": "off",
+  "chat.editor.fontSize": 14,
+  "chat.planAgent.defaultModel": "Claude Sonnet 4.6 (copilot)",
+  "github.copilot.chat.claudeAgent.enabled": false,
+  "chat.tools.urls.autoApprove": {
+    "https://code.visualstudio.com": true,
+    "https://github.com/microsoft/vscode/wiki/*": true,
+    "https://github.com": {
+      "approveRequest": false,
+      "approveResponse": true
+    }
+  },
+  "markdown.preview.breaks": true,
+  "workbench.browser.enableChatTools": true,
+  "claudeCode.preferredLocation": "panel",
+  "git.addAICoAuthor": "off",
 }
