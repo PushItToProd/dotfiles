@@ -70,9 +70,19 @@ handle_selection() {
   fi
 }
 
+vscode_choose_prompt="Select a VS Code workspace"
+vscode_choose_width=50
+vscode_choose_rows=20
+
 get_user_selection() {
   local selection_idx
-  selection_idx="$(choose -izp "Select a VS Code workspace" -w 50 -n 20 <<<"$workspaces_choose_list")"
+  selection_idx="$(
+    choose -iz \
+      -p "$vscode_choose_prompt" \
+      -w "$vscode_choose_width" \
+      -n "$vscode_choose_rows" \
+      <<<"$workspaces_choose_list"
+  )"
   if [[ "$selection_idx" == -1 ]]; then
     # no selection - exit early
     return
@@ -98,7 +108,8 @@ main() {
   if [[ ! "$selected_workspace" ]]; then
     fatal "no workspace selected"
   fi
-  echo "Selection: $selected_workspace ($selected_friendly_path)"
+  echo "Selection: $selected_workspace"
+  echo "Friendly path: $selected_friendly_path"
 
   handle_selection "$selected_workspace" "$selected_friendly_path"
 }
