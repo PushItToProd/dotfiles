@@ -131,6 +131,33 @@ func MakeFriendlyPath(homedir string, wsPath string) string {
 	return wsPath
 }
 
+// extractUniqueSSHRemotes extracts unique SSH remote hostnames from workspace entries and returns them as remote-only entries.
+func extractUniqueSSHRemotes(entries []WorkspaceEntry, homedir string) []OutputEntry {
+	remoteHosts := make(map[string]bool)
+	var result []OutputEntry
+
+	for _, entry := range entries {
+		matches := findNamedStringSubmatch(remoteWorkspaceRegexp, entry.WsCodePath)
+		if matches != nil && matches["remoteType"] == "ssh-remote" && matches["hostname"] != "" {
+			host := matches["hostname"]
+			if !remoteHosts[host] {
+				remoteHosts[host] = true
+				friendlyPath := fmt.Sprintf("[ssh-remote:%s]", host)
+				result = append(result, OutputEntry{
+					WorkspaceEntry: WorkspaceEntry{
+						WsCodePath: entry.WsCodePath, // Keep original for reference
+						ModTime:    entry.ModTime,    // Use the most recent mod time for this host
+					},
+					FriendlyPath: friendlyPath,
+					IsRemoteOnly: true,
+				})
+			}
+		}
+	}
+
+	return result
+}
+
 // sortWorkspaceEntryList orders a list of WorkspaceEntries newest to oldest.
 func sortWorkspaceEntryList(entries []WorkspaceEntry) {
 	slices.SortStableFunc(entries, func(a, b WorkspaceEntry) int {
@@ -325,6 +352,7 @@ func FindWorkspaceStorage(homedir string) (string, error) {
 type OutputEntry struct {
 	WorkspaceEntry
 	FriendlyPath string
+	IsRemoteOnly bool // True if this is an SSH remote with no workspace path (just hostname)
 }
 
 // OutputFormatter is a function type used to render an OutputEntry for display.
@@ -339,15 +367,27 @@ var formatters = map[string]OutputFormatter{
 var validFormatters = strings.Join(slices.Sorted(maps.Keys(formatters)), ", ")
 
 func FormatRofi(entry OutputEntry) string {
-	return fmt.Sprintf("%s\000info\x1f%s\n", entry.FriendlyPath, entry.WsCodePath)
+	remoteMarker := ""
+	if entry.IsRemoteOnly {
+		remoteMarker = " (REMOTE_ONLY)"
+	}
+	return fmt.Sprintf("%s%s\000info\x1f%s\n", entry.FriendlyPath, remoteMarker, entry.WsCodePath)
 }
 
 func FormatPlain(entry OutputEntry) string {
-	return fmt.Sprintf("%s|%s|%s\n", entry.ModTime, entry.FriendlyPath, entry.WsCodePath)
+	remoteMarker := ""
+	if entry.IsRemoteOnly {
+		remoteMarker = " (REMOTE_ONLY)"
+	}
+	return fmt.Sprintf("%s|%s%s|%s\n", entry.ModTime, entry.FriendlyPath, remoteMarker, entry.WsCodePath)
 }
 
 func FormatChoose(entry OutputEntry) string {
-	return fmt.Sprintf("%s | %s\n", entry.WsCodePath, entry.FriendlyPath)
+	remoteMarker := ""
+	if entry.IsRemoteOnly {
+		remoteMarker = " (REMOTE_ONLY)"
+	}
+	return fmt.Sprintf("%s | %s%s\n", entry.WsCodePath, entry.FriendlyPath, remoteMarker)
 }
 
 func main() {
@@ -375,6 +415,10 @@ func main() {
 	sortWorkspaceEntryList(wsEntries)
 	wsEntries = dedupeWorkspaceEntryList(wsEntries)
 
+	// Extract unique SSH remotes from workspace entries
+	remoteOnlyEntries := extractUniqueSSHRemotes(wsEntries, homedir)
+
+	// Output regular workspaces first
 	for _, entry := range wsEntries {
 		workspacePath := entry.WsCodePath
 		if workspacePath == "" {
@@ -382,7 +426,12 @@ func main() {
 		}
 
 		friendlyPath := MakeFriendlyPath(homedir, workspacePath)
-		outputEntry := OutputEntry{entry, friendlyPath}
+		outputEntry := OutputEntry{entry, friendlyPath, false}
 		fmt.Print(formatOutput(outputEntry))
+	}
+
+	// Then output remote-only entries
+	for _, entry := range remoteOnlyEntries {
+		fmt.Print(formatOutput(entry))
 	}
 }
