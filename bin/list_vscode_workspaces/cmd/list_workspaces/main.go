@@ -415,10 +415,13 @@ func main() {
 	sortWorkspaceEntryList(wsEntries)
 	wsEntries = dedupeWorkspaceEntryList(wsEntries)
 
-	// Extract unique SSH remotes from workspace entries
+	// Extract and output unique SSH remotes from workspace entries
 	remoteOnlyEntries := extractUniqueSSHRemotes(wsEntries, homedir)
+	for _, entry := range remoteOnlyEntries {
+		fmt.Print(formatOutput(entry))
+	}
 
-	// Output regular workspaces first
+	// Then output regular workspaces
 	for _, entry := range wsEntries {
 		workspacePath := entry.WsCodePath
 		if workspacePath == "" {
@@ -428,10 +431,5 @@ func main() {
 		friendlyPath := MakeFriendlyPath(homedir, workspacePath)
 		outputEntry := OutputEntry{entry, friendlyPath, false}
 		fmt.Print(formatOutput(outputEntry))
-	}
-
-	// Then output remote-only entries
-	for _, entry := range remoteOnlyEntries {
-		fmt.Print(formatOutput(entry))
 	}
 }
