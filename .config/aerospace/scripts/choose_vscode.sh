@@ -60,12 +60,19 @@ handle_selection() {
 
   # Check if this is a remote-only entry (marked with REMOTE_ONLY)
   if [[ "$selected_friendly_path" == *"REMOTE_ONLY"* || "$selected_workspace" != */* ]]; then
+    echo "Opening remote: $selected_workspace"
     # To open an SSH remote standalone without a workspace or folder, we must
     # use the --remote flag.
-    code -n --remote "$selected_workspace"
+    code --new-window --remote "$selected_workspace"
+  elif [[ "$selected_workspace" == *.code-workspace ]]; then
+    echo "Opening workspace: $selected_workspace"
+    # If we're opening a .code-workspace file from the local machine, we can
+    # actually use --folder-uri if we want, but if the workspace lives on a
+    # remote host, --file-uri is mandatory.
+    code --new-window --file-uri "$selected_workspace"
   else
-    # To open remote workspaces with paths, we need to use the --folder-uri
-    # flag.
+    echo "Opening folder: $selected_workspace"
+    # To open remote folders, we need to use the --folder-uri flag.
     code --new-window --folder-uri "$selected_workspace"
   fi
 }
