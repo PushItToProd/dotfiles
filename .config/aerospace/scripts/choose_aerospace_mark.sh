@@ -16,7 +16,7 @@ list_marks() {
 
 main() {
   if ! command -v aerospace-marks &>/dev/null; then
-    osascript -e ''
+    osascript -e 'display dialog "aerospace-marks is not on the PATH!" with icon stop'
   fi
 
   aerospace_marks_str=$(list_marks)
