@@ -13,6 +13,7 @@ list_workspaces() {
   go run "$HOME"/bin/list_vscode_workspaces/cmd/list_workspaces/main.go --format choose
 }
 
+# Extract hostname from format like "[ssh-remote:hostname] (REMOTE_ONLY)" using string manipulation
 extract_ssh_remote_hostname() {
   local selection="$1"
   selection="$(trim_string "$1")"
@@ -34,7 +35,6 @@ main() {
 
   # Prompt the user for input and return the index of their selection.
   selection="$(choose -izp "Select a VS Code workspace" -w 50 -n 20 <<<"$display_text")"
-  declare -p selection
   if [[ "$selection" == -1 ]]; then
     # no selection - exit early
     return
@@ -43,29 +43,19 @@ main() {
   # Using the index returned by `choose`, look up the original raw workspace
   # entry from the vscode_workspaces array.
   raw_entry="${vscode_workspaces["$selection"]}"
-  declare -p raw_entry
-  IFS='|' read -r selected_workspace _ <<<"$raw_entry"
+  IFS='|' read -r selected_workspace selected_friendly_path <<<"$raw_entry"
   selected_workspace="$(trim_string "$selected_workspace")"
-  declare -p selected_workspace
-
   if [[ ! "$selected_workspace" ]]; then
     echo "error: no workspace selected" >&2
     exit 1
   fi
-
   echo "Selection: $selected_workspace"
 
   # Check if this is a remote-only entry (marked with REMOTE_ONLY)
-  if [[ "${vscode_workspaces["$selection"]}" == *"REMOTE_ONLY"* ]]; then
-    # Extract the hostname from the friendly path format [ssh-remote:hostname]
-    # The workspace field contains the original vscode-remote URI
-    IFS='|' read -r _ selected_friendly_path <<<"${vscode_workspaces["$selection"]}"
-
-    # Extract hostname from format like "[ssh-remote:hostname] (REMOTE_ONLY)" using string manipulation
+  if [[ "$raw_entry" == *"REMOTE_ONLY"* ]]; then
     hostname="$(extract_ssh_remote_hostname "$selected_friendly_path")"
     if [[ -z "$hostname" ]]; then
-      echo "error: could not parse hostname from friendly path: $selected_friendly_path" >&2
-      exit 1
+      fatal "could not parse hostname from friendly path: $selected_friendly_path" >&2
     fi
 
     echo "Opening SSH remote: $hostname"
