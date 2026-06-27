@@ -33,17 +33,6 @@ load_workspaces() {
   workspaces_choose_list=$(remove_first_field_from_lines <<<"$vscode_workspaces_str")
 }
 
-# Extract hostname from format like "[ssh-remote:hostname] (REMOTE_ONLY)" using string manipulation
-extract_ssh_remote_hostname() {
-  local friendly_path="$1"
-  friendly_path="$(trim_string "$1")"
-  # strip `[ssh-remote:` prefix
-  friendly_path="${friendly_path#\[ssh-remote:}"
-  # strip `]` suffix
-  friendly_path="${friendly_path%%\]*}"
-  printf '%s' "$friendly_path"
-}
-
 # With `--format choose`, the output of list_workspaces is a newline-delimited
 # list of entries comprised of the raw path/URI used to access the remote, a
 # pipe delimiter surrounded by spaces, and a user-friendly display string. For
@@ -70,16 +59,10 @@ handle_selection() {
   local selected_friendly_path="$2"
 
   # Check if this is a remote-only entry (marked with REMOTE_ONLY)
-  if [[ "$selected_friendly_path" == *"REMOTE_ONLY"* ]]; then
-    hostname="$(extract_ssh_remote_hostname "$selected_friendly_path")"
-    if [[ -z "$hostname" ]]; then
-      fatal "could not parse hostname from friendly path: $selected_friendly_path"
-    fi
-
-    echo "Opening SSH remote: $hostname"
+  if [[ "$selected_friendly_path" == *"REMOTE_ONLY"* || "$selected_workspace" != */* ]]; then
     # To open an SSH remote standalone without a workspace or folder, we must
     # use the --remote flag.
-    code -n --remote "ssh-remote+$hostname"
+    code -n --remote "$selected_workspace"
   else
     # To open remote workspaces with paths, we need to use the --folder-uri
     # flag.

@@ -92,7 +92,7 @@ func TruncateDirPrefix(path string, basedir string, replacement string) (shortPa
 }
 
 var remoteWorkspaceRegexp = regexp.MustCompile(
-	`^vscode-remote://(?<remoteType>[\w-]+)\+(?<hostname>[\w.-]+)(?<path>/.*)$`,
+	`^vscode-remote://(?<remoteName>(?<remoteType>[\w-]+)\+(?<hostname>[\w.-]+))(?<path>/.*)$`,
 )
 
 func MakeFriendlyPathForRemoteWorkspace(workspaceUri string) (friendlyPath string, isRemote bool) {
@@ -143,10 +143,11 @@ func extractUniqueSSHRemotes(entries []WorkspaceEntry, homedir string) []OutputE
 			if !remoteHosts[host] {
 				remoteHosts[host] = true
 				friendlyPath := fmt.Sprintf("[ssh-remote:%s]", host)
+				remoteName := matches["remoteName"] // => e.g. `ssh-remote+hostname.local`
 				result = append(result, OutputEntry{
 					WorkspaceEntry: WorkspaceEntry{
-						WsCodePath: entry.WsCodePath, // Keep original for reference
-						ModTime:    entry.ModTime,    // Use the most recent mod time for this host
+						WsCodePath: remoteName,    // Use the matched remoteName
+						ModTime:    entry.ModTime, // Use the most recent mod time for this host
 					},
 					FriendlyPath: friendlyPath,
 					IsRemoteOnly: true,
