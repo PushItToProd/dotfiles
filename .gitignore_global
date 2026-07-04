@@ -14,3 +14,4 @@ node_modules/
 _scratch/
 .zsh_local_history
 .bundle/
+**/.claude/settings.local.json
