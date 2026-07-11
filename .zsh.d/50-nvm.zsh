@@ -23,6 +23,7 @@ _init_nvm() {
   unset -f npx
   unset -f tsc
   unset -f ts-node
+  unset -f pnpm
 
   export NVM_DIR="$_my_nvm__NVM_DIR"
   [ -s "$_my_nvm__nvm_sh_path" ] && \. "$_my_nvm__nvm_sh_path"  # This loads nvm
@@ -88,4 +89,27 @@ if ! command -v nvm &>/dev/null; then
     ts-node "$@"
   }
 
+  pnpm() {
+    _init_nvm
+    pnpm "$@"
+  }
+
 fi
+
+nvm-update-lts() {
+  # install latest lts, reinstall packages from default, and then set the latest
+  # lts as the default
+  echo "Current default: $(nvm ls default)"
+  echo "Installing latest lts version and copying packages from default"
+  nvm install --lts --latest-npm --reinstall-packages-from=default || {
+    echo "installing new lts or installing packages from previous default failed"
+    return 1
+  }
+  echo "Switching to default lts"
+  nvm use --lts || {
+    echo "setting default to new lts failed"
+    return 1
+  }
+  echo "nvm installed versions:"
+  nvm ls --no-alias
+}
