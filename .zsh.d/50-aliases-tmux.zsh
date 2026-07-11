@@ -10,7 +10,7 @@ __tmux_try_attach() {
   _tmux attach || _tmux
 }
 
-function my-tmux-attach {
+function _my_tmux_attach {
   local arg="$1"
   case "$arg" in
     ''|-*) tmux a "$@" ;;
@@ -20,13 +20,24 @@ function my-tmux-attach {
   esac
 }
 
+function _my_tmux_new {
+  local arg1="$1"
+  # TODO: add a `--pwd` flag to name the session after the current project dir
+  case "$arg1" in
+    ''|-*) tmux new-session "$@" ;;
+    # arg provided and doesn't start with a `-` => assume first arg is a session
+    # identifier
+    *) tmux new-session -s "$@" ;;
+  esac
+}
+
 alias tmux=__tmux_try_attach
 
 alias t='tmux'
-alias ta='my-tmux-attach'
-alias tat='my-tmux-attach'
+alias ta='_my_tmux_attach'
+alias tat='_my_tmux_attach'
 alias tls='tmux ls'
-alias tnew='tmux new'
+alias tnew='_my_tmux_new'
 
 alias ta0='tmux a -t 0'
 alias ta1='tmux a -t 1'
