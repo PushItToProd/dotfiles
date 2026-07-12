@@ -31,6 +31,33 @@ function _my_tmux_new {
   esac
 }
 
+function _tmux_attach_select {
+  local -a sessions
+  sessions=("${(@f)$(_tmux list-sessions -F '#S' 2>/dev/null)}")
+
+  if [[ -z "$sessions[1]" ]]; then
+    echo "No active tmux sessions."
+    _my_tmux_new
+    return
+  fi
+
+  local choice
+  PS3="Select a session (or 'new'): "
+  select choice in "${sessions[@]}" "new"; do
+    if [[ "$REPLY" == "q" ]]; then
+      return
+    elif [[ "$choice" == "new" ]]; then
+      _my_tmux_new
+      return
+    elif [[ -n "$choice" ]]; then
+      _my_tmux_attach "$choice"
+      return
+    else
+      echo "Invalid selection."
+    fi
+  done
+}
+
 alias tmux=__tmux_try_attach
 
 alias t='tmux'
@@ -38,6 +65,7 @@ alias ta='_my_tmux_attach'
 alias tat='_my_tmux_attach'
 alias tls='tmux ls'
 alias tnew='_my_tmux_new'
+alias tas='_tmux_attach_select'
 
 alias ta0='tmux a -t 0'
 alias ta1='tmux a -t 1'
