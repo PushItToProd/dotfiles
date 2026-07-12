@@ -15,11 +15,14 @@ alias open='xdg-open'
 # alias cat='less -RF'
 alias less='less -RF'
 alias lless='/usr/bin/less'
+
 alias l='ls -F'
 alias ll='ls -lh'
 alias la='ls -lah'
 alias lt='ls --human-readable --size --sort=size --classify --format=single-column'
 alias lastmodified='ls -tl'
+
+alias tree='tree --gitignore -I .git'
 
 alias grep='grep -I --exclude-dir=.git'
 alias fgrep='fgrep -I --exclude-dir=.git'
