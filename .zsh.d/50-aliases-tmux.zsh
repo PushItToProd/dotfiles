@@ -42,20 +42,15 @@ function _tmux_attach_select {
   fi
 
   local choice
-  PS3="Select a session (or 'new'): "
-  select choice in "${sessions[@]}" "new"; do
-    if [[ "$REPLY" == "q" ]]; then
-      return
-    elif [[ "$choice" == "new" ]]; then
-      _my_tmux_new
-      return
-    elif [[ -n "$choice" ]]; then
-      _my_tmux_attach "$choice"
-      return
-    else
-      echo "Invalid selection."
-    fi
-  done
+  choice="$( (print -l "${sessions[@]}"; echo "new") | fzf --prompt="tmux session> " --height=~40% --reverse)"
+
+  if [[ -z "$choice" ]]; then
+    return
+  elif [[ "$choice" == "new" ]]; then
+    _my_tmux_new
+  else
+    _my_tmux_attach "$choice"
+  fi
 }
 
 alias tmux=__tmux_try_attach
