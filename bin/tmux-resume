@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+# Reopen the last tmux session attached from this SSH client's IP, based on
+# records written by the tmux aliases in .zsh.d/50-aliases-tmux.zsh.
+set -euo pipefail
+
+: "${TMUX_LAST_SESSION_FILE:=$HOME/.cache/tmux-last-session.tsv}"
+
+fatal() {
+  echo "tmux-resume:" "$@" >&2
+  exit 1
+}
+
+[[ -n "${SSH_CONNECTION:-}" ]] || fatal "not an SSH session, nothing to resume"
+
+device_ip="${SSH_CONNECTION%% *}"
+
+[[ -f "$TMUX_LAST_SESSION_FILE" ]] || fatal "no recorded sessions ($TMUX_LAST_SESSION_FILE doesn't exist)"
+
+session="$(awk -F'\t' -v ip="$device_ip" '$1 == ip { s = $2 } END { print s }' "$TMUX_LAST_SESSION_FILE")"
+
+[[ -n "$session" ]] || fatal "no last session recorded for $device_ip"
+
+tmux has-session -t "$session" 2>/dev/null || fatal "session '$session' no longer exists"
+
+exec tmux attach -t "$session"
