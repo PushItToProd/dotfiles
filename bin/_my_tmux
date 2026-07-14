@@ -1,0 +1,130 @@
+#!/usr/bin/env bash
+# tmux utility functions, ported from .zsh.d/50-aliases-tmux.zsh, exposed as
+# subcommands: `_my_tmux <subcommand> [args...]`.
+set -euo pipefail
+
+: "${TMUX_LAST_SESSION_FILE:=$HOME/.cache/tmux-last-session.tsv}"
+
+_tmux() {
+  command -p tmux "$@"
+}
+
+# records, per client IP (from $SSH_CONNECTION), the last tmux session
+# attached from this device, for use by tmux-resume. No-ops outside SSH
+# since that's not a target use case.
+record_last_session() {
+  local session="${1:-}"
+  [[ -n "$session" && -n "${SSH_CONNECTION:-}" ]] || return 0
+  local ip="${SSH_CONNECTION%% *}"
+  mkdir -p "$(dirname "$TMUX_LAST_SESSION_FILE")"
+  local tmp="${TMUX_LAST_SESSION_FILE}.tmp.$$"
+  {
+    if [[ -f "$TMUX_LAST_SESSION_FILE" ]]; then
+      awk -F'\t' -v ip="$ip" '$1 != ip' "$TMUX_LAST_SESSION_FILE"
+    fi
+    printf '%s\t%s\n' "$ip" "$session"
+  } > "$tmp" && mv "$tmp" "$TMUX_LAST_SESSION_FILE"
+}
+
+# guesses which session a bare `tmux attach` (no -t) will pick, so it can be
+# recorded before attaching.
+most_recent_session() {
+  _tmux list-sessions -F '#{session_activity} #{session_name}' 2>/dev/null \
+    | sort -rn | head -1 | cut -d' ' -f2-
+}
+
+# any args provided => invoke tmux normally; no args => try attaching to an
+# existing session, otherwise start normally.
+try_attach() {
+  if [[ "$#" -gt 0 ]]; then
+    _tmux "$@"
+    return
+  fi
+  record_last_session "$(most_recent_session)"
+  _tmux attach || _tmux
+}
+
+attach() {
+  local arg="${1:-}"
+  case "$arg" in
+    ''|-*)
+      record_last_session "$(most_recent_session)"
+      _tmux attach "$@"
+      ;;
+    # arg provided and doesn't start with a `-` => assume first arg is a
+    # session identifier
+    *)
+      record_last_session "$arg"
+      _tmux attach -t "$@"
+      ;;
+  esac
+}
+
+new() {
+  local arg1="${1:-}"
+  case "$arg1" in
+    ''|-*) _tmux new-session "$@" ;;
+    # arg provided and doesn't start with a `-` => assume first arg is a
+    # session identifier
+    *) _tmux new-session -s "$@" ;;
+  esac
+}
+
+attach_select() {
+  local -a sessions
+  mapfile -t sessions < <(_tmux list-sessions -F '#S' 2>/dev/null)
+
+  if [[ -z "${sessions[0]:-}" ]]; then
+    echo "No active tmux sessions."
+    new
+    return
+  fi
+
+  local choice
+  choice="$( { printf '%s\n' "${sessions[@]}"; echo "new"; } | fzf --prompt="tmux session> " --height=~40% --reverse)"
+
+  if [[ -z "$choice" ]]; then
+    return
+  elif [[ "$choice" == "new" ]]; then
+    new
+  else
+    # attach records the session before attaching
+    attach "$choice"
+  fi
+}
+
+usage() {
+  cat <<'EOF'
+usage: _my_tmux <subcommand> [args...]
+
+subcommands:
+  new [session] [tmux-args...]      start a new (optionally named) session
+  attach [session] [tmux-args...]   attach to a session, recording it for tmux-resume
+  attach-select                     fzf-pick a session to attach to (or start new)
+  try-attach [tmux-args...]         attach to the most recent session, or start tmux normally
+  most-recent-session               print the most recently active session name
+  record-last-session <session>     record <session> as last attached (for tmux-resume)
+EOF
+}
+
+main() {
+  local cmd="${1:-}"
+  [[ $# -gt 0 ]] && shift
+
+  case "$cmd" in
+    new) new "$@" ;;
+    attach) attach "$@" ;;
+    attach-select) attach_select "$@" ;;
+    try-attach) try_attach "$@" ;;
+    most-recent-session) most_recent_session "$@" ;;
+    record-last-session) record_last_session "$@" ;;
+    -h|--help|help|'') usage ;;
+    *)
+      echo "_my_tmux: unknown subcommand '$cmd'" >&2
+      usage >&2
+      exit 1
+      ;;
+  esac
+}
+
+main "$@"
