@@ -1,11 +1,63 @@
 #!/usr/bin/env bash
 # clipboard paste, ported from the pbpaste alias in .zsh.d/50-aliases-system.zsh.
-# When SSH'd in and inside tmux, print tmux's buffer instead, since there's no
+# When SSH'd in and inside tmux, read tmux's buffer instead, since there's no
 # X clipboard to target over SSH.
 set -euo pipefail
 
+usage() {
+  cat <<'EOF'
+usage: pbpaste [-f|--force] [-n|--never-prompt] [file]
+
+Prints the clipboard to stdout, or writes it to <file> if given.
+A <file> of "-" means stdout, same as omitting it.
+
+If <file> already exists:
+  - on a tty, with no flags: prompts for confirmation before overwriting
+  - without a tty, or with --never-prompt: errors out instead of prompting
+  - with --force: overwrites without asking, in either case
+
+options:
+  -f, --force          overwrite <file> without prompting
+  -n, --never-prompt    never prompt, even on a tty (errors instead)
+  -h, --help            show this help
+EOF
+}
+
+force=0
+never_prompt=0
+file=""
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    -f|--force) force=1 ;;
+    -n|--never-prompt) never_prompt=1 ;;
+    -h|--help) usage; exit 0 ;;
+    -) file="$1" ;;
+    -*) echo "pbpaste: unknown option '$1'" >&2; usage >&2; exit 1 ;;
+    *) file="$1" ;;
+  esac
+  shift
+done
+
 if [[ -n "${SSH_CONNECTION:-}" && -n "${TMUX:-}" ]]; then
-  exec tmux save-buffer -
+  cmd=(tmux save-buffer -)
 else
-  exec xclip -sel clip -o
+  cmd=(xclip -sel clip -o)
 fi
+
+if [[ -z "$file" || "$file" == "-" ]]; then
+  exec "${cmd[@]}"
+fi
+
+if [[ -e "$file" && "$force" -ne 1 ]]; then
+  if [[ "$never_prompt" -eq 1 || ! -t 0 ]]; then
+    echo "pbpaste: '$file' already exists (use -f to overwrite)" >&2
+    exit 1
+  fi
+  read -r -p "pbpaste: '$file' already exists. Overwrite? [y/N] " reply
+  case "$reply" in
+    y|Y|yes|YES) ;;
+    *) echo "pbpaste: aborted" >&2; exit 1 ;;
+  esac
+fi
+
+"${cmd[@]}" > "$file"
