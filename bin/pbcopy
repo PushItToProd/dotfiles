@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+# clipboard copy, ported from the pbcopy alias in .zsh.d/50-aliases-system.zsh.
+# When SSH'd in and inside tmux, load stdin into tmux's buffer instead, since
+# there's no X clipboard to target over SSH.
+set -euo pipefail
+
+if [[ -n "${SSH_CONNECTION:-}" && -n "${TMUX:-}" ]]; then
+  exec tmux load-buffer -
+else
+  exec xclip -sel clip
+fi

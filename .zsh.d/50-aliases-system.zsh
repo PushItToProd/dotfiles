@@ -7,8 +7,9 @@ function reboot_required() {
     fi
 }
 
-alias pbcopy='xclip -sel clip'
-alias pbpaste='xclip -sel clip -o'
+#alias pbcopy='xclip -sel clip'
+#alias pbpaste='xclip -sel clip -o'
+unalias pbcopy pbpaste &>/dev/null || true
 alias open='xdg-open'
 
 #alias l=less
