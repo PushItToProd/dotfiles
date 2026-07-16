@@ -49,6 +49,7 @@ let g:netrw_banner = 0 " no useless banner
 " let g:netrw_browse_split = 4 " open files in a new tab
 let g:netrw_winsize = 25
 let g:netrw_list_hide= '.*\.swp$,.*\.pyc,.env,.git'
+let g:netrw_browse_split = 4   " open files in prior window
 
 " auto open browser
 " augroup ProjectDrawer
