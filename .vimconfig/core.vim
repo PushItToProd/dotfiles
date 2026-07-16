@@ -64,3 +64,10 @@ let g:netrw_browse_split = 4   " open files in prior window
 "
 "
 autocmd FileType markdown setlocal ts=4 sts=4 sw=4 expandtab
+
+" auto reload files from disk
+set autoread
+augroup auto_reload
+  autocmd!
+  autocmd FocusGained,BufEnter,CursorHold,CursorHoldI * silent! checktime
+augroup END
