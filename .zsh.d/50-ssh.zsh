@@ -1,22 +1,21 @@
 # ssh agent helper
 
-ssh_agent_start() {
-  eval "$(ssh-agent | tee ~/.ssh/agent.env)"
-}
+# requires ~/.config/systemd/user/ssh-agent.service
 
-ssh_agent_restart() {
-  kill $SSH_AGENT_PID
-  ssh_agent_start
-}
+__ssh_auth_sock="${XDG_RUNTIME_DIR}/ssh-agent.socket"
 
-# start the agent only if one isn't already running
-if [ -f ~/.ssh/agent.env ]; then
-  . ~/.ssh/agent.env >/dev/null
-  if ! kill -0 $SSH_AGENT_PID >/dev/null 2>&1; then
-    echo "Stale agent file found. Spawning new agent."
-    ssh_agent_start
-  fi
+if [[ "$SSH_AUTH_SOCK" ]]; then
+  :  # do nothing - already set
+elif [[ ! -S "$__ssh_auth_sock" ]]; then
+  {
+    echo "ssh-agent socket not found: $__ssh_auth_sock"
+    echo "is the ssh-agent.service running? ensure ~/.config/systemd/user/ssh-agent.service exists and try"
+    echo "  systemctl --user enable --now ssh-agent"
+    echo "and"
+    echo "  systemctl --user status ssh-agent"
+  } >&2
+  # if you see ^^^ this error, ensure ~/.config/systemd/user/ssh-agent.service
+  # exists and run `systemctl --user enable --now ssh-agent'
 else
-  echo "Starting SSH agent"
-  ssh_agent_start
+  export SSH_AUTH_SOCK="$__ssh_auth_sock"
 fi
