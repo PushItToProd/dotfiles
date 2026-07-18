@@ -65,4 +65,8 @@ nnoremap <Leader><Leader>l gt
 nnoremap <Leader><Leader>j <C-w>j
 nnoremap <Leader><Leader>k <C-w>k
 
+" write+quit even if I hold shift too long by mistake
 command Wq wq
+
+" copy to tmux buffer
+vnoremap gy :w !tmux load-buffer -<CR>
