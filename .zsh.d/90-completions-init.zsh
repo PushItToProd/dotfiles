@@ -11,6 +11,11 @@ zstyle :compinstall filename "$HOME/.zshrc"
 # shell startup
 #fpath=(~/.zsh/completions $fpath)
 
+__linuxbrew_site_funcs=/home/linuxbrew/.linuxbrew/share/zsh/site-functions
+if [[ -d "$__linuxbrew_site_funcs" ]] && ! (( $fpath[(Ie)$__linuxbrew_site_funcs] )); then
+  fpath=("$__linuxbrew_site_funcs" $fpath)
+fi
+
 autoload -Uz compinit
 compinit -u
 # End of lines added by compinstall
