@@ -4,9 +4,9 @@
 
 __ssh_auth_sock="${XDG_RUNTIME_DIR}/ssh-agent.socket"
 
-if [[ "$SSH_AUTH_SOCK" ]]; then
-  :  # do nothing - already set
-elif [[ ! -S "$__ssh_auth_sock" ]]; then
+if [[ -S "$__ssh_auth_sock" ]]; then
+  export SSH_AUTH_SOCK="$__ssh_auth_sock"
+else
   {
     echo "ssh-agent socket not found: $__ssh_auth_sock"
     echo "is the ssh-agent.service running? ensure ~/.config/systemd/user/ssh-agent.service exists and try"
@@ -16,6 +16,4 @@ elif [[ ! -S "$__ssh_auth_sock" ]]; then
   } >&2
   # if you see ^^^ this error, ensure ~/.config/systemd/user/ssh-agent.service
   # exists and run `systemctl --user enable --now ssh-agent'
-else
-  export SSH_AUTH_SOCK="$__ssh_auth_sock"
 fi
