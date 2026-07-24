@@ -1,1 +1,2 @@
 setopt auto_cd
+setopt interactive_comments
