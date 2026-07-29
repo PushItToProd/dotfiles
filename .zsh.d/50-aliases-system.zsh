@@ -47,3 +47,5 @@ fi
 alias untar='tar --extract --verbose --file'
 
 alias trash='gio trash'
+
+alias bat='batcat'
