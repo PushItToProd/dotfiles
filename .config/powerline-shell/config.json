@@ -2,7 +2,7 @@
   "segments": [
     "virtual_env",
     "~/bin/powerline_segments/my_cwd.py",
-    "git",
+    "~/bin/powerline_segments/my_git.py",
     "~/bin/powerline_segments/wrap.py",
     "root",
     "exit_code"
