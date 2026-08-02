@@ -17,6 +17,7 @@
 !.config/tmux
 !.config/systemd
 .config/systemd/user/*.wants
+!.config/fd
 
 !.config/Code
 .config/Code/*
