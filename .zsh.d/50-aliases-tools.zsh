@@ -6,4 +6,5 @@ randpass() {
   openssl rand -base64 "${1:-32}" | tr -d '\n'
 }
 
+# suffix alias: `blah.code-workspace` => `code blah.code-workspace`
 alias -s code-workspace='code'
