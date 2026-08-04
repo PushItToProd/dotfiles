@@ -18,6 +18,7 @@
 !.config/systemd
 .config/systemd/user/*.wants
 !.config/fd
+!.config/nvim
 
 !.config/Code
 .config/Code/*
