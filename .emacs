@@ -55,7 +55,7 @@
 
 (define-key evil-insert-state-map "\C-v" 'yank)
 
-(global-linum-mode t)
+(global-display-line-numbers-mode 1)
 (global-hl-line-mode +1)
 (load-theme 'spacemacs-dark t)
 (setq inhibit-splash-screen t)
@@ -138,7 +138,7 @@
  '(org-export-backends (quote (ascii html icalendar latex md)))
  '(package-selected-packages
    (quote
-    (dired-sidebar counsel ivy-clojuredocs ivy-posframe ivy pyvenv cobol-mode org-journal json-mode ob-go htmlize haskell-mode monokai-theme spacemacs-theme zenburn-theme rust-mode terraform-mode go-mode ansible markdown-mode ledger-mode tide evil)))
+    (dired-sidebar counsel ivy-clojuredocs ivy-posframe ivy pyvenv cobol-mode org-journal json-mode htmlize haskell-mode monokai-theme spacemacs-theme zenburn-theme rust-mode terraform-mode go-mode ansible markdown-mode ledger-mode tide evil)))
  '(scroll-conservatively 10000)
  '(show-paren-mode t))
 (custom-set-faces
@@ -200,13 +200,9 @@
  '(
    (python . t)
    (shell . t)
-   (C . t)
    (org . t)
    (emacs-lisp . t)
-   (go . t)
-   (java . t)
    (js . t)
-   (ruby . t)
    (awk . t)
    ))
 ;; Use python3 in babel
@@ -235,9 +231,9 @@
 
 ;;; org-journal ;;;
 
-(setq org-journal-dir "~/org/journal/")
-(setq org-journal-date-format "%A, %Y-%m-%d")
-(require 'org-journal)
+;(setq org-journal-dir "~/org/journal/")
+;(setq org-journal-date-format "%A, %Y-%m-%d")
+;(require 'org-journal)
 
 ;; ivy and counsel
 (ivy-mode 1)
