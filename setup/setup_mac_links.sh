@@ -19,11 +19,7 @@ linklog() {
 
 }
 
-# -s: symlink
-# -i: interactively prompt to overwrite (as long as the other precondition
-#     checks are satisified - i.e. the existing file matches the src exactly)
-# -F: allow overwriting directories
-: "${LN_FLAGS:=-siF}"
+: "${LN_FLAGS:=-s}"
 
 link() {
   local path="$1"
@@ -59,6 +55,13 @@ link() {
   if [[ "$DRY_RUN" ]]; then
     printf '  -> ** ⛔️ dry run: ln %s %q %q\n' "$LN_FLAGS" "$src" "$dest"
     return
+  fi
+  if [[ -e "$dest" ]]; then
+    # Manually trashing files instead of using `ln -f` - this keeps the
+    # originals around just on the offhand chance the diff check was faulty and,
+    # more importantly, works for directories.
+    printf '  -> "%s": trashing existing target before linking (diff already showed it is identical to the symlink source)' "$path" >&2
+    trash "$dest"
   fi
   ln "$LN_FLAGS" "$src" "$dest"
 }
