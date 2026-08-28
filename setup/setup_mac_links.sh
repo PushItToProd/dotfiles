@@ -6,6 +6,7 @@ PROGDIR="$(cd "$(dirname "$PROGPATH")" && pwd -P)"
 : "${DOTFILES_DIR="$(cd "$PROGDIR/.." && pwd -P)"}"
 : "${INSTALL_DIR="$HOME"}"
 
+# Run with `DRY_RUN=0` to overwrite
 : "${DRY_RUN=1}"
 
 fatal() {
@@ -17,6 +18,12 @@ linklog() {
   printf '"%s": ' "$path"
 
 }
+
+# -s: symlink
+# -i: interactively prompt to overwrite (as long as the other precondition
+#     checks are satisified - i.e. the existing file matches the src exactly)
+# -F: allow overwriting directories
+: "${LN_FLAGS:=-siF}"
 
 link() {
   local path="$1"
@@ -36,20 +43,24 @@ link() {
       printf '  -> "%s": already correctly linked ✅\n' "$path"
       return
     fi
-    printf '  -> error: "%s" is already a symlink to "%s" ⚠️\n' "$path" "$symlink_path" >&2
+    printf '  -> error: "%s" is already a symlink to "%s" - not changing to "%s" ⚠️\n' "$path" "$symlink_path" "$src" >&2
     return 2
   fi
 
+  # XXX: pretty sure the `-L` check here is superfluous
   if [[ -e "$dest" && ! -L "$dest" ]]; then
-    printf '  -> error: "%s": destination "%s" exists and is not a symlink ⚠️\n' "$path" "$dest"
-    return 1
+    if ! diff -rq "$src" "$dest" &>/dev/null; then
+      printf '  -> error: "%s": destination "%s" exists, is not a symlink, and has different content than the source ⚠️\n' "$path" "$dest"
+      return 1
+    fi
+    printf '  -> "%s": destination "%s" exists, is not a symlink, and is identical to the source - safe to overwrite\n' "$path" "$dest"
   fi
 
   if [[ "$DRY_RUN" ]]; then
-    printf '  -> ** ⛔️ dry run: ln -s %q %q\n' "$src" "$dest"
-  else
-    ln -s "$src" "$dest"
+    printf '  -> ** ⛔️ dry run: ln %s %q %q\n' "$LN_FLAGS" "$src" "$dest"
+    return
   fi
+  ln "$LN_FLAGS" "$src" "$dest"
 }
 
 ensure_dir() {
@@ -78,6 +89,12 @@ main() {
 
   ensure_dir "$INSTALL_DIR/bin"
   link "bin/list_vscode_workspaces"
+
+  link ".gitconfig"
+  link ".gitignore_global"
+
+  link ".vimrc"
+  link ".vimconfig"
 
   link ".zprofile"
 
