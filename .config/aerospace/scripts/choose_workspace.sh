@@ -28,7 +28,7 @@ truncate_title() {
 }
 
 aerospace::list_workspace_windows() {
-  aerospace list-windows --all --format $'%{workspace}\t%{app-name}\t%{window-title}' | sort | uniq
+  aerospace list-windows --all --format $'%{workspace}\t%{app-name}\t%{window-title}' | sort -n | uniq
 }
 
 _generate_app_label() {
